@@ -1,0 +1,231 @@
+class Player {
+	constructor(name, x, y) {
+		this.name = name;
+		this.x = x; // current position X
+		this.y = y; // current position Y
+		this.nX = x; // used for collisions as new X
+		this.nY = y; // used for collisions as new Y
+		this.health = 100;
+		this.score = 0;
+		this.inventory = [];
+		this.alive = true;
+		this.weapon = "rifle";
+		this.ammo = 120;
+		this.magazine = 30;
+		this.canMoveX = true; // used for collisions
+		this.canMoveY = true; // used for collisions
+		this.stamina = 100;
+		this.staminaCooldown = false;
+		this.radius = 40; // radius for collision detection
+
+		//rolling
+		this.speed = 0;
+		this.isRolling = false;
+		this.rollDirection = { x: 0, y: 0 };
+		this.startRollTime = 0; // The time at which the roll started to be used for the cooldown
+		this.rollDistance = 200;
+		this.rollDuration = 150; // ms
+		this.rollCooldown = 300; // ms
+	}
+
+	move(dx, dy) {
+		this.canMoveX = true;
+		this.canMoveY = true;
+		//checking for collisions
+		for (let i = 0; i < 33; i++) {
+			for (let j = 0; j < 19; j++) {
+				if (arena[j][i] === 1) {
+					if (collideRectCircle(i * 50, j * 50, 50, 50, this.x + dx * 2, this.y, this.radius)) {
+						this.canMoveX = false;
+					}
+
+					if (collideRectCircle(i * 50, j * 50, 50, 50, this.x, this.y + dy * 2, this.radius)) {
+						this.canMoveY = false;
+					}
+				}
+			}
+		}
+		//only move if no collision
+		if (this.canMoveX) {
+			this.x += dx;
+		}
+		if (this.canMoveY) {
+			this.y += dy;
+		}
+	}
+
+	startRoll(directionX, directionY) {
+		let now = Date.now();
+
+		if (!this.isRolling && now > this.startRollTime + this.rollCooldown) {
+			this.isRolling = true;
+			this.startRollTime = now;
+
+			let dir = createVector(directionX, directionY).normalize(); // Normalize to ensure consistent speed
+			this.rollDirection.x = dir.x;
+			this.rollDirection.y = dir.y;
+
+			this.canMoveX = true;
+			this.canMoveY = true;
+		}
+	}
+
+	updateRoll() {
+		if (this.isRolling) {
+			let elapsed = Date.now() - this.startRollTime;
+
+			if (elapsed < this.rollDuration) {
+				let t = elapsed / this.rollDuration;
+				this.speed = Math.sin(Math.PI * t) * (this.rollDistance / 30); //smooths out the start and end of the roll
+
+				this.nX = this.x += this.rollDirection.x * this.speed * 4; //fixes the speed
+				this.nY = this.y += this.rollDirection.y * this.speed * 4;
+
+				//checking for collisions while rolling
+				for (let i = 0; i < 33; i++) {
+					for (let j = 0; j < 19; j++) {
+						if (arena[j][i] === 1) {
+							if (collideRectCircle(i * 50, j * 50, 50, 50, this.nX, this.y, 50)) {
+								this.canMoveX = false;
+								console.log("collisionX");
+							}
+
+							if (collideRectCircle(i * 50, j * 50, 50, 50, this.x, this.nY, 50)) {
+								this.canMoveY = false;
+								console.log("collisionY");
+							}
+						}
+					}
+				}
+
+				//only move if no collision
+				if (this.canMoveX === true) {
+					this.x = this.nX;
+				}
+				if (this.canMoveY === true) {
+					this.y = this.nY;
+				}
+			} else {
+				this.isRolling = false; // end roll
+			}
+		}
+	}
+}
+
+let player = new Player("P1", 200, 450);
+
+let opponent = new Player("P2", 10, 10);
+
+function drawPlayer() {
+	moveX = 0;
+	moveY = 0;
+	sprinting = false;
+
+	if (player.isRolling === false) {
+		if (keyIsDown(keybind.up)) {
+			//(up, decrease Y)
+			moveY--;
+		}
+		if (keyIsDown(keybind.left)) {
+			//(left, X decrease)
+			moveX--;
+		}
+		if (keyIsDown(keybind.right)) {
+			//(right, X increase)
+			moveX++;
+		}
+		if (keyIsDown(keybind.down)) {
+			//(down, Y increase)
+			moveY++;
+		}
+		// fix diagonal movement speed
+		if (moveX !== 0 && moveY !== 0) {
+			moveX *= Math.SQRT1_2;
+			moveY *= Math.SQRT1_2;
+		}
+
+		if (keyIsDown(keybind.sprint) && (moveX !== 0 || moveY !== 0) && player.stamina > 0 && !player.staminaCooldown) {
+			moveX *= 1.75; //sprint
+			moveY *= 1.75;
+			player.stamina -= 1;
+			sprinting = true;
+
+			if (player.stamina < 0) {
+				player.staminaCooldown = true;
+			}
+		}
+
+		if (!sprinting) {
+			if (player.stamina <= 200) {
+				player.stamina += 0.5;
+			}
+			if (player.staminaCooldown && player.stamina >= 100) {
+				player.staminaCooldown = false;
+			}
+		}
+
+		sprinting = false;
+
+		moveX *= 4; // Adjust speed as needed
+		moveY *= 4; // Adjust speed as needed
+
+		player.move(moveX, moveY);
+
+		if (keyIsDown(keybind.roll) && (moveX !== 0 || moveY !== 0)) {
+			player.startRoll(moveX, moveY);
+		}
+	}
+
+	player.updateRoll();
+	reload();
+
+	push();
+	stroke(255);
+	strokeWeight(2);
+	stroke(0);
+	ellipse(player.x, player.y, 50); // Draw player as a circle
+
+	pop();
+}
+
+function drawOpponent() {}
+
+function drawGun() {
+	let angle = atan2(mouseY - player.y, mouseX - player.x);
+	gunX = player.x + cos(angle) * 35;
+	gunY = player.y + sin(angle) * 35;
+	push();
+	translate(gunX, gunY);
+	rotate(angle);
+
+	if (angle > 1.5 || angle < -1.5) {
+		//flips the image for when gun is facing the opposite direction
+		scale(1, -1);
+	}
+
+	image(ak47, 0, 5, 64, 32); // Draw the gun at player's position
+	pop();
+}
+
+let reloading = false;
+
+function reload() {
+	if (keyIsDown(82)) {
+		if (player.ammo > 0 && player.magazine < 30 && !reloading) {
+			reloading = true;
+			reloadCooldown = time;
+			rifleReload.setVolume(1);
+			rifleReload.play();
+		}
+	}
+
+	if (reloading) {
+		if (player.weapon === "rifle") {
+			if (reloadCooldown + 2000 < time) {
+				player.ammo -= 30 - player.magazine;
+				player.magazine = 30;
+				reloading = false;
+			}
+		}
+	}
+}
