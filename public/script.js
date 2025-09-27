@@ -1,3 +1,5 @@
+const socket = io();
+
 function preload() {
 	// Load any assets here if needed
 	ak47 = loadImage("assets/Guns/AK47.png");
