@@ -1,5 +1,3 @@
-const socket = io();
-
 socket.on("player_move", (data) => {
 	console.log("Opponent moved:", data);
 	opponent.x = data.x;
@@ -38,4 +36,5 @@ function draw() {
 	drawUI(); // Draw the user interface
 	createArena();
 	drawCrosshair();
+	drawOpponent();
 }

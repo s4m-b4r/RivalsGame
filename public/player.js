@@ -52,6 +52,7 @@ class Player {
 		if (this.canMoveY) {
 			this.y += dy;
 		}
+
 		socket.emit("player_move", { x: this.x, y: this.y });
 	}
 
@@ -192,7 +193,12 @@ function drawPlayer() {
 }
 
 function drawOpponent() {
+	push();
+	stroke(255, 0, 0);
+	strokeWeight(2);
+	stroke(0);
 	ellipse(opponent.x, opponent.y, 50);
+	pop();
 }
 
 function drawGun() {
