@@ -1,5 +1,11 @@
 const socket = io();
 
+socket.on("player_move", (data) => {
+	console.log("Opponent moved:", data);
+	opponent.x = data.x;
+	opponent.y = data.y;
+});
+
 function preload() {
 	// Load any assets here if needed
 	ak47 = loadImage("assets/Guns/AK47.png");

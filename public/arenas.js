@@ -2,9 +2,9 @@ function drawArena() {
 	for (let i = 0; i < 19; i++) {
 		for (let j = 0; j < 33; j++) {
 			noSmooth();
-			// img name = tileset, x position, y position, width, height, source x, source y, source width, source height
+			// tileset, x position, y position, width, height, source x, source y, source width, source height
 			image(tileset, j * 50 + 25, i * 50 + 25, 50, 50, 16 * arenaTiles[i][j].x, 16 * arenaTiles[i][j].y, 16, 16);
-			// rect(j*50, i *50, 50,50)
+			// rect(j*50, i *50, 50,50) //grid
 		}
 	}
 }

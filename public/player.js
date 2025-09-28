@@ -52,6 +52,7 @@ class Player {
 		if (this.canMoveY) {
 			this.y += dy;
 		}
+		socket.emit("player_move", { x: this.x, y: this.y });
 	}
 
 	startRoll(directionX, directionY) {
@@ -105,6 +106,8 @@ class Player {
 				if (this.canMoveY === true) {
 					this.y = this.nY;
 				}
+
+				socket.emit("player_move", { x: this.x, y: this.y });
 			} else {
 				this.isRolling = false; // end roll
 			}
@@ -188,7 +191,9 @@ function drawPlayer() {
 	pop();
 }
 
-function drawOpponent() {}
+function drawOpponent() {
+	ellipse(opponent.x, opponent.y, 50);
+}
 
 function drawGun() {
 	let angle = atan2(mouseY - player.y, mouseX - player.x);

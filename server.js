@@ -6,15 +6,13 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-// Serve static files
 app.use(express.static(__dirname + "/public"));
 
-// ✅ Serve the main page explicitly
 app.get("/", (req, res) => {
 	res.sendFile(__dirname + "/public/index.html");
 });
 
-// ✅ Keep the event loop alive
+// keep the event loop alive
 io.on("connection", (socket) => {
 	console.log("🔥 A user connected:", socket.id);
 
