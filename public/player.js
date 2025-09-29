@@ -118,7 +118,7 @@ class Player {
 
 let player = new Player("P1", 200, 450);
 
-let opponent = new Player("P2", 10, 10);
+let opponent = new Player("P2", 1000, 450);
 
 function drawPlayer() {
 	moveX = 0;
