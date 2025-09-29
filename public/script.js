@@ -36,11 +36,11 @@ function draw() {
 	drawArena(); // Draw the arena
 	bulletDraw(); // Draw bullets
 	drawPlayer(); // Draw the player
-	// drawGun(); // Draw the gun
+	drawGun(); // Draw the gun
 	shooting(); // Handle shooting logic
 	drawUI(); // Draw the user interface
 	createArena();
-	// drawCrosshair();
+	drawCrosshair();
 	drawOpponent();
 }
 
