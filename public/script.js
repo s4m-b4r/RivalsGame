@@ -4,6 +4,11 @@ socket.on("player_move", (data) => {
 	opponent.y = data.y;
 });
 
+socket.on("bullet_shot", (data) => {
+	console.log("Bullet shot:", data)
+
+})
+
 function preload() {
 	// Load any assets here if needed
 	ak47 = loadImage("assets/Guns/AK47.png");
@@ -38,3 +43,4 @@ function draw() {
 	drawCrosshair();
 	drawOpponent();
 }
+

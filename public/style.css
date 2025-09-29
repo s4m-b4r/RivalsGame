@@ -7,15 +7,9 @@ body {
 body {
 	margin: 0;
 	display: flex;
-
-	/* This centers our sketch horizontally. */
 	justify-content: center;
-
-	/* This centers our sketch vertically. */
 	align-items: center;
-
 	cursor: none;
-
 	background: local;
 	background-color: black;
 }
