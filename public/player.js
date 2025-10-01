@@ -221,7 +221,8 @@ function drawOpponent() {
 	pop();
 }
 
-function drawGuns() {
+
+function drawGun() {
 	let angle = atan2(mouseY - player.y, mouseX - player.x);
 	gunX = player.x + cos(angle) * 35;
 	gunY = player.y + sin(angle) * 35;
