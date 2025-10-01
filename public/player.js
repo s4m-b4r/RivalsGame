@@ -67,8 +67,8 @@ class Player {
 			this.rollDirection.x = dir.x;
 			this.rollDirection.y = dir.y;
 
-			this.canMoveX = true;
-			this.canMoveY = true;
+			this.canMoveXroll = true;
+			this.canMoveYroll = true;
 		}
 	}
 
@@ -88,24 +88,23 @@ class Player {
 					for (let j = 0; j < 19; j++) {
 						if (arena[j][i] === 1) {
 							if (collideRectCircle(i * 50, j * 50, 50, 50, this.nX, this.y, 50)) {
-								this.canMoveX = false;
+								this.canMoveXroll = false;
 								console.log("collisionX");
 							}
 
 							if (collideRectCircle(i * 50, j * 50, 50, 50, this.x, this.nY, 50)) {
-								this.canMoveY = false;
+								this.canMoveYroll = false;
 								console.log("collisionY");
 							}
 						}
 					}
 				}
-
-				//only move if no collision
-				if (this.canMoveX === true) {
-					this.x = this.nX;
+				
+				if (this.canMoveXroll){
+					this.x = this.nX //only move if no collision
 				}
-				if (this.canMoveY === true) {
-					this.y = this.nY;
+				if (this.canMoveYroll){
+					this.y = this.nY; //only move if no collision	
 				}
 
 				socket.emit("player_move", { x: this.x, y: this.y });
