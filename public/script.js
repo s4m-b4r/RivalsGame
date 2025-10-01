@@ -40,7 +40,7 @@ function draw() {
 	shooting(); // Handle shooting logic
 	drawUI(); // Draw the user interface
 	createArena();
-	drawCrosshair();
+	drawPlayerUI();
 	drawOpponent();
 }
 

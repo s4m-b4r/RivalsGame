@@ -14,7 +14,7 @@ class Player {
 		this.magazine = 30;
 		this.canMoveX = true; // used for collisions
 		this.canMoveY = true; // used for collisions
-		this.stamina = 100;
+		this.stamina = 200;
 		this.staminaCooldown = false;
 		this.radius = 40; // radius for collision detection
 
@@ -83,6 +83,9 @@ class Player {
 				this.nX = this.x + this.rollDirection.x * this.speed * 4; //fixes the speed
 				this.nY = this.y + this.rollDirection.y * this.speed * 4;
 
+				this.canMoveXroll = true;
+				this.canMoveYroll = true;
+				
 				//checking for collisions while rolling
 				for (let i = 0; i < 33; i++) {
 					for (let j = 0; j < 19; j++) {
@@ -159,7 +162,7 @@ function drawPlayer() {
 		}
 
 		if (!sprinting) {
-			if (player.stamina <= 200) {
+			if (player.stamina <= 300) {
 				player.stamina += 0.5;
 			}
 			if (player.staminaCooldown && player.stamina >= 100) {

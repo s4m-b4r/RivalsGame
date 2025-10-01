@@ -7,7 +7,7 @@ function drawUI() {
 	pop();
 }
 
-function drawCrosshair() {
+function drawPlayerUI() {
 	push();
 	stroke("#f5c536");
 	strokeWeight(3);
@@ -30,3 +30,5 @@ function drawCrosshair() {
 	text(player.ammo, mouseX + 55, mouseY - 8);
 	pop();
 }
+
+

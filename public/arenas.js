@@ -19,6 +19,7 @@ function switchArena(arenaNumber) {
 	} else if (arenaNumber === 4) {
 		arena = ARENA4;
 	}
+	arenaAssetsLoad()
 }
 
 function createArena() {
