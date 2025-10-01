@@ -21,6 +21,11 @@ io.on("connection", (socket) => {
 		socket.broadcast.emit("player_move", data);
 	});
 
+	socket.on("mouse_moved", (data) => {
+		// Send the to everyone
+		socket.broadcast.emit("mouse_moved", data);
+	});
+
 	socket.on("disconnect", () => {
 		console.log("A user disconnected:", socket.id);
 	});

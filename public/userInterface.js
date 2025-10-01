@@ -29,6 +29,8 @@ function drawPlayerUI() {
 	textSize(15);
 	text(player.ammo, mouseX + 55, mouseY - 8);
 	pop();
+
+
 }
 
 

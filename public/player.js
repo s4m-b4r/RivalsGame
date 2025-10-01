@@ -26,6 +26,9 @@ class Player {
 		this.rollDistance = 200;
 		this.rollDuration = 150; // ms
 		this.rollCooldown = 300; // ms
+
+		this.mouseX = 0
+		this.mouseY = 450 
 	}
 
 	move(dx, dy) {
@@ -80,12 +83,12 @@ class Player {
 				let t = elapsed / this.rollDuration;
 				this.speed = Math.sin(Math.PI * t) * (this.rollDistance / 30); //smooths out the start and end of the roll
 
-				this.nX = this.x + this.rollDirection.x * this.speed * 4; //fixes the speed
-				this.nY = this.y + this.rollDirection.y * this.speed * 4;
+				this.nX = this.x + this.rollDirection.x * this.speed * 6; //fixes the speed
+				this.nY = this.y + this.rollDirection.y * this.speed * 6;
 
 				this.canMoveXroll = true;
 				this.canMoveYroll = true;
-				
+
 				//checking for collisions while rolling
 				for (let i = 0; i < 33; i++) {
 					for (let j = 0; j < 19; j++) {
@@ -201,9 +204,24 @@ function drawOpponent() {
 	stroke(0);
 	ellipse(opponent.x, opponent.y, 50);
 	pop();
+
+	let angle = atan2(opponent.mouseY - opponent.y, opponent.mouseX - opponent.x)
+	gunX = opponent.x + cos(angle) * 35;
+	gunY = opponent.y + sin(angle) * 35;
+	push();
+	translate(gunX, gunY);
+	rotate(angle);
+
+	if (angle > 1.5 || angle < -1.5) {
+		//flips the image for when gun is facing the opposite direction
+		scale(1, -1);
+	}
+
+	image(ak47, 0, 5, 64, 32); // Draw the gun at player's position
+	pop();
 }
 
-function drawGun() {
+function drawGuns() {
 	let angle = atan2(mouseY - player.y, mouseX - player.x);
 	gunX = player.x + cos(angle) * 35;
 	gunY = player.y + sin(angle) * 35;
@@ -242,3 +260,4 @@ function reload() {
 		}
 	}
 }
+
