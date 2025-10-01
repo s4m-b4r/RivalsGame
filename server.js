@@ -16,15 +16,6 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
 	console.log("A user connected:", socket.id);
 
-	socket.on("player_move", (data) => {
-		// Send the move to everyone
-		socket.broadcast.emit("player_move", data);
-	});
-
-	socket.on("mouse_moved", (data) => {
-		// Send the to everyone
-		socket.broadcast.emit("mouse_moved", data);
-	});
 
 	socket.on("disconnect", () => {
 		console.log("A user disconnected:", socket.id);

@@ -25,7 +25,7 @@ class Player {
 		this.startRollTime = 0; // The time at which the roll started to be used for the cooldown
 		this.rollDistance = 200;
 		this.rollDuration = 150; // ms
-		this.rollCooldown = 300; // ms
+		this.rollCooldown = 500; // ms
 
 		this.mouseX = 0
 		this.mouseY = 450 
@@ -48,6 +48,7 @@ class Player {
 				}
 			}
 		}
+		
 		//only move if no collision
 		if (this.canMoveX) {
 			this.x += dx;
@@ -112,10 +113,15 @@ class Player {
 				if (this.canMoveYroll){
 					this.y = this.nY; //only move if no collision	
 				}
+				if (!this.canMoveX && !this.canMoveY) {
+					this.isRolling = false
+
+				}
 
 				socket.emit("player_move", { x: this.x, y: this.y });
 			} else {
 				this.isRolling = false; // end roll
+
 			}
 		}
 	}
@@ -196,6 +202,7 @@ function drawPlayer() {
 
 	pop();
 }
+
 
 function drawOpponent() {
 	push();

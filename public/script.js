@@ -15,6 +15,11 @@ socket.on("mouse_moved", (data) => {
 	opponent.mouseY = data.mY
 })
 
+socket.on("bullet_shot", (data) => {
+	console.log("bullet_shot", data)
+	
+})
+
 function preload() {
 	// Load any assets here if needed
 	ak47 = loadImage("assets/Guns/AK47.png");
