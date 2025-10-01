@@ -30,7 +30,9 @@ function drawPlayerUI() {
 	text(player.ammo, mouseX + 55, mouseY - 8);
 	pop();
 
-
+	push()
+	
+	pop()
 }
 
 

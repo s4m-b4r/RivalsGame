@@ -51,7 +51,6 @@ function shooting() {
 				rifleShot.setVolume(1);
 				rifleShot.play();
 				player.magazine--;
-				player.ammo--;
 			}
 		}
 	}
