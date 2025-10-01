@@ -80,8 +80,8 @@ class Player {
 				let t = elapsed / this.rollDuration;
 				this.speed = Math.sin(Math.PI * t) * (this.rollDistance / 30); //smooths out the start and end of the roll
 
-				this.nX = this.x += this.rollDirection.x * this.speed * 4; //fixes the speed
-				this.nY = this.y += this.rollDirection.y * this.speed * 4;
+				this.nX = this.x + this.rollDirection.x * this.speed * 4; //fixes the speed
+				this.nY = this.y + this.rollDirection.y * this.speed * 4;
 
 				//checking for collisions while rolling
 				for (let i = 0; i < 33; i++) {
@@ -99,7 +99,7 @@ class Player {
 						}
 					}
 				}
-				
+
 				if (this.canMoveXroll){
 					this.x = this.nX //only move if no collision
 				}
