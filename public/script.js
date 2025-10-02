@@ -39,7 +39,7 @@ function setup() {
 
 function draw() {
 	// arenaAssetsLoad();
-	frameRate(120);
+	frameRate(60);
 	time = Date.now(); // gets the current time (used for calldowns)
 	background(0);
 	drawArena(); // Draw the arena
