@@ -5,20 +5,18 @@ socket.on("player_move", (data) => {
 });
 
 socket.on("bullet_shot", (data) => {
-	console.log("Bullet shot:", data)
-	
-})
+	console.log("Bullet shot:", data);
+});
 
 socket.on("mouse_moved", (data) => {
-	console.log("mouse_moved", data)
-	opponent.mouseX = data.mX
-	opponent.mouseY = data.mY
-})
+	console.log("mouse_moved", data);
+	opponent.mouseX = data.mX;
+	opponent.mouseY = data.mY;
+});
 
 socket.on("bullet_shot", (data) => {
-	console.log("bullet_shot", data)
-	
-})
+	console.log("bullet_shot", data);
+});
 
 function preload() {
 	// Load any assets here if needed
@@ -50,14 +48,13 @@ function draw() {
 	drawGun(); // Draw the gun
 	shooting(); // Handle shooting logic
 
-	createArena(); 
+	createArena();
 
 	drawOpponent();
 	drawPlayerUI();
 	drawUI(); // Draw the user interface
-	ellipse(x, y, w, [h])
 }
 
-function mouseMoved(){
-	socket.emit("mouse_moved", {mX: mouseX, mY: mouseY});
+function mouseMoved() {
+	socket.emit("mouse_moved", { mX: mouseX, mY: mouseY });
 }
