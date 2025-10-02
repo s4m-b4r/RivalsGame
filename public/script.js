@@ -49,10 +49,13 @@ function draw() {
 	drawPlayer(); // Draw the player
 	drawGun(); // Draw the gun
 	shooting(); // Handle shooting logic
-	drawUI(); // Draw the user interface
+
 	createArena(); 
-	drawPlayerUI();
+
 	drawOpponent();
+	drawPlayerUI();
+	drawUI(); // Draw the user interface
+	ellipse(x, y, w, [h])
 }
 
 function mouseMoved(){

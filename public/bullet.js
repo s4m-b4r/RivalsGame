@@ -9,7 +9,6 @@ class Bullet {
 		this.recoildist = this.mouseVec.dist(this.location)
 		console.log(this.recoildist)
 
-
 		this.radius = 10; // Bullet size
 		this.speed = 5;
 		this.velocity = createVector(x - mouseX, y - mouseY) // direction
@@ -72,3 +71,4 @@ function bulletDraw() {
 		}
 	}
 }
+
