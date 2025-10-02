@@ -6,7 +6,7 @@ socket.on("player_move", (data) => {
 
 socket.on("bullet_shot", (data) => {
 	console.log("Bullet shot:", data)
-
+	
 })
 
 socket.on("mouse_moved", (data) => {
@@ -30,7 +30,7 @@ function preload() {
 }
 
 function setup() {
-	createCanvas(windowWidth - 30, windowHeight - 30);
+	createCanvas(windowWidth, windowHeight);
 	rectMode(CORNER);
 	ellipseMode(CENTER);
 	imageMode(CENTER);
@@ -50,7 +50,7 @@ function draw() {
 	drawGun(); // Draw the gun
 	shooting(); // Handle shooting logic
 	drawUI(); // Draw the user interface
-	createArena();
+	createArena(); 
 	drawPlayerUI();
 	drawOpponent();
 }

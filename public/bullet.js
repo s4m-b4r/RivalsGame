@@ -2,8 +2,14 @@ let bullets = [];
 let bulletCooldown = Date.now(); // Cooldown for shooting bullets
 
 class Bullet {
-	constructor(x, y, mouseX, mouseY) {
+	constructor(x, y, mouseX, mouseY) { //bulletType, weaponRecoil
 		this.location = createVector(x, y);
+		// recoil calculation
+		this.mouseVec = createVector(mouseX, mouseY)
+		this.recoildist = this.mouseVec.dist(this.location)
+		console.log(this.recoildist)
+
+
 		this.radius = 10; // Bullet size
 		this.speed = 5;
 		this.velocity = createVector(x - mouseX, y - mouseY) // direction
@@ -27,9 +33,8 @@ class Bullet {
 	isColliding() {
 		for (let i = 0; i < 33; i++) {
 			for (let j = 0; j < 19; j++) {
-				if (arena[j][i] === 1) {
+				if (arena[j][i] === 1 || arena[j][i] === 2) {
 					if (collidePointRect(this.location.x, this.location.y, i * 50, j * 50, 50, 50)) {
-						console.log("bulletCollide");
 						return true;
 					}
 				}
