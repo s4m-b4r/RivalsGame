@@ -2,15 +2,17 @@ let bullets = [];
 let bulletCooldown = Date.now(); // Cooldown for shooting bullets
 
 class Bullet {
-	constructor(x, y, mouseX, mouseY) { //bulletType, weaponRecoil
+	constructor(x, y, mouseX, mouseY) {
+		//bulletType, weaponRecoil
 		this.location = createVector(x, y);
-		this.mouseVec = createVector(mouseX, mouseY)
-		this.recoilScale = 10
+		this.mouseVec = createVector(mouseX, mouseY);
+		this.recoilScale = 5;
 		// recoil calculation
-		this.recoilDist = this.mouseVec.dist(this.location)
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100)
-		console.log(this.recoildist)
-
+		this.recoilDist = this.mouseVec.dist(this.location);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
+			this.recoilDist / 100
+		);
+		console.log(this.recoildist);
 
 		this.radius = 10; // Bullet size
 		this.speed = 5;
@@ -75,4 +77,3 @@ function bulletDraw() {
 		}
 	}
 }
-
