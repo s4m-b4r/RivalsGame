@@ -4,14 +4,18 @@ let bulletCooldown = Date.now(); // Cooldown for shooting bullets
 class Bullet {
 	constructor(x, y, mouseX, mouseY) { //bulletType, weaponRecoil
 		this.location = createVector(x, y);
-		// recoil calculation
 		this.mouseVec = createVector(mouseX, mouseY)
-		this.recoildist = this.mouseVec.dist(this.location)
+		this.recoilScale = 10
+		// recoil calculation
+		this.recoilDist = this.mouseVec.dist(this.location)
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100)
 		console.log(this.recoildist)
+
 
 		this.radius = 10; // Bullet size
 		this.speed = 5;
 		this.velocity = createVector(x - mouseX, y - mouseY) // direction
+			.add(this.recoilAdd)
 			.normalize() // Calculate velocity based on mouse position
 			.mult(-this.speed);
 	}
