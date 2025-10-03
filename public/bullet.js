@@ -77,12 +77,3 @@ function bulletDraw() {
 		}
 	}
 }
-
-//bulletType, weaponRecoil
-this.location = createVector(x, y);
-this.mouseVec = createVector(mouseX, mouseY);
-this.recoilScale = 5;
-
-// recoil calculation
-this.recoilDist = this.mouseVec.dist(this.location);
-this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
