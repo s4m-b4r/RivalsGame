@@ -20,7 +20,7 @@ socket.on("bullet_shot", (data) => {
 
 function preload() {
 	// Load any assets here if needed
-	ak47 = loadImage("assets/Guns/AK47.png");
+	assaultRifleImage = loadImage("assets/Guns/AK47.png");
 	tileset = loadImage("assets/environment/tileset.png");
 	rifleAmmo = loadImage("assets/Bullets/RifleAmmoSmall.png");
 	rifleShot = loadSound("assets/Sounds/762x54r Single Isolated MP3.mp3");

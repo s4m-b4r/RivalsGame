@@ -77,3 +77,21 @@ function bulletDraw() {
 		}
 	}
 }
+
+class Weapon {
+	constructor(name, asset, damage, recoil, scale, magazineSize, speed, cooldown) {
+		this.name = name
+		this.asset = asset
+		this.damage = damage
+		this.recoil = recoil
+		this.scale = scale
+		this.speed = speed
+		this.magazineSize = magazineSize
+		this.cooldown = cooldown
+	}
+	draw() {
+
+	}
+}
+
+let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, 5, 5, 5, 30, 5, 100)
