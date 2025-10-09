@@ -1,5 +1,6 @@
 function preload() {
 	// Load any assets here if needed
+	console.log("test");
 	assaultRifleImage = loadImage("assets/Guns/AK47.png");
 	tileset = loadImage("assets/environment/tileset.png");
 	rifleAmmo = loadImage("assets/Bullets/RifleAmmoSmall.png");
