@@ -238,10 +238,3 @@ function drawOpponent() {
 	image(assaultRifleImage, 0, 5, 64, 32); // Draw the gun at player's position
 	pop();
 }
-
-let reloading = false;
-
-function reload() {
-	if (keyIsDown(82)) {
-	}
-}
