@@ -2,18 +2,22 @@ let bullets = [];
 let bulletCooldown = Date.now(); // Cooldown for shooting bullets
 
 class Bullet {
-	constructor(x, y, mouseX, mouseY) {
+	constructor(x, y, mouseX, mouseY, weapon) {
 		//bulletType, weaponRecoil
+		this.weapon = weapon;
 		this.location = createVector(x, y);
 		this.mouseVec = createVector(mouseX, mouseY);
-		this.recoilScale = 5;
+		this.recoilScale = weapon.recoil; // Adjust recoil scale based on weapon
+		this.damage = weapon.damage;
 
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
+			this.recoilDist / 100
+		);
 
 		this.radius = 10; // Bullet size
-		this.speed = 10;
+		this.speed = weapon.speed; // Bullet speed
 		this.velocity = createVector(x - mouseX, y - mouseY) // direction
 			.add(this.recoilAdd)
 			.normalize() // Calculate velocity based on mouse position
@@ -49,18 +53,8 @@ class Bullet {
 }
 
 function shooting() {
-	if (player.magazine > 0 && !reloading) {
-		if (mouseIsPressed && mouseButton === LEFT) {
-			if (bulletCooldown + 100 <= time) {
-				// Check if enough time has passed since last bullet
-				let bullet = new Bullet(player.x, player.y, mouseX, mouseY);
-				bullets.push(bullet);
-				bulletCooldown = time; // Reset cooldown
-				rifleShot.setVolume(1);
-				rifleShot.play();
-				player.magazine--;
-			}
-		}
+	if (mouseIsPressed && mouseButton === LEFT) {
+		player.shoot(mouseX, mouseY);
 	}
 }
 
@@ -85,13 +79,58 @@ class Weapon {
 		this.scale = 5;
 		this.speed = speed;
 		this.magazineSize = magazineSize;
+		this.ammo = magazineSize; // Current ammo in magazine
 		this.cooldown = cooldown;
 		this.x = 0;
 		this.y = 0;
 		this.visible = true;
 		this.bulletCount = bulletCount;
+		this.lastShotTime = 0;
+		this.ammoType = "rifleAmmo";
+		this.remainingAmmo = 90; // Total ammo available
+		this.reloadTime = 2000; //time in milliseconds to reload
+		this.isReloading = false;
 	}
-	draw() {
+
+	shoot() {
+		let now = Date.now();
+		if (now - this.lastShotTime < this.cooldown) return; // cooldown check
+		if (this.ammo <= 0 || reloading) return; // no ammo check
+
+		for (let i = 0; i < this.bulletCount; i++) {
+			let bullet = new Bullet(player.x, player.y, mouseX, mouseY, this);
+			bullets.push(bullet);
+		}
+
+		this.lastShotTime = now;
+		this.ammo--;
+
+		rifleShot.setVolume(1);
+		rifleShot.play();
+	}
+
+	reload() {
+		if (keyIsDown(keybinds.reload)) {
+			// already reloading/no ammo/full magazine check
+			if (!(this.isReloading || this.remainingAmmo <= 0 || this.ammo === this.magazineSize)) {
+				this.isReloading = true;
+				this.reloadStartTime = Date.now();
+				rifleReload.setVolume(1);
+				rifleReload.play();
+			}
+		}
+		if (this.isReloading) {
+			if (Date.now() - this.reloadStartTime >= this.reloadTime) {
+				let neededAmmo = this.magazineSize - this.ammo;
+				let ammoToLoad = min(neededAmmo, this.remainingAmmo);
+				this.ammo += ammoToLoad;
+				this.remainingAmmo -= ammoToLoad;
+				this.isReloading = false;
+			}
+		}
+	}
+
+	draw(player) {
 		if (this.visible) {
 			let angle = atan2(mouseY - player.y, mouseX - player.x);
 			this.x = player.x + cos(angle) * 35;

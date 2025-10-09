@@ -9,7 +9,7 @@ class Player {
 		this.score = 0;
 		this.inventory = [];
 		this.alive = true;
-		this.weapon = "rifle";
+		this.weapon = null;
 		this.ammo = 120;
 		this.magazine = 30;
 		this.canMoveX = true; // used for collisions
@@ -29,6 +29,16 @@ class Player {
 
 		this.mouseX = 0;
 		this.mouseY = 450;
+	}
+
+	equipWeapon(weapon) {
+		this.weapon = weapon;
+	}
+
+	shoot(mouseX, mouseY) {
+		if (this.weapon) {
+			this.weapon.shoot(this, mouseX, mouseY);
+		}
 	}
 
 	move(dx, dy) {
@@ -190,7 +200,11 @@ function drawPlayer() {
 	}
 
 	player.updateRoll();
-	reload();
+
+	if (player.weapon) {
+		player.weapon.draw(player);
+		player.weapon.reload();
+	}
 
 	push();
 	stroke(255);
@@ -225,42 +239,9 @@ function drawOpponent() {
 	pop();
 }
 
-function drawGun() {
-	let angle = atan2(mouseY - player.y, mouseX - player.x);
-	gunX = player.x + cos(angle) * 35;
-	gunY = player.y + sin(angle) * 35;
-	push();
-	translate(gunX, gunY);
-	rotate(angle);
-
-	if (angle > 1.5 || angle < -1.5) {
-		//flips the image for when gun is facing the opposite direction
-		scale(1, -1);
-	}
-
-	image(assaultRifleImage, 0, 5, 64, 32); // Draw the gun at player's position
-	pop();
-}
-
 let reloading = false;
 
 function reload() {
 	if (keyIsDown(82)) {
-		if (player.ammo > 0 && player.magazine < 30 && !reloading) {
-			reloading = true;
-			reloadCooldown = time;
-			rifleReload.setVolume(1);
-			rifleReload.play();
-		}
-	}
-
-	if (reloading) {
-		if (player.weapon === "rifle") {
-			if (reloadCooldown + 2000 < time) {
-				player.ammo -= 30 - player.magazine;
-				player.magazine = 30;
-				reloading = false;
-			}
-		}
 	}
 }
