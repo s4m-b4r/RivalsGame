@@ -119,6 +119,7 @@ class Weapon {
 				rifleReload.play();
 			}
 		}
+
 		if (this.isReloading) {
 			if (Date.now() - this.reloadStartTime >= this.reloadTime) {
 				let neededAmmo = this.magazineSize - this.ammo;
