@@ -37,7 +37,7 @@ class Player {
 
 	shoot(mouseX, mouseY) {
 		if (this.weapon) {
-			this.weapon.shoot(this, mouseX, mouseY);
+			this.weapon.shoot();
 		}
 	}
 
@@ -201,11 +201,6 @@ function drawPlayer() {
 
 	player.updateRoll();
 
-	if (player.weapon) {
-		player.weapon.draw(player);
-		player.weapon.reload();
-	}
-
 	push();
 	stroke(255);
 	strokeWeight(2);
@@ -213,6 +208,11 @@ function drawPlayer() {
 	ellipse(player.x, player.y, 50); // Draw player as a circle
 
 	pop();
+
+	if (player.weapon) {
+		player.weapon.draw(player);
+		player.weapon.reload();
+	}
 }
 
 function drawOpponent() {

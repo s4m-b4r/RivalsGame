@@ -39,7 +39,7 @@ function setup() {
 	rectMode(CORNER);
 	ellipseMode(CENTER);
 	imageMode(CENTER);
-	translate(0, windowHeight - 30);
+
 	noSmooth();
 	arenaAssetsLoad();
 
