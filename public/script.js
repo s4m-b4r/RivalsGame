@@ -42,7 +42,9 @@ function setup() {
 	translate(0, windowHeight - 30);
 	noSmooth();
 	arenaAssetsLoad();
-	loadWeapons();
+
+	weapons = loadWeapons();
+	player.weapon = weapons.assaultRifle;
 }
 
 function draw() {

@@ -110,7 +110,7 @@ class Weapon {
 	}
 
 	reload() {
-		if (keyIsDown(keybinds.reload)) {
+		if (keyIsDown(Keybinds.reload)) {
 			// already reloading/no ammo/full magazine check
 			if (!(this.isReloading || this.remainingAmmo <= 0 || this.ammo === this.magazineSize)) {
 				this.isReloading = true;
@@ -156,4 +156,6 @@ function loadWeapons() {
 	let shotgun = new Weapon("Shotgun", shotgunImage, 15, 20, 2, 5, 1000, 7);
 	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, 90, 0, 3, 15, 2000, 1);
 	let smg = new Weapon("SMG", smgImage, 3, 15, 60, 10, 50, 1);
+
+	return { assaultRifle, shotgun, sniperRifle, smg };
 }
