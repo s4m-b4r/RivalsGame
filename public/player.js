@@ -221,7 +221,7 @@ function drawOpponent() {
 		scale(1, -1);
 	}
 
-	image(ak47, 0, 5, 64, 32); // Draw the gun at player's position
+	image(assaultRifleImage, 0, 5, 64, 32); // Draw the gun at player's position
 	pop();
 }
 
@@ -238,7 +238,7 @@ function drawGun() {
 		scale(1, -1);
 	}
 
-	image(ak47, 0, 5, 64, 32); // Draw the gun at player's position
+	image(assaultRifleImage, 0, 5, 64, 32); // Draw the gun at player's position
 	pop();
 }
 
