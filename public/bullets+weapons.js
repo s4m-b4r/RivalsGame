@@ -95,7 +95,7 @@ class Weapon {
 	shoot() {
 		let now = Date.now();
 		if (now - this.lastShotTime < this.cooldown) return; // cooldown check
-		if (this.ammo <= 0 || reloading) return; // no ammo check
+		if (this.ammo <= 0 || isReloading) return; // no ammo check
 
 		for (let i = 0; i < this.bulletCount; i++) {
 			let bullet = new Bullet(player.x, player.y, mouseX, mouseY, this);
