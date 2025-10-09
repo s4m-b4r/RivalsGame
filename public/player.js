@@ -27,8 +27,9 @@ class Player {
 		this.rollDuration = 150; // ms
 		this.rollCooldown = 500; // ms
 
-		this.mouseX = 0
-		this.mouseY = 450 
+		this.mouseX = 0;
+		this.mouseY = 450;
+		this.weapon = assaultRifle;
 	}
 
 	move(dx, dy) {
@@ -48,7 +49,7 @@ class Player {
 				}
 			}
 		}
-		
+
 		//only move if no collision
 		if (this.canMoveX) {
 			this.x += dx;
@@ -107,21 +108,19 @@ class Player {
 					}
 				}
 
-				if (this.canMoveXroll){
-					this.x = this.nX //only move if no collision
+				if (this.canMoveXroll) {
+					this.x = this.nX; //only move if no collision
 				}
-				if (this.canMoveYroll){
-					this.y = this.nY; //only move if no collision	
+				if (this.canMoveYroll) {
+					this.y = this.nY; //only move if no collision
 				}
 				if (!this.canMoveX && !this.canMoveY) {
-					this.isRolling = false
-
+					this.isRolling = false;
 				}
 
 				socket.emit("player_move", { x: this.x, y: this.y });
 			} else {
 				this.isRolling = false; // end roll
-
 			}
 		}
 	}
@@ -203,7 +202,6 @@ function drawPlayer() {
 	pop();
 }
 
-
 function drawOpponent() {
 	push();
 	stroke(255, 0, 0);
@@ -212,7 +210,7 @@ function drawOpponent() {
 	ellipse(opponent.x, opponent.y, 50);
 	pop();
 
-	let angle = atan2(opponent.mouseY - opponent.y, opponent.mouseX - opponent.x)
+	let angle = atan2(opponent.mouseY - opponent.y, opponent.mouseX - opponent.x);
 	gunX = opponent.x + cos(angle) * 35;
 	gunY = opponent.y + sin(angle) * 35;
 	push();
@@ -227,7 +225,6 @@ function drawOpponent() {
 	image(ak47, 0, 5, 64, 32); // Draw the gun at player's position
 	pop();
 }
-
 
 function drawGun() {
 	let angle = atan2(mouseY - player.y, mouseX - player.x);
@@ -268,4 +265,3 @@ function reload() {
 		}
 	}
 }
-

@@ -10,9 +10,7 @@ class Bullet {
 
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
-			this.recoilDist / 100
-		);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
 
 		this.radius = 10; // Bullet size
 		this.speed = 5;
@@ -79,19 +77,26 @@ function bulletDraw() {
 }
 
 class Weapon {
-	constructor(name, asset, damage, recoil, scale, magazineSize, speed, cooldown) {
-		this.name = name
-		this.asset = asset
-		this.damage = damage
-		this.recoil = recoil
-		this.scale = scale
-		this.speed = speed
-		this.magazineSize = magazineSize
-		this.cooldown = cooldown
+	constructor(name, asset, damage, recoil, scale, magazineSize, speed, cooldown, bulletCount) {
+		this.name = name;
+		this.asset = asset;
+		this.damage = damage;
+		this.recoil = recoil;
+		this.scale = scale;
+		this.speed = speed;
+		this.magazineSize = magazineSize;
+		this.cooldown = cooldown;
+		this.x = 0;
+		this.y = 0;
+		this.visible = true;
+		this.bulletCount = bulletCount;
 	}
 	draw() {
-
+		if (this.visible) {
+			let angle = atan2(mouseY - player.y, mouseX - player.x);
+		}
 	}
 }
 
-let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, 5, 5, 5, 30, 5, 100)
+let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, 5, 5, 5, 30, 5, 100, 1);
+let shotgun = new Weapon("Shotgun", shotgunImage, 15, 20, 5, 2, 5, 1500, 7);
