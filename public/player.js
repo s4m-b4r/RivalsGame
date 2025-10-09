@@ -226,20 +226,7 @@ function drawOpponent() {
 }
 
 function drawGun() {
-	let angle = atan2(mouseY - player.y, mouseX - player.x);
-	gunX = player.x + cos(angle) * 35;
-	gunY = player.y + sin(angle) * 35;
-	push();
-	translate(gunX, gunY);
-	rotate(angle);
-
-	if (angle > 1.5 || angle < -1.5) {
-		//flips the image for when gun is facing the opposite direction
-		scale(1, -1);
-	}
-
-	image(assaultRifleImage, 0, 5, 64, 32); // Draw the gun at player's position
-	pop();
+	shotgun.draw();
 }
 
 let reloading = false;

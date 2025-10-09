@@ -94,9 +94,23 @@ class Weapon {
 	draw() {
 		if (this.visible) {
 			let angle = atan2(mouseY - player.y, mouseX - player.x);
+			this.x = player.x + cos(angle) * 35;
+			this.y = player.y + sin(angle) * 35;
+			push();
+			translate(this.x, this.y);
+			rotate(angle);
+
+			if (angle > 1.5 || angle < -1.5) {
+				this.scale(1, -1);
+			}
+
+			noSmooth();
+			image(this.asset, 0, 0, 64, 32);
+			pop();
 		}
 	}
 }
+
 function loadWeapons() {
 	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, 5, 5, 30, 5, 100, 1);
 	let shotgun = new Weapon("Shotgun", shotgunImage, 15, 20, 2, 5, 1000, 7);
