@@ -19,18 +19,14 @@ function drawPlayerUI() {
 	ellipse(mouseX, mouseY, 20);
 	point(mouseX, mouseY);
 	pop();
-
+	if (!player.weapon) return;
 	push();
 	textSize(25);
 	stroke("#f5c53621");
 	fill(245, 197, 54);
-	text(player.magazine, mouseX + 25, mouseY + 8);
+	text(player.weapon.ammo, mouseX + 25, mouseY + 8);
 	fill(245, 197, 54, 125);
 	textSize(15);
-	text(player.ammo, mouseX + 55, mouseY - 8);
+	text(player.weapon.remainingAmmo, mouseX + 55, mouseY - 8);
 	pop();
-
-	push()
-	
-	pop()
 }
