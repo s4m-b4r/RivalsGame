@@ -97,6 +97,6 @@ class Weapon {
 		}
 	}
 }
-
+assaultRifleImage = loadImage("assets/Guns/AK47.png");
 let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, 5, 5, 5, 30, 5, 100, 1);
 let shotgun = new Weapon("Shotgun", shotgunImage, 15, 20, 5, 2, 5, 1500, 7);
