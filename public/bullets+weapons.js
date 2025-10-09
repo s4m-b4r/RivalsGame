@@ -13,7 +13,7 @@ class Bullet {
 		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
 
 		this.radius = 10; // Bullet size
-		this.speed = 5;
+		this.speed = 10;
 		this.velocity = createVector(x - mouseX, y - mouseY) // direction
 			.add(this.recoilAdd)
 			.normalize() // Calculate velocity based on mouse position
