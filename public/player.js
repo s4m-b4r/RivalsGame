@@ -29,7 +29,6 @@ class Player {
 
 		this.mouseX = 0;
 		this.mouseY = 450;
-		this.weapon = assaultRifle;
 	}
 
 	move(dx, dy) {

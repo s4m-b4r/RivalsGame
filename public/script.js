@@ -18,6 +18,22 @@ socket.on("bullet_shot", (data) => {
 	console.log("bullet_shot", data);
 });
 
+function preload() {
+	// Load any assets here if needed
+
+	assaultRifleImage = loadImage("assets/Guns/assaultRifle.png");
+	shotgunImage = loadImage("assets/Guns/shotgun.png");
+	sniperRifleImage = loadImage("assets/Guns/sniper.png");
+	smgImage = loadImage("assets/Guns/smg.png");
+
+	rifleAmmo = loadImage("assets/Bullets/RifleAmmoSmall.png");
+
+	tileset = loadImage("assets/environment/tileset.png");
+
+	rifleShot = loadSound("assets/Sounds/762x54r Single Isolated MP3.mp3");
+	rifleReload = loadSound("assets/Sounds/ak-47-reload-sound-effect.wav");
+}
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	rectMode(CORNER);
@@ -26,6 +42,7 @@ function setup() {
 	translate(0, windowHeight - 30);
 	noSmooth();
 	arenaAssetsLoad();
+	loadWeapons();
 }
 
 function draw() {

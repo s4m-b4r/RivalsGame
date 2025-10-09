@@ -77,12 +77,12 @@ function bulletDraw() {
 }
 
 class Weapon {
-	constructor(name, asset, damage, recoil, scale, magazineSize, speed, cooldown, bulletCount) {
+	constructor(name, asset, damage, recoil, magazineSize, speed, cooldown, bulletCount) {
 		this.name = name;
 		this.asset = asset;
 		this.damage = damage;
 		this.recoil = recoil;
-		this.scale = scale;
+		this.scale = 5;
 		this.speed = speed;
 		this.magazineSize = magazineSize;
 		this.cooldown = cooldown;
@@ -97,6 +97,9 @@ class Weapon {
 		}
 	}
 }
-
-let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, 5, 5, 5, 30, 5, 100, 1);
-let shotgun = new Weapon("Shotgun", shotgunImage, 15, 20, 5, 2, 5, 1500, 7);
+function loadWeapons() {
+	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, 5, 5, 30, 5, 100, 1);
+	let shotgun = new Weapon("Shotgun", shotgunImage, 15, 20, 2, 5, 1000, 7);
+	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, 90, 0, 3, 15, 2000, 1);
+	let smg = new Weapon("SMG", smgImage, 3, 15, 60, 10, 50, 1);
+}
