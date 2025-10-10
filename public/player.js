@@ -33,8 +33,8 @@ class Player {
 
 	equipWeapon(weapon) {
 		this.weapon = weapon;
-		weapon.equipSound.setVolume(1);
-		weapon.equipSound.play();
+		// weapon.equipSound.setVolume(1);
+		// weapon.equipSound.play();
 	}
 
 	shoot(mouseX, mouseY) {
