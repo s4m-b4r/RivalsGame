@@ -9,12 +9,11 @@ class Bullet {
 		this.mouseVec = createVector(mouseX, mouseY);
 		this.recoilScale = weapon.recoil; // Adjust recoil scale based on weapon
 		this.damage = weapon.damage;
+		this.asset = weapon.bulletAsset;
 
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
-			this.recoilDist / 100
-		);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -33,7 +32,7 @@ class Bullet {
 		translate(this.location.x, this.location.y);
 		rotate(this.velocity.heading()); // Rotate bullet to face direction of movement
 		// point(this.location.x, this.location.y); // Draw the bullet
-		image(rifleAmmo, 0, 0, 40, 40); // Draw the bullet image
+		image(this.asset, 0, 0, 40, 40); // Draw the bullet image
 		pop();
 	}
 
@@ -71,9 +70,10 @@ function bulletDraw() {
 }
 
 class Weapon {
-	constructor(name, asset, damage, recoil, magazineSize, speed, cooldown, bulletCount) {
+	constructor(name, asset, bulletAsset, damage, recoil, magazineSize, speed, cooldown, bulletCount) {
 		this.name = name;
 		this.asset = asset;
+		this.bulletAsset = bulletAsset;
 		this.damage = damage;
 		this.recoil = recoil;
 		this.scale = 5;
@@ -86,7 +86,7 @@ class Weapon {
 		this.visible = true;
 		this.bulletCount = bulletCount;
 		this.lastShotTime = 0;
-		this.ammoType = "rifleAmmo";
+
 		this.remainingAmmo = 90; // Total ammo available
 		this.reloadTime = 2000; //time in milliseconds to reload
 		this.isReloading = false;
@@ -110,7 +110,7 @@ class Weapon {
 	}
 
 	reload() {
-		if (keyIsDown(Keybinds.reload)) {
+		if (keyIsDown(keybind.reload)) {
 			// already reloading/no ammo/full magazine check
 			if (!(this.isReloading || this.remainingAmmo <= 0 || this.ammo === this.magazineSize)) {
 				this.isReloading = true;
@@ -152,10 +152,10 @@ class Weapon {
 }
 
 function loadWeapons() {
-	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, 5, 5, 30, 5, 100, 1);
-	let shotgun = new Weapon("Shotgun", shotgunImage, 15, 20, 2, 5, 1000, 7);
-	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, 90, 0, 3, 15, 2000, 1);
-	let smg = new Weapon("SMG", smgImage, 3, 15, 60, 10, 50, 1);
+	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, rifleAmmoImage, 5, 5, 30, 5, 100, 1);
+	let shotgun = new Weapon("Shotgun", shotgunImage, shotgunAmmoImage, 15, 20, 2, 5, 1000, 7);
+	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, rifleAmmoImage, 90, 0, 3, 15, 2000, 1);
+	let smg = new Weapon("SMG", smgImage, smgAmmoImage, 3, 15, 60, 10, 50, 1);
 
 	return { assaultRifle, shotgun, sniperRifle, smg };
 }

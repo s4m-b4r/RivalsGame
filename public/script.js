@@ -26,7 +26,9 @@ function preload() {
 	sniperRifleImage = loadImage("assets/Guns/sniper.png");
 	smgImage = loadImage("assets/Guns/smg.png");
 
-	rifleAmmo = loadImage("assets/Bullets/RifleAmmoSmall.png");
+	rifleAmmoImage = loadImage("assets/Bullets/RifleAmmoSmall.png");
+	shotgunAmmoImage = loadImage("assets/Bullets/ShotgunShellSmall.png");
+	smgAmmoImage = loadImage("assets/Bullets/PistolAmmoSmall.png");
 
 	tileset = loadImage("assets/environment/tileset.png");
 
