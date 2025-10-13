@@ -37,19 +37,19 @@ class Player {
 		// weapon.equipSound.play();
 	}
 
-	swapHotbarItem(scroll) {
-		if (scroll > 0) {
-			selectedHotbarSlot++;
-			if (selectedHotbarSlot > 2) {
-				selectedHotbarSlot = 0;
-			}
-		} else {
-			selectedHotbarSlot--;
-			if (selectedHotbarSlot < 0) {
-				selectedHotbarSlot = 2;
-			}
-		}
-	}
+	// swapHotbarItem(scroll) {
+	// 	if (scroll > 0) {
+	// 		selectedHotbarSlot++;
+	// 		if (selectedHotbarSlot > 2) {
+	// 			selectedHotbarSlot = 0;
+	// 		}
+	// 	} else {
+	// 		selectedHotbarSlot--;
+	// 		if (selectedHotbarSlot < 0) {
+	// 			selectedHotbarSlot = 2;
+	// 		}
+	// 	}
+	// }
 
 	shoot(mouseX, mouseY) {
 		if (this.weapon) {
