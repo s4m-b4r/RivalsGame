@@ -39,15 +39,16 @@ function drawPlayerUI() {
 		// hotbar
 
 		push();
+		stroke("#ffffff80");
+		strokeWeight(5);
 		for (let i = 0; i < 3; i++) {
 			if (i === selectedHotbarSlot) {
 				fill("#ffffff40");
+				rect(1325 + i * 100, 775, 100, 100);
 			} else {
 				fill("#ffffff20");
+				rect(1350 + i * 100, 800, 75, 75);
 			}
-			stroke("#ffffff80");
-			strokeWeight(5);
-			rect(1200 + i * 100, 800, 75, 75);
 		}
 		pop();
 	}
