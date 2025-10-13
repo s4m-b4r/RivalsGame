@@ -251,6 +251,6 @@ function drawOpponent() {
 		scale(1, -1);
 	}
 
-	image(opponent.weapon.asset, 0, 5, 64, 32); // Draw the gun at player's position
+	image(assaultRifleImage, 0, 5, 64, 32); // Draw the gun at player's position
 	pop();
 }
