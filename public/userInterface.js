@@ -7,6 +7,7 @@ function drawUI() {
 	pop();
 }
 selectedHotbarSlot = 0;
+
 function drawPlayerUI() {
 	if (inMatch) {
 		//crosshair
@@ -40,13 +41,13 @@ function drawPlayerUI() {
 		push();
 		for (let i = 0; i < 3; i++) {
 			if ((i = selectedHotbarSlot)) {
-				fill(#ffffff40)
+				fill("#ffffff40");
 			} else {
-				fill(#ffffff20)
+				fill("#ffffff20");
 			}
-			stroke(#ffffff80)
-			strokeWeight(5)
-			rect(1200 + i* 100 ,800, 75, 75);
+			stroke("#ffffff80");
+			strokeWeight(5);
+			rect(1200 + i * 100, 800, 75, 75);
 		}
 		pop();
 	}
