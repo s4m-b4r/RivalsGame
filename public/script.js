@@ -25,6 +25,7 @@ function preload() {
 	shotgunImage = loadImage("assets/Guns/shotgun.png");
 	sniperRifleImage = loadImage("assets/Guns/sniper.png");
 	smgImage = loadImage("assets/Guns/smg.png");
+	pistolImage = loadImage("assets/Guns/pistol.png");
 
 	rifleAmmoImage = loadImage("assets/Bullets/RifleAmmoSmall.png");
 	shotgunAmmoImage = loadImage("assets/Bullets/ShotgunShellSmall.png");
@@ -37,6 +38,7 @@ function preload() {
 }
 
 function setup() {
+	inMatch = true;
 	createCanvas(windowWidth, windowHeight);
 	rectMode(CORNER);
 	ellipseMode(CENTER);
@@ -54,19 +56,27 @@ function draw() {
 	frameRate(60);
 	time = Date.now(); // gets the current time (used for calldowns)
 	background(0);
-	drawArena(); // Draw the arena
-	bulletDraw(); // Draw bullets
-	drawPlayer(); // Draw the player
+	if (inMatch) {
+		drawArena(); // Draw the arena
+		bulletDraw(); // Draw bullets
+		drawPlayer(); // Draw the player
 
-	shooting(); // Handle shooting logic
+		shooting(); // Handle shooting logic
 
-	createArena();
+		createArena(); // used for making new arenas
 
-	drawOpponent();
-	drawPlayerUI();
-	drawUI(); // Draw the user interface
+		drawOpponent();
+		drawPlayerUI();
+		drawUI(); // Draw the user interface
+	}
 }
 
 function mouseMoved() {
 	socket.emit("mouse_moved", { mX: mouseX, mY: mouseY });
+}
+
+function mouseWheel(event) {
+	if (inMatch) {
+		swapHotBarItem(event.delta);
+	}
 }

@@ -156,6 +156,7 @@ function loadWeapons() {
 	let shotgun = new Weapon("Shotgun", shotgunImage, shotgunAmmoImage, 15, 20, 2, 5, 1000, 7);
 	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, rifleAmmoImage, 90, 0, 3, 15, 2000, 1);
 	let smg = new Weapon("SMG", smgImage, smgAmmoImage, 3, 15, 60, 10, 50, 1);
+	let pistol = new Weapon("Pistol", pistolImage, smgAmmoImage, 20, 3, 12, 7, 300, 1);
 
-	return { assaultRifle, shotgun, sniperRifle, smg };
+	return { assaultRifle, shotgun, sniperRifle, smg, pistol };
 }

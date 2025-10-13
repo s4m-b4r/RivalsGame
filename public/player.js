@@ -37,6 +37,20 @@ class Player {
 		// weapon.equipSound.play();
 	}
 
+	swapHotbarItem(scroll) {
+		if (scroll > 0) {
+			selectedHotbarSlot++;
+			if (selectedHotbarSlot > 2) {
+				selectedHotbarSlot = 0;
+			}
+		} else {
+			selectedHotbarSlot--;
+			if (selectedHotbarSlot < 0) {
+				selectedHotbarSlot = 2;
+			}
+		}
+	}
+
 	shoot(mouseX, mouseY) {
 		if (this.weapon) {
 			this.weapon.shoot();
@@ -237,6 +251,6 @@ function drawOpponent() {
 		scale(1, -1);
 	}
 
-	image(assaultRifleImage, 0, 5, 64, 32); // Draw the gun at player's position
+	image(opponent.weapon.asset, 0, 5, 64, 32); // Draw the gun at player's position
 	pop();
 }
