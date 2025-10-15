@@ -77,7 +77,7 @@ function mouseMoved() {
 
 function mouseWheel(event) {
 	if (inMatch) {
-		swapHotBarItem(event.delta);
+		player.swapHotBarItem(event.delta);
 		console.log(event.delta);
 	}
 }

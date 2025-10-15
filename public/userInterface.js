@@ -46,10 +46,10 @@ function drawPlayerUI() {
 		for (let i = 0; i < 3; i++) {
 			if (i === selectedHotbarSlot) {
 				fill("#ffffff40");
-				rect(1330 + i * 100, 860, 80, 80);
+				rect(1340 + i * 100, 850, 80, 80);
 			} else {
 				fill("#ffffff20");
-				rect(1330 + i * 100, 860, 75, 75);
+				rect(1340 + i * 100, 850, 75, 75);
 			}
 		}
 		pop();

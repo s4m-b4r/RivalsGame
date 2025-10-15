@@ -37,7 +37,7 @@ class Player {
 		// weapon.equipSound.play();
 	}
 
-	swapHotbarItem(scroll) {
+	swapHotBarItem(scroll) {
 		if (scroll > 0) {
 			selectedHotbarSlot++;
 			if (selectedHotbarSlot > 2) {
