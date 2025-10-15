@@ -16,6 +16,12 @@ socket.on("mouse_moved", (data) => {
 
 socket.on("bullet_shot", (data) => {
 	console.log("bullet_shot", data);
+	bullets.push(data.bullet);
+});
+
+socket.on("equip_item", (data) => {
+	console.log("equip_item", data);
+	opponent.equipped = data.item;
 });
 
 function preload() {
@@ -51,6 +57,7 @@ function setup() {
 
 	weapons = loadWeapons();
 	player.weapon = weapons.assaultRifle;
+	opponent.weapon = weapons.assaultRifle;
 }
 
 function draw() {
@@ -81,6 +88,5 @@ function mouseMoved() {
 function mouseWheel(event) {
 	if (inMatch) {
 		player.swapHotBarItem(event.delta);
-		console.log(event.delta);
 	}
 }

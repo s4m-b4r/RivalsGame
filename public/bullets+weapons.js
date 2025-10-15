@@ -100,6 +100,7 @@ class Weapon {
 		for (let i = 0; i < this.bulletCount; i++) {
 			let bullet = new Bullet(player.x, player.y, mouseX, mouseY, this);
 			bullets.push(bullet);
+			socket.emit("bullet_shot", { bullet: bullet });
 		}
 
 		this.lastShotTime = now;

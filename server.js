@@ -27,8 +27,12 @@ io.on("connection", (socket) => {
 	});
 
 	socket.on("bullet_shot", (data) => {
-		socket.broadcast.emit("bullet_shot", data)
-	})
+		socket.broadcast.emit("bullet_shot", data);
+	});
+
+	socket.on("equip_item", (data) => {
+		socket.broadcast.emit("equip_item", data);
+	});
 
 	socket.on("disconnect", () => {
 		console.log("A user disconnected:", socket.id);

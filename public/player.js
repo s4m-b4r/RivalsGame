@@ -7,7 +7,8 @@ class Player {
 		this.nY = y; // used for collisions as new Y
 		this.health = 100;
 		this.score = 0;
-		this.inventory = [];
+		this.inventory = [null, null, null];
+		this.equipped = null;
 		this.alive = true;
 		this.weapon = null;
 		this.ammo = 120;
@@ -49,6 +50,9 @@ class Player {
 				selectedHotbarSlot = 2;
 			}
 		}
+		this.equipped = this.inventory[selectedHotbarSlot];
+
+		socket.emit("equip_item", { item: this.equipped });
 	}
 
 	shoot(mouseX, mouseY) {
@@ -238,19 +242,20 @@ function drawOpponent() {
 	stroke(0);
 	ellipse(opponent.x, opponent.y, 50);
 	pop();
+	if (opponent.weapon) {
+		let angle = atan2(opponent.mouseY - opponent.y, opponent.mouseX - opponent.x);
+		gunX = opponent.x + cos(angle) * 35;
+		gunY = opponent.y + sin(angle) * 35;
+		push();
+		translate(gunX, gunY);
+		rotate(angle);
 
-	let angle = atan2(opponent.mouseY - opponent.y, opponent.mouseX - opponent.x);
-	gunX = opponent.x + cos(angle) * 35;
-	gunY = opponent.y + sin(angle) * 35;
-	push();
-	translate(gunX, gunY);
-	rotate(angle);
+		if (angle > 1.5 || angle < -1.5) {
+			//flips the image for when gun is facing the opposite direction
+			scale(1, -1);
+		}
 
-	if (angle > 1.5 || angle < -1.5) {
-		//flips the image for when gun is facing the opposite direction
-		scale(1, -1);
+		image(opponent.weapon.asset, 0, 5, 64, 32); // Draw the gun at player's position
+		pop();
 	}
-
-	image(assaultRifleImage, 0, 5, 64, 32); // Draw the gun at player's position
-	pop();
 }
