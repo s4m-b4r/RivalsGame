@@ -50,9 +50,9 @@ class Player {
 				selectedHotbarSlot = 2;
 			}
 		}
-		// this.equipped = this.inventory[selectedHotbarSlot];
+		this.equipped = this.inventory[selectedHotbarSlot];
 
-		// socket.emit("equip_item", { item: this.equipped });
+		// socket.emit("equip_item", { item: itemCode });
 	}
 
 	shoot(mouseX, mouseY) {

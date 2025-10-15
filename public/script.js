@@ -16,7 +16,6 @@ socket.on("mouse_moved", (data) => {
 
 socket.on("bullet_shot", (data) => {
 	console.log("bullet_shot", data);
-	bullets.push(data.bullet);
 });
 
 socket.on("equip_item", (data) => {
