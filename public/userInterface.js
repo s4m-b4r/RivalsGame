@@ -39,6 +39,8 @@ function drawPlayerUI() {
 		// hotbar
 
 		push();
+		rectMode(CENTER);
+
 		stroke("#ffffff80");
 		strokeWeight(5);
 		for (let i = 0; i < 3; i++) {
