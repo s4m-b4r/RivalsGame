@@ -145,7 +145,7 @@ class Weapon {
 			}
 
 			noSmooth();
-			image(this.asset, 0, 0, 64, 32);
+			image(this.asset, 0, 0, this.asset.width * 2, this.asset.height * 2);
 			pop();
 		}
 	}

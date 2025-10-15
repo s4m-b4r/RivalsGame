@@ -1,9 +1,6 @@
 function drawUI() {
 	push();
-	strokeWeight(2);
-	stroke(0);
-	fill(255);
-	rect(1660, 0, 100, 50);
+
 	pop();
 }
 selectedHotbarSlot = 0;
@@ -45,7 +42,7 @@ function drawPlayerUI() {
 		strokeWeight(5);
 		for (let i = 0; i < 3; i++) {
 			if (i === selectedHotbarSlot) {
-				fill("#ffffff40");
+				fill("#ffffff60");
 				rect(1340 + i * 100, 850, 80, 80);
 			} else {
 				fill("#ffffff20");

@@ -39,6 +39,8 @@ function preload() {
 
 function setup() {
 	inMatch = true;
+	createArenaMode = false;
+
 	createCanvas(windowWidth, windowHeight);
 	rectMode(CORNER);
 	ellipseMode(CENTER);
@@ -52,7 +54,6 @@ function setup() {
 }
 
 function draw() {
-	// arenaAssetsLoad();
 	frameRate(60);
 	time = Date.now(); // gets the current time (used for calldowns)
 	background(0);
@@ -63,11 +64,13 @@ function draw() {
 
 		shooting(); // Handle shooting logic
 
-		createArena(); // used for making new arenas
-
 		drawOpponent();
 		drawPlayerUI();
 		drawUI(); // Draw the user interface
+	}
+	if (createArenaMode) {
+		createArena(); // used for making new arenas
+		arenaAssetsLoad();
 	}
 }
 
