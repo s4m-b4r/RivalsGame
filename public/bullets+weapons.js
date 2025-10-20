@@ -10,7 +10,7 @@ class Bullet {
 		this.recoilScale = weapon.recoil; // Adjust recoil scale based on weapon
 		this.damage = weapon.damage;
 		this.asset = weapon.bulletAsset;
-
+		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
 		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
