@@ -16,6 +16,8 @@ socket.on("mouse_moved", (data) => {
 
 socket.on("bullet_shot", (data) => {
 	console.log("bullet_shot", data);
+	let bullet = new OpponentBullet(data.l, data.v, data.t);
+	bullets.push(bullet);
 });
 
 socket.on("equip_item", (data) => {
@@ -32,9 +34,9 @@ function preload() {
 	smgImage = loadImage("assets/Guns/smg.png");
 	pistolImage = loadImage("assets/Guns/pistol.png");
 
-	rifleAmmoImage = loadImage("assets/Bullets/RifleAmmoSmall.png");
-	shotgunAmmoImage = loadImage("assets/Bullets/ShotgunShellSmall.png");
-	smgAmmoImage = loadImage("assets/Bullets/PistolAmmoSmall.png");
+	rifleAmmoImage = loadImage("assets/Bullets/RifleAmmoSmall.png"); //bullet type 1
+	shotgunAmmoImage = loadImage("assets/Bullets/ShotgunShellSmall.png"); // bullet type 2
+	smgAmmoImage = loadImage("assets/Bullets/PistolAmmoSmall.png"); // bullet type 3
 
 	tileset = loadImage("assets/environment/tileset.png");
 
@@ -74,6 +76,7 @@ function draw() {
 		drawPlayerUI();
 		drawUI(); // Draw the user interface
 	}
+
 	if (createArenaMode) {
 		createArena(); // used for making new arenas
 		arenaAssetsLoad();

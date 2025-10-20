@@ -21,6 +21,8 @@ class Bullet {
 			.add(this.recoilAdd)
 			.normalize() // Calculate velocity based on mouse position
 			.mult(-this.speed);
+
+		socket.emit("bullet_shot", { l: this.location, v: this.velocity, t: this.type });
 	}
 
 	update() {
@@ -70,7 +72,7 @@ function bulletDraw() {
 }
 
 class Weapon {
-	constructor(name, asset, bulletAsset, damage, recoil, magazineSize, speed, cooldown, bulletCount) {
+	constructor(name, asset, bulletAsset, damage, recoil, magazineSize, speed, cooldown, bulletCount, type) {
 		this.name = name;
 		this.asset = asset;
 		this.bulletAsset = bulletAsset;
@@ -86,6 +88,7 @@ class Weapon {
 		this.visible = true;
 		this.bulletCount = bulletCount;
 		this.lastShotTime = 0;
+		this.type = type;
 
 		this.remainingAmmo = 90; // Total ammo available
 		this.reloadTime = 2000; //time in milliseconds to reload
@@ -152,11 +155,59 @@ class Weapon {
 }
 
 function loadWeapons() {
-	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, rifleAmmoImage, 5, 5, 30, 5, 100, 1);
-	let shotgun = new Weapon("Shotgun", shotgunImage, shotgunAmmoImage, 15, 20, 2, 5, 1000, 7);
-	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, rifleAmmoImage, 90, 0, 3, 15, 2000, 1);
-	let smg = new Weapon("SMG", smgImage, smgAmmoImage, 3, 15, 60, 10, 50, 1);
-	let pistol = new Weapon("Pistol", pistolImage, smgAmmoImage, 20, 3, 12, 7, 300, 1);
+	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, rifleAmmoImage, 5, 5, 30, 5, 100, 1, 1);
+	let shotgun = new Weapon("Shotgun", shotgunImage, shotgunAmmoImage, 15, 20, 2, 5, 1000, 7, 2);
+	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, rifleAmmoImage, 90, 0, 3, 15, 2000, 1, 1);
+	let smg = new Weapon("SMG", smgImage, smgAmmoImage, 3, 15, 60, 10, 50, 1, 3);
+	let pistol = new Weapon("Pistol", pistolImage, smgAmmoImage, 20, 3, 12, 7, 300, 1, 3);
 
 	return { assaultRifle, shotgun, sniperRifle, smg, pistol };
+}
+
+class OpponentBullet {
+	constructor(location, velocity, type) {
+		this.location = location;
+		this.velocity = velocity;
+		this.type = type;
+		this.asset = null;
+
+		switch (type) {
+			case 1:
+				this.asset = rifleAmmoImage;
+				break;
+			case 2:
+				this.asset = shotgunAmmoImage;
+				break;
+			case 3:
+				this.asset = shotgunAmmoImage;
+				break;
+		}
+	}
+
+	draw() {
+		push();
+		translate(this.location.x, this.location.y);
+		rotate(this.velocity.heading()); // Rotate bullet to face direction of movement
+		// point(this.location.x, this.location.y); // Draw the bullet
+		image(this.asset, 0, 0, 40, 40); // Draw the bullet image
+		pop();
+	}
+
+	update() {
+		this.location.add(this.velocity); // Update bullet position based on velocity
+	}
+
+	isColliding() {
+		for (let i = 0; i < 33; i++) {
+			for (let j = 0; j < 19; j++) {
+				if (arena[j][i] === 1 || arena[j][i] === 2) {
+					if (collidePointRect(this.location.x, this.location.y, i * 50, j * 50, 50, 50)) {
+						return true;
+					}
+				}
+			}
+		}
+
+		return this.location.x < 0 || this.location.x > width || this.location.y < 0 || this.location.y > height; // Check if bullet is off screen
+	}
 }
