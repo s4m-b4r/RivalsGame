@@ -48,8 +48,7 @@ class Bullet {
 				}
 			}
 		}
-
-		return this.location.x < 0 || this.location.x > width || this.location.y < 0 || this.location.y > height; // Check if bullet is off screen
+		if (collidePoint) return this.location.x < 0 || this.location.x > width || this.location.y < 0 || this.location.y > height; // Check if bullet is off screen
 	}
 }
 

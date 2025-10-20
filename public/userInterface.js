@@ -32,9 +32,12 @@ function drawPlayerUI() {
 			text(player.weapon.remainingAmmo, mouseX + 55, mouseY - 8);
 			pop();
 		}
+		//health bar
+		push();
+
+		pop();
 
 		// hotbar
-
 		push();
 		rectMode(CENTER);
 

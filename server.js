@@ -34,6 +34,10 @@ io.on("connection", (socket) => {
 		socket.broadcast.emit("equip_item", data);
 	});
 
+	socket.on("damage_dealt", () => {
+		socket.broadcast.emit("damage_dealt", data);
+	});
+
 	socket.on("disconnect", () => {
 		console.log("A user disconnected:", socket.id);
 	});

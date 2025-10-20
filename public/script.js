@@ -25,14 +25,23 @@ socket.on("equip_item", (data) => {
 	opponent.equipped = data.item;
 });
 
+socket.on("damage_dealt", (data) => {
+	console.log("damage_dealt", data);
+	player.health - data.d;
+	if (player.health <= 0) {
+		player.alive = false;
+		player.health = 0;
+	}
+});
+
 function preload() {
 	// Load any assets here if needed
 
-	assaultRifleImage = loadImage("assets/Guns/assaultRifle.png");
-	shotgunImage = loadImage("assets/Guns/shotgun.png");
-	sniperRifleImage = loadImage("assets/Guns/sniper.png");
-	smgImage = loadImage("assets/Guns/smg.png");
-	pistolImage = loadImage("assets/Guns/pistol.png");
+	assaultRifleImage = loadImage("assets/Guns/assaultRifle.png"); //itemcode 001
+	shotgunImage = loadImage("assets/Guns/shotgun.png"); //itemcode 002
+	sniperRifleImage = loadImage("assets/Guns/sniper.png"); //itemcode 003
+	smgImage = loadImage("assets/Guns/smg.png"); //itemcode 004
+	pistolImage = loadImage("assets/Guns/pistol.png"); //itemcode 005
 
 	rifleAmmoImage = loadImage("assets/Bullets/RifleAmmoSmall.png"); //bullet type 1
 	shotgunAmmoImage = loadImage("assets/Bullets/ShotgunShellSmall.png"); // bullet type 2
