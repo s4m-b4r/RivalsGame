@@ -166,8 +166,8 @@ function loadWeapons() {
 
 class OpponentBullet {
 	constructor(location, velocity, type) {
-		this.location = location;
-		this.velocity = velocity;
+		this.location = createVector(location.x, location.y);
+		this.velocity = createVector(velocity.x, velocity.y);
 		this.type = type;
 		this.asset = null;
 
