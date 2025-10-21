@@ -38,14 +38,14 @@ function drawPlayerUI() {
 		stroke("#00000080");
 		strokeWeight(2);
 		fill("#ff000040");
-		rect(75, 875, 300, 30);
+		rect(75, 850, 300, 30);
 		fill("#00ff0040");
-		rect(75, 875, 300 * (player.health / 100), 30);
+		rect(75, 850, 300 * (player.health / 100), 30);
 		fill("#ffffff80");
 		textAlign(CENTER, CENTER);
 		textSize(20);
 		strokeWeight(1);
-		text(`${player.health}/100`, 187.5, 890);
+		text(`${player.health}/100`, 225, 865);
 		pop();
 
 		// hotbar
