@@ -34,7 +34,7 @@ io.on("connection", (socket) => {
 		socket.broadcast.emit("equip_item", data);
 	});
 
-	socket.on("damage_dealt", () => {
+	socket.on("damage_dealt", (data) => {
 		socket.broadcast.emit("damage_dealt", data);
 	});
 
