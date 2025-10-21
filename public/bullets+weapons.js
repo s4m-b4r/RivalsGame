@@ -13,7 +13,9 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
+			this.recoilDist / 100
+		);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -48,7 +50,12 @@ class Bullet {
 				}
 			}
 		}
-		if (collidePoint) return this.location.x < 0 || this.location.x > width || this.location.y < 0 || this.location.y > height; // Check if bullet is off screen
+		if (collidePointCircle(this.location.x, this.location.y, opponent.x, opponent.y, player.radius * 2 + 5)) {
+			opponent.health -= this.damage;
+			socket.emit("damage_dealt", { d: this.damage });
+			return true;
+		}
+		return this.location.x < 0 || this.location.x > width || this.location.y < 0 || this.location.y > height; // Check if bullet is off screen
 	}
 }
 
@@ -205,6 +212,9 @@ class OpponentBullet {
 					}
 				}
 			}
+		}
+		if (collidePointCircle(this.location.x, this.location.y, player.x, player.y, player.radius * 2 + 5)) {
+			return true;
 		}
 
 		return this.location.x < 0 || this.location.x > width || this.location.y < 0 || this.location.y > height; // Check if bullet is off screen

@@ -34,7 +34,17 @@ function drawPlayerUI() {
 		}
 		//health bar
 		push();
-
+		rectMode(CORNER);
+		stroke("#00000080");
+		strokeWeight(2);
+		fill("#ff000040");
+		rect(50, 800, 300, 30);
+		fill("#00ff0040");
+		rect(50, 800, 300 * (player.health / 100), 30);
+		fill("#ffffff80");
+		textSize(20);
+		strokeWeight(1);
+		text(`${player.health}/100`, 200, 800);
 		pop();
 
 		// hotbar
