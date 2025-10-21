@@ -27,7 +27,7 @@ socket.on("equip_item", (data) => {
 
 socket.on("damage_dealt", (data) => {
 	console.log("damage_dealt", data);
-	player.health - data.d;
+	player.health -= data.d;
 	if (player.health <= 0) {
 		player.alive = false;
 		player.health = 0;

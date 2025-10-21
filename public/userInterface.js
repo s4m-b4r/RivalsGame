@@ -44,7 +44,7 @@ function drawPlayerUI() {
 		fill("#ffffff80");
 		textSize(20);
 		strokeWeight(1);
-		text(`${player.health}/100`, 200, 800);
+		text(`${player.health}/100`, 175, 800);
 		pop();
 
 		// hotbar
