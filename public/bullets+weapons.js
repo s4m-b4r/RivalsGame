@@ -50,7 +50,7 @@ class Bullet {
 				}
 			}
 		}
-		if (collidePointCircle(this.location.x, this.location.y, opponent.x, opponent.y, player.radius * 2 + 5)) {
+		if (collidePointCircle(this.location.x, this.location.y, opponent.x, opponent.y, player.radius + 5)) {
 			opponent.health -= this.damage;
 			socket.emit("damage_dealt", { d: this.damage });
 			return true;
@@ -213,7 +213,7 @@ class OpponentBullet {
 				}
 			}
 		}
-		if (collidePointCircle(this.location.x, this.location.y, player.x, player.y, player.radius * 2 + 5)) {
+		if (collidePointCircle(this.location.x, this.location.y, player.x, player.y, player.radius + 5)) {
 			return true;
 		}
 
