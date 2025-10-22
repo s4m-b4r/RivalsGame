@@ -13,9 +13,7 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
-			this.recoilDist / 100
-		);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -114,7 +112,7 @@ class Weapon {
 		this.lastShotTime = now;
 		this.ammo--;
 
-		rifleShot.setVolume(1);
+		rifleShot.setVolume(settings.sfxLevel * settings.masterLevel);
 		rifleShot.play();
 	}
 
@@ -124,7 +122,7 @@ class Weapon {
 			if (!(this.isReloading || this.remainingAmmo <= 0 || this.ammo === this.magazineSize)) {
 				this.isReloading = true;
 				this.reloadStartTime = Date.now();
-				rifleReload.setVolume(1);
+				rifleReload.setVolume(settings.sfxLevel * settings.masterLevel);
 				rifleReload.play();
 			}
 		}

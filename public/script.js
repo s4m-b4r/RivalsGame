@@ -91,7 +91,9 @@ function draw() {
 		arenaAssetsLoad();
 	}
 
-	if(!inMatch)
+	if (!inMatch) {
+		drawMainMenu();
+	}
 }
 
 function mouseMoved() {
