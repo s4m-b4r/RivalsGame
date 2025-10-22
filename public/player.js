@@ -233,6 +233,19 @@ function drawPlayer() {
 		player.weapon.draw(player);
 		player.weapon.reload();
 	}
+
+	if (keyIsDown(keybind.slot1)) {
+		selectedHotbarSlot = 0;
+		player.equipped = this.inventory[selectedHotbarSlot];
+	}
+	if (keyIsDown(keybind.slot2)) {
+		selectedHotbarSlot = 1;
+		player.equipped = this.inventory[selectedHotbarSlot];
+	}
+	if (keyIsDown(keybind.slot2)) {
+		selectedHotbarSlot = 2;
+		player.equipped = this.inventory[selectedHotbarSlot];
+	}
 }
 
 function drawOpponent() {

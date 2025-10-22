@@ -10,6 +10,9 @@ class Keybinds {
 		this.reload = 82;
 		this.useItem = 81;
 		this.pause = 27;
+		this.slot1 = 49;
+		this.slot2 = 50;
+		this.slot3 = 51;
 	}
 	changeKeybind(keycode) {
 		//change the keybind to the new keycode
