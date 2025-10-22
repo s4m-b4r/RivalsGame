@@ -29,6 +29,7 @@ io.on("connection", (socket) => {
 
 			waitingPlayer = null;
 			gameIdCounter++;
+			console.log("Game Started:", room);
 		} else {
 			waitingPlayer = socket;
 		}
