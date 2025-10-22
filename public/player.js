@@ -236,15 +236,15 @@ function drawPlayer() {
 
 	if (keyIsDown(keybind.slot1)) {
 		selectedHotbarSlot = 0;
-		player.equipped = this.inventory[selectedHotbarSlot];
+		player.equipped = player.inventory[selectedHotbarSlot];
 	}
 	if (keyIsDown(keybind.slot2)) {
 		selectedHotbarSlot = 1;
-		player.equipped = this.inventory[selectedHotbarSlot];
+		player.equipped = player.inventory[selectedHotbarSlot];
 	}
 	if (keyIsDown(keybind.slot2)) {
 		selectedHotbarSlot = 2;
-		player.equipped = this.inventory[selectedHotbarSlot];
+		player.equipped = player.inventory[selectedHotbarSlot];
 	}
 }
 

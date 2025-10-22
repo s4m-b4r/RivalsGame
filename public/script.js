@@ -90,6 +90,8 @@ function draw() {
 		createArena(); // used for making new arenas
 		arenaAssetsLoad();
 	}
+
+	if(!inMatch)
 }
 
 function mouseMoved() {

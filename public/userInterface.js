@@ -66,3 +66,5 @@ function drawPlayerUI() {
 		pop();
 	}
 }
+
+function drawMainMenu() {}
