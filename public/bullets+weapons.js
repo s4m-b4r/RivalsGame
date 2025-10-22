@@ -183,7 +183,7 @@ class OpponentBullet {
 				this.asset = shotgunAmmoImage;
 				break;
 			case 3:
-				this.asset = shotgunAmmoImage;
+				this.asset = smgAmmoImage;
 				break;
 		}
 	}
