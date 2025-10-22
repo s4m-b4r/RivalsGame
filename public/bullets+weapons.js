@@ -19,10 +19,10 @@ class Bullet {
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
-		this.velocity = createVector(x - mouseX, y - mouseY) // direction
+		this.velocity = createVector(mouseX - x, mouseY - y) // direction
 			.add(this.recoilAdd)
 			.normalize() // Calculate velocity based on mouse position
-			.mult(-this.speed);
+			.mult(this.speed);
 
 		socket.emit("bullet_shot", { room: roomID, l: this.location, v: this.velocity, t: this.type });
 	}
@@ -96,7 +96,7 @@ class Weapon {
 		this.lastShotTime = 0;
 		this.type = type;
 
-		this.remainingAmmo = 90; // Total ammo available
+		this.remainingAmmo = 1000; // Total ammo available
 		this.reloadTime = 2000; //time in milliseconds to reload
 		this.isReloading = false;
 		this.muzzleOffset = 60; // distance from player center to weapon muzzle
@@ -107,21 +107,20 @@ class Weapon {
 		if (now - this.lastShotTime < this.cooldown) return; // cooldown check
 		if (this.ammo <= 0 || this.isReloading) return; // no ammo check
 
-		for (let i = 0; i < this.bulletCount; i++) {
-			let angle = atan2(mouseY - player.y, mouseX - player.x);
+		let angle = atan2(mouseY - player.y, mouseX - player.x);
 
-			let startX = player.x + cos(angle) * this.muzzleOffset;
-			let startY = player.y + sin(angle) * this.muzzleOffset;
+		let startX = player.x + cos(angle) * this.muzzleOffset;
+		let startY = player.y + sin(angle) * this.muzzleOffset;
 
-			let aimDir = createVector(mouseX - player.x, mouseY - player.y);
-			if (aimDir.mag() < this.muzzleOffset) {
-				aimDir.setMag(this.muzzleOffset);
-				aimDir.add(createVector(player.x, player.y));
-			}
+		let aimDir = createVector(mouseX - player.x, mouseY - player.y);
 
-			let bullet = new Bullet(startX, startY, aimDir.x, aimDir.y, this);
-			bullets.push(bullet);
+		if (aimDir.mag() < this.muzzleOffset) {
+			aimDir.setMag(this.muzzleOffset);
+			aimDir.add(createVector(player.x, player.y));
 		}
+
+		let bullet = new Bullet(startX, startY, aimDir.x, aimDir.y, this);
+		bullets.push(bullet);
 
 		this.lastShotTime = now;
 		this.ammo--;
