@@ -19,10 +19,10 @@ class Bullet {
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
-		this.velocity = createVector(mouseX - x, mouseY - y) // direction
-			.add(this.recoilAdd)
-			.normalize() // Calculate velocity based on mouse position
-			.mult(this.speed);
+
+		let dir = createVector(mouseX - x, mouseY - y).normalize();
+		dir.add(p5.Vector.add(this.recoilAdd, 1 / this.recoilDist));
+		this.velocity = dir.normalize().mult(this.speed);
 
 		socket.emit("bullet_shot", { room: roomID, l: this.location, v: this.velocity, t: this.type });
 	}
