@@ -214,6 +214,7 @@ function drawPlayer() {
 		if (moveX != 0 && moveY != 0) {
 			player.move(moveX, moveY);
 		}
+
 		if (keyIsDown(keybind.roll) && (moveX !== 0 || moveY !== 0)) {
 			player.startRoll(moveX, moveY);
 		}
