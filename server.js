@@ -28,6 +28,7 @@ io.on("connection", (socket) => {
 			io.to(room).emit("game_start", { room, players: [waitingPlayer.id, socket.id] });
 
 			waitingPlayer = null;
+			gameIdCounter++;
 		} else {
 			waitingPlayer = socket;
 		}
