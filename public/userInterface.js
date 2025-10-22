@@ -74,9 +74,14 @@ function drawMainMenu() {
 	strokeWeight(3);
 	fill("white");
 	rect(width / 2, height / 2, 200, 100);
+
 	textAlign(CENTER, CENTER);
+
+	stroke("white");
 	fill("black");
 	text("JOIN GAME", width / 2, heigh / 2);
+	fill("#00ff0040");
+	point(mouseX, mouseY);
 	pop();
 }
 
