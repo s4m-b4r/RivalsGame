@@ -70,7 +70,20 @@ function drawPlayerUI() {
 function drawMainMenu() {
 	push();
 	rectMode(CENTER);
-	rect(width / 2, height / 2, w, h, [tl], [tr], [br], [bl]);
-
+	stroke("black");
+	strokeWeight(3);
+	fill("white");
+	rect(width / 2, height / 2, 200, 100);
+	textAlign(CENTER, CENTER);
+	fill("black");
+	text("JOIN GAME", width / 2, heigh / 2);
 	pop();
+}
+
+function mouseClicked() {
+	if (!inMatch) {
+		if (collidePointRect(mouseX, mouseY, width / 2 - 100, height / 2 - 50, 200, 100)) {
+			socket.emit("join_queue");
+		}
+	}
 }

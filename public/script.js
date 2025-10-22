@@ -34,6 +34,12 @@ socket.on("damage_dealt", (data) => {
 	}
 });
 
+socket.on("game_start", (data) => {
+	roomID = data.room;
+	console.log("roomID:", roomID, "players:", data.players);
+	inMatch = true;
+});
+
 function preload() {
 	// Load any assets here if needed
 
@@ -54,7 +60,7 @@ function preload() {
 }
 
 function setup() {
-	inMatch = true;
+	inMatch = false;
 	createArenaMode = false;
 
 	createCanvas(windowWidth, windowHeight);
@@ -97,7 +103,9 @@ function draw() {
 }
 
 function mouseMoved() {
-	socket.emit("mouse_moved", { mX: mouseX, mY: mouseY });
+	if (inMatch) {
+		socket.emit("mouse_moved", { room: roomID, mX: mouseX, mY: mouseY });
+	}
 }
 
 function mouseWheel(event) {

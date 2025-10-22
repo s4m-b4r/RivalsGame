@@ -22,7 +22,7 @@ class Bullet {
 			.normalize() // Calculate velocity based on mouse position
 			.mult(-this.speed);
 
-		socket.emit("bullet_shot", { l: this.location, v: this.velocity, t: this.type });
+		socket.emit("bullet_shot", { room: roomID, l: this.location, v: this.velocity, t: this.type });
 	}
 
 	update() {
@@ -50,7 +50,7 @@ class Bullet {
 		}
 		if (collidePointCircle(this.location.x, this.location.y, opponent.x, opponent.y, player.radius + 5)) {
 			opponent.health -= this.damage;
-			socket.emit("damage_dealt", { d: this.damage });
+			socket.emit("damage_dealt", { room: roomID, d: this.damage });
 			return true;
 		}
 		return this.location.x < 0 || this.location.x > width || this.location.y < 0 || this.location.y > height; // Check if bullet is off screen

@@ -87,7 +87,7 @@ class Player {
 			this.y += dy;
 		}
 
-		socket.emit("player_move", { x: this.x, y: this.y });
+		socket.emit("player_move", { room: roomID, x: this.x, y: this.y });
 	}
 
 	startRoll(directionX, directionY) {
@@ -147,7 +147,7 @@ class Player {
 					this.isRolling = false;
 				}
 
-				socket.emit("player_move", { x: this.x, y: this.y });
+				socket.emit("player_move", { room: roomID, x: this.x, y: this.y });
 			} else {
 				this.isRolling = false; // end roll
 			}
