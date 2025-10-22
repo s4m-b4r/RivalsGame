@@ -6,6 +6,9 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+let waitingPlayer = null;
+let gameIdCounter = 1;
+
 app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
@@ -16,26 +19,40 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
 	console.log("A user connected:", socket.id);
 
+	socket.on("join_queue", () => {
+		if (waitingPlayer) {
+			const room = "game-" + gameIdCounter;
+			socket.join(room);
+			waitingPlayer.join(room);
+
+			io.to(room).emit("game_start", { room, players: [waitingPlayer.id, socket.id] });
+
+			waitingPlayer = null;
+		} else {
+			waitingPlayer = socket;
+		}
+	});
+
 	socket.on("player_move", (data) => {
 		// Send the move to everyone
-		socket.broadcast.emit("player_move", data);
+		socket.to(data.room).emit("player_move", data);
 	});
 
 	socket.on("mouse_moved", (data) => {
 		// Send the to everyone
-		socket.broadcast.emit("mouse_moved", data);
+		socket.to(data.room).emit("mouse_moved", data);
 	});
 
 	socket.on("bullet_shot", (data) => {
-		socket.broadcast.emit("bullet_shot", data);
+		socket.to(data.room).emit("bullet_shot", data);
 	});
 
 	socket.on("equip_item", (data) => {
-		socket.broadcast.emit("equip_item", data);
+		socket.to(data.room).emit("equip_item", data);
 	});
 
 	socket.on("damage_dealt", (data) => {
-		socket.broadcast.emit("damage_dealt", data);
+		socket.to(data.room).emit("damage_dealt", data);
 	});
 
 	socket.on("disconnect", () => {

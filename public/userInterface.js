@@ -67,4 +67,10 @@ function drawPlayerUI() {
 	}
 }
 
-function drawMainMenu() {}
+function drawMainMenu() {
+	push();
+	rectMode(CENTER);
+	rect(width / 2, height / 2, w, h, [tl], [tr], [br], [bl]);
+
+	pop();
+}
