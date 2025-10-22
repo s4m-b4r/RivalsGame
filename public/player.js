@@ -242,7 +242,7 @@ function drawPlayer() {
 		selectedHotbarSlot = 1;
 		player.equipped = player.inventory[selectedHotbarSlot];
 	}
-	if (keyIsDown(keybind.slot2)) {
+	if (keyIsDown(keybind.slot3)) {
 		selectedHotbarSlot = 2;
 		player.equipped = player.inventory[selectedHotbarSlot];
 	}
