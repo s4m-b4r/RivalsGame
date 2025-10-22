@@ -211,9 +211,9 @@ function drawPlayer() {
 
 		moveX *= 4; // Adjust speed as needed
 		moveY *= 4; // Adjust speed as needed
-
-		player.move(moveX, moveY);
-
+		if (moveX != 0 && moveY != 0) {
+			player.move(moveX, moveY);
+		}
 		if (keyIsDown(keybind.roll) && (moveX !== 0 || moveY !== 0)) {
 			player.startRoll(moveX, moveY);
 		}
