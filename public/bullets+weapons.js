@@ -13,7 +13,9 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
+			this.recoilDist / 100
+		);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -97,6 +99,7 @@ class Weapon {
 		this.remainingAmmo = 90; // Total ammo available
 		this.reloadTime = 2000; //time in milliseconds to reload
 		this.isReloading = false;
+		this.muzzleOffset = 25; // distance from player center to weapon muzzle
 	}
 
 	shoot() {
@@ -105,7 +108,12 @@ class Weapon {
 		if (this.ammo <= 0 || this.isReloading) return; // no ammo check
 
 		for (let i = 0; i < this.bulletCount; i++) {
-			let bullet = new Bullet(player.x, player.y, mouseX, mouseY, this);
+			let angle = atan2(mouseY - player.y, mouseX - player.x);
+
+			let startX = player.x + cos(angle) * this.muzzleOffset;
+			let startY = player.y + sin(angle) * this.muzzleOffset;
+
+			let bullet = new Bullet(startX, startY, mouseX, mouseY, this);
 			bullets.push(bullet);
 		}
 
