@@ -114,7 +114,7 @@ class Weapon {
 			let startY = player.y + sin(angle) * this.muzzleOffset;
 
 			let aimDir = createVector(mouseX - player.x, mouseY - player.y);
-			let bullet = new Bullet(startX, startY, aimDir.x, aimDir.y, this);
+			let bullet = new Bullet(startX, startY, mouseX, mouseY, this);
 			bullets.push(bullet);
 		}
 
