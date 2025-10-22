@@ -99,7 +99,7 @@ class Weapon {
 		this.remainingAmmo = 90; // Total ammo available
 		this.reloadTime = 2000; //time in milliseconds to reload
 		this.isReloading = false;
-		this.muzzleOffset = 25; // distance from player center to weapon muzzle
+		this.muzzleOffset = 60; // distance from player center to weapon muzzle
 	}
 
 	shoot() {
@@ -113,7 +113,13 @@ class Weapon {
 			let startX = player.x + cos(angle) * this.muzzleOffset;
 			let startY = player.y + sin(angle) * this.muzzleOffset;
 
-			let bullet = new Bullet(startX, startY, mouseX, mouseY, this);
+			let aimDir = createVector(mouseX - player.x, mouseY - player.y);
+			if (aimDir.mag() < this.muzzleOffset) {
+				aimDir.setMag(this.muzzleOffset);
+				aimDir.add(createVector(player.x, player.y));
+			}
+
+			let bullet = new Bullet(startX, startY, aimDir.x, aimDir.y, this);
 			bullets.push(bullet);
 		}
 
