@@ -41,20 +41,23 @@ socket.on("game_start", (data) => {
 });
 
 function preload() {
-	// Load any assets here if needed
-
+	// Load any assets here if needed //
+	// guns //
 	assaultRifleImage = loadImage("assets/Guns/assaultRifle.png"); //itemcode 001
 	shotgunImage = loadImage("assets/Guns/shotgun.png"); //itemcode 002
 	sniperRifleImage = loadImage("assets/Guns/sniper.png"); //itemcode 003
 	smgImage = loadImage("assets/Guns/smg.png"); //itemcode 004
 	pistolImage = loadImage("assets/Guns/pistol.png"); //itemcode 005
-
+	// bullets //
 	rifleAmmoImage = loadImage("assets/Bullets/RifleAmmoSmall.png"); //bullet type 1
 	shotgunAmmoImage = loadImage("assets/Bullets/ShotgunShellSmall.png"); // bullet type 2
 	smgAmmoImage = loadImage("assets/Bullets/PistolAmmoSmall.png"); // bullet type 3
-
+	// particles //
+	dmgParticleImage = loadImage("assets/Particles/dmgParticle.png");
+	// tileset //
 	tileset = loadImage("assets/environment/tileset.png");
-
+	//sounds//
+	//weapon sounds//
 	rifleShot = loadSound("assets/Sounds/762x54r Single Isolated MP3.mp3");
 	rifleReload = loadSound("assets/Sounds/ak-47-reload-sound-effect.wav");
 }
