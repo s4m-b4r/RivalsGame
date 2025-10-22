@@ -211,7 +211,7 @@ function drawPlayer() {
 
 		moveX *= 4; // Adjust speed as needed
 		moveY *= 4; // Adjust speed as needed
-		if (moveX != 0 && moveY != 0) {
+		if (moveX != 0 || moveY != 0) {
 			player.move(moveX, moveY);
 		}
 
