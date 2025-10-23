@@ -21,7 +21,7 @@ class Particle {
 		noSmooth();
 		image(this.asset, 0, 0, 64, 64, this.frameCount * 64, 0, 64, 64);
 		pop();
-		if (this.startTime + (this.frameCount * 10 + 10) > Date.now()) {
+		if (this.startTime + (this.frameCount * 50 + 50) > Date.now()) {
 			this.frameCount++;
 		}
 	}
