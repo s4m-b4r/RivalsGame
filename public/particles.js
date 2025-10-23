@@ -26,7 +26,7 @@ class Particle {
 }
 
 function damageParticle(location, velocity) {
-	let dmgParticle = new Particle(location.x, location.y, velocity.x, velocity.y, "damage", dmgParticleImg);
+	let dmgParticle = new Particle(location.x, location.y, velocity.x, velocity.y, "damage", dmgParticleImage);
 	particles.push(dmgParticle);
 	console.log("particle spawn");
 }
