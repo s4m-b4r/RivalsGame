@@ -54,10 +54,10 @@ class Bullet {
 
 			let particleDirection = this.location.add(this.velocity);
 			damageParticle(this.location, this.velocity);
-			return true;
 			if (opponent.health < 0) {
 				opponent.alive = false;
 			}
+			return true;
 		}
 		return this.location.x < 0 || this.location.x > width || this.location.y < 0 || this.location.y > height; // Check if bullet is off screen
 	}
