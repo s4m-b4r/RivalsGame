@@ -160,116 +160,120 @@ let player = new Player("P1", 200, 450);
 let opponent = new Player("P2", 1000, 450);
 
 function drawPlayer() {
-	moveX = 0;
-	moveY = 0;
-	sprinting = false;
-
-	if (player.isRolling === false) {
-		if (keyIsDown(keybind.up)) {
-			//(up, decrease Y)
-			moveY--;
-		}
-		if (keyIsDown(keybind.left)) {
-			//(left, X decrease)
-			moveX--;
-		}
-		if (keyIsDown(keybind.right)) {
-			//(right, X increase)
-			moveX++;
-		}
-		if (keyIsDown(keybind.down)) {
-			//(down, Y increase)
-			moveY++;
-		}
-		// fix diagonal movement speed
-		if (moveX !== 0 && moveY !== 0) {
-			moveX *= Math.SQRT1_2;
-			moveY *= Math.SQRT1_2;
-		}
-
-		if (keyIsDown(keybind.sprint) && (moveX !== 0 || moveY !== 0) && player.stamina > 0 && !player.staminaCooldown) {
-			moveX *= 1.75; //sprint
-			moveY *= 1.75;
-			player.stamina -= 1;
-			sprinting = true;
-
-			if (player.stamina < 0) {
-				player.staminaCooldown = true;
-			}
-		}
-
-		if (!sprinting) {
-			if (player.stamina <= 300) {
-				player.stamina += 0.5;
-			}
-			if (player.staminaCooldown && player.stamina >= 100) {
-				player.staminaCooldown = false;
-			}
-		}
-
+	if (player.alive) {
+		moveX = 0;
+		moveY = 0;
 		sprinting = false;
 
-		moveX *= 4; // Adjust speed as needed
-		moveY *= 4; // Adjust speed as needed
-		if (moveX != 0 || moveY != 0) {
-			player.move(moveX, moveY);
+		if (player.isRolling === false) {
+			if (keyIsDown(keybind.up)) {
+				//(up, decrease Y)
+				moveY--;
+			}
+			if (keyIsDown(keybind.left)) {
+				//(left, X decrease)
+				moveX--;
+			}
+			if (keyIsDown(keybind.right)) {
+				//(right, X increase)
+				moveX++;
+			}
+			if (keyIsDown(keybind.down)) {
+				//(down, Y increase)
+				moveY++;
+			}
+			// fix diagonal movement speed
+			if (moveX !== 0 && moveY !== 0) {
+				moveX *= Math.SQRT1_2;
+				moveY *= Math.SQRT1_2;
+			}
+
+			if (keyIsDown(keybind.sprint) && (moveX !== 0 || moveY !== 0) && player.stamina > 0 && !player.staminaCooldown) {
+				moveX *= 1.75; //sprint
+				moveY *= 1.75;
+				player.stamina -= 1;
+				sprinting = true;
+
+				if (player.stamina < 0) {
+					player.staminaCooldown = true;
+				}
+			}
+
+			if (!sprinting) {
+				if (player.stamina <= 300) {
+					player.stamina += 0.5;
+				}
+				if (player.staminaCooldown && player.stamina >= 100) {
+					player.staminaCooldown = false;
+				}
+			}
+
+			sprinting = false;
+
+			moveX *= 4; // Adjust speed as needed
+			moveY *= 4; // Adjust speed as needed
+			if (moveX != 0 || moveY != 0) {
+				player.move(moveX, moveY);
+			}
+
+			if (keyIsDown(keybind.roll) && (moveX !== 0 || moveY !== 0)) {
+				player.startRoll(moveX, moveY);
+			}
 		}
 
-		if (keyIsDown(keybind.roll) && (moveX !== 0 || moveY !== 0)) {
-			player.startRoll(moveX, moveY);
+		player.updateRoll();
+
+		push();
+		stroke(255);
+		strokeWeight(2);
+		stroke(0);
+		ellipse(player.x, player.y, 50); // Draw player as a circle
+
+		pop();
+
+		if (player.weapon) {
+			player.weapon.draw(player);
+			player.weapon.reload();
 		}
-	}
 
-	player.updateRoll();
-
-	push();
-	stroke(255);
-	strokeWeight(2);
-	stroke(0);
-	ellipse(player.x, player.y, 50); // Draw player as a circle
-
-	pop();
-
-	if (player.weapon) {
-		player.weapon.draw(player);
-		player.weapon.reload();
-	}
-
-	if (keyIsDown(keybind.slot1)) {
-		selectedHotbarSlot = 0;
-		player.equipped = player.inventory[selectedHotbarSlot];
-	}
-	if (keyIsDown(keybind.slot2)) {
-		selectedHotbarSlot = 1;
-		player.equipped = player.inventory[selectedHotbarSlot];
-	}
-	if (keyIsDown(keybind.slot3)) {
-		selectedHotbarSlot = 2;
-		player.equipped = player.inventory[selectedHotbarSlot];
+		if (keyIsDown(keybind.slot1)) {
+			selectedHotbarSlot = 0;
+			player.equipped = player.inventory[selectedHotbarSlot];
+		}
+		if (keyIsDown(keybind.slot2)) {
+			selectedHotbarSlot = 1;
+			player.equipped = player.inventory[selectedHotbarSlot];
+		}
+		if (keyIsDown(keybind.slot3)) {
+			selectedHotbarSlot = 2;
+			player.equipped = player.inventory[selectedHotbarSlot];
+		}
 	}
 }
 
 function drawOpponent() {
-	push();
-	stroke(255, 0, 0);
-	strokeWeight(2);
-	stroke(0);
-	ellipse(opponent.x, opponent.y, 50);
-	pop();
-	if (opponent.weapon) {
-		let angle = atan2(opponent.mouseY - opponent.y, opponent.mouseX - opponent.x);
-		gunX = opponent.x + cos(angle) * 35;
-		gunY = opponent.y + sin(angle) * 35;
+	if (opponent.alive) {
 		push();
-		translate(gunX, gunY);
-		rotate(angle);
-
-		if (angle > 1.5 || angle < -1.5) {
-			//flips the image for when gun is facing the opposite direction
-			scale(1, -1);
-		}
-
-		image(opponent.weapon.asset, 0, 5, 64, 32); // Draw the gun at player's position
+		stroke(255, 0, 0);
+		strokeWeight(2);
+		stroke(0);
+		ellipse(opponent.x, opponent.y, 50);
 		pop();
+		if (opponent.weapon) {
+			let angle = atan2(opponent.mouseY - opponent.y, opponent.mouseX - opponent.x);
+			gunX = opponent.x + cos(angle) * 35;
+			gunY = opponent.y + sin(angle) * 35;
+			push();
+			translate(gunX, gunY);
+			rotate(angle);
+
+			if (angle > 1.5 || angle < -1.5) {
+				//flips the image for when gun is facing the opposite direction
+				scale(1, -1);
+			}
+
+			image(opponent.weapon.asset, 0, 5, 64, 32); // Draw the gun at player's position
+			pop();
+		}
 	}
 }
