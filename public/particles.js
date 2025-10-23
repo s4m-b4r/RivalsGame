@@ -33,7 +33,7 @@ function damageParticle(location, velocity) {
 	console.log("particle spawn");
 }
 
-function particleDraw() {
+function drawParticles() {
 	for (let i = particles.length - 1; i >= 0; i--) {
 		let p = particles[i];
 		p.draw();

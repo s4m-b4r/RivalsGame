@@ -91,6 +91,7 @@ function draw() {
 		shooting(); // Handle shooting logic
 
 		drawOpponent();
+		drawParticles();
 		drawPlayerUI();
 		drawUI(); // Draw the user interface
 	}
