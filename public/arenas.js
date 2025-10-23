@@ -1,6 +1,6 @@
 function drawArena() {
 	for (let i = 0; i < 19; i++) {
-		for (let j = 0; j < 33; j++) {
+		for (let j = 0; j < 35; j++) {
 			noSmooth();
 			// tileset, x position, y position, width, height, source x, source y, source width, source height
 			image(tileset, j * 50 + 25, i * 50 + 25, 50, 50, 16 * arenaTiles[i][j].x, 16 * arenaTiles[i][j].y, 16, 16);
@@ -19,7 +19,7 @@ function switchArena(arenaNumber) {
 	} else if (arenaNumber === 4) {
 		arena = ARENA4;
 	}
-	arenaAssetsLoad()
+	arenaAssetsLoad();
 }
 
 function createArena() {
@@ -49,20 +49,20 @@ function arenaAssetsLoad() {
 	let tempy = 0;
 	for (let i2 = 0; i2 < 20; i2++) {
 		arenaTiles[i2] = [];
-		for (let j2 = 0; j2 < 34; j2++) {
+		for (let j2 = 0; j2 < 36; j2++) {
 			arenaTiles[i2][j2] = null; // placeholder
 		}
 	}
 
 	for (let i2 = 0; i2 < 20; i2++) {
-		for (let j2 = 0; j2 < 34; j2++) {
+		for (let j2 = 0; j2 < 36; j2++) {
 			arenaTiles[i2][j2] = null;
 			arenaTiles[i2][j2] = { x: 4, y: 3 };
 		}
 	}
 
 	for (let i3 = 0; i3 < 19; i3++) {
-		for (let j3 = 0; j3 < 33; j3++) {
+		for (let j3 = 0; j3 < 35; j3++) {
 			tile = arena[i3][j3];
 
 			if (tile === 0) {

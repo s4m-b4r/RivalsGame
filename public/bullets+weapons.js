@@ -39,7 +39,7 @@ class Bullet {
 	}
 
 	isColliding() {
-		for (let i = 0; i < 33; i++) {
+		for (let i = 0; i < 35; i++) {
 			for (let j = 0; j < 19; j++) {
 				if (arena[j][i] === 1 || arena[j][i] === 2) {
 					if (collidePointRect(this.location.x, this.location.y, i * 50, j * 50, 50, 50)) {
@@ -96,7 +96,7 @@ class Weapon {
 		this.lastShotTime = 0;
 		this.type = type;
 
-		this.remainingAmmo = 90; // Total ammo available
+		this.remainingAmmo = 1000; // Total ammo available
 		this.reloadTime = 2000; //time in milliseconds to reload
 		this.isReloading = false;
 		this.muzzleOffset = 60; // distance from player center to weapon muzzle

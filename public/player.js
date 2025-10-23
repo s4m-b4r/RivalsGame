@@ -65,7 +65,7 @@ class Player {
 		this.canMoveX = true;
 		this.canMoveY = true;
 		//checking for collisions
-		for (let i = 0; i < 33; i++) {
+		for (let i = 0; i < 35; i++) {
 			for (let j = 0; j < 19; j++) {
 				if (arena[j][i] === 1) {
 					if (collideRectCircle(i * 50, j * 50, 50, 50, this.x + dx * 2, this.y, this.radius)) {
@@ -121,7 +121,7 @@ class Player {
 				this.canMoveYroll = true;
 
 				//checking for collisions while rolling
-				for (let i = 0; i < 33; i++) {
+				for (let i = 0; i < 35; i++) {
 					for (let j = 0; j < 19; j++) {
 						if (arena[j][i] === 1) {
 							if (collideRectCircle(i * 50, j * 50, 50, 50, this.nX, this.y, this.radius)) {
