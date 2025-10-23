@@ -1,7 +1,7 @@
 let particles = [];
 
 class Particle {
-	constructor(x, y, rx, ry, type, asset) {
+	constructor(x, y, rx, ry, type, asset, frameCount) {
 		this.x = x;
 		this.y = y;
 		this.rotation = createVector(rx, ry);
@@ -18,14 +18,17 @@ class Particle {
 		push();
 		translate(this.x, this.y);
 		rotate(this.rotation.heading());
-		image(this.asset, 0, 0, 16, 16, this.frameCount * 64, 0, 64, 64);
+		noSmooth();
+		image(this.asset, 0, 0, 64, 64, this.frameCount * 64, 0, 64, 64);
 		pop();
-		this.frameCount++;
+		if (this.startTime + (this.frameCount * 10 + 10) > Date.now()) {
+			this.frameCount++;
+		}
 	}
 }
 
 function damageParticle(location, velocity) {
-	let dmgParticle = new Particle(location.x, location.y, velocity.x, velocity.y, "damage", dmgParticleImage);
+	let dmgParticle = new Particle(location.x, location.y, velocity.x, velocity.y, "damage", dmgParticleImage, 30);
 	particles.push(dmgParticle);
 	console.log("particle spawn");
 }
