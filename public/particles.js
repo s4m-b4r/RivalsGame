@@ -35,7 +35,7 @@ function drawParticles() {
 		let p = particles[i];
 		p.draw();
 		if ((p.frameCount = p.lifetime)) {
-			p.splice(i, 1);
+			particles.splice(i, 1);
 			console.log("particle gone");
 		}
 	}
