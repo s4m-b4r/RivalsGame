@@ -80,7 +80,8 @@ function drawMainMenu() {
 	stroke("white");
 	fill("black");
 	text("JOIN GAME", width / 2, height / 2);
-	fill("#00ff0040");
+	stroke("#00ff0040");
+	strokeWeight(8);
 	point(mouseX, mouseY);
 	pop();
 }
