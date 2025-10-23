@@ -5,10 +5,7 @@ class Particle {
 		this.x = x;
 		this.y = y;
 		this.rotation = createVector(rx, ry);
-		this.rx = rx;
-		this.ry = ry;
-		this.velocity = createVector(rx - x, ry - y);
-		this.rotation = this.velocity.heading();
+
 		this.type = type;
 		this.lifetime = 30; // frames
 		this.frameCount = 0;
