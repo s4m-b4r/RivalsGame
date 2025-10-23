@@ -21,15 +21,17 @@ io.on("connection", (socket) => {
 
 	socket.on("join_queue", () => {
 		if (waitingPlayer) {
-			const room = "game-" + gameIdCounter;
-			socket.join(room);
-			waitingPlayer.join(room);
+			if (!waitingPlayer.id != socket.id) {
+				const room = "game-" + gameIdCounter;
+				socket.join(room);
+				waitingPlayer.join(room);
 
-			io.to(room).emit("game_start", { room, players: [waitingPlayer.id, socket.id] });
+				io.to(room).emit("game_start", { room, players: [waitingPlayer.id, socket.id] });
 
-			waitingPlayer = null;
-			gameIdCounter++;
-			console.log("Game Started:", room);
+				waitingPlayer = null;
+				gameIdCounter++;
+				console.log("Game Started:", room);
+			}
 		} else {
 			waitingPlayer = socket;
 		}
