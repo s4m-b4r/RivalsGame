@@ -88,8 +88,6 @@ function draw() {
 		bulletDraw(); // Draw bullets
 		drawPlayer(); // Draw the player
 
-		shooting(); // Handle shooting logic
-
 		drawOpponent();
 		drawParticles();
 		drawPlayerUI();

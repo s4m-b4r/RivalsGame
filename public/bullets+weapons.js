@@ -51,9 +51,13 @@ class Bullet {
 		if (collidePointCircle(this.location.x, this.location.y, opponent.x, opponent.y, player.radius + 5)) {
 			opponent.health -= this.damage;
 			socket.emit("damage_dealt", { room: roomID, d: this.damage });
+
 			let particleDirection = this.location.add(this.velocity);
 			damageParticle(this.location, this.velocity);
 			return true;
+			if (opponent.health < 0) {
+				opponent.alive = false;
+			}
 		}
 		return this.location.x < 0 || this.location.x > width || this.location.y < 0 || this.location.y > height; // Check if bullet is off screen
 	}

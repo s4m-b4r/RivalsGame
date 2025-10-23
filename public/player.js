@@ -222,6 +222,7 @@ function drawPlayer() {
 		}
 
 		player.updateRoll();
+		shooting();
 
 		push();
 		stroke(255);
