@@ -32,7 +32,7 @@ function drawPlayerUI() {
 			text(player.weapon.remainingAmmo, mouseX + 55, mouseY - 8);
 			pop();
 		}
-		//health bar
+		//health + stamina bar
 		push();
 		rectMode(CORNER);
 		stroke("#00000080");
@@ -46,6 +46,10 @@ function drawPlayerUI() {
 		textSize(20);
 		strokeWeight(1);
 		text(`${player.health}/100`, 225, 865);
+		fill("#3065ba20");
+		rect(75, 860, 300, 10);
+		fill("#3065ba80");
+		rect(75, 860, 300 * (player.stamina / 200), 10);
 		pop();
 
 		// hotbar
@@ -80,7 +84,7 @@ function drawMainMenu() {
 	stroke("white");
 	fill("black");
 	text("JOIN GAME", width / 2, height / 2);
-	stroke("#00ff0040");
+	stroke("#00ff00");
 	strokeWeight(8);
 	point(mouseX, mouseY);
 	pop();

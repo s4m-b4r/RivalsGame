@@ -93,7 +93,7 @@ class Player {
 	startRoll(directionX, directionY) {
 		let now = Date.now();
 
-		if (!this.isRolling && now > this.startRollTime + this.rollCooldown) {
+		if (!this.isRolling && now > this.startRollTime + this.rollCooldown && this.stamina >= 50) {
 			this.isRolling = true;
 			this.startRollTime = now;
 
@@ -103,6 +103,7 @@ class Player {
 
 			this.canMoveXroll = true;
 			this.canMoveYroll = true;
+			this.stamina -= 50;
 		}
 	}
 
