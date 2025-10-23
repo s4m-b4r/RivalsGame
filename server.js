@@ -20,6 +20,7 @@ io.on("connection", (socket) => {
 	console.log("A user connected:", socket.id);
 
 	socket.on("join_queue", () => {
+		console.log("Join queue:", socket.id);
 		if (waitingPlayer) {
 			if (waitingPlayer.id != socket.id) {
 				const room = "game-" + gameIdCounter;
@@ -61,6 +62,9 @@ io.on("connection", (socket) => {
 
 	socket.on("disconnect", () => {
 		console.log("A user disconnected:", socket.id);
+		if (socket.id == waitingPlayer.id) {
+			waitingPlayer = null;
+		}
 	});
 });
 
