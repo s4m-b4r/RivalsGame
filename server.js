@@ -21,7 +21,7 @@ io.on("connection", (socket) => {
 
 	socket.on("join_queue", () => {
 		if (waitingPlayer) {
-			if (!waitingPlayer.id != socket.id) {
+			if (waitingPlayer.id != socket.id) {
 				const room = "game-" + gameIdCounter;
 				socket.join(room);
 				waitingPlayer.join(room);
