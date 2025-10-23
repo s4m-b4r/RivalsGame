@@ -1,3 +1,5 @@
+let particles = [];
+
 class Particle {
 	constructor(x, y, rx, ry, type, asset) {
 		this.x = x;
