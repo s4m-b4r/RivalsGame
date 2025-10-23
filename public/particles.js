@@ -18,8 +18,8 @@ class Particle {
 		push();
 		translate(this.x, this.y);
 
-		rotate(this.rotation.heading() + 90);
-		console.log(this.rotation.heading());
+		rotate(this.rotation.heading() + 0.5 * Math.PI);
+
 		noSmooth();
 		image(this.asset, 0, 0, 64, 64, this.frameCount * 64, 0, 64, 64);
 		pop();
