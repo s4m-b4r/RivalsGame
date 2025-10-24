@@ -46,7 +46,7 @@ function drawPlayerUI() {
 		textAlign(CENTER, CENTER);
 		textSize(20);
 		strokeWeight(1);
-		text(`${player.health}/100`, 225, 760);
+		text(`${player.health}/100`, 225, 775);
 		fill("#3065ba20");
 		rect(75, 750, 300, 10);
 		fill("#3065ba80");

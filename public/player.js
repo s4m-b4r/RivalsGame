@@ -226,7 +226,7 @@ function drawPlayer() {
 		shooting();
 
 		push();
-		stroke("#81e4f7");
+		fill("#81e4f7");
 		strokeWeight(2);
 		stroke(0);
 		ellipse(player.x, player.y, 50); // Draw player as a circle
