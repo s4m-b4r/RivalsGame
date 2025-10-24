@@ -76,6 +76,7 @@ function drawMainMenu() {
 	background("#202020");
 	noSmooth();
 	filter(BLUR, 2);
+	imageMode(CORNER);
 	image(logoImage, 0, 0, height, height);
 	rectMode(CENTER);
 	stroke("black");
