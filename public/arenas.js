@@ -57,7 +57,7 @@ function arenaAssetsLoad() {
 	for (let i2 = 0; i2 < 20; i2++) {
 		for (let j2 = 0; j2 < 36; j2++) {
 			arenaTiles[i2][j2] = null;
-			arenaTiles[i2][j2] = { x: 4, y: 4 };
+			arenaTiles[i2][j2] = { x: 3, y: 0 };
 		}
 	}
 
