@@ -39,18 +39,18 @@ function drawPlayerUI() {
 		stroke("#00000080");
 		strokeWeight(2);
 		fill("#ff000040");
-		rect(75, 850, 300, 30);
+		rect(75, 760, 300, 30);
 		fill("#00ff0040");
-		rect(75, 850, 300 * (player.health / 100), 30);
+		rect(75, 760, 300 * (player.health / 100), 30);
 		fill("#ffffff80");
 		textAlign(CENTER, CENTER);
 		textSize(20);
 		strokeWeight(1);
 		text(`${player.health}/100`, 225, 865);
 		fill("#3065ba20");
-		rect(75, 840, 300, 10);
+		rect(75, 750, 300, 10);
 		fill("#3065ba80");
-		rect(75, 840, 300 * (player.stamina / 300.5), 10);
+		rect(75, 750, 300 * (player.stamina / 300.5), 10);
 		pop();
 
 		// hotbar
@@ -62,10 +62,10 @@ function drawPlayerUI() {
 		for (let i = 0; i < 3; i++) {
 			if (i === selectedHotbarSlot) {
 				fill("#ffffff60");
-				rect(1340 + i * 100, 850, 80, 80);
+				rect(75 + i * 100, 850, 80, 80);
 			} else {
 				fill("#ffffff20");
-				rect(1340 + i * 100, 850, 75, 75);
+				rect(75 + i * 100, 850, 75, 75);
 			}
 		}
 		pop();
