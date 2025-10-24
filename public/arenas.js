@@ -33,97 +33,58 @@ function createArena() {
 	}
 }
 
-//33 x 19
-
-/*
-if [arena[y][x] === 1] && arena[y+1][x] === 0 then tile 2,3,4,5
-if [arena[y][x] === 1] && arena[y][x-1] === 0 && arena[y][x+1] === 0 then tile 1,7,13,19
-
-[0][0][0]
-[0][1][0]
-[0][0][0]
-*/
-
 function arenaAssetsLoad() {
-	let tempx = 0;
-	let tempy = 0;
-	for (let i2 = 0; i2 < 20; i2++) {
-		arenaTiles[i2] = [];
-		for (let j2 = 0; j2 < 36; j2++) {
-			arenaTiles[i2][j2] = null; // placeholder
+	// Initialize arenaTiles grid
+	for (let i = 0; i < 19; i++) {
+		arenaTiles[i] = [];
+		for (let j = 0; j < 35; j++) {
+			arenaTiles[i][j] = { x: 3, y: 0 }; // default placeholder
 		}
 	}
 
-	for (let i2 = 0; i2 < 20; i2++) {
-		for (let j2 = 0; j2 < 36; j2++) {
-			arenaTiles[i2][j2] = null;
-			arenaTiles[i2][j2] = { x: 3, y: 0 };
-		}
-	}
+	for (let i = 0; i < 19; i++) {
+		for (let j = 0; j < 35; j++) {
+			const tile = arena[i][j];
+			let up, down, left, right;
 
-	for (let i3 = 0; i3 < 19; i3++) {
-		for (let j3 = 0; j3 < 35; j3++) {
-			tile = arena[i3][j3];
-			if (i3 == 0) {
-				left = true;
-			} else if (arena[i3][j3 - 1] === 0) {
-				left = false;
-			} else {
-				left = true;
-			}
+			// Left (same row, previous column)
+			if (j === 0) left = true;
+			else left = arena[i][j - 1] !== 0;
 
-			if (i3 == 19) {
-				right = true;
-			} else if (arena[i3][j3 + 1] === 0) {
-				right = false;
-			} else {
-				right = true;
-			}
+			// Right (same row, next column)
+			if (j === 34) right = true;
+			else right = arena[i][j + 1] !== 0;
 
-			if (j3 == 0) {
-				up = true;
-			} else if (arena[i3 - 1][j3] === 0) {
-				up = false;
-			} else {
-				up = true;
-			}
+			// Up (previous row, same column)
+			if (i === 0) up = true;
+			else up = arena[i - 1][j] !== 0;
 
-			if (j3 == 35) {
-				down = true;
-			} else if (arena[i3 + 1][j3] === 0) {
-				down = false;
-			} else {
-				down = true;
-			}
-			console.log(up, down, left, right);
+			// Down (next row, same column)
+			if (i === 18) down = true;
+			else down = arena[i + 1][j] !== 0;
 
-			if (tile == 0) {
-				////////// tile below /////////////// tile above /////////////// tile right ////////////// tile left ///////
+			// tile graphics
+			if (tile === 0) {
 				if (!up && !down && !left && !right) {
-					arenaTiles[i3][j3] = { x: 4, y: 4 }; //floor middle
+					arenaTiles[i][j] = { x: 4, y: 4 }; // middle
 				} else if (!up && down && !left && !right) {
-					arenaTiles[i3][j3] = { x: 4, y: 5 }; //floor bottom middle
+					arenaTiles[i][j] = { x: 4, y: 5 }; // bottom middle
 				} else if (!up && down && left && !right) {
-					arenaTiles[i3][j3] = { x: 3, y: 5 }; //floor bottom left
+					arenaTiles[i][j] = { x: 3, y: 5 }; // bottom left
 				} else if (!up && down && !left && right) {
-					arenaTiles[i3][j3] = { x: 5, y: 5 }; //floor bottom right
+					arenaTiles[i][j] = { x: 5, y: 5 }; // bottom right
 				} else if (!up && !down && left && !right) {
-					arenaTiles[i3][j3] = { x: 3, y: 4 }; //floor left side
+					arenaTiles[i][j] = { x: 3, y: 4 }; // left side
 				} else if (!up && !down && !left && right) {
-					arenaTiles[i3][j3] = { x: 5, y: 4 }; //floor right side
+					arenaTiles[i][j] = { x: 5, y: 4 }; // right side
 				} else if (up && !down && !left && !right) {
-					arenaTiles[i3][j3] = { x: 4, y: 3 }; //floor top middle
+					arenaTiles[i][j] = { x: 4, y: 3 }; // top middle
 				} else if (up && !down && left && !right) {
-					arenaTiles[i3][j3] = { x: 3, y: 3 }; //floor top left
+					arenaTiles[i][j] = { x: 3, y: 3 }; // top left
 				} else if (up && !down && !left && right) {
-					arenaTiles[i3][j3] = { x: 5, y: 3 }; //floor top right
+					arenaTiles[i][j] = { x: 5, y: 3 }; // top right
 				}
 			}
-			// if (tile === 1) {
-			// 	if (arena[i3][j3] && arena[i3][j3] === 0) {
-			// 		arenaTiles[i3][j3] = { x: 0, y: 1 }; // wall
-			// 	}
-			// }
 		}
 	}
 }
