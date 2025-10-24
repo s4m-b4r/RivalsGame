@@ -38,6 +38,7 @@ socket.on("game_start", (data) => {
 	roomID = data.room;
 	console.log("roomID:", roomID, "players:", data.players);
 	inMatch = true;
+	document.body.classList.toggle("hide-mouse", true);
 });
 
 function preload() {
@@ -68,6 +69,7 @@ function preload() {
 function setup() {
 	inMatch = false;
 	createArenaMode = false;
+	document.body.classList.toggle("hide-mouse", false);
 
 	createCanvas(windowWidth, windowHeight);
 	rectMode(CORNER);
