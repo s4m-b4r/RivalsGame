@@ -118,11 +118,11 @@ function arenaAssetsLoad() {
 					arenaTiles[i3][j3] = { x: 5, y: 3 }; //floor top right
 				}
 			}
-			if (tile === 1) {
-				if (arena[i3][j3] && arena[i3][j3] === 0) {
-					arenaTiles[i3][j3] = { x: 0, y: 1 }; // wall
-				}
-			}
+			// if (tile === 1) {
+			// 	if (arena[i3][j3] && arena[i3][j3] === 0) {
+			// 		arenaTiles[i3][j3] = { x: 0, y: 1 }; // wall
+			// 	}
+			// }
 		}
 	}
 }
