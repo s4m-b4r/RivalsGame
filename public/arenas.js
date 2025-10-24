@@ -83,6 +83,34 @@ function arenaAssetsLoad() {
 					arenaTiles[i][j] = { x: 3, y: 3 }; // top left
 				} else if (up && !down && !left && right) {
 					arenaTiles[i][j] = { x: 5, y: 3 }; // top right
+				} else if (up && down && !left && !right) {
+					arenaTiles[i][j] = { x: 4, y: 2 }; // inbetween horizontal
+				} else if (!up && !down && left && right) {
+					arenaTiles[i][j] = { x: 3, y: 2 }; // inbetween vertical
+				}
+			} else {
+				if (!up && !down && !left && !right) {
+					arenaTiles[i][j] = { x: 3, y: 1 }; // middle
+				} else if (!up && down && !left && !right) {
+					arenaTiles[i][j] = { x: 1, y: 5 }; // bottom middle
+				} else if (!up && down && left && !right) {
+					arenaTiles[i][j] = { x: 1, y: 2 }; // bottom left
+				} else if (!up && down && !left && right) {
+					arenaTiles[i][j] = { x: 2, y: 2 }; // bottom right
+				} else if (!up && !down && left && !right) {
+					arenaTiles[i][j] = { x: 2, y: 4 }; // left side
+				} else if (!up && !down && !left && right) {
+					arenaTiles[i][j] = { x: 4, y: 1 }; // right side
+				} else if (up && !down && !left && !right) {
+					arenaTiles[i][j] = { x: 3, y: 2 }; // top middle
+				} else if (up && !down && left && !right) {
+					arenaTiles[i][j] = { x: 1, y: 1 }; // top left
+				} else if (up && !down && !left && right) {
+					arenaTiles[i][j] = { x: 2, y: 1 }; // top right
+				} else if (up && down && !left && !right) {
+					arenaTiles[i][j] = { x: 3, y: 3 }; // inbetween horizontal
+				} else if (!up && !down && left && right) {
+					arenaTiles[i][j] = { x: 2, y: 3 }; // inbetween vertical
 				}
 			}
 		}
