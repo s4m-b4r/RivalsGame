@@ -46,7 +46,7 @@ function drawPlayerUI() {
 		textAlign(CENTER, CENTER);
 		textSize(20);
 		strokeWeight(1);
-		text(`${player.health}/100`, 225, 865);
+		text(`${player.health}/100`, 225, 760);
 		fill("#3065ba20");
 		rect(75, 750, 300, 10);
 		fill("#3065ba80");
@@ -62,10 +62,10 @@ function drawPlayerUI() {
 		for (let i = 0; i < 3; i++) {
 			if (i === selectedHotbarSlot) {
 				fill("#ffffff60");
-				rect(75 + i * 100, 850, 80, 80);
+				rect(125 + i * 100, 850, 80, 80);
 			} else {
 				fill("#ffffff20");
-				rect(75 + i * 100, 850, 75, 75);
+				rect(125 + i * 100, 850, 75, 75);
 			}
 		}
 		pop();
