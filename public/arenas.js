@@ -57,7 +57,7 @@ function arenaAssetsLoad() {
 	for (let i2 = 0; i2 < 20; i2++) {
 		for (let j2 = 0; j2 < 36; j2++) {
 			arenaTiles[i2][j2] = null;
-			arenaTiles[i2][j2] = { x: 4, y: 3 };
+			arenaTiles[i2][j2] = { x: 4, y: 4 };
 		}
 	}
 
@@ -66,17 +66,26 @@ function arenaAssetsLoad() {
 			tile = arena[i3][j3];
 
 			if (tile === 0) {
-				tempx = Math.floor(random(0, 4));
-				tempy = Math.floor(random(0, 3));
-				arenaTiles[i3][j3] = { x: 6 + tempx, y: 0 + tempy }; // floor
-			}
+				////////// tile below /////////////// tile above /////////////// tile right ////////////// tile left ///////
+				if (arena[i3 + 1][j3] === 0 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 0 && arena[i3][j3 - 1] === 0) {
+					arenaTiles[i2][j2] = { x: 4, y: 4 }; //floor middle
+				} else if (arena[i3 + 1][j3] === 1 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 0 && arena[i3][j3 - 1] === 0) {
+					arenaTiles[i3][j3] = { x: 4, y: 5 }; //floor bottom middle
+				} else if (arena[i3 + 1][j3] === 1 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 0 && arena[i3][j3 - 1] === 1) {
+					arenaTiles[i3][j3] = { x: 3, y: 5 }; //floor bottom left
+				} else if (arena[i3 + 1][j3] === 1 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 1 && arena[i3][j3 - 1] === 0) {
+					arenaTiles[i3][j3] = { x: 5, y: 5 }; //floor bottom right
+				} else if (arena[i3 + 1][j3] === 0 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 0 && arena[i3][j3 - 1] === 1) {
+					arenaTiles[i3][j3] = { x: 3, y: 4 }; //floor left side
+				} else if (arena[i3 + 1][j3] === 0 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 1 && arena[i3][j3 - 1] === 0) {
+					arenaTiles[i3][j3] = { x: 3, y: 4 }; //floor right side
+				}
 
-			if (tile === 1) {
-				if (arena[i3][j3] && arena[i3][j3] === 0) {
-					arenaTiles[i3][j3] = { x: 0, y: 1 }; // wall
-				} else {
-					tempx = Math.floor(random(0, 4));
-					arenaTiles[i3][j3] = { x: 1 + tempx, y: 0 }; // wall
+				if (tile === 1) {
+					if (arena[i3][j3] && arena[i3][j3] === 0) {
+						arenaTiles[i3][j3] = { x: 0, y: 1 }; // wall
+					} else {
+					}
 				}
 			}
 		}
