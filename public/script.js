@@ -42,6 +42,8 @@ socket.on("game_start", (data) => {
 
 function preload() {
 	// Load any assets here if needed //
+	// logo //
+	logoImage = loadImage("assets/logo/Rivals logo_x100.png");
 	// guns //
 	assaultRifleImage = loadImage("assets/Guns/assaultRifle.png"); //itemcode 001
 	shotgunImage = loadImage("assets/Guns/shotgun.png"); //itemcode 002
@@ -57,6 +59,7 @@ function preload() {
 	// tileset //
 	tileset = loadImage("assets/environment/tileset.png");
 	//sounds//
+
 	//weapon sounds//
 	rifleShot = loadSound("assets/Sounds/762x54r Single Isolated MP3.mp3");
 	rifleReload = loadSound("assets/Sounds/ak-47-reload-sound-effect.wav");

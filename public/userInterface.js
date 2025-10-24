@@ -73,6 +73,10 @@ function drawPlayerUI() {
 
 function drawMainMenu() {
 	push();
+	background("#202020");
+	noSmooth();
+	filter(BLUR, 2);
+	image(logoImage, 0, 0, height, height);
 	rectMode(CENTER);
 	stroke("black");
 	strokeWeight(3);
