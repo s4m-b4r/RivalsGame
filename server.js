@@ -62,8 +62,10 @@ io.on("connection", (socket) => {
 
 	socket.on("disconnect", () => {
 		console.log("A user disconnected:", socket.id);
-		if (socket.id == waitingPlayer.id) {
-			waitingPlayer = null;
+		if (waitingPlayer) {
+			if (socket.id == waitingPlayer.id) {
+				waitingPlayer = null;
+			}
 		}
 	});
 });
