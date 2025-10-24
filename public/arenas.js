@@ -47,22 +47,7 @@ function arenaAssetsLoad() {
 			const tile = arena[i][j];
 			let up, down, left, right;
 
-			// // Left (same row, previous column)
-			// if (j === 0) left = true;
-			// else left = arena[i][j - 1] !== 0;
-
-			// // Right (same row, next column)
-			// if (j === 34) right = true;
-			// else right = arena[i][j + 1] !== 0;
-
-			// // Up (previous row, same column)
-			// if (i === 0) up = true;
-			// else up = arena[i - 1][j] !== 0;
-
-			// // Down (next row, same column)
-			// if (i === 18) down = true;
-			// else down = arena[i + 1][j] !== 0;
-
+			// check neighboring tiles
 			left = j > 0 ? arena[i][j - 1] !== 0 : false;
 			right = j < 34 ? arena[i][j + 1] !== 0 : false;
 			up = i > 0 ? arena[i - 1][j] !== 0 : false;
