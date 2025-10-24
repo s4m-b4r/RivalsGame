@@ -228,11 +228,13 @@ class OpponentBullet {
 				}
 			}
 		}
-		if (collidePointCircle(this.location.x, this.location.y, player.x, player.y, player.radius)) {
-			damageParticle(this.location, this.velocity);
-			hitSound.setVolume(0.4 * settings.sfxLevel * settings.masterLevel);
-			hitSound.play();
-			return true;
+		if (player.alive) {
+			if (collidePointCircle(this.location.x, this.location.y, player.x, player.y, player.radius)) {
+				damageParticle(this.location, this.velocity);
+				hitSound.setVolume(0.4 * settings.sfxLevel * settings.masterLevel);
+				hitSound.play();
+				return true;
+			}
 		}
 
 		return this.location.x < 0 || this.location.x > width || this.location.y < 0 || this.location.y > height; // Check if bullet is off screen

@@ -134,6 +134,11 @@ class Player {
 								this.canMoveYroll = false;
 								console.log("collisionY");
 							}
+							if (collideRectCircle(i * 50, j * 50, 50, 50, this.nX, this.nY, this.radius)) {
+								this.canMoveYroll = false;
+								this.canMoveXroll = false;
+								console.log("test collison both");
+							}
 						}
 					}
 				}
