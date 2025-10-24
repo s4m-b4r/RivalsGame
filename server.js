@@ -1,5 +1,6 @@
 const express = require("express");
 const http = require("http");
+const { start } = require("repl");
 const { Server } = require("socket.io");
 
 const app = express();
@@ -26,8 +27,24 @@ io.on("connection", (socket) => {
 				const room = "game-" + gameIdCounter;
 				socket.join(room);
 				waitingPlayer.join(room);
+				player1Pos = { x: 150, y: 475 };
+				player2Pos = { x: 1600, y: 475 };
 
-				io.to(room).emit("game_start", { room, players: [waitingPlayer.id, socket.id] });
+				io.to(waitingPlayer.id).emit("game_start", {
+					room,
+					playerId: waitingPlayer.id,
+					opponentId: socket.id,
+					startPos: player1Pos,
+					opStartPos: player2Pos,
+				});
+
+				io.to(socket.id).emit("game_start", {
+					room,
+					playerId: socket.id,
+					opponentId: waitingPlayer.id,
+					startPos: player2Pos,
+					opStartPos: player1Pos,
+				});
 
 				waitingPlayer = null;
 				gameIdCounter++;

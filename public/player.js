@@ -226,7 +226,7 @@ function drawPlayer() {
 		shooting();
 
 		push();
-		stroke(255);
+		stroke("#81e4f7");
 		strokeWeight(2);
 		stroke(0);
 		ellipse(player.x, player.y, 50); // Draw player as a circle
@@ -256,7 +256,7 @@ function drawPlayer() {
 function drawOpponent() {
 	if (opponent.alive) {
 		push();
-		stroke(255, 0, 0);
+		fill("#a65050");
 		strokeWeight(2);
 		stroke(0);
 		ellipse(opponent.x, opponent.y, 50);

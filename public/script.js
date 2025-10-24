@@ -36,7 +36,12 @@ socket.on("damage_dealt", (data) => {
 
 socket.on("game_start", (data) => {
 	roomID = data.room;
-	console.log("roomID:", roomID, "players:", data.players);
+	player.x = data.startPos.x;
+	player.y = data.startPos.y;
+	opponent.x = data.opStartPos.x;
+	opponent.y = data.opStartPos.y;
+
+	console.log("roomID:", roomID, "players:", data.playerId, data.opponentId);
 
 	inMatch = true;
 	document.body.classList.toggle("hide-mouse", true);
