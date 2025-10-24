@@ -98,7 +98,7 @@ function drawMainMenu() {
 	fill("#f6cd26");
 	textSize(50);
 	if (queueing) {
-		text("JOINING...", width - 250, height - 150);
+		text("QUEUEING", width - 250, height - 150);
 	} else {
 		text("JOIN GAME", width - 250, height - 150);
 	}

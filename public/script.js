@@ -64,6 +64,7 @@ function preload() {
 	//weapon sounds//
 	rifleShot = loadSound("assets/Sounds/762x54r Single Isolated MP3.mp3");
 	rifleReload = loadSound("assets/Sounds/ak-47-reload-sound-effect.wav");
+	hitSound = loadSound("assets/Sounds/hitmarker.mp3");
 }
 
 function setup() {
