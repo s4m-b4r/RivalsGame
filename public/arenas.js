@@ -95,8 +95,9 @@ function arenaAssetsLoad() {
 			} else {
 				down = true;
 			}
+			console.log(up, down, left, right);
 
-			if (tile === 0) {
+			if (tile == 0) {
 				////////// tile below /////////////// tile above /////////////// tile right ////////////// tile left ///////
 				if (!up && !down && !left && !right) {
 					arenaTiles[i3][j3] = { x: 4, y: 4 }; //floor middle
