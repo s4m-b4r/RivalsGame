@@ -37,6 +37,7 @@ socket.on("damage_dealt", (data) => {
 socket.on("game_start", (data) => {
 	roomID = data.room;
 	console.log("roomID:", roomID, "players:", data.players);
+
 	inMatch = true;
 	document.body.classList.toggle("hide-mouse", true);
 });

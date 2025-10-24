@@ -51,7 +51,7 @@ class Bullet {
 			}
 		}
 		if (opponent.alive) {
-			if (collidePointCircle(this.location.x, this.location.y, opponent.x, opponent.y, player.radius + 5)) {
+			if (collidePointCircle(this.location.x, this.location.y, opponent.x, opponent.y, player.radius)) {
 				opponent.health -= this.damage;
 				socket.emit("damage_dealt", { room: roomID, d: this.damage });
 				hitSound.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
@@ -228,7 +228,7 @@ class OpponentBullet {
 				}
 			}
 		}
-		if (collidePointCircle(this.location.x, this.location.y, player.x, player.y, player.radius + 5)) {
+		if (collidePointCircle(this.location.x, this.location.y, player.x, player.y, player.radius)) {
 			damageParticle(this.location, this.velocity);
 			hitSound.setVolume(0.4 * settings.sfxLevel * settings.masterLevel);
 			hitSound.play();
