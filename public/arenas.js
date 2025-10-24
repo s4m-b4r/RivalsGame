@@ -64,28 +64,63 @@ function arenaAssetsLoad() {
 	for (let i3 = 0; i3 < 19; i3++) {
 		for (let j3 = 0; j3 < 35; j3++) {
 			tile = arena[i3][j3];
+			if ((i3 = 0)) {
+				left = true;
+			} else if (arena[i3][j3 - 1] === 0) {
+				left = false;
+			} else {
+				left = true;
+			}
+
+			if ((i3 = 19)) {
+				right = true;
+			} else if (arena[i3][j3 + 1] === 0) {
+				right = false;
+			} else {
+				right = true;
+			}
+
+			if ((j3 = 0)) {
+				up = true;
+			} else if (arena[i3 - 1][j3] === 0) {
+				up = false;
+			} else {
+				up = true;
+			}
+
+			if ((j3 = 35)) {
+				down = true;
+			} else if (arena[i3 + 1][j3] === 0) {
+				down = false;
+			} else {
+				down = true;
+			}
 
 			if (tile === 0) {
 				////////// tile below /////////////// tile above /////////////// tile right ////////////// tile left ///////
-				if (arena[i3 + 1][j3] === 0 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 0 && arena[i3][j3 - 1] === 0) {
+				if (!up && !down && !left && !right) {
 					arenaTiles[i3][j3] = { x: 4, y: 4 }; //floor middle
-				} else if (arena[i3 + 1][j3] === 1 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 0 && arena[i3][j3 - 1] === 0) {
+				} else if (!up && down && !left && !right) {
 					arenaTiles[i3][j3] = { x: 4, y: 5 }; //floor bottom middle
-				} else if (arena[i3 + 1][j3] === 1 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 0 && arena[i3][j3 - 1] === 1) {
+				} else if (!up && down && left && !right) {
 					arenaTiles[i3][j3] = { x: 3, y: 5 }; //floor bottom left
-				} else if (arena[i3 + 1][j3] === 1 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 1 && arena[i3][j3 - 1] === 0) {
+				} else if (!up && down && !left && right) {
 					arenaTiles[i3][j3] = { x: 5, y: 5 }; //floor bottom right
-				} else if (arena[i3 + 1][j3] === 0 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 0 && arena[i3][j3 - 1] === 1) {
+				} else if (!up && !down && left && !right) {
 					arenaTiles[i3][j3] = { x: 3, y: 4 }; //floor left side
-				} else if (arena[i3 + 1][j3] === 0 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 1 && arena[i3][j3 - 1] === 0) {
-					arenaTiles[i3][j3] = { x: 3, y: 4 }; //floor right side
+				} else if (!up && !down && !left && right) {
+					arenaTiles[i3][j3] = { x: 5, y: 4 }; //floor right side
+				} else if (up && !down && !left && !right) {
+					arenaTiles[i3][j3] = { x: 4, y: 3 }; //floor top middle
+				} else if (up && !down && left && !right) {
+					arenaTiles[i3][j3] = { x: 3, y: 3 }; //floor top left
+				} else if (up && !down && !left && right) {
+					arenaTiles[i3][j3] = { x: 5, y: 3 }; //floor top right
 				}
-
-				if (tile === 1) {
-					if (arena[i3][j3] && arena[i3][j3] === 0) {
-						arenaTiles[i3][j3] = { x: 0, y: 1 }; // wall
-					} else {
-					}
+			}
+			if (tile === 1) {
+				if (arena[i3][j3] && arena[i3][j3] === 0) {
+					arenaTiles[i3][j3] = { x: 0, y: 1 }; // wall
 				}
 			}
 		}
