@@ -79,15 +79,20 @@ function drawMainMenu() {
 	imageMode(CORNER);
 	image(logoImage, 0, 0, height, height);
 	rectMode(CENTER);
-	stroke("black");
+	stroke("#f6cd26");
 	strokeWeight(3);
-	fill("white");
-	rect(width - 250, height - 150, 200, 100);
+	fill("#202020");
+	if (collidePointRect(mouseX, mouseY, width - 450, height - 250, 400, 200)) {
+		fill("#303030");
+	}
+	rect(width - 250, height - 150, 400, 200);
 
 	textAlign(CENTER, CENTER);
 
-	stroke("white");
-	fill("black");
+	stroke("#202020");
+	strokeWeight(1);
+	textFont("IMPACT");
+	fill("#f6cd26");
 	textSize(32);
 	text("JOIN GAME", width - 250, height - 150);
 	pop();
@@ -95,7 +100,7 @@ function drawMainMenu() {
 
 function mouseClicked() {
 	if (!inMatch) {
-		if (collidePointRect(mouseX, mouseY, width / 2 - 100, height / 2 - 50, 200, 100)) {
+		if (collidePointRect(mouseX, mouseY, width - 450, height - 250, 400, 200)) {
 			socket.emit("join_queue");
 		}
 	}

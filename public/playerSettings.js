@@ -44,4 +44,4 @@ class Settings {
 	}
 }
 
-let settings = new Settings(1, 1, 1, false, false, false, 1, "#f5c536", 90, "Circle", "#ffffff00", false);
+let settings = new Settings(0.5, 1, 1, false, false, false, 1, "#f5c536", 90, "Circle", "#ffffff00", false);
