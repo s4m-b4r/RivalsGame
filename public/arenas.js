@@ -64,7 +64,7 @@ function arenaAssetsLoad() {
 	for (let i3 = 0; i3 < 19; i3++) {
 		for (let j3 = 0; j3 < 35; j3++) {
 			tile = arena[i3][j3];
-			if ((i3 = 0)) {
+			if (i3 == 0) {
 				left = true;
 			} else if (arena[i3][j3 - 1] === 0) {
 				left = false;
@@ -72,7 +72,7 @@ function arenaAssetsLoad() {
 				left = true;
 			}
 
-			if ((i3 = 19)) {
+			if (i3 == 19) {
 				right = true;
 			} else if (arena[i3][j3 + 1] === 0) {
 				right = false;
@@ -80,7 +80,7 @@ function arenaAssetsLoad() {
 				right = true;
 			}
 
-			if ((j3 = 0)) {
+			if (j3 == 0) {
 				up = true;
 			} else if (arena[i3 - 1][j3] === 0) {
 				up = false;
@@ -88,7 +88,7 @@ function arenaAssetsLoad() {
 				up = true;
 			}
 
-			if ((j3 = 35)) {
+			if (j3 == 35) {
 				down = true;
 			} else if (arena[i3 + 1][j3] === 0) {
 				down = false;
