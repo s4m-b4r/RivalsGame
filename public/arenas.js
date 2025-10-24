@@ -68,7 +68,7 @@ function arenaAssetsLoad() {
 			if (tile === 0) {
 				////////// tile below /////////////// tile above /////////////// tile right ////////////// tile left ///////
 				if (arena[i3 + 1][j3] === 0 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 0 && arena[i3][j3 - 1] === 0) {
-					arenaTiles[i2][j2] = { x: 4, y: 4 }; //floor middle
+					arenaTiles[i3][j3] = { x: 4, y: 4 }; //floor middle
 				} else if (arena[i3 + 1][j3] === 1 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 0 && arena[i3][j3 - 1] === 0) {
 					arenaTiles[i3][j3] = { x: 4, y: 5 }; //floor bottom middle
 				} else if (arena[i3 + 1][j3] === 1 && arena[i3 - 1][j3] === 0 && arena[i3][j3 + 1] === 0 && arena[i3][j3 - 1] === 1) {
