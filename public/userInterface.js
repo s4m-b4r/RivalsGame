@@ -3,6 +3,7 @@ function drawUI() {
 
 	pop();
 }
+
 selectedHotbarSlot = 0;
 
 function drawPlayerUI() {
@@ -71,6 +72,8 @@ function drawPlayerUI() {
 	}
 }
 
+let queueing = false;
+
 function drawMainMenu() {
 	push();
 	background("#202020");
@@ -93,15 +96,25 @@ function drawMainMenu() {
 	strokeWeight(1);
 	textFont("IMPACT");
 	fill("#f6cd26");
-	textSize(32);
-	text("JOIN GAME", width - 250, height - 150);
+	textSize(50);
+	if (queueing) {
+		text("JOINING...", width - 250, height - 150);
+	} else {
+		text("JOIN GAME", width - 250, height - 150);
+	}
 	pop();
 }
 
 function mouseClicked() {
 	if (!inMatch) {
 		if (collidePointRect(mouseX, mouseY, width - 450, height - 250, 400, 200)) {
-			socket.emit("join_queue");
+			if (!queueing) {
+				socket.emit("join_queue");
+				queueing = true;
+			} else {
+				socket.emit("leave_queue");
+				queueing = false;
+			}
 		}
 	}
 }

@@ -38,6 +38,15 @@ io.on("connection", (socket) => {
 		}
 	});
 
+	socket.on("leave_queue", () => {
+		console.log("Leave queue:", socket.id);
+		if (waitingPlayer) {
+			if (waitingPlayer.id == socket.id) {
+				waitingPlayer = null;
+			}
+		}
+	});
+
 	socket.on("player_move", (data) => {
 		// Send the move to everyone
 		socket.to(data.room).emit("player_move", data);
