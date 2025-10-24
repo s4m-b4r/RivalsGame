@@ -75,22 +75,21 @@ function drawMainMenu() {
 	push();
 	background("#202020");
 	noSmooth();
-	filter(BLUR, 2);
+	// filter(BLUR, 2);
 	imageMode(CORNER);
 	image(logoImage, 0, 0, height, height);
 	rectMode(CENTER);
 	stroke("black");
 	strokeWeight(3);
 	fill("white");
-	rect(width / 2, height / 2, 200, 100);
+	rect(width - 250, height - 150, 200, 100);
 
 	textAlign(CENTER, CENTER);
 
 	stroke("white");
 	fill("black");
 	textSize(32);
-	textFont(f);
-	text("JOIN GAME", width / 2, height / 2);
+	text("JOIN GAME", width - 250, height - 150);
 	pop();
 }
 
