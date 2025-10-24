@@ -48,9 +48,9 @@ function drawPlayerUI() {
 		strokeWeight(1);
 		text(`${player.health}/100`, 225, 865);
 		fill("#3065ba20");
-		rect(75, 860, 300, 10);
+		rect(75, 840, 300, 10);
 		fill("#3065ba80");
-		rect(75, 860, 300 * (player.stamina / 200), 10);
+		rect(75, 840, 300 * (player.stamina / 300.5), 10);
 		pop();
 
 		// hotbar
