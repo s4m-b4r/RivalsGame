@@ -128,6 +128,9 @@ class Player {
 							if (collideRectCircle(i * 50, j * 50, 50, 50, this.nX, this.y, this.radius)) {
 								this.canMoveXroll = false;
 								console.log("collisionX");
+							} else if (collideRectCircle(i * 50, j * 50, 50, 50, this.nX, this.nY, this.radius)) {
+								this.canMoveYroll = false;
+								console.log("collisionXY");
 							}
 
 							if (collideRectCircle(i * 50, j * 50, 50, 50, this.x, this.nY, this.radius)) {

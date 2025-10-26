@@ -4,10 +4,6 @@ socket.on("player_move", (data) => {
 	opponent.y = data.y;
 });
 
-socket.on("bullet_shot", (data) => {
-	console.log("Bullet shot:", data);
-});
-
 socket.on("mouse_moved", (data) => {
 	console.log("mouse_moved", data);
 	opponent.mouseX = data.mX;
@@ -18,6 +14,8 @@ socket.on("bullet_shot", (data) => {
 	console.log("bullet_shot", data);
 	let bullet = new OpponentBullet(data.l, data.v, data.t);
 	bullets.push(bullet);
+	rifleShot.setVolume(settings.sfxLevel * settings.masterLevel);
+	rifleShot.play();
 });
 
 socket.on("equip_item", (data) => {
