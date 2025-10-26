@@ -120,6 +120,7 @@ class Player {
 
 				this.canMoveXroll = true;
 				this.canMoveYroll = true;
+				this.canMoveYXroll = true;
 
 				//checking for collisions while rolling
 				for (let i = 0; i < 35; i++) {
@@ -127,15 +128,19 @@ class Player {
 						if (arena[j][i] === 1) {
 							if (collideRectCircle(i * 50, j * 50, 50, 50, this.nX, this.y, this.radius)) {
 								this.canMoveXroll = false;
+								this.canMoveYXroll = false;
 								console.log("collisionX");
-							} else if (collideRectCircle(i * 50, j * 50, 50, 50, this.nX, this.nY, this.radius)) {
-								this.canMoveYroll = false;
-								console.log("collisionXY");
 							}
 
 							if (collideRectCircle(i * 50, j * 50, 50, 50, this.x, this.nY, this.radius)) {
 								this.canMoveYroll = false;
+								this.canMoveYXroll = false;
 								console.log("collisionY");
+							}
+
+							if (this.canMoveYXroll && collideRectCircle(i * 50, j * 50, 50, 50, this.nX, this.nY, this.radius)) {
+								this.canMoveYroll = false;
+								console.log("collisionXY");
 							}
 						}
 					}
