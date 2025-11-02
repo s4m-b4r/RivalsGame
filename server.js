@@ -1,5 +1,18 @@
+require("dotenv").config();
+const { Pool } = new Pool({
+	connectionString: process.env.DATABASE_URL,
+	ssl: {
+		rejectUnauthorized: false,
+	},
+});
+
+Pool.connect()
+	.then(() => console.log("Connected to the database"))
+	.catch((err) => console.error("Database connection error:", err));
+
 const express = require("express");
 const http = require("http");
+const { connect } = require("http2");
 const { start } = require("repl");
 const { Server } = require("socket.io");
 
@@ -65,12 +78,10 @@ io.on("connection", (socket) => {
 	});
 
 	socket.on("player_move", (data) => {
-		// Send the move to everyone
 		socket.to(data.room).emit("player_move", data);
 	});
 
 	socket.on("mouse_moved", (data) => {
-		// Send the to everyone
 		socket.to(data.room).emit("mouse_moved", data);
 	});
 
