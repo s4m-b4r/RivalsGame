@@ -1,20 +1,20 @@
 require("dotenv").config();
-const { Pool } = new Pool({
+const { Pool } = require("pg");
+const express = require("express");
+const http = require("http");
+const { Server } = require("socket.io");
+
+const pool = new Pool({
 	connectionString: process.env.DATABASE_URL,
 	ssl: {
 		rejectUnauthorized: false,
 	},
 });
 
-Pool.connect()
+pool
+	.connect()
 	.then(() => console.log("Connected to the database"))
 	.catch((err) => console.error("Database connection error:", err));
-
-const express = require("express");
-const http = require("http");
-const { connect } = require("http2");
-const { start } = require("repl");
-const { Server } = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
