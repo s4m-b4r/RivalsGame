@@ -63,9 +63,19 @@ function drawPlayerUI() {
 			if (i === selectedHotbarSlot) {
 				fill("#ffffff60");
 				rect(125 + i * 100, 850, 80, 80);
+				push();
+				translate(x, y);
+				rotate(0.5 * Math.PI);
+				image(player.inventory[selectedHotbarSlot].asset, 0, 0, player.inventory[selectedHotbarSlot].asset.width * 2, player.inventory[selectedHotbarSlot].asset.height * 2);
+				pop();
 			} else {
 				fill("#ffffff20");
 				rect(125 + i * 100, 850, 75, 75);
+				push();
+				translate(x, y);
+				rotate(0.5 * Math.PI);
+				image(player.inventory[selectedHotbarSlot].asset, 0, 0, player.inventory[selectedHotbarSlot].asset.width * 1.5, player.inventory[selectedHotbarSlot].asset.height * 1.5);
+				pop();
 			}
 		}
 		pop();
