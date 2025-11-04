@@ -7,8 +7,7 @@ class Player {
 		this.nY = y; // used for collisions as new Y
 		this.health = 100;
 		this.score = 0;
-		this.inventory = [null, null, null];
-		this.equipped = null;
+		this.inventory = [weapons.assaultRifle, weapons.pistol, weapons.smg];
 		this.alive = true;
 		this.weapon = null;
 		this.ammo = 120;
@@ -32,12 +31,6 @@ class Player {
 		this.mouseY = 450;
 	}
 
-	equipWeapon(weapon) {
-		this.weapon = weapon;
-		// weapon.equipSound.setVolume(1);
-		// weapon.equipSound.play();
-	}
-
 	swapHotBarItem(scroll) {
 		if (scroll > 0) {
 			selectedHotbarSlot++;
@@ -50,14 +43,13 @@ class Player {
 				selectedHotbarSlot = 2;
 			}
 		}
-		this.equipped = this.inventory[selectedHotbarSlot];
 
 		// socket.emit("equip_item", { item: itemCode });
 	}
 
 	shoot(mouseX, mouseY) {
-		if (this.weapon) {
-			this.weapon.shoot();
+		if (this.inventory[selectedHotbarSlot]) {
+			this.inventory[selectedHotbarSlot].shoot();
 		}
 	}
 
@@ -233,22 +225,19 @@ function drawPlayer() {
 
 		pop();
 
-		if (player.weapon) {
-			player.weapon.draw(player);
-			player.weapon.reload();
+		if (player.inventory[selectedHotbarSlot]) {
+			player.inventory[selectedHotbarSlot].draw(player);
+			player.inventory[selectedHotbarSlot].reload();
 		}
 
 		if (keyIsDown(keybind.slot1)) {
 			selectedHotbarSlot = 0;
-			player.equipped = player.inventory[selectedHotbarSlot];
 		}
 		if (keyIsDown(keybind.slot2)) {
 			selectedHotbarSlot = 1;
-			player.equipped = player.inventory[selectedHotbarSlot];
 		}
 		if (keyIsDown(keybind.slot3)) {
 			selectedHotbarSlot = 2;
-			player.equipped = player.inventory[selectedHotbarSlot];
 		}
 	}
 }

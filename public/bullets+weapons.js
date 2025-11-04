@@ -13,9 +13,7 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
-			this.recoilDist / 100
-		);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -240,3 +238,11 @@ class OpponentBullet {
 		return this.location.x < 0 || this.location.x > width || this.location.y < 0 || this.location.y > height; // Check if bullet is off screen
 	}
 }
+
+// class Grenade {
+// 	constructor(name, asset, type) {
+// 		this.name = name;
+// 		this.asset = asset;
+// 		this.damage = damage;
+// 	}
+// }
