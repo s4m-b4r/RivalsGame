@@ -85,6 +85,7 @@ function setup() {
 	arenaAssetsLoad();
 
 	weapons = loadWeapons();
+	player.inventory = [weapons.assaultRifle, weapons.pistol, weapons.smg];
 	player.weapon = weapons.assaultRifle;
 	opponent.weapon = weapons.assaultRifle;
 }

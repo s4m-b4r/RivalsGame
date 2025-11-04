@@ -7,7 +7,7 @@ class Player {
 		this.nY = y; // used for collisions as new Y
 		this.health = 100;
 		this.score = 0;
-		this.inventory = [weapons.assaultRifle, weapons.pistol, weapons.smg];
+		this.inventory = [null, null, null];
 		this.alive = true;
 		this.weapon = null;
 		this.ammo = 120;
