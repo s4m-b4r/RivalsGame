@@ -65,7 +65,7 @@ function drawPlayerUI() {
 				rect(125 + i * 100, 850, 80, 80);
 				push();
 				translate(125 + i * 100, 850);
-				rotate(0.25 * Math.PI);
+				rotate(-0.25 * Math.PI);
 				image(player.inventory[i].asset, 0, 0, player.inventory[i].asset.width * 2, player.inventory[i].asset.height * 2);
 				pop();
 			} else {
@@ -73,7 +73,7 @@ function drawPlayerUI() {
 				rect(125 + i * 100, 850, 75, 75);
 				push();
 				translate(125 + i * 100, 850);
-				rotate(0.25 * Math.PI);
+				rotate(-0.25 * Math.PI);
 				image(player.inventory[i].asset, 0, 0, player.inventory[i].asset.width * 1.5, player.inventory[i].asset.height * 1.5);
 				pop();
 			}
