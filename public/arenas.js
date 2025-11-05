@@ -66,6 +66,11 @@ function arenaAssetsLoad() {
 				else if (up && !down && !left && right) arenaTiles[i][j] = { x: 5, y: 3 }; // top right
 				else if (up && down && !left && !right) arenaTiles[i][j] = { x: 4, y: 2 }; // inbetween horizontal
 				else if (!up && !down && left && right) arenaTiles[i][j] = { x: 3, y: 2 }; // inbetween vertical
+				else if (up && down && left && !right) arenaTiles[i][j] = { x: 0, y: 3 };
+				else if (up && down && !left && right) arenaTiles[i][j] = { x: 0, y: 2 };
+				else if (up && !down && left && right) arenaTiles[i][j] = { x: 0, y: 4 };
+				else if (!up && down && left && right) arenaTiles[i][j] = { x: 0, y: 5 };
+				else if (up && down && left && right) arenaTiles[i][j] = { x: 0, y: 1 };
 			} else {
 				if (!up && !down && !left && !right) arenaTiles[i][j] = { x: 3, y: 1 };
 				else if (!up && down && !left && !right) arenaTiles[i][j] = { x: 2, y: 5 };
