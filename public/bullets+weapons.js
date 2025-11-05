@@ -85,6 +85,10 @@ function bulletDraw() {
 		let g = grenades[i];
 		g.update();
 		g.draw();
+		g.checkCollisionDetonation();
+		if (g.fullyDetonated) {
+			grenades.splice(i, 1);
+		}
 	}
 }
 
@@ -261,6 +265,7 @@ class GrenadeItem {
 		this.count = count;
 		this.speed = 3;
 		this.visible = true;
+		this.cooldown = 5000;
 	}
 	shoot() {
 		let now = Date.now;
@@ -303,6 +308,7 @@ class Grenade {
 		this.spin = 0;
 		this.thrownTime = Date.now();
 		this.detonated = false;
+		this.fullyDetonated = false;
 	}
 	update() {
 		if (!this.detonated) {
@@ -317,7 +323,7 @@ class Grenade {
 			push();
 			translate(this.location.x, this.location.y);
 			rotate(this.spin * Math.PI);
-			this.spin += 0.2;
+			this.spin += 0.02;
 			noSmooth();
 			image(this.grenade.asset, 0, 0, this.grenade.asset.width, this.grenade.asset.height);
 			pop();
