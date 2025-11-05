@@ -353,6 +353,7 @@ class Grenade {
 							this.velocity.reflect(normal);
 
 							this.velocity.mult(0.7);
+							this.location.add(this.velocity * 2);
 						}
 					}
 				}
