@@ -265,7 +265,7 @@ class GrenadeItem {
 	shoot() {
 		let now = Date.now;
 		if (now - this.lastThrownTime < this.cooldown || this.count <= 0) return;
-		let grenade = new Grenade(this.asset, this.type, this.damage, this.detonationTime, player.x, player.y, mouseX, mouseY);
+		let grenade = new Grenade(grenade, player.x, player.y, mouseX, mouseY);
 		grenades.push(grenade);
 		this.count--;
 		if (this.count <= 0) this.visible = false;
