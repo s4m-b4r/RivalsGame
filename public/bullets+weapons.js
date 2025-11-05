@@ -270,15 +270,15 @@ class GrenadeItem {
 		this.cooldown = 5000;
 	}
 	shoot() {
-		let now = Date.now;
+		let now = Date.now();
 		if (now - this.lastThrownTime < this.cooldown || this.count <= 0) {
 			return;
 		} else {
 			let grenade = new Grenade(this, player.x, player.y, mouseX, mouseY);
 			this.lastThrownTime = now;
 			grenades.push(grenade);
-			this.count--;
 
+			this.count--;
 			if (this.count <= 0) this.visible = false;
 		}
 	}
