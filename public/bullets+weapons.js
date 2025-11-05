@@ -128,7 +128,7 @@ class Weapon {
 			bullets.push(bullet);
 		} else {
 			for (let i = 0; i < this.bulletCount; i++) {
-				//////////////////////////
+				////////////////////////// fix for shotgun here
 			}
 		}
 
@@ -260,6 +260,7 @@ class GrenadeItem {
 		this.lastThrownTime = 0;
 		this.count = count;
 		this.speed = 3;
+		this.visible = true;
 	}
 	shoot() {
 		let now = Date.now;
@@ -267,6 +268,28 @@ class GrenadeItem {
 		let grenade = new Grenade(this.asset, this.type, this.damage, this.detonationTime, player.x, player.y, mouseX, mouseY);
 		grenades.push(grenade);
 		this.count--;
+		if (this.count <= 0) this.visible = false;
+	}
+	reload() {
+		// fill to fix logic elsewhere (do nothing here)
+	}
+	draw() {
+		if (this.visible) {
+			let angle = atan2(mouseY - player.y, mouseX - player.x);
+			this.x = player.x + cos(angle) * 35;
+			this.y = player.y + sin(angle) * 35;
+			push();
+			translate(this.x, this.y);
+			rotate(angle);
+
+			if (angle > 1.5 || angle < -1.5) {
+				scale(1, -1);
+			}
+
+			noSmooth();
+			image(this.asset, 0, 0, this.asset.width * 2, this.asset.height * 2);
+			pop();
+		}
 	}
 }
 
@@ -295,6 +318,7 @@ class Grenade {
 			translate(this.location.x, this.location.y);
 			rotate(this.spin * Math.PI);
 			this.spin += 0.2;
+			noSmooth();
 			image(this.grenade.asset, 0, 0, this.grenade.asset.width, this.grenade.asset.height);
 			pop();
 		}
