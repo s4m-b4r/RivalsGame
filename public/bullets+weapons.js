@@ -334,31 +334,33 @@ class Grenade {
 		if (!this.detonated) {
 			if (Date.now() - this.thrownTime > this.grenade.detonationTime) {
 				this.detonated = true;
+				return;
 			}
+
+			// check collisions with walls
 			for (let i = 0; i < 33; i++) {
 				for (let j = 0; j < 19; j++) {
 					if (arena[j][i] === 1 || arena[j][i] === 2) {
-						if (collidePointRect(this.location.x, this.location.y, i * 50, j * 50, 50, 50)) {
-							// hitting a wall reflects the direction of the grenade off the wall
-							let wallX = i * 50;
-							let wallY = j * 50;
+						let wallX = i * 50;
+						let wallY = j * 50;
 
+						if (collidePointRect(this.location.x, this.location.y, wallX, wallY, 50, 50)) {
+							let prevPos = p5.Vector.sub(this.location, this.velocity);
 							let normal = createVector(0, 0);
+							// hit from left or right
+							if (prevPos.x < wallX && this.location.x >= wallX) normal = createVector(-1, 0); // left face
+							else if (prevPos.x > wallX + 50 && this.location.x <= wallX + 50) normal = createVector(1, 0); // right face
+							// hit from top or bottom
+							else if (prevPos.y < wallY && this.location.y >= wallY) normal = createVector(0, -1); // top
+							else if (prevPos.y > wallY + 50 && this.location.y <= wallY + 50) normal = createVector(0, 1); // bottom
 
-							if (this.location.x < wallX) normal = createVector(-1, 0); // left side
-							else if (this.location.x > wallX + 50) normal = createVector(1, 0); // right side
-							else if (this.location.y < wallY) normal = createVector(0, -1); // top
-							else if (this.location.y > wallY + 50) normal = createVector(0, 1); // bottom
-							this.location.sub(this.velocity);
+							this.location = prevPos.copy();
 							this.velocity.reflect(normal);
-
-							this.velocity.mult(0.7);
-							this.location.add(this.velocity);
+							this.velocity.mult(0.6);
 						}
 					}
 				}
 			}
-		} else {
 		}
 	}
 }
