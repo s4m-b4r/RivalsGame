@@ -116,8 +116,8 @@ class Weapon {
 	shoot() {
 		let now = Date.now();
 		if (now - this.lastShotTime < this.cooldown) return; // cooldown check
-		if (this.ammo >= 0 || this.isReloading) return; // no ammo check
-		if (this.bulletCount === 1) {
+		if (this.ammo <= 0 || this.isReloading) return; // no ammo check
+		if (this.bulletCount < 2) {
 			let angle = atan2(mouseY - player.y, mouseX - player.x);
 
 			let startX = player.x + cos(angle) * this.muzzleOffset;
