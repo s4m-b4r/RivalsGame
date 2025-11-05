@@ -349,11 +349,11 @@ class Grenade {
 							else if (this.location.x > wallX + 50) normal = createVector(1, 0); // right side
 							else if (this.location.y < wallY) normal = createVector(0, -1); // top
 							else if (this.location.y > wallY + 50) normal = createVector(0, 1); // bottom
-
+							this.location.sub(this.velocity);
 							this.velocity.reflect(normal);
 
 							this.velocity.mult(0.7);
-							this.location.add(this.velocity * 2);
+							this.location.add(this.velocity);
 						}
 					}
 				}
