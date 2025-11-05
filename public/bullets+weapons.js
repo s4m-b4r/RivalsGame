@@ -271,13 +271,16 @@ class GrenadeItem {
 	}
 	shoot() {
 		let now = Date.now;
-		if (now - this.lastThrownTime < this.cooldown || this.count <= 0) return;
-		let grenade = new Grenade(this, player.x, player.y, mouseX, mouseY);
-		grenades.push(grenade);
-		this.count--;
-		this.lastThrownTime = now;
+		if (now - this.lastThrownTime < this.cooldown || this.count <= 0) {
+			return;
+		} else {
+			let grenade = new Grenade(this, player.x, player.y, mouseX, mouseY);
+			this.lastThrownTime = now;
+			grenades.push(grenade);
+			this.count--;
 
-		if (this.count <= 0) this.visible = false;
+			if (this.count <= 0) this.visible = false;
+		}
 	}
 	reload() {
 		// fill to fix logic elsewhere (do nothing here)
