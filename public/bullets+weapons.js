@@ -13,7 +13,9 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
+			this.recoilDist / 100
+		);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -310,6 +312,7 @@ class Grenade {
 		this.detonated = false;
 		this.fullyDetonated = false;
 	}
+
 	update() {
 		if (!this.detonated) {
 			this.location.add(this.velocity);
@@ -338,7 +341,7 @@ class Grenade {
 			}
 
 			// check collisions with walls
-			for (let i = 0; i < 33; i++) {
+			for (let i = 0; i < 35; i++) {
 				for (let j = 0; j < 19; j++) {
 					if (arena[j][i] === 1 || arena[j][i] === 2) {
 						let wallX = i * 50;
