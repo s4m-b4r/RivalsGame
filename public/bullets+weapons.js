@@ -81,6 +81,11 @@ function bulletDraw() {
 			bullets.splice(i, 1); // Remove bullet if it goes off screen
 		}
 	}
+	for (let i = grenades.length - 1; i >= 0; i--) {
+		let g = grenades[i];
+		g.update();
+		g.draw();
+	}
 }
 
 class Weapon {
@@ -112,8 +117,7 @@ class Weapon {
 		let now = Date.now();
 		if (now - this.lastShotTime < this.cooldown) return; // cooldown check
 		if (this.ammo <= 0 || this.isReloading) return; // no ammo check
-
-		for (let i = 0; i < this.bulletCount; i++) {
+		if ((this.bulletCount = 0)) {
 			let angle = atan2(mouseY - player.y, mouseX - player.x);
 
 			let startX = player.x + cos(angle) * this.muzzleOffset;
@@ -122,6 +126,10 @@ class Weapon {
 			let aimDir = createVector(mouseX - player.x, mouseY - player.y);
 			let bullet = new Bullet(startX, startY, mouseX, mouseY, this);
 			bullets.push(bullet);
+		} else {
+			for (let i = 0; i < this.bulletCount; i++) {
+				//////////////////////////
+			}
 		}
 
 		this.lastShotTime = now;
@@ -239,10 +247,81 @@ class OpponentBullet {
 	}
 }
 
-// class Grenade {
-// 	constructor(name, asset, type) {
-// 		this.name = name;
-// 		this.asset = asset;
-// 		this.damage = damage;
-// 	}
-// }
+let grenades = [];
+
+class GrenadeItem {
+	constructor(name, asset, eAsset, type, damage, time, count) {
+		this.name = name;
+		this.asset = asset;
+		this.explosionAsset = eAsset;
+		this.damage = damage;
+		this.type = type;
+		this.detonationTime = time;
+		this.lastThrownTime = 0;
+		this.count = count;
+		this.speed = 3;
+	}
+	shoot() {
+		let now = Date.now;
+		if (now - this.lastThrownTime < this.cooldown || this.count <= 0) return;
+		let grenade = new Grenade(this.asset, this.type, this.damage, this.detonationTime, player.x, player.y, mouseX, mouseY);
+		grenades.push(grenade);
+		this.count--;
+	}
+}
+
+class Grenade {
+	constructor(grenade, x, y, mouseX, mouseY) {
+		this.grenade = grenade;
+		this.location = createVector(x, y);
+		this.velocity = createVector(mouseX - x, mouseY - y)
+			.normalize()
+			.mult(this.grenade.speed);
+		this.spin = 0;
+		this.thrownTime = Date.now();
+		this.detonated = false;
+	}
+	update() {
+		this.location.add(this.velocity);
+	}
+
+	draw() {
+		let now = Date.now();
+		if (this.detonated) {
+		} else {
+			push();
+			translate(this.location.x, this.location.y);
+			rotate(spin * Math.PI);
+			spin += 0.2;
+			image(this.grenade.asset, 0, 0, this.grenade.asset.width, this.grenade.asset.height);
+			pop();
+		}
+	}
+
+	checkCollisionDetonation() {
+		if (!this.detonated) {
+			if (now - this.grenade.detonationTime > this.thrownTime) {
+				this.detonated = true;
+			}
+			for (let i = 0; i < 33; i++) {
+				for (let j = 0; j < 19; j++) {
+					if (arena[j][i] === 1 || arena[j][i] === 2) {
+						if (collidePointRect(this.location.x, this.location.y, i * 50, j * 50, 50, 50)) {
+							// this.velocity = ///////
+						}
+					}
+				}
+			}
+		} else {
+		}
+	}
+}
+
+class OpponentGrenade {
+	constructor(location, velocity, type, detonationTime) {}
+}
+
+function loadGrenades() {
+	let handGrenade = new GrenadeItem("Hand Grenade", handGrenadeImage, handGrenadeExplosionImage, "normal", 70, 4000, 5);
+	return { handGrenade };
+}

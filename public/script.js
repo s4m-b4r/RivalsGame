@@ -69,6 +69,10 @@ function preload() {
 	rifleShot = loadSound("assets/Sounds/762x54r Single Isolated MP3.mp3");
 	rifleReload = loadSound("assets/Sounds/ak-47-reload-sound-effect.wav");
 	hitSound = loadSound("assets/Sounds/hitmarker.mp3");
+
+	// grenades //
+	handGrenadeImage = loadImage("assets/Grenades/handGrenade.png");
+	handGrenadeExplosionImage = loadImage("assets/Grenades/handGrenadeExplosion.png");
 }
 
 function setup() {
@@ -85,7 +89,8 @@ function setup() {
 	arenaAssetsLoad();
 
 	weapons = loadWeapons();
-	player.inventory = [weapons.assaultRifle, weapons.pistol, weapons.smg];
+	grenadeItems = loadGrenades();
+	player.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
 	player.weapon = weapons.assaultRifle;
 	opponent.weapon = weapons.assaultRifle;
 }
