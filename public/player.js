@@ -10,8 +10,7 @@ class Player {
 		this.inventory = [null, null, null];
 		this.alive = true;
 		this.weapon = null;
-		this.ammo = 120;
-		this.magazine = 30;
+
 		this.canMoveX = true; // used for collisions
 		this.canMoveY = true; // used for collisions
 		this.stamina = 200;

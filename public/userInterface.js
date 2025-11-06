@@ -39,18 +39,18 @@ function drawPlayerUI() {
 		stroke("#00000080");
 		strokeWeight(2);
 		fill("#ff000040");
-		rect(75, 760, 300, 30);
+		rect(55, 760, 300, 30);
 		fill("#00ff0040");
-		rect(75, 760, 300 * (player.health / 100), 30);
+		rect(55, 760, 300 * (player.health / 100), 30);
 		fill("#ffffff80");
 		textAlign(CENTER, CENTER);
 		textSize(20);
 		strokeWeight(1);
-		text(`${player.health}/100`, 225, 775);
+		text(`${player.health}/100`, 215, 777);
 		fill("#3065ba20");
-		rect(75, 750, 300, 10);
+		rect(55, 750, 300, 10);
 		fill("#3065ba80");
-		rect(75, 750, 300 * (player.stamina / 300.5), 10);
+		rect(55, 750, 300 * (player.stamina / 300.5), 10);
 		pop();
 
 		// hotbar
@@ -62,21 +62,25 @@ function drawPlayerUI() {
 		for (let i = 0; i < 3; i++) {
 			if (i === selectedHotbarSlot) {
 				fill("#ffffff60");
-				rect(125 + i * 100, 850, 80, 80);
+				rect(100 + i * 100, 850, 80, 80);
 				push();
-				translate(125 + i * 100, 850);
+				translate(100 + i * 100, 850);
 				rotate(-0.25 * Math.PI);
 				image(player.inventory[i].asset, 0, 0, player.inventory[i].asset.width * 2, player.inventory[i].asset.height * 2);
 				pop();
 			} else {
 				fill("#ffffff20");
-				rect(125 + i * 100, 850, 75, 75);
+				rect(100 + i * 100, 850, 75, 75);
 				push();
-				translate(125 + i * 100, 850);
+				translate(100 + i * 100, 850);
 				rotate(-0.25 * Math.PI);
 				image(player.inventory[i].asset, 0, 0, player.inventory[i].asset.width * 1.5, player.inventory[i].asset.height * 1.5);
 				pop();
 			}
+			push();
+			textAlign(CENTER, CENTER);
+			text(player.inventory[i].ammo, 160 + i * 100, 910);
+			pop();
 		}
 		pop();
 	}
