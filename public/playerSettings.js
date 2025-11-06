@@ -22,15 +22,11 @@ class Keybinds {
 let keybind = new Keybinds();
 
 class Settings {
-	constructor(masL, musL, sfxL, masM, musM, sfxM, Csize, Ccolor, Copacity, Cshape, Ocolor, Oct) {
+	constructor(masL, musL, sfxL, Csize, Ccolor, Copacity, Cshape, Ocolor, Oct) {
 		//audio
 		this.masterLevel = masL;
 		this.musicLevel = musL;
 		this.sfxLevel = sfxL;
-
-		this.masterMute = masM;
-		this.musicMute = musM;
-		this.sfxMute = sfxM;
 
 		//crosshair
 		this.cSize = Csize;
@@ -44,4 +40,4 @@ class Settings {
 	}
 }
 
-let settings = new Settings(0.5, 1, 1, false, false, false, 1, "#f5c536", 90, "Circle", "#ffffff00", false);
+let settings = new Settings(0.5, 1, 1, 1, "#f5c536", 90, "Circle", "#ffffff00", false);

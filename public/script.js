@@ -67,7 +67,7 @@ function preload() {
 	// tileset //
 	tileset = loadImage("assets/environment/tileset.png");
 	//sounds//
-
+	clickSound = loadSound("assets/Sounds/Click_stereo.ogg.mp3");
 	//weapon sounds//
 	rifleShot = loadSound("assets/Sounds/762x54r Single Isolated MP3.mp3");
 	rifleReload = loadSound("assets/Sounds/ak-47-reload-sound-effect.wav");

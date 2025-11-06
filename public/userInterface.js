@@ -138,6 +138,7 @@ function mouseClicked() {
 }
 
 let countdownArray = ["3", "2", "1", "GO!", " "];
+let lastSecondPlayed = -1;
 function drawCountdown() {
 	if (Date.now() < countdownStart + 4000) {
 		push();
@@ -145,14 +146,22 @@ function drawCountdown() {
 		fill("#00000050");
 		rect(0, 0, width, height);
 		i = Math.trunc((Date.now() - countdownStart) / 1000);
+		if (i !== lastSecondPlayed && i < countdownArray.length) {
+			click.volume(settings.masterLevel * settings.sfxLevel);
+			click.play();
+			lastSecondPlayed = i;
+		}
+
 		textAlign(CENTER, CENTER);
+		textFont("IMPACT");
 		textSize(100);
 		strokeWeight(10);
 		stroke("#ffffff");
 		fill("#ffffff90");
-		text(countdownArray[i], 1750 / 2, 950 / 2);
+		text(countdownArray[i], 1700 / 2, 950 / 2);
 		pop();
 	} else {
+		lastSecondPlayed = -1;
 		matchStart = true;
 		countdown = false;
 	}
