@@ -125,7 +125,7 @@ function draw() {
 	}
 
 	if (countdown) {
-		countdown();
+		drawCountdown();
 	}
 }
 

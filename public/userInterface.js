@@ -138,7 +138,7 @@ function mouseClicked() {
 }
 
 countdownArray = ["3", "2", "1", "GO!", " "];
-function countdown() {
+function drawCountdown() {
 	if (Date.now() < countdownStart + 4000) {
 		push();
 		stroke(0);
