@@ -150,7 +150,7 @@ function drawCountdown() {
 		strokeWeight(10);
 		stroke("#ffffff");
 		fill("#ffffff90");
-		text(countdownArray[i], width / 2, height / 2);
+		text(countdownArray[i], 1750 / 2, 950 / 2);
 		pop();
 	} else {
 		matchStart = true;
