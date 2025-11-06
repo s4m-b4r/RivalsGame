@@ -42,6 +42,9 @@ socket.on("game_start", (data) => {
 	console.log("roomID:", roomID, "players:", data.playerId, data.opponentId);
 
 	inMatch = true;
+	matchStart = false;
+	countdown = true;
+	countdownStart = Date.now();
 	document.body.classList.toggle("hide-mouse", true);
 });
 
@@ -78,6 +81,8 @@ function preload() {
 function setup() {
 	inMatch = false;
 	createArenaMode = false;
+	countdown = false;
+	matchStart = false;
 	document.body.classList.toggle("hide-mouse", false);
 
 	createCanvas(windowWidth, windowHeight);
@@ -117,6 +122,10 @@ function draw() {
 
 	if (!inMatch) {
 		drawMainMenu();
+	}
+
+	if (countdown) {
+		countdown();
 	}
 }
 
