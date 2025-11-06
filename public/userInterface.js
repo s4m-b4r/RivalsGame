@@ -147,7 +147,7 @@ function drawCountdown() {
 		rect(0, 0, width, height);
 		i = Math.trunc((Date.now() - countdownStart) / 1000);
 		if (i !== lastSecondPlayed && i < countdownArray.length) {
-			clickSound.volume(settings.masterLevel * settings.sfxLevel);
+			clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
 			clickSound.play();
 			lastSecondPlayed = i;
 		}
