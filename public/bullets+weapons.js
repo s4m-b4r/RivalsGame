@@ -13,7 +13,9 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
+			this.recoilDist / 100
+		);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -269,7 +271,7 @@ class GrenadeItem {
 	}
 	shoot() {
 		let now = Date.now();
-		if (now - this.lastThrownTime < this.cooldown || this.count <= 0) {
+		if (now - this.lastThrownTime < this.cooldown || this.ammo <= 0) {
 			return;
 		} else {
 			let grenade = new Grenade(this, player.x, player.y, mouseX, mouseY);
@@ -277,7 +279,7 @@ class GrenadeItem {
 			grenades.push(grenade);
 
 			this.ammo--;
-			if (this.count <= 0) this.visible = false;
+			if (this.ammo <= 0) this.visible = false;
 		}
 	}
 	reload() {
