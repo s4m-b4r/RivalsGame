@@ -78,6 +78,10 @@ function drawPlayerUI() {
 				pop();
 			}
 			push();
+			stroke("#ffffff90");
+			textSize(15);
+			fill("#ffffff90");
+			strokeWeight(1);
 			textAlign(CENTER, CENTER);
 			text(player.inventory[i].ammo, 160 + i * 100, 910);
 			pop();
