@@ -39,9 +39,9 @@ function drawPlayerUI() {
 		stroke("#00000080");
 		strokeWeight(2);
 		fill("#ff000040");
-		rect(55, 765, 385, 30);
+		rect(55, 770, 285, 30);
 		fill("#00ff0040");
-		rect(55, 765, 385 * (player.health / 100), 30);
+		rect(55, 770, 285 * (player.health / 100), 30);
 		fill("#ffffff80");
 		textAlign(CENTER, CENTER);
 		textSize(20);
