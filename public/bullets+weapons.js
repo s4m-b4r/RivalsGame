@@ -276,7 +276,7 @@ class GrenadeItem {
 			this.lastThrownTime = now;
 			grenades.push(grenade);
 
-			this.count--;
+			this.ammo--;
 			if (this.count <= 0) this.visible = false;
 		}
 	}
@@ -314,6 +314,9 @@ class Grenade {
 		this.thrownTime = Date.now();
 		this.detonated = false;
 		this.fullyDetonated = false;
+
+		this.frameCount = 0; // for explosion
+		this.detonatedTime = 0;
 	}
 
 	update() {
@@ -325,6 +328,9 @@ class Grenade {
 	draw() {
 		let now = Date.now();
 		if (this.detonated) {
+			if (this.startTime + (this.frameCount * 50 + 50) > Date.now()) {
+				this.frameCount++;
+			}
 		} else {
 			push();
 			translate(this.location.x, this.location.y);
@@ -340,6 +346,7 @@ class Grenade {
 		if (!this.detonated) {
 			if (Date.now() - this.thrownTime > this.grenade.detonationTime) {
 				this.detonated = true;
+				this.detonatedTime = Date.now();
 				return;
 			}
 
