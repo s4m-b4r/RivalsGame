@@ -137,7 +137,7 @@ function mouseClicked() {
 	}
 }
 
-countdownArray = ["3", "2", "1", "GO!", " "];
+let countdownArray = ["3", "2", "1", "GO!", " "];
 function drawCountdown() {
 	if (Date.now() < countdownStart + 4000) {
 		push();
@@ -146,10 +146,10 @@ function drawCountdown() {
 		rect(0, 0, width, height);
 		i = Math.trunc((Date.now() - countdownStart) / 1000);
 		textAlign(CENTER, CENTER);
-		textSize(100)
-		strokeWeight(10)
-		stroke(#ffffff)
-		fill(#ffffff90)
+		textSize(100);
+		strokeWeight(10);
+		stroke("#ffffff");
+		fill("#ffffff90");
 		text(countdownArray[i], width / 2, height / 2);
 		pop();
 	} else {
