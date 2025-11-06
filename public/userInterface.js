@@ -146,6 +146,10 @@ function countdown() {
 		rect(0, 0, width, height);
 		i = Math.trunc((Date.now() - countdownStart) / 1000);
 		textAlign(CENTER, CENTER);
+		textSize(100)
+		strokeWeight(10)
+		stroke(#ffffff)
+		fill(#ffffff90)
 		text(countdownArray[i], width / 2, height / 2);
 		pop();
 	} else {
