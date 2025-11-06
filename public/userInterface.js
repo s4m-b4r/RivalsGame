@@ -155,9 +155,9 @@ function drawCountdown() {
 		textAlign(CENTER, CENTER);
 		textFont("IMPACT");
 		textSize(100);
-		strokeWeight(10);
+		strokeWeight(0);
 		stroke("#ffffff");
-		fill("#ffffff90");
+		fill("#ffffff95");
 		text(countdownArray[i], 1700 / 2, 950 / 2);
 		pop();
 	} else {
