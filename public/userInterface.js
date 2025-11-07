@@ -22,13 +22,14 @@ function drawPlayerUI() {
 		pop();
 
 		//magazine count
-		if (player.weapon) {
+		if (player.inventory[selectedHotbarSlot]) {
 			push();
 			textFont("IMPACT");
 			textSize(15);
 			stroke("#f5c53621");
 			fill(245, 197, 54);
-			text(player.inventory[selectedHotbarSlot].ammo, mouseX + 25, mouseY + 8);
+			textAlign(CENTER, CENTER);
+			text(player.inventory[selectedHotbarSlot].ammo, mouseX + 20, mouseY);
 			pop();
 		}
 		//health + stamina bar
