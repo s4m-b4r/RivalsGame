@@ -184,8 +184,9 @@ function drawMatchScoreTime() {
 	textAlign(CENTER, CENTER);
 	textFont("IMPACT");
 	stroke("#ffffff98");
+	fill("#ffffff");
 	strokeWeight(0);
 	textSize(25);
-	text(roundTimeStr, 875, 25);
+	text(roundTimeStr, 825, 25);
 	pop();
 }
