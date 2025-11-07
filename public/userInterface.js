@@ -99,7 +99,7 @@ function drawMainMenu() {
 	noSmooth();
 	// filter(BLUR, 2);
 	imageMode(CORNER);
-	image(logoImage, 0, 0, height - 75, height - 75);
+	image(logoImage, 0, 75, height - 75, height - 75);
 	rectMode(CENTER);
 	stroke("#f6cd26");
 	strokeWeight(3);
@@ -178,6 +178,6 @@ function drawMatchScoreTime() {
 
 	let roundMinutes = floor(remainingRoundTime / 60000);
 	let roundSeconds = floor((remainingRoundTime % 60000) / 1000);
-	let roundTimeStr = nf(roundMinutes) + ":" + nf(roundSeconds);
+	let roundTimeStr = nf(roundMinutes, 2) + ":" + nf(roundSeconds, 2);
 	console.log(roundTimeStr);
 }
