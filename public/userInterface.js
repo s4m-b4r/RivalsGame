@@ -24,13 +24,11 @@ function drawPlayerUI() {
 		//magazine count
 		if (player.weapon) {
 			push();
-			textSize(25);
+			textFont("IMPACT");
+			textSize(15);
 			stroke("#f5c53621");
 			fill(245, 197, 54);
-			text(player.weapon.ammo, mouseX + 25, mouseY + 8);
-			fill(245, 197, 54, 125);
-			textSize(15);
-			text(player.weapon.remainingAmmo, mouseX + 55, mouseY - 8);
+			text(player.inventory[selectedHotbarSlot].ammo, mouseX + 25, mouseY + 8);
 			pop();
 		}
 		//health + stamina bar
@@ -46,6 +44,7 @@ function drawPlayerUI() {
 		textAlign(CENTER, CENTER);
 		textSize(20);
 		strokeWeight(1);
+		textFont("IMPACT");
 		text(`${player.health}/100`, 202.5, 784);
 		fill("#3065ba20");
 		rect(60, 760, 285, 10);
