@@ -42,7 +42,7 @@ socket.on("game_start", (data) => {
 	console.log("roomID:", roomID, "players:", data.playerId, data.opponentId);
 
 	inMatch = true;
-	matchStart = false;
+	roundStart = false;
 	countdown = true;
 	countdownStart = Date.now();
 	document.body.classList.toggle("hide-mouse", true);
@@ -82,7 +82,7 @@ function setup() {
 	inMatch = false;
 	createArenaMode = false;
 	countdown = false;
-	matchStart = false;
+	roundStart = false;
 	document.body.classList.toggle("hide-mouse", false);
 
 	createCanvas(windowWidth, windowHeight);
@@ -113,6 +113,9 @@ function draw() {
 		drawParticles();
 		drawPlayerUI();
 		drawUI(); // Draw the user interface
+		if (roundStart) {
+			drawMatchScoreTime();
+		}
 	}
 
 	if (createArenaMode) {

@@ -156,7 +156,7 @@ function drawPlayer() {
 		moveX = 0;
 		moveY = 0;
 		sprinting = false;
-		if (matchStart) {
+		if (roundStart) {
 			if (player.isRolling === false) {
 				if (keyIsDown(keybind.up)) {
 					//(up, decrease Y)

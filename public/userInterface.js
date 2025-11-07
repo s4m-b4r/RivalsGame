@@ -35,12 +35,13 @@ function drawPlayerUI() {
 		//health + stamina bar
 		push();
 		rectMode(CORNER);
-		stroke("#00000080");
-		strokeWeight(2);
+		stroke("#00000050");
+		strokeWeight(1);
 		fill("#ff000040");
 		rect(60, 770, 285, 30);
 		fill("#00ff0040");
 		rect(60, 770, 285 * (player.health / 100), 30);
+
 		fill("#ffffff80");
 		textAlign(CENTER, CENTER);
 		textSize(20);
@@ -98,7 +99,7 @@ function drawMainMenu() {
 	noSmooth();
 	// filter(BLUR, 2);
 	imageMode(CORNER);
-	image(logoImage, 0, 0, height, height);
+	image(logoImage, 0, 0, height - 75, height - 75);
 	rectMode(CENTER);
 	stroke("#f6cd26");
 	strokeWeight(3);
@@ -162,7 +163,21 @@ function drawCountdown() {
 		pop();
 	} else {
 		lastSecondPlayed = -1;
-		matchStart = true;
+		roundStart = true;
 		countdown = false;
+		roundStartTime = date.now();
 	}
+}
+
+roundStartTime = 0;
+function drawMatchScoreTime() {
+	let elapsedRoundTime = Date.now() - roundStartTime;
+	let remainingRoundTime = 120000 - elapsedRoundTime;
+
+	if (remainingRoundTime < 0) remainingRoundTime = 0;
+
+	let roundMinutes = floor(remainingRoundTime / 60000);
+	let roundSeconds = floor((remainingRoundTime % 60000) / 1000);
+	let roundTimeStr = nf(roundMinutes) + ":" + nf(roundSeconds);
+	console.log(roundTimeStr);
 }
