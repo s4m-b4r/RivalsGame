@@ -180,4 +180,12 @@ function drawMatchScoreTime() {
 	let roundSeconds = floor((remainingRoundTime % 60000) / 1000);
 	let roundTimeStr = nf(roundMinutes, 2) + ":" + nf(roundSeconds, 2);
 	console.log(roundTimeStr);
+	push();
+	textAlign(CENTER, CENTER);
+	textFont("IMPACT");
+	stroke("#ffffff98");
+	strokeWeight(0);
+	textSize(25);
+	text(roundTimeStr, 875, 25);
+	pop();
 }
