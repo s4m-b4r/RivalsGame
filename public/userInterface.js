@@ -165,7 +165,7 @@ function drawCountdown() {
 		lastSecondPlayed = -1;
 		roundStart = true;
 		countdown = false;
-		roundStartTime = date.now();
+		roundStartTime = Date.now();
 	}
 }
 
