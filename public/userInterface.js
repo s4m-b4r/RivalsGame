@@ -187,6 +187,6 @@ function drawMatchScoreTime() {
 	fill("#ffffff");
 	strokeWeight(0);
 	textSize(25);
-	text(roundTimeStr, 825, 25);
+	text(roundTimeStr, 850, 25);
 	pop();
 }
