@@ -1,11 +1,3 @@
-const { text } = require("stream/consumers");
-
-function drawUI() {
-	push();
-
-	pop();
-}
-
 selectedHotbarSlot = 0;
 
 function drawPlayerUI() {
