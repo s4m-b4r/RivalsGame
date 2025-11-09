@@ -46,6 +46,8 @@ socket.on("game_start", (data) => {
 	countdown = true;
 	countdownStart = Date.now();
 	document.body.classList.toggle("hide-mouse", true);
+	playerScore = 0;
+	opponentScore = 0;
 });
 
 function preload() {
@@ -122,8 +124,9 @@ function draw() {
 		createArena(); // used for making new arenas
 		arenaAssetsLoad();
 	}
-
-	if (!inMatch) {
+	if (!loggedIn) {
+		drawSignInUpScreen();
+	} else if (!inMatch) {
 		drawMainMenu();
 	}
 

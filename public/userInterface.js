@@ -1,3 +1,5 @@
+const { text } = require("stream/consumers");
+
 function drawUI() {
 	push();
 
@@ -189,4 +191,152 @@ function drawMatchScoreTime() {
 	textSize(25);
 	text(roundTimeStr, 850, 25);
 	pop();
+
+	//scores
+	push();
+	textAlign(CENTER, CENTER);
+	textFont("IMPACT");
+	fill("#ff0000");
+	fill("#0000ff");
+	textSize(25);
+	text(`${playerScore}`, 750, 25);
+	text(`${opponentScore}`, 950, 25);
+
+	pop();
+}
+
+function drawWinRound() {
+	if (roundWinner == "player") {
+		push();
+		textAlign(CENTER, CENTER);
+		textFont("IMPACT");
+		stroke("#00ff0098");
+		fill("#00ff00");
+		strokeWeight(0);
+		textSize(100);
+		text("YOU WIN THE ROUND!", 1700 / 2, 950 / 2);
+		pop();
+	} else if (roundWinner == "opponent") {
+		push();
+		textAlign(CENTER, CENTER);
+		textFont("IMPACT");
+		stroke("#ff000098");
+		fill("#ff0000");
+		strokeWeight(0);
+		textSize(100);
+		text("YOU LOSE THE ROUND!", 1700 / 2, 950 / 2);
+		pop();
+	}
+}
+
+let loggedIn = false;
+let showingSignup = false;
+let usernameInput = "";
+let passwordInput = "";
+let message = "";
+
+function drawSignInUpScreen() {
+	push();
+	background("#202020");
+	imageMode(CORNER);
+	image(logoImage, 0, 0, height, height);
+	rectMode(CORNER);
+	fill("#373737");
+	rect(width - 500, 0, 500, height);
+
+	fill("#f6cd26");
+	textAlign(CENTER, CENTER);
+	textFont("IMPACT");
+	textSize(40);
+	text(showingSignup ? "SIGN UP" : "SIGN IN", width - 250, 100);
+
+	textSize(20);
+	fill("#ffffff");
+	text("Username:", width - 400, 250);
+	text("Password:", width - 400, 350);
+
+	noFill();
+	stroke("#f6cd26");
+	rect(width - 400, 270, 300, 40);
+	rect(width - 400, 370, 300, 40);
+
+	rectMode(CENTER);
+	stroke("#f6cd26");
+	fill("#202020");
+	if (collidePointRect(mouseX, mouseY, width - 350, 450, 200, 60)) fill("#303030");
+	rect(width - 250, 480, 200, 60);
+	noStroke();
+	fill("#f6cd26");
+	textAlign(CENTER, CENTER);
+	textSize(25);
+	text(showingSignup ? "CREATE" : "LOGIN", width - 250, 480);
+
+	textSize(16);
+	fill("#bbb");
+	textAlign(CENTER);
+	text(showingSignup ? "Already have an account? Click here to login" : "No account? Click here to sign up", width - 250, 560);
+
+	fill("#f6cd26");
+	textAlign(CENTER);
+	text(message, width - 250, 620);
+	pop();
+}
+
+function keyTyped() {
+	if (!loggedIn) {
+		if (keyCode === BACKSPACE) {
+			if (focusedInput === "username") usernameInput = usernameInput.slice(0, -1);
+			if (focusedInput === "password") passwordInput = passwordInput.slice(0, -1);
+		} else if (key.length === 1 && key !== " ") {
+			if (focusedInput === "username") usernameInput += key;
+			if (focusedInput === "password") passwordInput += key;
+		}
+	}
+}
+
+let focusedInput = null;
+
+function mousePressed() {
+	if (!loggedIn) {
+		// username box
+		if (collidePointRect(mouseX, mouseY, width - 400, 270, 300, 40)) focusedInput = "username";
+		// password box
+		else if (collidePointRect(mouseX, mouseY, width - 400, 370, 300, 40)) focusedInput = "password";
+		// login/signup button
+		else if (collidePointRect(mouseX, mouseY, width - 350, 450, 200, 60)) {
+			if (showingSignup) handleSignup();
+			else handleLogin();
+		}
+		// toggle link
+		else if (collidePointRect(mouseX, mouseY, width - 450, 540, 400, 40)) {
+			showingSignup = !showingSignup;
+			message = "";
+		}
+	}
+}
+
+async function handleSignup() {
+	const res = await fetch("/signup", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ username: usernameInput, password: passwordInput }),
+	});
+	const data = await res.json();
+	message = data.message || data.error || "";
+	if (data.success) showingSignup = false;
+}
+
+async function handleLogin() {
+	const res = await fetch("/login", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ username: usernameInput, password: passwordInput }),
+	});
+	const data = await res.json();
+	message = data.message || data.error || "";
+	if (data.success) {
+		loggedIn = true;
+		player.username = usernameInput;
+		message = "Welcome, " + usernameInput + "!";
+	}
 }

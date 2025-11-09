@@ -29,6 +29,50 @@ app.get("/", (req, res) => {
 	res.sendFile(__dirname + "/public/index.html");
 });
 
+app.use(express.json());
+
+// Signup route
+app.post("/signup", async (req, res) => {
+	const { username, password } = req.body;
+
+	if (!username || !password) return res.status(400).json({ error: "Username and password required" });
+
+	if (password.length < 12) return res.status(400).json({ error: "Password must be at least 12 characters long" });
+
+	try {
+		const result = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
+		if (result.rows.length > 0) {
+			return res.status(400).json({ error: "Username already exists" });
+		}
+
+		await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [username, password]);
+		res.json({ success: true, message: "Account created successfully!" });
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: "Database error" });
+	}
+});
+
+// Login route
+app.post("/login", async (req, res) => {
+	const { username, password } = req.body;
+
+	if (!username || !password) return res.status(400).json({ error: "Username and password required" });
+
+	try {
+		const result = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
+		if (result.rows.length === 0) return res.status(400).json({ error: "Invalid username" });
+
+		const user = result.rows[0];
+		if (user.password !== password) return res.status(400).json({ error: "Invalid password" });
+
+		res.json({ success: true, message: "Login successful!" });
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: "Database error" });
+	}
+});
+
 // keep the event loop alive
 io.on("connection", (socket) => {
 	console.log("A user connected:", socket.id);
