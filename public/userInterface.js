@@ -1,3 +1,5 @@
+const { text } = require("stream/consumers");
+
 selectedHotbarSlot = 0;
 
 function drawPlayerUI() {
@@ -244,13 +246,20 @@ function drawSignInUpScreen() {
 
 	textSize(20);
 	fill("#ffffff");
+	textAlign(LEFT, CENTER);
 	text("Username:", width - 400, 250);
 	text("Password:", width - 400, 350);
 
 	noFill();
 	stroke("#f6cd26");
+	if (focusedInput === "username") strokeWeight(3);
+	else strokeWeight(1);
 	rect(width - 400, 270, 300, 40);
+	if (focusedInput === "password") strokeWeight(3);
+	else strokeWeight(1);
 	rect(width - 400, 370, 300, 40);
+	text(usernameInput, width - 390, 290);
+	text(passwordInput.replace(/./g, "*"), width - 390, 390);
 
 	rectMode(CENTER);
 	stroke("#f6cd26");
@@ -286,7 +295,7 @@ function keyTyped() {
 	}
 }
 
-let focusedInput = null;
+let focusedInput = "username";
 
 function mousePressed() {
 	if (!loggedIn) {
