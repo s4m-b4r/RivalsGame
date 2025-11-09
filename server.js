@@ -73,10 +73,54 @@ app.post("/login", async (req, res) => {
 	}
 });
 
+app.post("/save_settings", async (req, res) => {
+	const { username, keybinds, settings } = req.body;
+
+	try {
+		const userResult = await pool.query("SELECT id FROM users WHERE username = $1", [username]);
+		if (userResult.rows.length === 0) return res.status(400).json({ error: "User not found" });
+		const userId = userResult.rows[0].id;
+
+		const existing = await pool.query("SELECT * FROM player_settings WHERE user_id = $1", [userId]);
+		if (existing.rows.length > 0) {
+			await pool.query("UPDATE player_settings SET keybinds = $1, settings = $2 WHERE user_id = $3", [keybinds, settings, userId]);
+		} else {
+			await pool.query("INSERT INTO player_settings (user_id, keybinds, settings) VALUES ($1, $2, $3)", [userId, keybinds, settings]);
+		}
+
+		res.json({ success: true });
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: "Database error" });
+	}
+});
+
+app.post("/load_settings", async (req, res) => {
+	const { username } = req.body;
+
+	try {
+		const userResult = await pool.query("SELECT id FROM users WHERE username = $1", [username]);
+		if (userResult.rows.length === 0) return res.status(400).json({ error: "User not found" });
+		const userId = userResult.rows[0].id;
+
+		const settingsResult = await pool.query("SELECT keybinds, settings FROM player_settings WHERE user_id = $1", [userId]);
+		if (settingsResult.rows.length === 0) return res.json({ keybinds: null, settings: null });
+
+		res.json(settingsResult.rows[0]);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: "Database error" });
+	}
+});
+
 // keep the event loop alive
 io.on("connection", (socket) => {
 	console.log("A user connected:", socket.id);
 
+	socket.on("register_username", (data) => {
+		socket.username = data.username;
+		console.log(`User ${data.username} registered on socket ${socket.id}`);
+	});
 	socket.on("join_queue", () => {
 		console.log("Join queue:", socket.id);
 		if (waitingPlayer) {

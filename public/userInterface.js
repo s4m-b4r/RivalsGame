@@ -341,6 +341,31 @@ async function handleLogin() {
 		loggedIn = true;
 		player.username = usernameInput;
 		socket.emit("register_username", { username: usernameInput });
+
+		// Load settings
+		const settingsRes = await fetch("/load_settings", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ username: usernameInput }),
+		});
+		const settingsData = await settingsRes.json();
+		if (settingsData.settings) {
+			settings = Object.assign(new Settings(), settingsData.settings);
+			keybind = Object.assign(new Keybinds(), settingsData.keybinds);
+		}
+
 		message = "Welcome, " + usernameInput + "!";
 	}
+}
+
+async function savePlayerSettings() {
+	await fetch("/save_settings", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({
+			username: player.username,
+			keybinds: keybind,
+			settings: settings,
+		}),
+	});
 }
