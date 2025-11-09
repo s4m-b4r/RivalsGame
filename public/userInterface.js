@@ -119,7 +119,7 @@ function drawMainMenu() {
 }
 
 function mouseClicked() {
-	if (!inMatch) {
+	if (loggedIn && !inMatch) {
 		if (collidePointRect(mouseX, mouseY, width - 450, height - 250, 400, 200)) {
 			if (!queueing) {
 				socket.emit("join_queue");
@@ -340,6 +340,7 @@ async function handleLogin() {
 	if (data.success) {
 		loggedIn = true;
 		player.username = usernameInput;
+		socket.emit("register_username", { username: usernameInput });
 		message = "Welcome, " + usernameInput + "!";
 	}
 }
