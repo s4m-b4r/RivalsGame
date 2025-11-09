@@ -256,9 +256,13 @@ function drawSignInUpScreen() {
 	if (focusedInput === "password") strokeWeight(3);
 	else strokeWeight(1);
 	rect(width - 400, 370, 300, 40);
+	strokeWeight(0);
+	textSize(20);
+	stroke("#ffffff");
+	fill("#ffffff");
 	text(usernameInput, width - 390, 290);
 	text(passwordInput.replace(/./g, "*"), width - 390, 390);
-
+	strokeWeight(1);
 	rectMode(CENTER);
 	stroke("#f6cd26");
 	fill("#202020");
@@ -281,7 +285,7 @@ function drawSignInUpScreen() {
 	pop();
 }
 
-function keyTyped() {
+function keyPressed() {
 	if (!loggedIn) {
 		if (keyCode === BACKSPACE) {
 			if (focusedInput === "username") usernameInput = usernameInput.slice(0, -1);
