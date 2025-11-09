@@ -1,5 +1,3 @@
-const { text } = require("stream/consumers");
-
 selectedHotbarSlot = 0;
 
 function drawPlayerUI() {
