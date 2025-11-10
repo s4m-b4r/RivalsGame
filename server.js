@@ -152,7 +152,7 @@ io.on("connection", (socket) => {
 
 				waitingPlayer = null;
 				gameIdCounter++;
-				console.log("Game Started:", room);
+				console.log("Game Started:", room, "Arena:", matchArena);
 			}
 		} else {
 			waitingPlayer = socket;
