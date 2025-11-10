@@ -114,7 +114,7 @@ function draw() {
 		drawOpponent();
 		drawParticles();
 		drawPlayerUI();
-		drawUI(); // Draw the user interface
+
 		if (roundStart) {
 			drawMatchScoreTime();
 		}
