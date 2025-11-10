@@ -153,7 +153,7 @@ function drawCountdown() {
 		strokeWeight(0);
 		stroke("#ffffff");
 		fill("#ffffff95");
-		text(countdownArray[i], 1700 / 2, 950 / 2);
+		text(countdownArray[i], 1750 / 2, 950 / 2);
 		pop();
 	} else {
 		lastSecondPlayed = -1;
@@ -166,7 +166,7 @@ function drawCountdown() {
 roundStartTime = 0;
 function drawMatchScoreTime() {
 	let elapsedRoundTime = Date.now() - roundStartTime;
-	let remainingRoundTime = 120000 - elapsedRoundTime;
+	let remainingRoundTime = 150000 - elapsedRoundTime;
 
 	if (remainingRoundTime < 0) remainingRoundTime = 0;
 
@@ -196,6 +196,10 @@ function drawMatchScoreTime() {
 	fill("#ff0000");
 	text(`${opponentScore}`, 975, 25);
 
+	if (remainingRoundTime === 0) {
+		drawWinRound();
+	}
+
 	pop();
 }
 
@@ -204,21 +208,21 @@ function drawWinRound() {
 		push();
 		textAlign(CENTER, CENTER);
 		textFont("IMPACT");
-		stroke("#00ff0098");
-		fill("#00ff00");
+		stroke("#0000ff");
+		fill("#0000ff");
 		strokeWeight(0);
 		textSize(100);
-		text("YOU WIN THE ROUND!", 1700 / 2, 950 / 2);
+		text("YOU WIN THE ROUND!", 1750 / 2, 950 / 2);
 		pop();
 	} else if (roundWinner == "opponent") {
 		push();
 		textAlign(CENTER, CENTER);
 		textFont("IMPACT");
-		stroke("#ff000098");
+		stroke("#ff0000");
 		fill("#ff0000");
 		strokeWeight(0);
 		textSize(100);
-		text("YOU LOSE THE ROUND!", 1700 / 2, 950 / 2);
+		text("YOU LOSE THE ROUND!", 1750 / 2, 950 / 2);
 		pop();
 	}
 }
