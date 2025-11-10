@@ -32,6 +32,12 @@ socket.on("damage_dealt", (data) => {
 	}
 });
 
+socket.on("new_round", (data) => {
+	console.log("new_round", data);
+	arena = arenas[data.a];
+	arenaAssetsLoad();
+});
+
 socket.on("game_start", (data) => {
 	roomID = data.room;
 	player.x = data.startPos.x;
@@ -93,6 +99,8 @@ function setup() {
 	imageMode(CENTER);
 
 	noSmooth();
+
+	let arena = arenas[0];
 	arenaAssetsLoad();
 
 	weapons = loadWeapons();

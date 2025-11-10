@@ -181,18 +181,20 @@ function drawMatchScoreTime() {
 	fill("#ffffff");
 	strokeWeight(0);
 	textSize(25);
-	text(roundTimeStr, 850, 25);
+	text(roundTimeStr, 875, 25);
 	pop();
 
 	//scores
 	push();
 	textAlign(CENTER, CENTER);
 	textFont("IMPACT");
-	fill("#ff0000");
-	fill("#0000ff");
 	textSize(25);
-	text(`${playerScore}`, 750, 25);
-	text(`${opponentScore}`, 950, 25);
+	fill("#0000ff");
+
+	text(`${playerScore}`, 775, 25);
+
+	fill("#ff0000");
+	text(`${opponentScore}`, 975, 25);
 
 	pop();
 }
