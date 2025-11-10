@@ -199,7 +199,6 @@ function drawMatchScoreTime() {
 	if (remainingRoundTime === 0) {
 		drawWinRound();
 	}
-
 	pop();
 }
 

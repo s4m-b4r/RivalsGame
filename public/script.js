@@ -36,6 +36,19 @@ socket.on("new_round", (data) => {
 	console.log("new_round", data);
 	arena = arenas[data.a];
 	arenaAssetsLoad();
+	player.x = data.startPos.x;
+	player.y = data.startPos.y;
+	opponent.x = data.opStartPos.x;
+	opponent.y = data.opStartPos.y;
+	countdownStart = Date.now();
+	inMatch = true;
+	roundStart = false;
+	countdown = true;
+});
+
+socket.on("update_score", (data) => {
+	playerScore = data.ps;
+	opponentScore = data.os;
 });
 
 socket.on("game_start", (data) => {
