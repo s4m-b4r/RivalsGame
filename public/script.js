@@ -44,6 +44,8 @@ socket.on("game_start", (data) => {
 	player.y = data.startPos.y;
 	opponent.x = data.opStartPos.x;
 	opponent.y = data.opStartPos.y;
+	arena = arenas[data];
+	arenaAssetsLoad();
 
 	console.log("roomID:", roomID, "players:", data.playerId, data.opponentId);
 

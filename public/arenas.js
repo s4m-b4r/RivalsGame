@@ -9,19 +9,6 @@ function drawArena() {
 	}
 }
 
-function switchArena(arenaNumber) {
-	if (arenaNumber === 1) {
-		arena = ARENA1;
-	} else if (arenaNumber === 2) {
-		arena = ARENA2;
-	} else if (arenaNumber === 3) {
-		arena = ARENA3;
-	} else if (arenaNumber === 4) {
-		arena = ARENA4;
-	}
-	arenaAssetsLoad();
-}
-
 function createArena() {
 	let boardX = floor(mouseX / 50);
 	let boardY = floor(mouseY / 50);
