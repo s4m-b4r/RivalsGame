@@ -204,7 +204,6 @@ io.on("connection", (socket) => {
 		if (game.scores.p1 >= 3 || game.scores.p2 >= 3) {
 			const matchWinner = game.scores.p1 > game.scores.p2 ? p1 : p2;
 			io.to(data.room).emit("match_over", { winner: matchWinner, scores: game.scores });
-			console.log(`Game ${game.gameID} over. Winner: ${matchWinner}`);
 			games.splice(games.indexOf(game), 1);
 			return;
 		}
