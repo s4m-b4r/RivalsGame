@@ -214,7 +214,7 @@ io.on("connection", (socket) => {
 			game.inProgress = true;
 			game.roundWinner = null;
 
-			const newArena = Math.floor(Math.random() * 5);
+			const newArena = Math.floor(Math.random() * 4); // 0 to 4
 			const roundEndTime = Date.now() + 154000;
 			const roundStartTime = Date.now();
 
