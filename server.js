@@ -133,6 +133,7 @@ io.on("connection", (socket) => {
 				matchArena = Math.floor(Math.random() * 5); // 0 to 4
 				roundEndTime = Date.now() + 154000;
 				roundStartTime = Date.now();
+				console.log(roundStartTime, roundEndTime, Date.now());
 				io.to(waitingPlayer.id).emit("game_start", {
 					room,
 					playerId: waitingPlayer.id,
