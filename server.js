@@ -22,6 +22,7 @@ const io = new Server(server);
 
 let waitingPlayer = null;
 let gameIdCounter = 1;
+const games = [];
 
 app.use(express.static(__dirname + "/public"));
 
@@ -112,7 +113,7 @@ app.post("/load_settings", async (req, res) => {
 		res.status(500).json({ error: "Database error" });
 	}
 });
-games = [];
+
 // keep the event loop alive
 io.on("connection", (socket) => {
 	console.log("A user connected:", socket.id);
@@ -154,7 +155,16 @@ io.on("connection", (socket) => {
 					roundEndTime: roundEndTime,
 					roundStartTime: roundStartTime,
 				});
-				// games.push({ gameID: room, players: { p1: socket.id, p2: waitingPlayer.id }, scores: { p1: 0, p2: 0 }, round: 1 });
+
+				games.push({
+					gameID: room,
+					players: { p1: socket.id, p2: waitingPlayer.id },
+					scores: { p1: 0, p2: 0 },
+					round: 1,
+					inProgress: true,
+					winner: null,
+				});
+
 				waitingPlayer = null;
 				gameIdCounter++;
 				console.log("Game Started:", room, "Arena:", matchArena);
@@ -164,29 +174,63 @@ io.on("connection", (socket) => {
 		}
 	});
 
-	// socket.on("check_winner", (data) => {
-	// 	for (let i = 0; i < games.length; i++) {
-	// 		if (games[i].gameID === data.room) {
-	// 			if (games[i].round === data.round) {
-	// 				selectedGame = i;
-	// 				games[i].round++;
-	// 				if (socket.id === games[i].players.p1) {
-	// 					games[i].scores.p1++;
-	// 				} else {
-	// 					games[i].scores.p2++;
-	// 				}
-	// 				break;
-	// 			}
-	// 		}
-	// 	}
-	// 	socket.to(data.room).emit("round_winner", {
-	// 		winner: winner,
+	socket.on("player_killed_opponent", (data) => {
+		const game = games.find((g) => g.gameID === data.room);
+		if (!game || !game.inProgress) return;
 
-	// 		roundEndTime: Date.now() + 159000,
-	// 		roundStartTime: Date.now() + 5000,
-	// 		round: games[selectedGame].round,
-	// 	});
-	// });
+		const { p1, p2 } = game.players;
+		const killer = socket.id;
+		const victim = killer === p1 ? p2 : p1;
+
+		// Prevent double reporting
+		if (game.roundWinner) return;
+
+		game.roundWinner = killer;
+		game.inProgress = false;
+
+		if (killer === p1) {
+			game.scores.p1++;
+		} else {
+			game.scores.p2++;
+		}
+
+		// Notify both clients
+		io.to(data.room).emit("round_end", {
+			winner: killer,
+			scores: game.scores,
+			round: game.round,
+		});
+
+		if (game.scores.p1 >= 3 || game.scores.p2 >= 3) {
+			const matchWinner = game.scores.p1 > game.scores.p2 ? p1 : p2;
+			io.to(data.room).emit("match_over", { winner: matchWinner, scores: game.scores });
+			console.log(`Game ${game.gameID} over. Winner: ${matchWinner}`);
+			games.splice(games.indexOf(game), 1);
+			return;
+		}
+
+		// Start next round after a short delay
+		setTimeout(() => {
+			game.round++;
+			game.inProgress = true;
+			game.roundWinner = null;
+
+			const newArena = Math.floor(Math.random() * 5);
+			const roundEndTime = Date.now() + 154000;
+			const roundStartTime = Date.now();
+
+			io.to(data.room).emit("new_round", {
+				round: game.round,
+				a: newArena,
+				startPos: { x: 150, y: 475 },
+				opStartPos: { x: 1600, y: 475 },
+				roundEndTime,
+				roundStartTime,
+			});
+
+			console.log(`Game ${game.gameID} - Round ${game.round} started`);
+		}, 5000);
+	});
 
 	socket.on("leave_queue", () => {
 		console.log("Leave queue:", socket.id);

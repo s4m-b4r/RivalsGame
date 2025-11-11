@@ -13,7 +13,9 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
+			this.recoilDist / 100
+		);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -55,7 +57,8 @@ class Bullet {
 				hitSound.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
 				hitSound.play();
 				damageParticle(this.location, this.velocity);
-				if (opponent.health < 0) {
+				if (opponent.health <= 0 && player.alive) {
+					socket.emit("player_killed_opponent", { room: roomID });
 					opponent.alive = false;
 				}
 				return true;
