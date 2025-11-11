@@ -160,13 +160,14 @@ function drawCountdown() {
 		roundStart = true;
 		countdown = false;
 		roundStartTime = Date.now();
+		roundEndTime = roundStartTime + 150000;
 	}
 }
 
 roundStartTime = 0;
+roundEndTime = 0;
 function drawMatchScoreTime() {
-	let elapsedRoundTime = Date.now() - roundStartTime;
-	let remainingRoundTime = 150000 - elapsedRoundTime;
+	let remainingRoundTime = roundEndTime - Date.now();
 
 	if (remainingRoundTime < 0) remainingRoundTime = 0;
 

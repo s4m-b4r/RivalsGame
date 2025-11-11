@@ -130,7 +130,7 @@ io.on("connection", (socket) => {
 				waitingPlayer.join(room);
 				player1Pos = { x: 150, y: 475 };
 				player2Pos = { x: 1600, y: 475 };
-				matchArena = Math.floor(Math.random(0, 5));
+				matchArena = Math.floor(Math.random(0, 5) * 5); // 0 to 4
 
 				io.to(waitingPlayer.id).emit("game_start", {
 					room,
