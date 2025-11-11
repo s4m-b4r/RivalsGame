@@ -131,6 +131,7 @@ io.on("connection", (socket) => {
 				player1Pos = { x: 150, y: 475 };
 				player2Pos = { x: 1600, y: 475 };
 				matchArena = Math.floor(Math.random(0, 5) * 5); // 0 to 4
+				roundEndTime = Date.now() + 154000;
 
 				io.to(waitingPlayer.id).emit("game_start", {
 					room,
@@ -138,7 +139,8 @@ io.on("connection", (socket) => {
 					opponentId: socket.id,
 					startPos: player1Pos,
 					opStartPos: player2Pos,
-					a: matchArena,
+					arena: matchArena,
+					roundEndTime: roundEndTime,
 				});
 
 				io.to(socket.id).emit("game_start", {
@@ -147,7 +149,8 @@ io.on("connection", (socket) => {
 					opponentId: waitingPlayer.id,
 					startPos: player2Pos,
 					opStartPos: player1Pos,
-					a: matchArena,
+					arena: matchArena,
+					roundEndTime: roundEndTime,
 				});
 
 				waitingPlayer = null;
