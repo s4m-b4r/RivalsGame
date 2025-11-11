@@ -219,11 +219,23 @@ io.on("connection", (socket) => {
 			const roundEndTime = Date.now() + 154000;
 			const roundStartTime = Date.now();
 
-			io.to(data.room).emit("new_round", {
+			const player1Pos = { x: 150, y: 475 };
+			const player2Pos = { x: 1600, y: 475 };
+
+			io.to(game.players.p1).emit("new_round", {
 				round: game.round,
 				a: newArena,
-				startPos: { x: 150, y: 475 },
-				opStartPos: { x: 1600, y: 475 },
+				startPos: player1Pos,
+				opStartPos: player2Pos,
+				roundEndTime,
+				roundStartTime,
+			});
+
+			io.to(game.players.p2).emit("new_round", {
+				round: game.round,
+				a: newArena,
+				startPos: player2Pos,
+				opStartPos: player1Pos,
 				roundEndTime,
 				roundStartTime,
 			});
