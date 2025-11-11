@@ -60,6 +60,7 @@ socket.on("game_start", (data) => {
 	opponent.y = data.opStartPos.y;
 	arena = arenas[data.arena];
 	roundEndTime = data.roundEndTime;
+	roundStartTime = data.roundStartTime;
 	arenaAssetsLoad();
 
 	console.log("roomID:", roomID, "players:", data.playerId, data.opponentId);
@@ -67,7 +68,6 @@ socket.on("game_start", (data) => {
 	inMatch = true;
 	roundStart = false;
 	countdown = true;
-	countdownStart = data.roundEndTime - 154000;
 	document.body.classList.toggle("hide-mouse", true);
 	playerScore = 0;
 	opponentScore = 0;

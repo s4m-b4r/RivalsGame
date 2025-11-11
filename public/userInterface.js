@@ -135,12 +135,12 @@ function mouseClicked() {
 let countdownArray = ["3", "2", "1", "GO!", " "];
 let lastSecondPlayed = -1;
 function drawCountdown() {
-	if (Date.now() < countdownStart + 4000) {
+	if (Date.now() < roundStartTime + 4000) {
 		push();
 		stroke(0);
 		fill("#00000050");
 		rect(0, 0, width, height);
-		i = Math.trunc((Date.now() - countdownStart) / 1000);
+		i = Math.trunc((Date.now() - roundStartTime) / 1000);
 		if (i !== lastSecondPlayed && i < countdownArray.length) {
 			clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
 			clickSound.play();
