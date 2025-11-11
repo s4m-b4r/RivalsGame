@@ -23,7 +23,7 @@ function drawPlayerUI() {
 			stroke("#f5c53621");
 			fill(245, 197, 54);
 			textAlign(CENTER, CENTER);
-			text(player.inventory[selectedHotbarSlot].ammo, mouseX + 20, mouseY);
+			text(player.inventory[selectedHotbarSlot].ammo, mouseX + 25, mouseY);
 			pop();
 		}
 		//health + stamina bar
@@ -201,6 +201,7 @@ function drawMatchScoreTime() {
 	pop();
 }
 
+roundWinner = "";
 function drawWinRound() {
 	if (roundWinner == "player") {
 		push();
@@ -210,7 +211,7 @@ function drawWinRound() {
 		fill("#0000ff");
 		strokeWeight(0);
 		textSize(100);
-		text("YOU WIN THE ROUND!", 1750 / 2, 950 / 2);
+		text(player.name, "WON THE ROUND!", 1750 / 2, 950 / 2);
 		pop();
 	} else if (roundWinner == "opponent") {
 		push();
@@ -220,7 +221,7 @@ function drawWinRound() {
 		fill("#ff0000");
 		strokeWeight(0);
 		textSize(100);
-		text("YOU LOSE THE ROUND!", 1750 / 2, 950 / 2);
+		text(opponent.name, "WON THE ROUND!", 1750 / 2, 950 / 2);
 		pop();
 	}
 }

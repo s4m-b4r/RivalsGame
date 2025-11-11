@@ -112,7 +112,7 @@ app.post("/load_settings", async (req, res) => {
 		res.status(500).json({ error: "Database error" });
 	}
 });
-
+games = [];
 // keep the event loop alive
 io.on("connection", (socket) => {
 	console.log("A user connected:", socket.id);
@@ -133,7 +133,6 @@ io.on("connection", (socket) => {
 				matchArena = Math.floor(Math.random() * 5); // 0 to 4
 				roundEndTime = Date.now() + 154000;
 				roundStartTime = Date.now();
-				console.log(roundStartTime, roundEndTime, Date.now());
 				io.to(waitingPlayer.id).emit("game_start", {
 					room,
 					playerId: waitingPlayer.id,
@@ -155,7 +154,7 @@ io.on("connection", (socket) => {
 					roundEndTime: roundEndTime,
 					roundStartTime: roundStartTime,
 				});
-
+				// games.push({ gameID: room, players: { p1: socket.id, p2: waitingPlayer.id }, scores: { p1: 0, p2: 0 }, round: 1 });
 				waitingPlayer = null;
 				gameIdCounter++;
 				console.log("Game Started:", room, "Arena:", matchArena);
@@ -164,6 +163,30 @@ io.on("connection", (socket) => {
 			waitingPlayer = socket;
 		}
 	});
+
+	// socket.on("check_winner", (data) => {
+	// 	for (let i = 0; i < games.length; i++) {
+	// 		if (games[i].gameID === data.room) {
+	// 			if (games[i].round === data.round) {
+	// 				selectedGame = i;
+	// 				games[i].round++;
+	// 				if (socket.id === games[i].players.p1) {
+	// 					games[i].scores.p1++;
+	// 				} else {
+	// 					games[i].scores.p2++;
+	// 				}
+	// 				break;
+	// 			}
+	// 		}
+	// 	}
+	// 	socket.to(data.room).emit("round_winner", {
+	// 		winner: winner,
+
+	// 		roundEndTime: Date.now() + 159000,
+	// 		roundStartTime: Date.now() + 5000,
+	// 		round: games[selectedGame].round,
+	// 	});
+	// });
 
 	socket.on("leave_queue", () => {
 		console.log("Leave queue:", socket.id);
