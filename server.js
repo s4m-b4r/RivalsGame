@@ -226,8 +226,8 @@ io.on("connection", (socket) => {
 				a: newArena,
 				startPos: player1Pos,
 				opStartPos: player2Pos,
-				roundEndTime,
-				roundStartTime,
+				roundEndTime: roundEndTime,
+				roundStartTime: roundStartTime,
 			});
 
 			io.to(game.players.p2).emit("new_round", {
