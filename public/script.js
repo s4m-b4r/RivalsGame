@@ -45,6 +45,10 @@ socket.on("new_round", (data) => {
 	inMatch = true;
 	roundStart = false;
 	countdown = true;
+	player.health = 100;
+	opponent.health = 100;
+	player.alive = true;
+	opponent.alive = true;
 });
 
 socket.on("update_score", (data) => {
