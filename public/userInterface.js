@@ -93,36 +93,36 @@ function drawMenuTabs() {
 	push();
 	stroke("#f6cd26");
 	rectMode(CORNER);
+	strokeWeight(3);
 	//Match Menu
 	fill("#202020");
-	if (collidePointRect(mouseX, mouseY)) {
+	if (collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) {
 		fill("#303030");
 	}
-	rect(41, 41, 300, 100);
+	rect(41, 41, 300, 75);
 	//weapon select menu
-	if (collidePointRect(mouseX, mouseY)) {
+	if (collidePointRect(mouseX, mouseY, 423, 41, 300, 75)) {
 		fill("#303030");
 	}
-	rect(423, 41, 300, 100);
+	rect(423, 41, 300, 75);
 	//LeaderBoard Menu
 	fill("#202020");
-	strokeWeight(3);
-	if (collidePointRect(mouseX, mouseY)) {
+	if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) {
 		fill("#303030");
 	}
-	rect(805, 41, 300, 100);
+	rect(805, 41, 300, 75);
 	//stats menu
 	fill("#202020");
-	if (collidePointRect(mouseX, mouseY)) {
+	if (collidePointRect(mouseX, mouseY, 1187, 41, 300, 75)) {
 		fill("#303030");
 	}
-	rect(1187, 41, 300, 100);
+	rect(1187, 41, 300, 75);
 	//settings menu
 	fill("#202020");
-	if (collidePointRect(mouseX, mouseY)) {
+	if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) {
 		fill("#303030");
 	}
-	rect(1569, 41, 300, 100);
+	rect(1569, 41, 300, 75);
 	pop();
 }
 
