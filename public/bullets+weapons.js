@@ -13,7 +13,9 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
+			this.recoilDist / 100
+		);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -316,7 +318,7 @@ class Grenade {
 		this.thrownTime = Date.now();
 		this.detonated = false;
 		this.fullyDetonated = false;
-		this.detonationTime = this.thrownTime + this.grenade.this.detonationTime;
+		this.detonationTime = this.thrownTime + this.grenade.detonationTime;
 
 		this.frameCount = 0; // for explosion
 		this.detonatedTime = 0;
