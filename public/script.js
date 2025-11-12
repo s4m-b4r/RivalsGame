@@ -50,6 +50,8 @@ socket.on("new_round", (data) => {
 	player.alive = true;
 	opponent.alive = true;
 	round++;
+	drawWinner = false;
+
 	for (let i = 0; i < 3; i++) {
 		player.inventory[i].ammo = player.inventory[i].magazineSize;
 	}
@@ -64,6 +66,7 @@ socket.on("round_end", (data) => {
 		roundWinner = "opponent";
 		opponentScore++;
 	}
+	drawWinner = true;
 	console.log(roundWinner, "player/opponent score:", playerScore, ":", opponentScore);
 });
 
@@ -126,6 +129,8 @@ function setup() {
 	createArenaMode = false;
 	countdown = false;
 	roundStart = false;
+	drawWinner = false;
+
 	document.body.classList.toggle("hide-mouse", false);
 
 	createCanvas(windowWidth, windowHeight);
@@ -175,6 +180,9 @@ function draw() {
 
 	if (countdown) {
 		drawCountdown();
+	}
+	if (drawWinner) {
+		drawWinRound();
 	}
 }
 

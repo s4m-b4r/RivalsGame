@@ -197,7 +197,7 @@ function drawMatchScoreTime() {
 	text(opponentScore, 975, 25);
 
 	if (remainingRoundTime === 0) {
-		drawWinRound();
+		drawWinner = true;
 	}
 	pop();
 }
