@@ -129,8 +129,8 @@ io.on("connection", (socket) => {
 				const room = "game-" + gameIdCounter;
 				socket.join(room);
 				waitingPlayer.join(room);
-				player1Pos = { x: 150, y: 475 };
-				player2Pos = { x: 1600, y: 475 };
+				const player2Pos = { x: 150, y: 475 };
+				const player1Pos = { x: 1600, y: 475 };
 				matchArena = Math.floor(Math.random() * 4); // 0 to 4
 				roundEndTime = Date.now() + 154000;
 				roundStartTime = Date.now();
@@ -218,8 +218,13 @@ io.on("connection", (socket) => {
 			const roundEndTime = Date.now() + 154000;
 			const roundStartTime = Date.now();
 
-			const player1Pos = { x: 150, y: 475 };
-			const player2Pos = { x: 1600, y: 475 };
+			if (game.round % 2 == 1) {
+				const player1Pos = { x: 150, y: 475 };
+				const player2Pos = { x: 1600, y: 475 };
+			} else {
+				const player2Pos = { x: 150, y: 475 };
+				const player1Pos = { x: 1600, y: 475 };
+			}
 
 			io.to(game.players.p1).emit("new_round", {
 				round: game.round,
