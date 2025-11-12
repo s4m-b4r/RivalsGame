@@ -134,11 +134,12 @@ function drawMenuTabs() {
 	textSize(50);
 	strokeWeight(1);
 	fill("#f6cd26");
-	text("MATCH", 191, 80);
-	text("LOADOUT", 573, 80);
-	text("CAREER", 955, 80);
-	text("LEADERBOARD", 1337, 80);
-	text("SETTINGS", 1719, 80);
+	stroke("#202020");
+	text("MATCH", 191, 78);
+	text("LOADOUT", 573, 78);
+	text("CAREER", 955, 78);
+	text("LEADERBOARD", 1337, 78);
+	text("SETTINGS", 1719, 78);
 
 	pop();
 }
