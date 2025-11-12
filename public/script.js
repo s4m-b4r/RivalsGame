@@ -175,10 +175,12 @@ function draw() {
 		createArena(); // used for making new arenas
 		arenaAssetsLoad();
 	}
+
 	if (!loggedIn) {
 		drawSignInUpScreen();
 	} else if (!inMatch) {
 		drawMainMenu();
+		drawMenuTabs();
 	}
 
 	if (countdown) {

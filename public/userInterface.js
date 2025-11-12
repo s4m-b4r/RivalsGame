@@ -87,6 +87,45 @@ function drawPlayerUI() {
 
 let queueing = false;
 
+let selectedMenu;
+
+function drawMenuTabs() {
+	push();
+	stroke("#f6cd26");
+	rectMode(CORNER);
+	//Match Menu
+	fill("#202020");
+	if (collidePointRect(mouseX, mouseY)) {
+		fill("#303030");
+	}
+	rect(41, 41, 300, 100);
+	//weapon select menu
+	if (collidePointRect(mouseX, mouseY)) {
+		fill("#303030");
+	}
+	rect(423, 41, 300, 100);
+	//LeaderBoard Menu
+	fill("#202020");
+	strokeWeight(3);
+	if (collidePointRect(mouseX, mouseY)) {
+		fill("#303030");
+	}
+	rect(805, 41, 300, 100);
+	//stats menu
+	fill("#202020");
+	if (collidePointRect(mouseX, mouseY)) {
+		fill("#303030");
+	}
+	rect(1187, 41, 300, 100);
+	//settings menu
+	fill("#202020");
+	if (collidePointRect(mouseX, mouseY)) {
+		fill("#303030");
+	}
+	rect(1569, 41, 300, 100);
+	pop();
+}
+
 function drawMainMenu() {
 	push();
 	background("#202020");
