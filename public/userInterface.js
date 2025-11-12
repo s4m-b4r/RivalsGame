@@ -97,35 +97,30 @@ function drawMenuTabs() {
 	strokeWeight(3);
 	//Match Menu
 	fill("#202020");
-	if (collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) {
-		fill("#303030");
-	}
+	if (collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) fill("#303030");
+	if (selectedMenu == "match") fill("#f6cd2650");
 	rect(41, 41, 300, 75);
 
-	//weapon select menu
+	//loadout menu
 	fill("#202020");
-	if (collidePointRect(mouseX, mouseY, 423, 41, 300, 75)) {
-		fill("#303030");
-	}
+	if (collidePointRect(mouseX, mouseY, 423, 41, 300, 75)) fill("#303030");
+	if (selectedMenu == "loadout") fill("#f6cd2650");
 	rect(423, 41, 300, 75);
-	text();
+
 	//LeaderBoard Menu
 	fill("#202020");
-	if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) {
-		fill("#303030");
-	}
+	if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) fill("#303030");
+	if (selectedMenu == "leaderboard") fill("#f6cd2650");
 	rect(805, 41, 300, 75);
-	//stats menu
+	//career menu
 	fill("#202020");
-	if (collidePointRect(mouseX, mouseY, 1187, 41, 300, 75)) {
-		fill("#303030");
-	}
+	if (collidePointRect(mouseX, mouseY, 1187, 41, 300, 75)) fill("#303030");
+	if (selectedMenu == "career") fill("#f6cd2650");
 	rect(1187, 41, 300, 75);
 	//settings menu
 	fill("#202020");
-	if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) {
-		fill("#303030");
-	}
+	if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) fill("#303030");
+	if (selectedMenu == "settings") fill("#f6cd2650");
 	rect(1569, 41, 300, 75);
 
 	//texts
@@ -185,6 +180,27 @@ function mouseClicked() {
 				socket.emit("leave_queue");
 				queueing = false;
 			}
+		}
+		//Match Menu
+		if (collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) {
+			selectedMenu = "match";
+		}
+		//loadout menu
+		if (collidePointRect(mouseX, mouseY, 423, 41, 300, 75)) {
+			selectedMenu = "loadout";
+		}
+		//LeaderBoard Menu
+		if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) {
+			selectedMenu = "leaderboard";
+		}
+		//career menu
+		if (collidePointRect(mouseX, mouseY, 1187, 41, 300, 75)) {
+			selectedMenu = "career";
+		}
+
+		//settings menu
+		if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) {
+			selectedMenu = "settings";
 		}
 	}
 }
