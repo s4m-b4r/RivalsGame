@@ -202,7 +202,7 @@ function drawMatchScoreTime() {
 			emittedRoundEnd = true;
 			if (player.health > opponent.health) {
 				socket.emit("player_killed_opponent", { room: roomID });
-			} else if (player.health == opponent) {
+			} else if (player.health == opponent.health) {
 				socket.emit("new_round_equal_health", { room: roomID });
 			}
 		}
