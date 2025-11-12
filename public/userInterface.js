@@ -182,26 +182,19 @@ function mouseClicked() {
 			}
 		}
 		//Match Menu
-		if (collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) {
-			selectedMenu = "match";
-		}
+		if (collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) selectedMenu = "match";
+
 		//loadout menu
-		if (collidePointRect(mouseX, mouseY, 423, 41, 300, 75)) {
-			selectedMenu = "loadout";
-		}
+		if (collidePointRect(mouseX, mouseY, 423, 41, 300, 75)) selectedMenu = "loadout";
+
 		//LeaderBoard Menu
-		if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) {
-			selectedMenu = "leaderboard";
-		}
+		if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) selectedMenu = "leaderboard";
+
 		//career menu
-		if (collidePointRect(mouseX, mouseY, 1187, 41, 300, 75)) {
-			selectedMenu = "career";
-		}
+		if (collidePointRect(mouseX, mouseY, 1187, 41, 300, 75)) selectedMenu = "career";
 
 		//settings menu
-		if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) {
-			selectedMenu = "settings";
-		}
+		if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) selectedMenu = "settings";
 	}
 }
 
