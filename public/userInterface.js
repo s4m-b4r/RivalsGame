@@ -145,7 +145,7 @@ function drawMainMenu() {
 	noSmooth();
 	// filter(BLUR, 2);
 	imageMode(CORNER);
-	image(logoImage, 0, 100, height - 100, height - 100);
+	image(logoImage, 0, 75, height - 75, height - 75);
 	rectMode(CENTER);
 	stroke("#f6cd26");
 	strokeWeight(3);
@@ -430,7 +430,7 @@ async function handleLogin() {
 	message = data.message || data.error || "";
 	if (data.success) {
 		loggedIn = true;
-		player.username = usernameInput;
+		player.name = usernameInput;
 		socket.emit("register_username", { username: usernameInput });
 
 		// Load settings

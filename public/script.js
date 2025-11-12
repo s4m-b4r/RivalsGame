@@ -85,6 +85,7 @@ socket.on("game_start", (data) => {
 	arenaAssetsLoad();
 	player.id = data.playerId;
 	opponent.id = data.opponentId;
+	opponent.name = data.opponentName;
 
 	console.log("roomID:", roomID, "players:", data.playerId, data.opponentId);
 
