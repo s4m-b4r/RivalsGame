@@ -10,7 +10,6 @@ class Player {
 		this.score = 0;
 		this.inventory = [null, null, null];
 		this.alive = true;
-		this.weapon = null;
 
 		this.canMoveX = true; // used for collisions
 		this.canMoveY = true; // used for collisions
@@ -251,7 +250,7 @@ function drawOpponent() {
 		stroke(0);
 		ellipse(opponent.x, opponent.y, 50);
 		pop();
-		if (opponent.weapon) {
+		if (opponent.inventory[opponentSelectedSlot]) {
 			let angle = atan2(opponent.mouseY - opponent.y, opponent.mouseX - opponent.x);
 			gunX = opponent.x + cos(angle) * 35;
 			gunY = opponent.y + sin(angle) * 35;
