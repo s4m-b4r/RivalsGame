@@ -18,9 +18,9 @@ socket.on("bullet_shot", (data) => {
 	rifleShot.play();
 });
 
-socket.on("equip_item", (data) => {
-	console.log("equip_item", data);
-	opponent.equipped = data.item;
+socket.on("swap_item", (data) => {
+	console.log("swap_item", data);
+	opponentSelectedSlot = data.s;
 });
 
 socket.on("damage_dealt", (data) => {

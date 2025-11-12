@@ -43,8 +43,7 @@ class Player {
 				selectedHotbarSlot = 2;
 			}
 		}
-
-		// socket.emit("equip_item", { item: itemCode });
+		socket.emit("swap_item", { s: selectedHotbarSlot });
 	}
 
 	shoot(mouseX, mouseY) {
@@ -242,6 +241,8 @@ function drawPlayer() {
 	}
 }
 
+opponentSelectedSlot = 0;
+
 function drawOpponent() {
 	if (opponent.alive) {
 		push();
@@ -263,7 +264,7 @@ function drawOpponent() {
 				scale(1, -1);
 			}
 
-			image(opponent.weapon.asset, 0, 5, 64, 32); // Draw the gun at player's position
+			image(opponent.inventory[opponentSelectedSlot].asset, 0, 5, 64, 32); // Draw the gun at player's position
 			pop();
 		}
 	}

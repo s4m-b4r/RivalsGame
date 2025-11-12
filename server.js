@@ -329,8 +329,12 @@ io.on("connection", (socket) => {
 		socket.to(data.room).emit("bullet_shot", data);
 	});
 
-	socket.on("equip_item", (data) => {
-		socket.to(data.room).emit("equip_item", data);
+	socket.on("grenade_thrown", (data) => {
+		socket.to(data.room).emit("grenade_thrown", data);
+	});
+
+	socket.on("swap_item", (data) => {
+		socket.to(data.room).emit("swap_item", data);
 	});
 
 	socket.on("damage_dealt", (data) => {

@@ -316,9 +316,12 @@ class Grenade {
 		this.thrownTime = Date.now();
 		this.detonated = false;
 		this.fullyDetonated = false;
+		this.detonationTime = this.thrownTime + this.grenade.this.detonationTime;
 
 		this.frameCount = 0; // for explosion
 		this.detonatedTime = 0;
+
+		socket.emit("grenade_thrown", { room: roomID, l: this.location, v: this.velocity, t: this.type, dt: this.detonationTime });
 	}
 
 	update() {
@@ -346,7 +349,7 @@ class Grenade {
 
 	checkCollisionDetonation() {
 		if (!this.detonated) {
-			if (Date.now() - this.thrownTime > this.grenade.detonationTime) {
+			if (Date.now() > this.detonationTime) {
 				this.detonated = true;
 				this.detonatedTime = Date.now();
 				return;
