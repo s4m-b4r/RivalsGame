@@ -132,11 +132,13 @@ function drawMenuTabs() {
 	textAlign(CENTER, CENTER);
 	textFont("IMPACT");
 	textSize(50);
-	text("MATCH", 191, 71);
-	text("LOADOUT", 573, 71);
-	text("CAREER", 955, 71);
-	text("LEADERBOARD", 1337, 71);
-	text("SETTINGS", 1719, 71);
+	strokeWeight(1);
+	fill("#f6cd26");
+	text("MATCH", 191, 80);
+	text("LOADOUT", 573, 80);
+	text("CAREER", 955, 80);
+	text("LEADERBOARD", 1337, 80);
+	text("SETTINGS", 1719, 80);
 
 	pop();
 }
