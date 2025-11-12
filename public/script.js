@@ -62,9 +62,11 @@ socket.on("round_end", (data) => {
 	if (data.winner == player.id) {
 		playerScore++;
 		roundWinner = "player";
-	} else {
+	} else if (data.winner == opponent.id) {
 		roundWinner = "opponent";
 		opponentScore++;
+	} else {
+		roundWinner = "draw";
 	}
 	drawWinner = true;
 	console.log(roundWinner, "player/opponent score:", playerScore, ":", opponentScore);

@@ -162,7 +162,7 @@ function drawCountdown() {
 		countdown = false;
 	}
 }
-
+emittedRoundEnd = false;
 roundStartTime = 0;
 roundEndTime = 0;
 function drawMatchScoreTime() {
@@ -198,6 +198,14 @@ function drawMatchScoreTime() {
 
 	if (remainingRoundTime === 0) {
 		drawWinner = true;
+		if (!emittedRoundEnd) {
+			emittedRoundEnd = true;
+			if (player.health > opponent.health) {
+				socket.emit("player_killed_opponent", { room: roomID });
+			} else if (player.health == opponent) {
+				socket.emit("new_round_equal_health", { room: roomID });
+			}
+		}
 	}
 	pop();
 }
@@ -223,6 +231,16 @@ function drawWinRound() {
 		strokeWeight(0);
 		textSize(100);
 		text(`${opponent.name} WON THE ROUND!`, 1750 / 2, 950 / 2);
+		pop();
+	} else if (roundWinner == "draw") {
+		push();
+		textAlign(CENTER, CENTER);
+		textFont("IMPACT");
+		stroke("#ffff00");
+		fill("#ffff00");
+		strokeWeight(0);
+		textSize(100);
+		text(`DRAW`, 1750 / 2, 950 / 2);
 		pop();
 	}
 	console.log("win screen");
