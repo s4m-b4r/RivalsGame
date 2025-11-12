@@ -263,7 +263,7 @@ function drawOpponent() {
 				scale(1, -1);
 			}
 
-			image(opponent.inventory[opponentSelectedSlot].asset, 0, 5, opponent.inventory[opponentSelectedSlot].asset.width, opponent.inventory[opponentSelectedSlot].asset.height); // Draw the gun at player's position
+			image(opponent.inventory[opponentSelectedSlot].asset, 0, 5, opponent.inventory[opponentSelectedSlot].asset.width * 2, opponent.inventory[opponentSelectedSlot].asset.height * 2); // Draw the gun at player's position
 			pop();
 		}
 	}
