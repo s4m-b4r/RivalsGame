@@ -87,12 +87,13 @@ function drawPlayerUI() {
 
 let queueing = false;
 
-let selectedMenu;
+let selectedMenu = "match";
 
 function drawMenuTabs() {
 	push();
 	stroke("#f6cd26");
 	rectMode(CORNER);
+
 	strokeWeight(3);
 	//Match Menu
 	fill("#202020");
@@ -100,11 +101,14 @@ function drawMenuTabs() {
 		fill("#303030");
 	}
 	rect(41, 41, 300, 75);
+
 	//weapon select menu
+	fill("#202020");
 	if (collidePointRect(mouseX, mouseY, 423, 41, 300, 75)) {
 		fill("#303030");
 	}
 	rect(423, 41, 300, 75);
+	text();
 	//LeaderBoard Menu
 	fill("#202020");
 	if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) {
@@ -123,6 +127,17 @@ function drawMenuTabs() {
 		fill("#303030");
 	}
 	rect(1569, 41, 300, 75);
+
+	//texts
+	textAlign(CENTER, CENTER);
+	textFont("IMPACT");
+	textSize(50);
+	text("MATCH", 191, 71);
+	text("LOADOUT", 573, 71);
+	text("CAREER", 955, 71);
+	text("LEADERBOARD", 1337, 71);
+	text("SETTINGS", 1719, 71);
+
 	pop();
 }
 
