@@ -30,7 +30,6 @@ class Particle {
 function damageParticle(location, velocity) {
 	let dmgParticle = new Particle(location.x, location.y, velocity.x, velocity.y, "damage", dmgParticleImage, 30);
 	particles.push(dmgParticle);
-	console.log("particle spawn");
 }
 
 function drawParticles() {
@@ -39,7 +38,6 @@ function drawParticles() {
 		p.draw();
 		if (p.frameCount >= p.lifetime) {
 			particles.splice(i, 1);
-			console.log("particle gone");
 		}
 	}
 }

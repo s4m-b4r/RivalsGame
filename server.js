@@ -219,11 +219,13 @@ io.on("connection", (socket) => {
 			const roundStartTime = Date.now();
 
 			if (game.round % 2 == 1) {
-				const player1Pos = { x: 150, y: 475 };
-				const player2Pos = { x: 1600, y: 475 };
+				player1Pos = { x: 150, y: 475 };
+				player2Pos = { x: 1600, y: 475 };
+				console.log("odd");
 			} else {
-				const player2Pos = { x: 150, y: 475 };
-				const player1Pos = { x: 1600, y: 475 };
+				player2Pos = { x: 150, y: 475 };
+				player1Pos = { x: 1600, y: 475 };
+				console.log("even");
 			}
 
 			io.to(game.players.p1).emit("new_round", {

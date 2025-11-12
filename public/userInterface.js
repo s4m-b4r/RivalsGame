@@ -212,7 +212,7 @@ function drawWinRound() {
 		fill("#0000ff");
 		strokeWeight(0);
 		textSize(100);
-		text(player.name, "WON THE ROUND!", 1750 / 2, 950 / 2);
+		text(`${player.name} WON THE ROUND!`, 1750 / 2, 950 / 2);
 		pop();
 	} else if (roundWinner == "opponent") {
 		push();
@@ -222,9 +222,10 @@ function drawWinRound() {
 		fill("#ff0000");
 		strokeWeight(0);
 		textSize(100);
-		text(opponent.name, "WON THE ROUND!", 1750 / 2, 950 / 2);
+		text(`${opponent.name} WON THE ROUND!`, 1750 / 2, 950 / 2);
 		pop();
 	}
+	console.log("win screen");
 }
 
 let loggedIn = false;
