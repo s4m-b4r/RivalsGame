@@ -50,6 +50,10 @@ socket.on("new_round", (data) => {
 	player.alive = true;
 	opponent.alive = true;
 	round++;
+	for (let i = 0; i < 3; i++) {
+		player.inventory[i].ammo = player.inventory[i].magazineSize;
+	}
+	player.stamina = 300;
 });
 
 socket.on("round_end", (data) => {
