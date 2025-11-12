@@ -42,7 +42,7 @@ class Player {
 				selectedHotbarSlot = 2;
 			}
 		}
-		socket.emit("swap_item", { s: selectedHotbarSlot });
+		socket.emit("swap_item", { room: roomID, s: selectedHotbarSlot });
 	}
 
 	shoot(mouseX, mouseY) {
