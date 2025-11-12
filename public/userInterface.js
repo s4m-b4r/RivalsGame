@@ -191,10 +191,10 @@ function drawMatchScoreTime() {
 	textSize(25);
 	fill("#0000ff");
 
-	text(`${playerScore}`, 775, 25);
+	text(playerScore, 775, 25);
 
 	fill("#ff0000");
-	text(`${opponentScore}`, 975, 25);
+	text(opponentScore, 975, 25);
 
 	if (remainingRoundTime === 0) {
 		drawWinRound();

@@ -49,11 +49,18 @@ socket.on("new_round", (data) => {
 	opponent.health = 100;
 	player.alive = true;
 	opponent.alive = true;
+	round++;
 });
 
-socket.on("update_score", (data) => {
-	playerScore = data.ps;
-	opponentScore = data.os;
+socket.on("round_end", (data) => {
+	if (data.winner == player.id) {
+		playerScore++;
+		roundWinner = "player";
+	} else {
+		roundWinner = "opponent";
+		opponentScore++;
+	}
+	console.log(roundWinner, "player/opponent score:", playerScore, ":", opponentScore);
 });
 
 socket.on("game_start", (data) => {
@@ -66,6 +73,8 @@ socket.on("game_start", (data) => {
 	roundEndTime = data.roundEndTime;
 	roundStartTime = data.roundStartTime;
 	arenaAssetsLoad();
+	player.id = data.playerId;
+	opponent.id = data.opponentId;
 
 	console.log("roomID:", roomID, "players:", data.playerId, data.opponentId);
 
@@ -75,6 +84,7 @@ socket.on("game_start", (data) => {
 	document.body.classList.toggle("hide-mouse", true);
 	playerScore = 0;
 	opponentScore = 0;
+	round = 0;
 });
 
 function preload() {

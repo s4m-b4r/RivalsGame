@@ -1,6 +1,7 @@
 class Player {
 	constructor(name, x, y) {
 		this.name = name;
+		this.id = null;
 		this.x = x; // current position X
 		this.y = y; // current position Y
 		this.nX = x; // used for collisions as new X
