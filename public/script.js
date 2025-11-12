@@ -150,6 +150,7 @@ function setup() {
 	weapons = loadWeapons();
 	grenadeItems = loadGrenades();
 	player.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
+	opponent.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
 	player.weapon = weapons.assaultRifle;
 	opponent.weapon = weapons.assaultRifle;
 }
