@@ -131,3 +131,5 @@ let arenaTiles = [
 ];
 
 let arenas = [ARENA1, ARENA2, ARENA3, ARENA4];
+
+arena = ARENA1;
