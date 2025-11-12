@@ -51,6 +51,7 @@ socket.on("new_round", (data) => {
 	opponent.alive = true;
 	round++;
 	drawWinner = false;
+	emittedRoundEnd = false;
 
 	for (let i = 0; i < 3; i++) {
 		player.inventory[i].ammo = player.inventory[i].magazineSize;
