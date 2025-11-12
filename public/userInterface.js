@@ -145,7 +145,7 @@ function drawMainMenu() {
 	noSmooth();
 	// filter(BLUR, 2);
 	imageMode(CORNER);
-	image(logoImage, 0, 75, height - 75, height - 75);
+	image(logoImage, 0, 100, height - 100, height - 100);
 	rectMode(CENTER);
 	stroke("#f6cd26");
 	strokeWeight(3);
