@@ -13,9 +13,7 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
-			this.recoilDist / 100
-		);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -386,7 +384,79 @@ class Grenade {
 }
 
 class OpponentGrenade {
-	constructor(location, velocity, type, detonationTime) {}
+	constructor(location, velocity, type, detonationTime) {
+		this.type = type;
+		this.location = location;
+		this.velocity = velocity;
+		this.detonationTime = detonationTime;
+		this.detonated = false;
+		this.frameCount = 0;
+		this.startTime = 0;
+		this.spin = 0;
+
+		if (this.type == 1) {
+			this.asset = handGrenadeImage;
+			this.explosionAsset = handGrenadeExplosionImage;
+		}
+	}
+
+	update() {
+		if (!this.detonated) {
+			this.location.add(this.velocity);
+		}
+	}
+
+	draw() {
+		let now = Date.now();
+		if (this.detonated) {
+			if (this.startTime + (this.frameCount * 50 + 50) > Date.now()) {
+				this.frameCount++;
+			}
+		} else {
+			push();
+			translate(this.location.x, this.location.y);
+			rotate(this.spin * Math.PI);
+			this.spin += 0.02;
+			noSmooth();
+			image(this.asset, 0, 0, this.asset.width * 2, this.asset.height * 2);
+			pop();
+		}
+	}
+
+	checkCollisionDetonation() {
+		if (!this.detonated) {
+			if (Date.now() > this.detonationTime) {
+				this.detonated = true;
+				this.detonatedTime = Date.now();
+				return;
+			}
+
+			// check collisions with walls
+			for (let i = 0; i < 35; i++) {
+				for (let j = 0; j < 19; j++) {
+					if (arena[j][i] === 1 || arena[j][i] === 2) {
+						let wallX = i * 50;
+						let wallY = j * 50;
+
+						if (collidePointRect(this.location.x, this.location.y, wallX, wallY, 50, 50)) {
+							let prevPos = p5.Vector.sub(this.location, this.velocity);
+							let normal = createVector(0, 0);
+							// hit from left or right
+							if (prevPos.x < wallX && this.location.x >= wallX) normal = createVector(-1, 0); // left face
+							else if (prevPos.x > wallX + 50 && this.location.x <= wallX + 50) normal = createVector(1, 0); // right face
+							// hit from top or bottom
+							else if (prevPos.y < wallY && this.location.y >= wallY) normal = createVector(0, -1); // top
+							else if (prevPos.y > wallY + 50 && this.location.y <= wallY + 50) normal = createVector(0, 1); // bottom
+
+							this.location = prevPos.copy();
+							this.velocity.reflect(normal);
+							this.velocity.mult(0.6);
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 function loadGrenades() {

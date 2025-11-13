@@ -32,6 +32,11 @@ socket.on("damage_dealt", (data) => {
 	}
 });
 
+socket.on("grenade_thrown", (data) => {
+	console.log("grenade_thrown", data);
+	let grenade = new OpponentGrenade(data.l, data.v, data.t, data.dt);
+});
+
 socket.on("new_round", (data) => {
 	console.log("new_round", data);
 	arena = arenas[data.a];
