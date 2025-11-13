@@ -239,7 +239,7 @@ function drawMatchScoreTime() {
 	let roundMinutes = floor(remainingRoundTime / 60000);
 	let roundSeconds = floor((remainingRoundTime % 60000) / 1000);
 	let roundTimeStr = nf(roundMinutes, 2) + ":" + nf(roundSeconds, 2);
-	console.log(roundTimeStr);
+
 	push();
 	textAlign(CENTER, CENTER);
 	textFont("IMPACT");

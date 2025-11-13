@@ -220,7 +220,11 @@ function drawPlayer() {
 		strokeWeight(2);
 		stroke(0);
 		ellipse(player.x, player.y, 50); // Draw player as a circle
-
+		textAlign(CENTER, CENTER);
+		textSize(10);
+		fill("#81e4f7");
+		strokeWeight(0);
+		text(player.name, player.x, player.y + 60);
 		pop();
 
 		if (player.inventory[selectedHotbarSlot]) {
@@ -266,5 +270,12 @@ function drawOpponent() {
 			image(opponent.inventory[opponentSelectedSlot].asset, 0, 5, opponent.inventory[opponentSelectedSlot].asset.width * 2, opponent.inventory[opponentSelectedSlot].asset.height * 2); // Draw the gun at player's position
 			pop();
 		}
+		push();
+		textAlign(CENTER, CENTER);
+		textSize(10);
+		fill("#a65050");
+		strokeWeight(0);
+		text(opponent.name, opponent.x, opponent.y + 60);
+		pop();
 	}
 }
