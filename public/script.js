@@ -153,6 +153,10 @@ function preload() {
 	handGrenadeExplosionImage = loadImage("assets/Grenades/handGrenadeExplosion.png");
 }
 
+let masterVolumeSlider;
+let sfxVolumeSlider;
+let musicVolumeSlider;
+
 function setup() {
 	inMatch = false;
 	createArenaMode = false;
@@ -220,9 +224,6 @@ function draw() {
 			drawMatchScoreTime();
 		}
 	}
-	masterVolumeSlider.hide();
-	sfxVolumeSlider.hide();
-	musicVolumeSlider.hide();
 
 	if (createArenaMode) {
 		createArena(); // used for making new arenas
@@ -235,9 +236,6 @@ function draw() {
 		if (selectedMenu == "match") drawMainMenu();
 		if (selectedMenu == "settings") {
 			drawSettingsMenu();
-			masterVolumeSlider.show();
-			sfxVolumeSlider.show();
-			musicVolumeSlider.show();
 		}
 		drawMenuTabs();
 	}
