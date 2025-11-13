@@ -222,7 +222,7 @@ function createSettingsUI() {
 	createVolumeSlider("SFX Volume", 150, 420, "sfxLevel");
 
 	createColorPickerUI("Crosshair Color", 150, 540, "cColor");
-	createColorPickerUI("Opponent Color", 150, 640, "oColor");
+	createColorPickerUI("Opponent Color", 150, 690, "oColor");
 
 	// Keybind inputs
 	let startX = 1000;
@@ -248,7 +248,7 @@ function createSettingsUI() {
 	});
 
 	let saveBtn = createButton("SAVE SETTINGS");
-	saveBtn.position(width - 450, height - 150);
+	saveBtn.position(width - 450, height - 50);
 	saveBtn.size(400, 80);
 	saveBtn.style("font-family", "IMPACT");
 	saveBtn.style("font-size", "28px");
