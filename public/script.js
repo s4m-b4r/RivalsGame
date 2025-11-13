@@ -166,6 +166,7 @@ function setup() {
 	drawMatchWinner = false;
 	let pauseMenu = false;
 
+	let loggedIn = false;
 	document.body.classList.toggle("hide-mouse", false);
 
 	createCanvas(windowWidth, windowHeight);
