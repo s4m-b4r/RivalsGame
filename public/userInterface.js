@@ -248,7 +248,7 @@ function createSettingsUI() {
 	});
 
 	let saveBtn = createButton("SAVE SETTINGS");
-	saveBtn.position(width - 450, height - 50);
+	saveBtn.position(width - 450, height - 120);
 	saveBtn.size(400, 80);
 	saveBtn.style("font-family", "IMPACT");
 	saveBtn.style("font-size", "28px");
