@@ -275,7 +275,7 @@ function createVolumeSlider(label, x, y, settingKey) {
 	textSize(25);
 	textFont("IMPACT");
 	fill("#f6cd26");
-	strokewieght(0);
+	strokeweight(0);
 	text(label, x, y - 40);
 
 	let slider = createSlider(0, 1, settings[settingKey], 0.01);
@@ -291,7 +291,7 @@ function createColorPickerUI(label, x, y, settingKey) {
 	textSize(25);
 	textFont("IMPACT");
 	fill("#f6cd26");
-	strokewieght(0);
+	strokeweight(0);
 	text(label, x, y - 40);
 
 	let picker = createColorPicker(settings[settingKey]);
@@ -309,7 +309,7 @@ function createKeybindInput(label, x, y, key) {
 	textSize(25);
 	textFont("IMPACT");
 	fill("#f6cd26");
-	strokewieght(0);
+	strokeweight(0);
 	text(label, x, y - 15);
 
 	let input = createInput(keyCodeToName(keybind[key]));
