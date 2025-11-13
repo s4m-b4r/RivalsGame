@@ -15,7 +15,7 @@ body {
 	cursor: none;
 }
 
-.slider {
+.customSlider {
 	-webkit-appearance: none;
 	appearance: none;
 	width: 100%;
@@ -27,11 +27,11 @@ body {
 	transition: opacity 0.2s;
 }
 
-.slider:hover {
+.customSlider:hover {
 	opacity: 1;
 }
 
-.slider::-webkit-slider-thumb {
+.customSlider::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	appearance: none;
 	width: 25px;
@@ -40,7 +40,7 @@ body {
 	cursor: pointer;
 }
 
-.slider::-moz-range-thumb {
+.customSlider::-moz-range-thumb {
 	width: 25px;
 	height: 25px;
 	background: #04aa6d;
