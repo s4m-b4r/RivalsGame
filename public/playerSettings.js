@@ -20,14 +20,14 @@ class Keybinds {
 let keybind = new Keybinds(87, 83, 68, 65, 32, 16, 82, 27, 49, 50, 51);
 
 class Settings {
-	constructor(masL, musL, sfxL, Csize, Ccolor, Ocolor, Oct, Pcolor) {
+	constructor(masL, musL, sfxL, Ccolor, Ocolor, Oct, Pcolor) {
 		//audio
 		this.masterLevel = masL;
 		this.musicLevel = musL;
 		this.sfxLevel = sfxL;
 
 		//crosshair
-		this.cSize = Csize;
+
 		this.cColor = Ccolor;
 
 		//opponent
@@ -39,4 +39,4 @@ class Settings {
 	}
 }
 
-let settings = new Settings(0.5, 1, 1, 1, "#f5c536", "#ffffff00", false, "#81e4f7");
+let settings = new Settings(0.5, 1, 1, "#f5c536", "#701f1f", false, "#81e4f7");

@@ -51,7 +51,8 @@ function drawPlayerUI() {
 			textFont("IMPACT");
 			textSize(15);
 			stroke(settings.cColor);
-			fill(245, 197, 54);
+			fill(settings.cColor);
+			strokeWeight(0);
 			textAlign(CENTER, CENTER);
 			text(player.inventory[selectedHotbarSlot].ammo, mouseX + 25, mouseY);
 			pop();
