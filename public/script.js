@@ -79,6 +79,17 @@ socket.on("round_end", (data) => {
 	console.log(roundWinner, "player/opponent score:", playerScore, ":", opponentScore);
 });
 
+socket.on("match_over", (data) => {
+	if (data.winner == player.id) {
+		matchWinner = "player";
+	} else {
+		matchWinner = "opponent";
+	}
+	drawWinner = false;
+	drawMatchWinner = true;
+	matchWinScreenTime = Date.now();
+});
+
 socket.on("game_start", (data) => {
 	roomID = data.room;
 	player.x = data.startPos.x;
@@ -102,6 +113,10 @@ socket.on("game_start", (data) => {
 	playerScore = 0;
 	opponentScore = 0;
 	round = 0;
+	for (let i = 0; i < 3; i++) {
+		player.inventory[i].ammo = player.inventory[i].magazineSize;
+	}
+	player.stamina = 300;
 });
 
 function preload() {
@@ -194,6 +209,9 @@ function draw() {
 	}
 	if (drawWinner) {
 		drawWinRound();
+	}
+	if (drawMatchWinner) {
+		drawWinMatch();
 	}
 }
 

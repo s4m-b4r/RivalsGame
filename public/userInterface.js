@@ -312,6 +312,38 @@ function drawWinRound() {
 	console.log("win screen");
 }
 
+matchWinner = "";
+matchWinScreenTime = 0;
+function drawWinMatch() {
+	if ((matchWinner = "player")) {
+		push();
+		textAlign(CENTER, CENTER);
+		textFont("IMPACT");
+		stroke("#0000ff");
+		fill("#0000ff");
+		strokeWeight(0);
+		textSize(100);
+		text(`${player.name.toUpperCase()} WON THE MATCH!`, 1750 / 2, 950 / 2);
+		pop();
+	} else {
+		push();
+		textAlign(CENTER, CENTER);
+		textFont("IMPACT");
+		stroke("#ff0000");
+		fill("#ff0000");
+		strokeWeight(0);
+		textSize(100);
+		text(`${opponent.name.toUpperCase()} WON THE MATCH!`, 1750 / 2, 950 / 2);
+		pop();
+	}
+	if (Date.now() > matchWinScreenTime + 5000) {
+		drawMatchWinner = false;
+		inMatch = false;
+		roundStart = false;
+		countdown = false;
+	}
+}
+
 let loggedIn = false;
 let showingSignup = false;
 let usernameInput = "";
