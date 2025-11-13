@@ -217,16 +217,14 @@ function drawSettingsMenu() {
 function createSettingsUI() {
 	clearUI();
 
-	// --- Volume sliders (left side) ---
 	createVolumeSlider("Master Volume", 150, 220, "masterLevel");
 	createVolumeSlider("Music Volume", 150, 320, "musicLevel");
 	createVolumeSlider("SFX Volume", 150, 420, "sfxLevel");
 
-	// --- Color pickers (left side) ---
 	createColorPickerUI("Crosshair Color", 150, 540, "cColor");
 	createColorPickerUI("Opponent Color", 150, 640, "oColor");
 
-	// --- Keybind inputs
+	// Keybind inputs
 	let startX = 1000;
 	let startY = 220;
 	let spacing = 60;
