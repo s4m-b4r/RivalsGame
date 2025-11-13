@@ -386,17 +386,27 @@ class Grenade {
 class OpponentGrenade {
 	constructor(location, velocity, type, detonationTime) {
 		this.type = type;
-		this.location = location;
-		this.velocity = velocity;
+		this.location = createVector(location.x, location.y);
+		this.velocity = createVector(velocity.x, velocity.y);
 		this.detonationTime = detonationTime;
 		this.detonated = false;
 		this.frameCount = 0;
 		this.startTime = 0;
 		this.spin = 0;
 
-		if (this.type == 1) {
-			this.asset = handGrenadeImage;
-			this.explosionAsset = handGrenadeExplosionImage;
+		switch (type) {
+			case 1:
+				this.asset = handGrenadeImage;
+				this.explosionAsset = handGrenadeExplosionImage;
+				break;
+			case 2:
+				this.asset = handGrenadeImage;
+				this.explosionAsset = handGrenadeExplosionImage;
+				break;
+			case 3:
+				this.asset = handGrenadeImage;
+				this.explosionAsset = handGrenadeExplosionImage;
+				break;
 		}
 	}
 
