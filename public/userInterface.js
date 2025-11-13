@@ -200,22 +200,133 @@ function drawMainMenu() {
 	pop();
 }
 
+let colorPickerCrosshair, colorPickerOpponent;
+let slidersInitialized = false;
+
 function drawSettingsMenu() {
-	// 734 height available
-	// 157 pixels from top
-	// 100 pixels per button, 22 pixel gap between each
-	// 6 buttons right 5 left side
-	// 3 volume slides left side
-	// crosshair size/opacity sliders + colour picker
-	// opponent colour picker
-	// opponent colour on or off
 	background("#202020");
 	noSmooth();
-	filter(BLUR, 20);
-	imageMode(CORNER);
-	image(logoImage, 0, 75, height - 75, height - 75);
-	fill("#20202050");
-	rect(0, 0, width, height);
+
+	if (!slidersInitialized) {
+		// Create sliders (only once)
+		createSettingsUI();
+		slidersInitialized = true;
+	}
+
+	// UI titles
+	push();
+	fill("#f6cd26");
+	textFont("IMPACT");
+	textSize(40);
+	textAlign(LEFT, CENTER);
+	text("PLAYER SETTINGS", 100, 100);
+	pop();
+}
+
+function createSettingsUI() {
+	// --- Volume sliders ---
+	createVolumeSlider("Master Volume", 100, 180, "masterLevel");
+	createVolumeSlider("Music Volume", 100, 260, "musicLevel");
+	createVolumeSlider("SFX Volume", 100, 340, "sfxLevel");
+
+	// --- Color pickers ---
+	createColorPickerUI("Crosshair Color", 100, 420, "cColor");
+	createColorPickerUI("Opponent Color", 100, 500, "oColor");
+
+	// --- Keybind inputs ---
+	createKeybindInput("Move Up", 500, 180, "up");
+	createKeybindInput("Move Down", 500, 230, "down");
+	createKeybindInput("Move Left", 500, 280, "left");
+	createKeybindInput("Move Right", 500, 330, "right");
+	createKeybindInput("Pause", 500, 380, "pause");
+
+	// --- Save Button ---
+	let saveBtn = createButton("SAVE SETTINGS");
+	saveBtn.position(100, 600);
+	saveBtn.size(300, 60);
+	saveBtn.style("font-family", "IMPACT");
+	saveBtn.style("font-size", "20px");
+	saveBtn.style("background-color", "#f6cd26");
+	saveBtn.style("border", "none");
+	saveBtn.style("color", "#202020");
+	saveBtn.mousePressed(savePlayerSettingsUI);
+}
+
+function createVolumeSlider(label, x, y, settingKey) {
+	let labelEl = createP(label);
+	labelEl.position(x, y - 25);
+	labelEl.style("color", "#f6cd26");
+	labelEl.style("font-family", "IMPACT");
+	labelEl.style("font-size", "18px");
+	labelEl.style("margin", "0");
+	let slider = createSlider(0, 1, settings[settingKey], 0.01);
+	slider.position(x, y);
+	slider.style("width", "300px");
+	slider.input(() => (settings[settingKey] = slider.value()));
+}
+
+function createColorPickerUI(label, x, y, settingKey) {
+	let labelEl = createP(label);
+	labelEl.position(x, y - 25);
+	labelEl.style("color", "#f6cd26");
+	labelEl.style("font-family", "IMPACT");
+	labelEl.style("font-size", "18px");
+	labelEl.style("margin", "0");
+	let picker = createColorPicker(settings[settingKey]);
+	picker.position(x, y);
+	picker.input(() => (settings[settingKey] = picker.value()));
+
+	if (settingKey === "cColor") colorPickerCrosshair = picker;
+	else colorPickerOpponent = picker;
+}
+
+function createKeybindInput(label, x, y, key) {
+	let labelEl = createP(label);
+	labelEl.position(x, y - 25);
+	labelEl.style("color", "#f6cd26");
+	labelEl.style("font-family", "IMPACT");
+	labelEl.style("font-size", "18px");
+	labelEl.style("margin", "0");
+
+	let input = createInput(keyCodeToName(keybind[key]));
+	input.position(x, y);
+	input.size(150, 25);
+	input.style("text-align", "center");
+	input.style("background-color", "#202020");
+	input.style("border", "2px solid #f6cd26");
+	input.style("color", "#fff");
+	input.style("font-family", "IMPACT");
+	input.style("font-size", "16px");
+
+	input.elt.readOnly = true;
+	input.mousePressed(() => {
+		input.value("Press key...");
+		function captureKey(e) {
+			e.preventDefault();
+			keybind[key] = e.keyCode;
+			input.value(keyCodeToName(e.keyCode));
+			window.removeEventListener("keydown", captureKey);
+		}
+		window.addEventListener("keydown", captureKey);
+	});
+}
+
+function keyCodeToName(code) {
+	return code === 32 ? "Space" : code === 16 ? "Shift" : code === 27 ? "Esc" : String.fromCharCode(code);
+}
+
+async function savePlayerSettingsUI() {
+	await fetch("/save_settings", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({
+			username: player.name,
+			keybinds: keybind,
+			settings: settings,
+		}),
+	});
+
+	console.log("Settings saved!");
 }
 
 function drawLeaderboardMenu() {
@@ -546,16 +657,4 @@ async function handleLogin() {
 
 		message = "Welcome, " + usernameInput + "!";
 	}
-}
-
-async function savePlayerSettings() {
-	await fetch("/save_settings", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({
-			username: player.username,
-			keybinds: keybind,
-			settings: settings,
-		}),
-	});
 }
