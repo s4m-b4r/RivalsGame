@@ -177,6 +177,22 @@ function setup() {
 	grenadeItems = loadGrenades();
 	player.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
 	opponent.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
+
+	// buttons | slidings
+	let masterVolumeSlider;
+	masterVolumeSlider = createSlider(0, 1, 0.5, 0.01);
+	masterVolumeSlider.position(500, 300);
+	// masterVolumeSlider.hide();
+
+	let sfxVolumeSlider;
+	sfxVolumeSlider = createSlider(0, 1, 0.5, 0.01);
+	sfxVolumeSlider.position(500, 400);
+	// sfxVolumeSlider.hide();
+
+	let musicVolumeSlider;
+	musicVolumeSlider = createSlider(0, 1, 0.5, 0.01);
+	musicVolumeSlider.position(500, 500);
+	// musicVolumeSlider.hide();
 }
 
 function draw() {
