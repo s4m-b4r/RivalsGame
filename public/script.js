@@ -88,6 +88,7 @@ socket.on("match_over", (data) => {
 	drawWinner = false;
 	drawMatchWinner = true;
 	matchWinScreenTime = Date.now();
+	queueing = false;
 });
 
 socket.on("game_start", (data) => {
