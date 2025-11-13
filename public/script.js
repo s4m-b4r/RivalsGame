@@ -106,6 +106,9 @@ socket.on("game_start", (data) => {
 
 	console.log("roomID:", roomID, "players:", data.playerId, data.opponentId);
 
+	opponent.health = 100;
+	opponent.alive = true;
+
 	inMatch = true;
 	roundStart = false;
 	countdown = true;
