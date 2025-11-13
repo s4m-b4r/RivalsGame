@@ -1,23 +1,23 @@
 class Keybinds {
-	constructor() {
-		this.up = 87; //the keycodes for each keybind
-		this.down = 83;
-		this.right = 68;
-		this.left = 65;
-		this.roll = 32;
-		this.sprint = 16;
-		this.reload = 82;
-		this.pause = 27;
-		this.slot1 = 49;
-		this.slot2 = 50;
-		this.slot3 = 51;
+	constructor(up, down, right, left, roll, sprint, reload, pause, slot1, slot2, slot3) {
+		this.up = up; //the keycodes for each keybind
+		this.down = down;
+		this.right = right;
+		this.left = left;
+		this.roll = roll;
+		this.sprint = sprint;
+		this.reload = reload;
+		this.pause = pause;
+		this.slot1 = slot1;
+		this.slot2 = slot2;
+		this.slot3 = slot3;
 	}
 	changeKeybind(keycode) {
 		//change the keybind to the new keycode
 	}
 }
 
-let keybind = new Keybinds();
+let keybind = new Keybinds(87, 83, 68, 65, 32, 16, 82, 27, 49, 50, 51);
 
 class Settings {
 	constructor(masL, musL, sfxL, Csize, Ccolor, Ocolor, Oct) {
