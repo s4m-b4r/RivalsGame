@@ -199,6 +199,8 @@ function setup() {
 	musicVolumeSlider.style("width", "200px");
 	musicVolumeSlider.addClass("customSlider");
 	// musicVolumeSlider.hide();
+
+	let showVolumes = false;
 }
 
 function draw() {
@@ -218,6 +220,9 @@ function draw() {
 			drawMatchScoreTime();
 		}
 	}
+	masterVolumeSlider.hide();
+	sfxVolumeSlider.hide();
+	musicVolumeSlider.hide();
 
 	if (createArenaMode) {
 		createArena(); // used for making new arenas
@@ -228,7 +233,12 @@ function draw() {
 		drawSignInUpScreen();
 	} else if (!inMatch) {
 		if (selectedMenu == "match") drawMainMenu();
-		if (selectedMenu == "settings") drawSettingsMenu();
+		if (selectedMenu == "settings") {
+			drawSettingsMenu();
+			masterVolumeSlider.show();
+			sfxVolumeSlider.show();
+			musicVolumeSlider.show();
+		}
 		drawMenuTabs();
 	}
 
