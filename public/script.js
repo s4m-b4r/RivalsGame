@@ -158,6 +158,7 @@ function setup() {
 	countdown = false;
 	roundStart = false;
 	drawWinner = false;
+	drawMatchWinner = false;
 
 	document.body.classList.toggle("hide-mouse", false);
 
