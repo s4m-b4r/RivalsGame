@@ -179,6 +179,13 @@ function drawSettingsMenu() {
 	// crosshair size/opacity sliders + colour picker
 	// opponent colour picker
 	// opponent colour on or off
+	background("#202020");
+	noSmooth();
+	filter(BLUR, 2);
+	imageMode(CORNER);
+	image(logoImage, 0, 75, height - 75, height - 75);
+	fill("#20202050");
+	rect(0, 0, width, height);
 }
 
 function drawLeaderboardMenu() {

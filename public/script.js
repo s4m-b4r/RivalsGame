@@ -227,7 +227,8 @@ function draw() {
 	if (!loggedIn) {
 		drawSignInUpScreen();
 	} else if (!inMatch) {
-		drawMainMenu();
+		if (selectedMenu == "match") drawMainMenu();
+		if (selectedMenu == "settings") drawSettingsMenu();
 		drawMenuTabs();
 	}
 
