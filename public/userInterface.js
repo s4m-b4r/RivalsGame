@@ -373,14 +373,16 @@ function drawStatisticsMenu() {
 }
 
 function mouseClicked() {
-	if (loggedIn && !inMatch && selectedMenu === "match") {
-		if (collidePointRect(mouseX, mouseY, width - 450, height - 250, 400, 200)) {
-			if (!queueing) {
-				socket.emit("join_queue");
-				queueing = true;
-			} else {
-				socket.emit("leave_queue");
-				queueing = false;
+	if (loggedIn && !inMatch) {
+		if (selectedMenu === "match") {
+			if (collidePointRect(mouseX, mouseY, width - 450, height - 250, 400, 200)) {
+				if (!queueing) {
+					socket.emit("join_queue");
+					queueing = true;
+				} else {
+					socket.emit("leave_queue");
+					queueing = false;
+				}
 			}
 		}
 		//Match Menu
