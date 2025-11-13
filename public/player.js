@@ -224,7 +224,7 @@ function drawPlayer() {
 		textSize(15);
 		fill("#81e4f7");
 		strokeWeight(0);
-		text(player.name, player.x, player.y + 30);
+		text(player.name, player.x, player.y + 35);
 		pop();
 
 		if (player.inventory[selectedHotbarSlot]) {
@@ -275,7 +275,7 @@ function drawOpponent() {
 		textSize(15);
 		fill("#a65050");
 		strokeWeight(0);
-		text(opponent.name, opponent.x, opponent.y + 30);
+		text(opponent.name, opponent.x, opponent.y + 35);
 		pop();
 	}
 }

@@ -341,6 +341,7 @@ function drawWinMatch() {
 		inMatch = false;
 		roundStart = false;
 		countdown = false;
+		document.body.classList.toggle("hide-mouse", false);
 	}
 }
 
