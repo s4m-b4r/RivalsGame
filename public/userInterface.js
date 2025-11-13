@@ -300,7 +300,7 @@ function createColorPickerUI(label, x, y, settingKey) {
 
 function createKeybindInput(label, x, y, key) {
 	let labelEl = createP(label);
-	labelEl.position(x, y - 25);
+	labelEl.position(x, y - 15);
 	labelEl.style("color", "#f6cd26");
 	labelEl.style("font-family", "IMPACT");
 	labelEl.style("font-size", "26px");
