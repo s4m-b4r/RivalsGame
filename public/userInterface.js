@@ -181,7 +181,7 @@ function drawSettingsMenu() {
 	// opponent colour on or off
 	background("#202020");
 	noSmooth();
-	filter(BLUR, 2);
+	filter(BLUR, 20);
 	imageMode(CORNER);
 	image(logoImage, 0, 75, height - 75, height - 75);
 	fill("#20202050");
