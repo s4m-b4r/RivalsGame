@@ -221,7 +221,7 @@ function drawPlayer() {
 		stroke(0);
 		ellipse(player.x, player.y, 50); // Draw player as a circle
 		textAlign(CENTER, CENTER);
-		textSize(10);
+		textSize(15);
 		fill("#81e4f7");
 		strokeWeight(0);
 		text(player.name, player.x, player.y + 30);
@@ -272,7 +272,7 @@ function drawOpponent() {
 		}
 		push();
 		textAlign(CENTER, CENTER);
-		textSize(10);
+		textSize(15);
 		fill("#a65050");
 		strokeWeight(0);
 		text(opponent.name, opponent.x, opponent.y + 30);
