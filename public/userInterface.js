@@ -1,5 +1,15 @@
 selectedHotbarSlot = 0;
 
+pauseMenu = false;
+function drawPauseUI() {
+	push();
+	fill("#20202050");
+	strokeWeight(0);
+	rectMode(CORNER);
+	rect(725, 275, 300, 400, 10);
+	pop();
+}
+
 function drawPlayerUI() {
 	if (inMatch) {
 		//crosshair
@@ -447,6 +457,12 @@ function keyPressed() {
 		} else if (key.length === 1 && key !== " ") {
 			if (focusedInput === "username") usernameInput += key;
 			if (focusedInput === "password") passwordInput += key;
+		}
+	}
+	if (inMatch) {
+		if (keyCode == keybind.pause) {
+			if (!pauseMenu) pauseMenu = true;
+			else pauseMenu = false;
 		}
 	}
 }

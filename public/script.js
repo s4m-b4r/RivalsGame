@@ -164,6 +164,7 @@ function setup() {
 	roundStart = false;
 	drawWinner = false;
 	drawMatchWinner = false;
+	let pauseMenu = false;
 
 	document.body.classList.toggle("hide-mouse", false);
 
@@ -221,6 +222,7 @@ function draw() {
 		if (roundStart) {
 			drawMatchScoreTime();
 		}
+		if (pauseMenu) drawPauseUI();
 	}
 
 	if (createArenaMode) {
