@@ -321,7 +321,7 @@ class Grenade {
 		this.frameCount = 0; // for explosion
 		this.detonatedTime = 0;
 
-		socket.emit("grenade_thrown", { room: roomID, l: this.location, v: this.velocity, t: this.type, dt: this.detonationTime });
+		socket.emit("grenade_thrown", { room: roomID, l: this.location, v: this.velocity, t: this.grenade.type, dt: this.detonationTime });
 	}
 
 	update() {
@@ -470,6 +470,6 @@ class OpponentGrenade {
 }
 
 function loadGrenades() {
-	let handGrenade = new GrenadeItem("Hand Grenade", handGrenadeImage, handGrenadeExplosionImage, "normal", 70, 3000, 5);
+	let handGrenade = new GrenadeItem("Hand Grenade", handGrenadeImage, handGrenadeExplosionImage, 1, 70, 3000, 5);
 	return { handGrenade };
 }
