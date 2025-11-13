@@ -1,3 +1,5 @@
+const { text } = require("stream/consumers");
+
 selectedHotbarSlot = 0;
 
 pauseMenu = false;
@@ -230,7 +232,7 @@ function createSettingsUI() {
 	createColorPickerUI("Player Color", 150, 840, "pColor");
 
 	// Keybind inputs
-	let startX = 1000;
+	let startX = 800;
 	let startY = 220;
 	let spacing = 60;
 
@@ -271,12 +273,13 @@ function clearUI() {
 }
 
 function createVolumeSlider(label, x, y, settingKey) {
-	let labelEl = createP(label);
-	labelEl.position(x, y - 40);
-	labelEl.style("color", "#f6cd26");
-	labelEl.style("font-family", "IMPACT");
-	labelEl.style("font-size", "28px");
-	labelEl.style("margin", "0");
+	textAlign(LEFT, CENTER);
+	textSize(25);
+	textFont("IMPACT");
+	fill("#f6cd26");
+	strokewieght(0);
+	text(label, x, y - 40);
+
 	let slider = createSlider(0, 1, settings[settingKey], 0.01);
 	slider.position(x, y);
 	slider.style("width", "400px");
@@ -286,12 +289,12 @@ function createVolumeSlider(label, x, y, settingKey) {
 }
 
 function createColorPickerUI(label, x, y, settingKey) {
-	let labelEl = createP(label);
-	labelEl.position(x, y - 40);
-	labelEl.style("color", "#f6cd26");
-	labelEl.style("font-family", "IMPACT");
-	labelEl.style("font-size", "28px");
-	labelEl.style("margin", "0");
+	textAlign(LEFT, CENTER);
+	textSize(25);
+	textFont("IMPACT");
+	fill("#f6cd26");
+	strokewieght(0);
+	text(label, x, y - 40);
 
 	let picker = createColorPicker(settings[settingKey]);
 	picker.position(x, y);
@@ -304,12 +307,12 @@ function createColorPickerUI(label, x, y, settingKey) {
 }
 
 function createKeybindInput(label, x, y, key) {
-	let labelEl = createP(label);
-	labelEl.position(x, y - 15);
-	labelEl.style("color", "#f6cd26");
-	labelEl.style("font-family", "IMPACT");
-	labelEl.style("font-size", "26px");
-	labelEl.style("margin", "0");
+	textAlign(LEFT, CENTER);
+	textSize(25);
+	textFont("IMPACT");
+	fill("#f6cd26");
+	strokewieght(0);
+	text(label, x, y - 15);
 
 	let input = createInput(keyCodeToName(keybind[key]));
 	input.position(x + 250, y - 15);
