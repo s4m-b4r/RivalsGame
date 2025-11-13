@@ -7,15 +7,26 @@ function drawPauseUI() {
 	strokeWeight(0);
 	rectMode(CORNER);
 	rect(725, 275, 300, 400, 10);
+
+	textAlign(CENTER, CENTER);
+	textFont("IMPACT");
+	textSize(30);
+
 	//resume
 	fill("#ffffff50");
 	rect(750, 300, 250, 100, 10);
+	fill("#ffffff");
+	text("RESUME", 875, 350);
 	//settings
 	fill("#ffffff50");
 	rect(750, 425, 250, 100, 10);
+	fill("#ffffff");
+	text("SETTINGS", 875, 475);
 	//forfeit
 	fill("#ffffff50");
 	rect(750, 550, 250, 100, 10);
+	fill("#ffffff");
+	text("FORFEIT", 875, 600);
 	pop();
 }
 
