@@ -202,80 +202,109 @@ function drawMainMenu() {
 
 let colorPickerCrosshair, colorPickerOpponent;
 let slidersInitialized = false;
+let uiElements = [];
 
 function drawSettingsMenu() {
 	background("#202020");
 	noSmooth();
 
 	if (!slidersInitialized) {
-		// Create sliders (only once)
 		createSettingsUI();
 		slidersInitialized = true;
 	}
 
-	// UI titles
 	push();
 	fill("#f6cd26");
 	textFont("IMPACT");
-	textSize(40);
+	textSize(60);
 	textAlign(LEFT, CENTER);
 	text("PLAYER SETTINGS", 100, 100);
 	pop();
 }
 
 function createSettingsUI() {
-	// --- Volume sliders ---
-	createVolumeSlider("Master Volume", 100, 180, "masterLevel");
-	createVolumeSlider("Music Volume", 100, 260, "musicLevel");
-	createVolumeSlider("SFX Volume", 100, 340, "sfxLevel");
+	clearUI();
 
-	// --- Color pickers ---
-	createColorPickerUI("Crosshair Color", 100, 420, "cColor");
-	createColorPickerUI("Opponent Color", 100, 500, "oColor");
+	// --- Volume sliders (left side) ---
+	createVolumeSlider("Master Volume", 150, 220, "masterLevel");
+	createVolumeSlider("Music Volume", 150, 320, "musicLevel");
+	createVolumeSlider("SFX Volume", 150, 420, "sfxLevel");
 
-	// --- Keybind inputs ---
-	createKeybindInput("Move Up", 500, 180, "up");
-	createKeybindInput("Move Down", 500, 230, "down");
-	createKeybindInput("Move Left", 500, 280, "left");
-	createKeybindInput("Move Right", 500, 330, "right");
-	createKeybindInput("Pause", 500, 380, "pause");
+	// --- Color pickers (left side) ---
+	createColorPickerUI("Crosshair Color", 150, 540, "cColor");
+	createColorPickerUI("Opponent Color", 150, 640, "oColor");
 
-	// --- Save Button ---
+	// --- Keybind inputs (right side, “red circle” area) ---
+	let startX = 1000;
+	let startY = 220;
+	let spacing = 60;
+
+	const keybindLabels = [
+		["Move Up", "up"],
+		["Move Down", "down"],
+		["Move Left", "left"],
+		["Move Right", "right"],
+		["Roll", "roll"],
+		["Sprint", "sprint"],
+		["Reload", "reload"],
+		["Pause", "pause"],
+		["Slot 1", "slot1"],
+		["Slot 2", "slot2"],
+		["Slot 3", "slot3"],
+	];
+
+	keybindLabels.forEach(([label, key], i) => {
+		createKeybindInput(label, startX, startY + i * spacing, key);
+	});
+
+	// --- Save Button (bottom center) ---
 	let saveBtn = createButton("SAVE SETTINGS");
-	saveBtn.position(100, 600);
-	saveBtn.size(300, 60);
+	saveBtn.position(width / 2 - 200, height - 150);
+	saveBtn.size(400, 80);
 	saveBtn.style("font-family", "IMPACT");
-	saveBtn.style("font-size", "20px");
+	saveBtn.style("font-size", "28px");
 	saveBtn.style("background-color", "#f6cd26");
 	saveBtn.style("border", "none");
 	saveBtn.style("color", "#202020");
+	saveBtn.style("border-radius", "10px");
 	saveBtn.mousePressed(savePlayerSettingsUI);
+	uiElements.push(saveBtn);
+}
+
+function clearUI() {
+	for (let el of uiElements) el.remove();
+	uiElements = [];
 }
 
 function createVolumeSlider(label, x, y, settingKey) {
 	let labelEl = createP(label);
-	labelEl.position(x, y - 25);
+	labelEl.position(x, y - 40);
 	labelEl.style("color", "#f6cd26");
 	labelEl.style("font-family", "IMPACT");
-	labelEl.style("font-size", "18px");
+	labelEl.style("font-size", "28px");
 	labelEl.style("margin", "0");
 	let slider = createSlider(0, 1, settings[settingKey], 0.01);
 	slider.position(x, y);
-	slider.style("width", "300px");
+	slider.style("width", "400px");
+	slider.style("height", "30px");
 	slider.input(() => (settings[settingKey] = slider.value()));
+	uiElements.push(labelEl, slider);
 }
 
 function createColorPickerUI(label, x, y, settingKey) {
 	let labelEl = createP(label);
-	labelEl.position(x, y - 25);
+	labelEl.position(x, y - 40);
 	labelEl.style("color", "#f6cd26");
 	labelEl.style("font-family", "IMPACT");
-	labelEl.style("font-size", "18px");
+	labelEl.style("font-size", "28px");
 	labelEl.style("margin", "0");
+
 	let picker = createColorPicker(settings[settingKey]);
 	picker.position(x, y);
+	picker.size(80, 80);
 	picker.input(() => (settings[settingKey] = picker.value()));
 
+	uiElements.push(labelEl, picker);
 	if (settingKey === "cColor") colorPickerCrosshair = picker;
 	else colorPickerOpponent = picker;
 }
@@ -285,20 +314,21 @@ function createKeybindInput(label, x, y, key) {
 	labelEl.position(x, y - 25);
 	labelEl.style("color", "#f6cd26");
 	labelEl.style("font-family", "IMPACT");
-	labelEl.style("font-size", "18px");
+	labelEl.style("font-size", "26px");
 	labelEl.style("margin", "0");
 
 	let input = createInput(keyCodeToName(keybind[key]));
-	input.position(x, y);
-	input.size(150, 25);
+	input.position(x + 250, y - 15);
+	input.size(180, 40);
 	input.style("text-align", "center");
 	input.style("background-color", "#202020");
-	input.style("border", "2px solid #f6cd26");
+	input.style("border", "3px solid #f6cd26");
 	input.style("color", "#fff");
 	input.style("font-family", "IMPACT");
-	input.style("font-size", "16px");
-
+	input.style("font-size", "22px");
+	input.style("border-radius", "6px");
 	input.elt.readOnly = true;
+
 	input.mousePressed(() => {
 		input.value("Press key...");
 		function captureKey(e) {
@@ -309,10 +339,23 @@ function createKeybindInput(label, x, y, key) {
 		}
 		window.addEventListener("keydown", captureKey);
 	});
+
+	uiElements.push(labelEl, input);
 }
 
 function keyCodeToName(code) {
-	return code === 32 ? "Space" : code === 16 ? "Shift" : code === 27 ? "Esc" : String.fromCharCode(code);
+	switch (code) {
+		case 32:
+			return "Space";
+		case 16:
+			return "Shift";
+		case 27:
+			return "Esc";
+		case 9:
+			return "Tab";
+		default:
+			return String.fromCharCode(code);
+	}
 }
 
 async function savePlayerSettingsUI() {
@@ -328,7 +371,6 @@ async function savePlayerSettingsUI() {
 
 	console.log("Settings saved!");
 }
-
 function drawLeaderboardMenu() {
 	//
 }
