@@ -420,6 +420,25 @@ function mouseClicked() {
 
 		//settings menu
 		if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) selectedMenu = "settings";
+
+		if (inMatch && pauseMenu) {
+			//resume
+			if (collidePointRect(mouseX, mouseY, 750, 300, 250, 100)) {
+				pauseMenu = false;
+				document.body.classList.toggle("hide-mouse", true);
+			}
+			//settings
+			if (collidePointRect(mouseX, mouseY, 750, 425, 250, 100)) {
+				pauseMenu = false;
+				document.body.classList.toggle("hide-mouse", false);
+			}
+			//forfeit
+			if (collidePointRect(mouseX, mouseY, 750, 550, 250, 100)) {
+				socket.emit("forfeit_round", { room: roomID });
+				pauseMenu = false;
+				document.body.classList.toggle("hide-mouse", false);
+			}
+		}
 	}
 }
 
@@ -646,8 +665,13 @@ function keyPressed() {
 	}
 	if (inMatch) {
 		if (keyCode == keybind.pause) {
-			if (!pauseMenu) pauseMenu = true;
-			else pauseMenu = false;
+			if (!pauseMenu) {
+				pauseMenu = true;
+				document.body.classList.toggle("hide-mouse", false);
+			} else {
+				pauseMenu = false;
+				document.body.classList.toggle("hide-mouse", true);
+			}
 		}
 	}
 }
