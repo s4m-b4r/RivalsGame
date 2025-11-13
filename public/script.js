@@ -189,19 +189,16 @@ function setup() {
 	masterVolumeSlider.position(500, 300);
 	masterVolumeSlider.style("width", "200px");
 	masterVolumeSlider.addClass("customSlider");
-	// masterVolumeSlider.hide();
 
 	sfxVolumeSlider = createSlider(0, 1, 0.5, 0.01);
 	sfxVolumeSlider.position(500, 400);
 	sfxVolumeSlider.style("width", "200px");
 	sfxVolumeSlider.addClass("customSlider");
-	// sfxVolumeSlider.hide();
 
 	musicVolumeSlider = createSlider(0, 1, 0.5, 0.01);
 	musicVolumeSlider.position(500, 500);
 	musicVolumeSlider.style("width", "200px");
 	musicVolumeSlider.addClass("customSlider");
-	// musicVolumeSlider.hide();
 
 	let showVolumes = false;
 }
@@ -225,6 +222,10 @@ function draw() {
 		if (pauseMenu) drawPauseUI();
 	}
 
+	masterVolumeSlider.hide();
+	sfxVolumeSlider.hide();
+	musicVolumeSlider.hide();
+
 	if (createArenaMode) {
 		createArena(); // used for making new arenas
 		arenaAssetsLoad();
@@ -236,6 +237,9 @@ function draw() {
 		if (selectedMenu == "match") drawMainMenu();
 		if (selectedMenu == "settings") {
 			drawSettingsMenu();
+			masterVolumeSlider.show();
+			sfxVolumeSlider.show();
+			musicVolumeSlider.show();
 		}
 		drawMenuTabs();
 	}
