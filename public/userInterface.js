@@ -1,3 +1,5 @@
+const { clear } = require("console");
+
 selectedHotbarSlot = 0;
 
 pauseMenu = false;
@@ -212,14 +214,6 @@ function drawSettingsMenu() {
 		createSettingsUI();
 		slidersInitialized = true;
 	}
-
-	push();
-	fill("#f6cd26");
-	textFont("IMPACT");
-	textSize(60);
-	textAlign(LEFT, CENTER);
-	text("PLAYER SETTINGS", 100, 100);
-	pop();
 }
 
 function createSettingsUI() {
@@ -234,7 +228,7 @@ function createSettingsUI() {
 	createColorPickerUI("Crosshair Color", 150, 540, "cColor");
 	createColorPickerUI("Opponent Color", 150, 640, "oColor");
 
-	// --- Keybind inputs (right side, “red circle” area) ---
+	// --- Keybind inputs
 	let startX = 1000;
 	let startY = 220;
 	let spacing = 60;
@@ -257,9 +251,8 @@ function createSettingsUI() {
 		createKeybindInput(label, startX, startY + i * spacing, key);
 	});
 
-	// --- Save Button (bottom center) ---
 	let saveBtn = createButton("SAVE SETTINGS");
-	saveBtn.position(width / 2 - 200, height - 150);
+	saveBtn.position(width - 450, height - 150);
 	saveBtn.size(400, 80);
 	saveBtn.style("font-family", "IMPACT");
 	saveBtn.style("font-size", "28px");
@@ -395,16 +388,28 @@ function mouseClicked() {
 			}
 		}
 		//Match Menu
-		if (collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) selectedMenu = "match";
+		if (collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) {
+			selectedMenu = "match";
+			clearUI();
+		}
 
 		//loadout menu
-		if (collidePointRect(mouseX, mouseY, 423, 41, 300, 75)) selectedMenu = "loadout";
+		if (collidePointRect(mouseX, mouseY, 423, 41, 300, 75)) {
+			selectedMenu = "loadout";
+			clearUI();
+		}
 
 		//LeaderBoard Menu
-		if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) selectedMenu = "leaderboard";
+		if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) {
+			selectedMenu = "leaderboard";
+			clearUI();
+		}
 
 		//career menu
-		if (collidePointRect(mouseX, mouseY, 1187, 41, 300, 75)) selectedMenu = "career";
+		if (collidePointRect(mouseX, mouseY, 1187, 41, 300, 75)) {
+			selectedMenu = "career";
+			clearUI();
+		}
 
 		//settings menu
 		if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) selectedMenu = "settings";
