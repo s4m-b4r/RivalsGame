@@ -373,7 +373,7 @@ function drawStatisticsMenu() {
 }
 
 function mouseClicked() {
-	if (loggedIn && !inMatch) {
+	if (loggedIn && !inMatch && selectedMenu === "match") {
 		if (collidePointRect(mouseX, mouseY, width - 450, height - 250, 400, 200)) {
 			if (!queueing) {
 				socket.emit("join_queue");
