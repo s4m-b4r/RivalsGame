@@ -7,6 +7,15 @@ function drawPauseUI() {
 	strokeWeight(0);
 	rectMode(CORNER);
 	rect(725, 275, 300, 400, 10);
+	//resume
+	fill("#30303050");
+	rect(750, 300, 250, 100, 10);
+	//settings
+	fill("#30303050");
+	rect(750, 300, 350, 100, 10);
+	//forfeit
+	fill("#30303050");
+	rect(750, 300, 450, 100, 10);
 	pop();
 }
 
