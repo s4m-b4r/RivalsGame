@@ -1,5 +1,3 @@
-const { clear } = require("console");
-
 selectedHotbarSlot = 0;
 
 pauseMenu = false;
