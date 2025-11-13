@@ -388,24 +388,28 @@ function mouseClicked() {
 		//Match Menu
 		if (collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) {
 			selectedMenu = "match";
+			slidersInitialized = false;
 			clearUI();
 		}
 
 		//loadout menu
 		if (collidePointRect(mouseX, mouseY, 423, 41, 300, 75)) {
 			selectedMenu = "loadout";
+			slidersInitialized = false;
 			clearUI();
 		}
 
 		//LeaderBoard Menu
 		if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) {
 			selectedMenu = "leaderboard";
+			slidersInitialized = false;
 			clearUI();
 		}
 
 		//career menu
 		if (collidePointRect(mouseX, mouseY, 1187, 41, 300, 75)) {
 			selectedMenu = "career";
+			slidersInitialized = false;
 			clearUI();
 		}
 
