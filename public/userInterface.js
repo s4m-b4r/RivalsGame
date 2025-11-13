@@ -705,3 +705,5 @@ async function handleLogin() {
 		message = "Welcome, " + usernameInput + "!";
 	}
 }
+
+loggedIn = false;
