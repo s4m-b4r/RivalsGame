@@ -170,6 +170,29 @@ function drawMainMenu() {
 	pop();
 }
 
+function drawSettingsMenu() {
+	// 734 height available
+	// 157 pixels from top
+	// 100 pixels per button, 22 pixel gap between each
+	// 6 buttons right 5 left side
+	// 3 volume slides left side
+	// crosshair size/opacity sliders + colour picker
+	// opponent colour picker
+	// opponent colour on or off
+}
+
+function drawLeaderboardMenu() {
+	//
+}
+
+function drawLoadoutMenu() {
+	//
+}
+
+function drawStatisticsMenu() {
+	//
+}
+
 function mouseClicked() {
 	if (loggedIn && !inMatch) {
 		if (collidePointRect(mouseX, mouseY, width - 450, height - 250, 400, 200)) {
