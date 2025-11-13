@@ -34,7 +34,7 @@ function drawPlayerUI() {
 	if (inMatch) {
 		//crosshair
 		push();
-		stroke("#f5c536");
+		stroke(settings.cColor);
 		strokeWeight(3);
 		noFill();
 		line(mouseX + 7, mouseY, mouseX + 15, mouseY);
@@ -50,7 +50,7 @@ function drawPlayerUI() {
 			push();
 			textFont("IMPACT");
 			textSize(15);
-			stroke("#f5c53621");
+			stroke(settings.cColor);
 			fill(245, 197, 54);
 			textAlign(CENTER, CENTER);
 			text(player.inventory[selectedHotbarSlot].ammo, mouseX + 25, mouseY);
