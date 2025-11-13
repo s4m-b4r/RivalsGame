@@ -216,13 +216,13 @@ function drawPlayer() {
 			shooting();
 		}
 		push();
-		fill("#81e4f7");
+		fill(settings.pColor);
 		strokeWeight(2);
 		stroke(0);
 		ellipse(player.x, player.y, 50); // Draw player as a circle
 		textAlign(CENTER, CENTER);
 		textSize(15);
-		fill("#81e4f7");
+		fill(settings.pColor);
 		strokeWeight(0);
 		text(player.name, player.x, player.y + 35);
 		pop();
@@ -249,7 +249,7 @@ opponentSelectedSlot = 0;
 function drawOpponent() {
 	if (opponent.alive) {
 		push();
-		fill("#a65050");
+		fill(settings.oColor);
 		strokeWeight(2);
 		stroke(0);
 		ellipse(opponent.x, opponent.y, 50);
@@ -267,13 +267,19 @@ function drawOpponent() {
 				scale(1, -1);
 			}
 
-			image(opponent.inventory[opponentSelectedSlot].asset, 0, 5, opponent.inventory[opponentSelectedSlot].asset.width * 2, opponent.inventory[opponentSelectedSlot].asset.height * 2); // Draw the gun at player's position
+			image(
+				opponent.inventory[opponentSelectedSlot].asset,
+				0,
+				5,
+				opponent.inventory[opponentSelectedSlot].asset.width * 2,
+				opponent.inventory[opponentSelectedSlot].asset.height * 2
+			); // Draw the gun at player's position
 			pop();
 		}
 		push();
 		textAlign(CENTER, CENTER);
 		textSize(15);
-		fill("#a65050");
+		fill(settings.oColor);
 		strokeWeight(0);
 		text(opponent.name, opponent.x, opponent.y + 35);
 		pop();

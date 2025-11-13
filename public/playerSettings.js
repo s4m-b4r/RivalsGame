@@ -20,7 +20,7 @@ class Keybinds {
 let keybind = new Keybinds(87, 83, 68, 65, 32, 16, 82, 27, 49, 50, 51);
 
 class Settings {
-	constructor(masL, musL, sfxL, Csize, Ccolor, Ocolor, Oct) {
+	constructor(masL, musL, sfxL, Csize, Ccolor, Ocolor, Oct, Pcolor) {
 		//audio
 		this.masterLevel = masL;
 		this.musicLevel = musL;
@@ -33,7 +33,10 @@ class Settings {
 		//opponent
 		this.oColor = Ocolor;
 		this.oColorToggle = Oct;
+
+		//player
+		this.pColor = Pcolor;
 	}
 }
 
-let settings = new Settings(0.5, 1, 1, 1, "#f5c536", "#ffffff00", false);
+let settings = new Settings(0.5, 1, 1, 1, "#f5c536", "#ffffff00", false, "#81e4f7");

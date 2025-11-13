@@ -223,6 +223,7 @@ function createSettingsUI() {
 
 	createColorPickerUI("Crosshair Color", 150, 540, "cColor");
 	createColorPickerUI("Opponent Color", 150, 690, "oColor");
+	createColorPickerUI("Player Color", 150, 840, "pColor");
 
 	// Keybind inputs
 	let startX = 1000;
