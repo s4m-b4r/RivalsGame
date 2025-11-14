@@ -112,7 +112,7 @@ class Weapon {
 		this.lastShotTime = 0;
 		this.type = type;
 
-		this.remainingAmmo = 1000; // Total ammo available
+		this.remainingAmmo = 10000; // Total ammo available
 		this.reloadTime = 2000; //time in milliseconds to reload
 		this.isReloading = false;
 		this.muzzleOffset = 60; // distance from player center to weapon muzzle

@@ -187,9 +187,11 @@ function setup() {
 	opponent.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
 }
 
+let userFramerate = 60;
+
 //fix
 function draw() {
-	frameRate(60);
+	frameRate(userFramerate);
 	time = Date.now(); // gets the current time (used for calldowns)
 	background(0);
 	if (inMatch) {
