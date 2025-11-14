@@ -428,6 +428,7 @@ function mouseClicked() {
 		//settings menu
 		if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) selectedMenu = "settings";
 	}
+
 	if (inMatch && pauseMenu) {
 		//resume
 		if (collidePointRect(mouseX, mouseY, 750, 300, 250, 100)) {
