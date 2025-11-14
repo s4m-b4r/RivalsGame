@@ -229,7 +229,7 @@ function drawTextsettings() {
 		textFont("IMPACT");
 		fill("#f6cd26");
 		strokeWeight(0);
-		text(label, x, y);
+		text(label, x, y + 5);
 	}
 
 	//volume
