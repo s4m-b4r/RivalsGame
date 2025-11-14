@@ -238,13 +238,13 @@ function drawTextsettings() {
 	textFont("IMPACT");
 	fill("#f6cd26");
 	strokeWeight(0);
-	text("Master Volume", 150, 220);
-	text("Music Volume", 150, 320);
-	text("SFX Volume", 150, 420);
+	text("Master Volume", 150, 210);
+	text("Music Volume", 150, 310);
+	text("SFX Volume", 150, 410);
 
-	text("Crosshair Colour", 150, 540);
-	text("Opponent Colour", 150, 540);
-	text("Player Colour", 150, 540);
+	text("Crosshair Colour", 150, 520);
+	text("Opponent Colour", 150, 670);
+	text("Player Colour", 150, 820);
 }
 
 const keybindLabels = [
