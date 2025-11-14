@@ -283,7 +283,7 @@ function createVolumeSlider(label, x, y, settingKey) {
 	slider.style("width", "400px");
 	slider.style("height", "30px");
 	slider.input(() => (settings[settingKey] = slider.value()));
-	uiElements.push(labelEl, slider);
+	uiElements.push(slider);
 }
 
 function createColorPickerUI(label, x, y, settingKey) {
@@ -299,7 +299,7 @@ function createColorPickerUI(label, x, y, settingKey) {
 	picker.size(80, 80);
 	picker.input(() => (settings[settingKey] = picker.value()));
 
-	uiElements.push(labelEl, picker);
+	uiElements.push(picker);
 	if (settingKey === "cColor") colorPickerCrosshair = picker;
 	else colorPickerOpponent = picker;
 }
@@ -335,7 +335,7 @@ function createKeybindInput(label, x, y, key) {
 		window.addEventListener("keydown", captureKey);
 	});
 
-	uiElements.push(labelEl, input);
+	uiElements.push(input);
 }
 
 function keyCodeToName(code) {
