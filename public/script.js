@@ -55,7 +55,7 @@ socket.on("new_round", (data) => {
 	opponent.health = 100;
 	player.alive = true;
 	opponent.alive = true;
-	round++;
+	gameround++;
 	drawWinner = false;
 	emittedRoundEnd = false;
 
@@ -118,7 +118,7 @@ socket.on("game_start", (data) => {
 	document.body.classList.toggle("hide-mouse", true);
 	playerScore = 0;
 	opponentScore = 0;
-	round = 0;
+	gameround = 0;
 	for (let i = 0; i < 3; i++) {
 		player.inventory[i].ammo = player.inventory[i].magazineSize;
 	}
