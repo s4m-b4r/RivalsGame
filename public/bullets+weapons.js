@@ -67,7 +67,7 @@ class Bullet {
 }
 
 function shooting() {
-	if (mouseIsPressed && mouseButton === LEFT) {
+	if (mouseIsPressed && mouseButton === LEFT && !pauseMenu) {
 		player.shoot(mouseX, mouseY);
 	}
 }
