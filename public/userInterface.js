@@ -144,12 +144,12 @@ function drawMenuTabs() {
 	//LeaderBoard Menu
 	fill("#202020");
 	if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) fill("#303030");
-	if (selectedMenu == "leaderboard") fill("#f6cd2650");
+	if (selectedMenu == "career") fill("#f6cd2650");
 	rect(805, 41, 300, 75);
 	//career menu
 	fill("#202020");
 	if (collidePointRect(mouseX, mouseY, 1187, 41, 300, 75)) fill("#303030");
-	if (selectedMenu == "career") fill("#f6cd2650");
+	if (selectedMenu == "leaderboard") fill("#f6cd2650");
 	rect(1187, 41, 300, 75);
 	//settings menu
 	fill("#202020");
@@ -375,15 +375,6 @@ async function savePlayerSettingsUI() {
 function drawLeaderboardMenu() {
 	background("#202020");
 
-	// Title
-	push();
-	textAlign(CENTER, CENTER);
-	textFont("IMPACT");
-	textSize(60);
-	fill("#f6cd26");
-	text("LEADERBOARD", width / 2, 120);
-	pop();
-
 	// Stat toggle button
 	let btnX = width / 2 - 150;
 	let btnY = 200;
@@ -402,6 +393,7 @@ function drawLeaderboardMenu() {
 	textAlign(CENTER, CENTER);
 	textSize(32);
 	textFont("IMPACT");
+	strokeWeight(0);
 	text("RANK BY: " + statDisplayName(leaderboardStat), btnX + btnW / 2, btnY + btnH / 2);
 	pop();
 
