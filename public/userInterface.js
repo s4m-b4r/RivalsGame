@@ -373,7 +373,68 @@ async function savePlayerSettingsUI() {
 	console.log("Settings saved!");
 }
 function drawLeaderboardMenu() {
-	//
+	background("#202020");
+
+	// Title
+	push();
+	textAlign(CENTER, CENTER);
+	textFont("IMPACT");
+	textSize(60);
+	fill("#f6cd26");
+	text("LEADERBOARD", width / 2, 120);
+	pop();
+
+	// Stat toggle button
+	let btnX = width / 2 - 150;
+	let btnY = 200;
+	let btnW = 300;
+	let btnH = 70;
+
+	leaderboardButtonHovered = collidePointRect(mouseX, mouseY, btnX, btnY, btnW, btnH);
+
+	push();
+	rectMode(CORNER);
+	stroke("#f6cd26");
+	strokeWeight(3);
+	fill(leaderboardButtonHovered ? "#303030" : "#202020");
+	rect(btnX, btnY, btnW, btnH, 10);
+	fill("#f6cd26");
+	textAlign(CENTER, CENTER);
+	textSize(32);
+	textFont("IMPACT");
+	text("RANK BY: " + statDisplayName(leaderboardStat), btnX + btnW / 2, btnY + btnH / 2);
+	pop();
+
+	// Table headings
+	push();
+	textAlign(CENTER, CENTER);
+	textFont("IMPACT");
+	fill("#f6cd26");
+	textSize(40);
+	text("RANK", width / 2 - 300, 300);
+	text("PLAYER", width / 2, 300);
+	text(statDisplayName(leaderboardStat).toUpperCase(), width / 2 + 300, 300);
+	pop();
+
+	// Rows
+	push();
+	textFont("IMPACT");
+	textSize(32);
+	textAlign(CENTER, CENTER);
+
+	for (let i = 0; i < leaderboardData.length && i < 10; i++) {
+		let y = 360 + i * 60;
+		let row = leaderboardData[i];
+
+		fill(i % 2 === 0 ? "#ffffff15" : "#ffffff05");
+		rect(width / 2 - 500, y - 25, 1000, 50);
+
+		fill("#ffffff");
+		text(i + 1, width / 2 - 300, y);
+		text(row.username, width / 2, y);
+		text(row[leaderboardStat], width / 2 + 300, y);
+	}
+	pop();
 }
 
 function drawLoadoutMenu() {
@@ -416,6 +477,7 @@ function mouseClicked() {
 			selectedMenu = "leaderboard";
 			slidersInitialized = false;
 			clearUI();
+			loadLeaderboardData();
 		}
 
 		//career menu
@@ -427,6 +489,20 @@ function mouseClicked() {
 
 		//settings menu
 		if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) selectedMenu = "settings";
+
+		if (selectedMenu === "leaderboard") {
+			let btnX = width / 2 - 150;
+			let btnY = 200;
+			let btnW = 300;
+			let btnH = 70;
+
+			if (collidePointRect(mouseX, mouseY, btnX, btnY, btnW, btnH)) {
+				// cycle to the next stat
+				let index = leaderboardStatsList.indexOf(leaderboardStat);
+				leaderboardStat = leaderboardStatsList[(index + 1) % leaderboardStatsList.length];
+				loadLeaderboardData();
+			}
+		}
 	}
 
 	if (inMatch && pauseMenu) {
@@ -479,6 +555,7 @@ function drawCountdown() {
 		countdown = false;
 	}
 }
+
 emittedRoundEnd = false;
 roundStartTime = 0;
 roundEndTime = 0;
@@ -742,4 +819,22 @@ async function handleLogin() {
 
 		message = "Welcome, " + usernameInput + "!";
 	}
+}
+
+let leaderboardData = [];
+let leaderboardStat = "matches_won";
+let leaderboardStatsList = ["matches_won", "kills", "rounds_won"];
+let leaderboardButtonHovered = false;
+
+async function loadLeaderboardData() {
+	const res = await fetch("/leaderboard");
+	const data = await res.json();
+	leaderboardData = data;
+}
+
+function statDisplayName(stat) {
+	if (stat === "matches_won") return "Matches Won";
+	if (stat === "kills") return "Kills";
+	if (stat === "rounds_won") return "Rounds Won";
+	return stat;
 }
