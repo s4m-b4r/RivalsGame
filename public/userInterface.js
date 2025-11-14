@@ -211,12 +211,59 @@ let uiElements = [];
 function drawSettingsMenu() {
 	background("#202020");
 	noSmooth();
+	drawTextsettings();
 
 	if (!slidersInitialized) {
 		createSettingsUI();
 		slidersInitialized = true;
 	}
 }
+function drawTextsettings() {
+	for (let i = 0; i < keybindLabels.length; i++) {
+		x = keyStartX;
+		y = keyStartY + i * keySpacing;
+		label = keybindLabels[i][0];
+
+		textAlign(LEFT, CENTER);
+		textSize(25);
+		textFont("IMPACT");
+		fill("#f6cd26");
+		strokeWeight(0);
+		text(label, x, y - 15);
+	}
+
+	//volume
+	textAlign(LEFT, CENTER);
+	textSize(25);
+	textFont("IMPACT");
+	fill("#f6cd26");
+	strokeWeight(0);
+	text("Master Volume", 150, 220);
+	text("Music Volume", 150, 320);
+	text("SFX Volume", 150, 420);
+
+	text("Crosshair Colour", 150, 540);
+	text("Opponent Colour", 150, 540);
+	text("Player Colour", 150, 540);
+}
+
+const keybindLabels = [
+	["Move Up", "up"],
+	["Move Down", "down"],
+	["Move Left", "left"],
+	["Move Right", "right"],
+	["Roll", "roll"],
+	["Sprint", "sprint"],
+	["Reload", "reload"],
+	["Pause", "pause"],
+	["Slot 1", "slot1"],
+	["Slot 2", "slot2"],
+	["Slot 3", "slot3"],
+];
+// Keybind inputs
+let keyStartX = 800;
+let keyStartY = 220;
+let keySpacing = 60;
 
 function createSettingsUI() {
 	clearUI();
@@ -225,31 +272,12 @@ function createSettingsUI() {
 	createVolumeSlider("Music Volume", 150, 320, "musicLevel");
 	createVolumeSlider("SFX Volume", 150, 420, "sfxLevel");
 
-	createColorPickerUI("Crosshair Color", 150, 540, "cColor");
-	createColorPickerUI("Opponent Color", 150, 690, "oColor");
-	createColorPickerUI("Player Color", 150, 840, "pColor");
-
-	// Keybind inputs
-	let startX = 800;
-	let startY = 220;
-	let spacing = 60;
-
-	const keybindLabels = [
-		["Move Up", "up"],
-		["Move Down", "down"],
-		["Move Left", "left"],
-		["Move Right", "right"],
-		["Roll", "roll"],
-		["Sprint", "sprint"],
-		["Reload", "reload"],
-		["Pause", "pause"],
-		["Slot 1", "slot1"],
-		["Slot 2", "slot2"],
-		["Slot 3", "slot3"],
-	];
+	createColorPickerUI("Crosshair Colour", 150, 540, "cColor");
+	createColorPickerUI("Opponent Colour", 150, 690, "oColor");
+	createColorPickerUI("Player Colour", 150, 840, "pColor");
 
 	keybindLabels.forEach(([label, key], i) => {
-		createKeybindInput(label, startX, startY + i * spacing, key);
+		createKeybindInput(label, keyStartX, keyStartY + i * keySpacing, key);
 	});
 
 	let saveBtn = createButton("SAVE SETTINGS");
@@ -271,14 +299,6 @@ function clearUI() {
 }
 
 function createVolumeSlider(label, x, y, settingKey) {
-	textAlign(LEFT, CENTER);
-	textSize(25);
-	textFont("IMPACT");
-	fill("#f6cd26");
-	stroke("white");
-	strokeWeight(2);
-	text(label, x, y - 40);
-
 	let slider = createSlider(0, 1, settings[settingKey], 0.01);
 	slider.position(x, y);
 	slider.style("width", "400px");
@@ -288,13 +308,6 @@ function createVolumeSlider(label, x, y, settingKey) {
 }
 
 function createColorPickerUI(label, x, y, settingKey) {
-	textAlign(LEFT, CENTER);
-	textSize(25);
-	textFont("IMPACT");
-	fill("#f6cd26");
-	strokeWeight(0);
-	text(label, x, y - 40);
-
 	let picker = createColorPicker(settings[settingKey]);
 	picker.position(x, y);
 	picker.size(80, 80);
@@ -306,13 +319,6 @@ function createColorPickerUI(label, x, y, settingKey) {
 }
 
 function createKeybindInput(label, x, y, key) {
-	textAlign(LEFT, CENTER);
-	textSize(25);
-	textFont("IMPACT");
-	fill("#f6cd26");
-	strokeWeight(0);
-	text(label, x, y - 15);
-
 	let input = createInput(keyCodeToName(keybind[key]));
 	input.position(x + 250, y - 15);
 	input.size(180, 40);
