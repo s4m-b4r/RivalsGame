@@ -209,7 +209,7 @@ let slidersInitialized = false;
 let uiElements = [];
 
 function drawSettingsMenu() {
-	// background("#202020");
+	background("#202020");
 	noSmooth();
 
 	if (!slidersInitialized) {
@@ -275,7 +275,8 @@ function createVolumeSlider(label, x, y, settingKey) {
 	textSize(25);
 	textFont("IMPACT");
 	fill("#f6cd26");
-	strokeWeight(0);
+	stroke("white");
+	strokeWeight(2);
 	text(label, x, y - 40);
 
 	let slider = createSlider(0, 1, settings[settingKey], 0.01);
