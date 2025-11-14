@@ -114,6 +114,77 @@ app.post("/load_settings", async (req, res) => {
 	}
 });
 
+app.get("/leaderboard", async (req, res) => {
+	try {
+		const result = await pool.query(`
+            SELECT u.username, s.kills, s.deaths, s.rounds_won, s.matches_won, s.matches_lost
+            FROM player_stats s
+            JOIN users u ON u.id = s.user_id
+            ORDER BY s.matches_won DESC, s.kills DESC
+            LIMIT 10
+        `);
+
+		res.json(result.rows);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: "Database error" });
+	}
+});
+
+app.post("/career", async (req, res) => {
+	const { username } = req.body;
+
+	try {
+		const user = await pool.query("SELECT id FROM users WHERE username = $1", [username]);
+		if (user.rows.length === 0) return res.status(400).json({ error: "User not found" });
+
+		const stats = await pool.query("SELECT * FROM player_stats WHERE user_id = $1", [user.rows[0].id]);
+
+		if (stats.rows.length === 0)
+			return res.json({
+				kills: 0,
+				deaths: 0,
+				rounds_won: 0,
+				matches_won: 0,
+				matches_lost: 0,
+				kd: 0,
+				wl: 0,
+			});
+
+		const s = stats.rows[0];
+		const kd = s.deaths === 0 ? s.kills : (s.kills / s.deaths).toFixed(2);
+		const wl = s.matches_lost === 0 ? s.matches_won : (s.matches_won / s.matches_lost).toFixed(2);
+
+		res.json({
+			...s,
+			kd,
+			wl,
+		});
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: "Database error" });
+	}
+});
+
+async function updateStats(username, field, amount = 1) {
+	try {
+		const user = await pool.query("SELECT id FROM users WHERE username = $1", [username]);
+		if (user.rows.length === 0) return;
+
+		const userId = user.rows[0].id;
+
+		await pool.query(
+			`INSERT INTO player_stats (user_id, ${field})
+             VALUES ($1, $2)
+             ON CONFLICT (user_id)
+             DO UPDATE SET ${field} = player_stats.${field} + EXCLUDED.${field}`,
+			[userId, amount]
+		);
+	} catch (err) {
+		console.error("Stat update error:", err);
+	}
+}
+
 // keep the event loop alive
 io.on("connection", (socket) => {
 	console.log("A user connected:", socket.id);
@@ -187,13 +258,24 @@ io.on("connection", (socket) => {
 		// Prevent double reporting
 		if (game.roundWinner) return;
 
+		const killerName = socket.username;
+		const victimName = io.sockets.sockets.get(victim)?.username;
+
+		const p1Socket = io.sockets.sockets.get(p1);
+		const p2Socket = io.sockets.sockets.get(p2);
+
+		updateStats(killerName, "kills", 1);
+		updateStats(victimName, "deaths", 1);
+
 		game.roundWinner = killer;
 		game.inProgress = false;
 
 		if (killer === p1) {
 			game.scores.p1++;
+			updateStats(p1Socket.username, "rounds_won", 1);
 		} else {
 			game.scores.p2++;
+			updateStats(p2Socket.username, "rounds_won", 1);
 		}
 
 		// Notify both clients
@@ -206,6 +288,11 @@ io.on("connection", (socket) => {
 		if (game.scores.p1 >= 3 || game.scores.p2 >= 3) {
 			const matchWinner = game.scores.p1 > game.scores.p2 ? p1 : p2;
 			io.to(data.room).emit("match_over", { winner: matchWinner, scores: game.scores });
+			const winnerSocket = io.sockets.sockets.get(matchWinner);
+			const loserSocket = matchWinner === p1 ? io.sockets.sockets.get(p2) : io.sockets.sockets.get(p1);
+
+			if (winnerSocket) updateStats(winnerSocket.username, "matches_won", 1);
+			if (loserSocket) updateStats(loserSocket.username, "matches_lost", 1);
 			games.splice(games.indexOf(game), 1);
 			return;
 		}
