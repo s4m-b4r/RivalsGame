@@ -209,7 +209,7 @@ let slidersInitialized = false;
 let uiElements = [];
 
 function drawSettingsMenu() {
-	background("#202020");
+	// background("#202020");
 	noSmooth();
 
 	if (!slidersInitialized) {
