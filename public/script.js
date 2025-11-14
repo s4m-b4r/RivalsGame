@@ -219,6 +219,9 @@ function draw() {
 		if (selectedMenu == "settings") {
 			drawSettingsMenu();
 		}
+		if (selectedMenu == "leaderboard") {
+			drawLeaderboardMenu();
+		}
 		drawMenuTabs();
 	}
 
