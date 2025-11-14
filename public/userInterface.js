@@ -244,7 +244,7 @@ function drawTextsettings() {
 
 	text("Crosshair Colour", 150, 520);
 	text("Opponent Colour", 350, 520);
-	text("Player Colour", 150, 670);
+	text("Player Colour", 150, 650);
 }
 
 const keybindLabels = [
