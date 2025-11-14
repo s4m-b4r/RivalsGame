@@ -533,8 +533,8 @@ function drawWinRound() {
 		push();
 		textAlign(CENTER, CENTER);
 		textFont("IMPACT");
-		stroke("#0000ff");
-		fill("#0000ff");
+		stroke(settings.pColor);
+		fill(settings.pColor);
 		strokeWeight(0);
 		textSize(100);
 		text(`${player.name.toUpperCase()} WON THE ROUND!`, 1750 / 2, 950 / 2);
@@ -543,8 +543,8 @@ function drawWinRound() {
 		push();
 		textAlign(CENTER, CENTER);
 		textFont("IMPACT");
-		stroke("#ff0000");
-		fill("#ff0000");
+		stroke(settings.oColor);
+		fill(settings.oColor);
 		strokeWeight(0);
 		textSize(100);
 		text(`${opponent.name.toUpperCase()} WON THE ROUND!`, 1750 / 2, 950 / 2);
