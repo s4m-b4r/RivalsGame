@@ -474,17 +474,17 @@ function mouseClicked() {
 
 		//LeaderBoard Menu
 		if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) {
-			selectedMenu = "leaderboard";
+			selectedMenu = "career";
 			slidersInitialized = false;
 			clearUI();
-			loadLeaderboardData();
 		}
 
 		//career menu
 		if (collidePointRect(mouseX, mouseY, 1187, 41, 300, 75)) {
-			selectedMenu = "career";
+			selectedMenu = "leaderboard";
 			slidersInitialized = false;
 			clearUI();
+			loadLeaderboardData();
 		}
 
 		//settings menu
