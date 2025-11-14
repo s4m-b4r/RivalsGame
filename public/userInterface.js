@@ -243,8 +243,8 @@ function drawTextsettings() {
 	text("SFX Volume", 150, 410);
 
 	text("Crosshair Colour", 150, 520);
-	text("Opponent Colour", 150, 670);
-	text("Player Colour", 150, 820);
+	text("Opponent Colour", 350, 520);
+	text("Player Colour", 150, 670);
 }
 
 const keybindLabels = [
@@ -273,8 +273,8 @@ function createSettingsUI() {
 	createVolumeSlider("SFX Volume", 150, 420, "sfxLevel");
 
 	createColorPickerUI("Crosshair Colour", 150, 540, "cColor");
-	createColorPickerUI("Opponent Colour", 150, 690, "oColor");
-	createColorPickerUI("Player Colour", 150, 840, "pColor");
+	createColorPickerUI("Opponent Colour", 350, 540, "oColor");
+	createColorPickerUI("Player Colour", 150, 670, "pColor");
 
 	keybindLabels.forEach(([label, key], i) => {
 		createKeybindInput(label, keyStartX, keyStartY + i * keySpacing, key);
