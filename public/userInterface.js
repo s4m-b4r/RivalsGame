@@ -303,6 +303,7 @@ function createVolumeSlider(label, x, y, settingKey) {
 	slider.position(x, y);
 	slider.style("width", "400px");
 	slider.style("height", "30px");
+	slider.style("background", "#f6cd26");
 	slider.input(() => (settings[settingKey] = slider.value()));
 	uiElements.push(slider);
 }
