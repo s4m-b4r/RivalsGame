@@ -521,7 +521,7 @@ function drawCareerMenu() {
 	text(`${losses} LOSSES`, -240, 280);
 
 	fill("#ffffff");
-	textSize(40);
+	textSize(60);
 	let WLratio;
 	if (losses === 0) {
 		WLratio = wins;
@@ -529,7 +529,7 @@ function drawCareerMenu() {
 		WLratio = (wins / losses).toFixed(2);
 	}
 	textAlign(CENTER, CENTER);
-	text(WLratio, 0, 0);
+	text(WLratio, 0, -25);
 	pop();
 }
 
