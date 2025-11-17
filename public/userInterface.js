@@ -814,8 +814,8 @@ async function loadLeaderboardData() {
 }
 
 function statDisplayName(stat) {
-	if (stat === "matches_won") return "Matches Won";
-	if (stat === "kills") return "Kills";
-	if (stat === "rounds_won") return "Rounds Won";
+	if (stat === "matches_won") return "MATCHES WON";
+	if (stat === "kills") return "KILLS";
+	if (stat === "rounds_won") return "ROUNDS WON";
 	return stat;
 }
