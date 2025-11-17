@@ -543,7 +543,7 @@ function drawCareerMenu() {
 	let KDangle1 = (kills / KDtotal) * TWO_PI;
 	let KDangle2 = (deaths / KDtotal) * TWO_PI;
 	push();
-	textAlign(CENTER, CENTER);
+	textAlign(LEFT, CENTER);
 	translate(width / 2 - 350, 600);
 
 	stroke("#f6cd26");
@@ -589,7 +589,7 @@ function drawCareerMenu() {
 	pop();
 	//////////////////////
 	push();
-	textAlign(CENTER, CENTER);
+	textAlign(LEFT, CENTER);
 	translate(width / 2 + 350, 600);
 
 	stroke("#f6cd26");
