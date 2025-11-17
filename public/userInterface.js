@@ -375,26 +375,20 @@ async function savePlayerSettingsUI() {
 function drawLeaderboardMenu() {
 	background("#202020");
 
-	// Stat toggle button
-	let btnX = width / 2 - 150;
-	let btnY = 200;
-	let btnW = 300;
-	let btnH = 70;
-
-	leaderboardButtonHovered = collidePointRect(mouseX, mouseY, btnX, btnY, btnW, btnH);
+	leaderboardButtonHovered = collidePointRect(mouseX, mouseY, width / 2 - 150, 200, 300, 70);
 
 	push();
 	rectMode(CORNER);
 	stroke("#f6cd26");
 	strokeWeight(3);
 	fill(leaderboardButtonHovered ? "#303030" : "#202020");
-	rect(btnX, btnY, btnW, btnH, 10);
+	rect(width / 2 - 150, 200, 300, 70, 10);
 	fill("#f6cd26");
 	textAlign(CENTER, CENTER);
 	textSize(32);
 	textFont("IMPACT");
 	strokeWeight(0);
-	text("RANK BY: " + statDisplayName(leaderboardStat), btnX + btnW / 2, btnY + btnH / 2);
+	text("RANK BY: " + statDisplayName(leaderboardStat), width / 2 - 150 + 300 / 2, 200 + 70 / 2);
 	pop();
 
 	// Table headings
@@ -483,12 +477,7 @@ function mouseClicked() {
 		if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) selectedMenu = "settings";
 
 		if (selectedMenu === "leaderboard") {
-			let btnX = width / 2 - 150;
-			let btnY = 200;
-			let btnW = 300;
-			let btnH = 70;
-
-			if (collidePointRect(mouseX, mouseY, btnX, btnY, btnW, btnH)) {
+			if (collidePointRect(mouseX, mouseY, width / 2 - 150, 200, 300, 70)) {
 				// cycle to the next stat
 				let index = leaderboardStatsList.indexOf(leaderboardStat);
 				leaderboardStat = leaderboardStatsList[(index + 1) % leaderboardStatsList.length];
