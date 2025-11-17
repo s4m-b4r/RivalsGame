@@ -481,17 +481,15 @@ let allLoadoutItems = [];
 function buildLoadoutItemPool() {
 	allLoadoutItems = [];
 
-	// Add all weapons (guns)
 	for (let key in weapons) {
 		allLoadoutItems.push({
 			name: weapons[key].name ?? key,
-			ref: weapons[key], // direct reference to real weapon object
+			ref: weapons[key],
 			type: "weapon",
-			image: weapons[key].image, // your loadWeapons already includes image refs
+			asset: weapons[key].asset,
 		});
 	}
 
-	// Add all grenades
 	for (let key in grenadeItems) {
 		allLoadoutItems.push({
 			name: grenadeItems[key].name ?? key,
