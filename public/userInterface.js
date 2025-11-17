@@ -529,6 +529,7 @@ function drawLoadoutSlot(i, x, y, w, h) {
 
 function drawCareerMenu() {
 	push();
+	textAlign(CENTER, CENTER);
 	background("#202020");
 
 	let kills = player.kills;
@@ -589,7 +590,6 @@ function drawCareerMenu() {
 
 	//////////////////////
 
-	push();
 	translate(width / 2 + 350, 600);
 
 	stroke("#f6cd26");
