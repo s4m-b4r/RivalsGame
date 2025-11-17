@@ -423,6 +423,9 @@ function drawLeaderboardMenu() {
 	pop();
 }
 
+let loadoutSelection = [null, null, null];
+let selectedLoadoutIndex = 0;
+
 function drawLoadoutMenu() {
 	background("#1a1a1a");
 	textFont("IMPACT");
