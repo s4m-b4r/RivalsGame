@@ -456,7 +456,7 @@ function drawCareerMenu() {
 	fill("#f6cd26");
 	textFont("IMPACT");
 	textSize(32);
-	text("K/D RATIO", -240, -275);
+	text("K/D RATIO", -240, -265);
 
 	let radius = 200;
 	let start = -HALF_PI;
@@ -501,7 +501,7 @@ function drawCareerMenu() {
 	fill("#f6cd26");
 	textFont("IMPACT");
 	textSize(32);
-	text("W/L RATIO", -240, -275);
+	text("W/L RATIO", -240, -265);
 
 	fill("#00ff00AA");
 	arc(0, -30, radius * 2, radius * 2, start, start + WLangle1);
