@@ -215,6 +215,7 @@ function drawPlayer() {
 			player.updateRoll();
 			shooting();
 		}
+
 		push();
 		fill(settings.pColor);
 		strokeWeight(2);
@@ -224,7 +225,7 @@ function drawPlayer() {
 		textSize(15);
 		fill(settings.pColor);
 		strokeWeight(0);
-		text(player.name, player.x, player.y + 35);
+		text(player.name.slice(0, 20), player.x, player.y + 35);
 		pop();
 
 		if (player.inventory[selectedHotbarSlot]) {
@@ -281,7 +282,7 @@ function drawOpponent() {
 		textSize(15);
 		fill(settings.oColor);
 		strokeWeight(0);
-		text(opponent.name, opponent.x, opponent.y + 35);
+		text(opponent.name.slice(0, 20), opponent.x, opponent.y + 35);
 		pop();
 	}
 }

@@ -424,7 +424,99 @@ function drawLeaderboardMenu() {
 }
 
 function drawLoadoutMenu() {
-	//
+	background("#1a1a1a");
+	textFont("IMPACT");
+	fill("#f6cd26");
+	textSize(60);
+	textAlign(LEFT, TOP);
+	text("SELECT YOUR LOADOUT", 120, 80);
+
+	drawLoadoutItemsGrid();
+	drawLoadoutSlots();
+}
+
+function drawLoadoutItemsGrid() {
+	let startX = 120;
+	let startY = 200;
+	let cardW = 260;
+	let cardH = 180;
+	let gap = 40;
+
+	for (let i = 0; i < allLoadoutItems.length; i++) {
+		let row = Math.floor(i / 2);
+		let col = i % 2;
+
+		let x = startX + col * (cardW + gap);
+		let y = startY + row * (cardH + gap);
+
+		drawLoadoutCard(i, allLoadoutItems[i], x, y, cardW, cardH);
+	}
+}
+
+function drawLoadoutCard(i, item, x, y, w, h) {
+	let hovered = collidePointRect(mouseX, mouseY, x, y, w, h);
+
+	push();
+	stroke("#f6cd26");
+	strokeWeight(hovered ? 6 : 3);
+	fill(hovered ? "#303030" : "#202020");
+	rect(x, y, w, h, 15);
+
+	if (item.image) {
+		imageMode(CENTER);
+		image(item.image, x + w / 2, y + h / 2 - 10, 80, 80);
+	}
+
+	fill("#f6cd26");
+	textSize(28);
+	textAlign(CENTER, CENTER);
+	text(item.name.toUpperCase(), x + w / 2, y + h - 30);
+	pop();
+}
+
+function drawLoadoutSlots() {
+	let baseX = width - 500;
+	let baseY = 250;
+
+	textSize(45);
+	fill("#f6cd26");
+	textAlign(CENTER, TOP);
+	text("YOUR LOADOUT", baseX + 200, 150);
+
+	for (let i = 0; i < 3; i++) {
+		let x = baseX;
+		let y = baseY + i * 200;
+
+		drawLoadoutSlot(i, x, y, 400, 150);
+	}
+}
+
+function drawLoadoutSlot(i, x, y, w, h) {
+	let hovered = collidePointRect(mouseX, mouseY, x, y, w, h);
+	let selected = selectedLoadoutIndex === i;
+
+	push();
+	stroke(selected ? "#f6cd26" : "#ffffff44");
+	strokeWeight(selected ? 6 : 3);
+	fill(hovered ? "#303030" : "#202020");
+	rect(x, y, w, h, 15);
+
+	fill("#f6cd26");
+	textSize(30);
+	textAlign(CENTER, CENTER);
+
+	let item = loadoutSelection[i];
+
+	if (item) {
+		if (item.image) {
+			imageMode(CENTER);
+			image(item.image, x + 70, y + h / 2, 80, 80);
+		}
+		text(item.name.toUpperCase(), x + w / 2 + 30, y + h / 2);
+	} else {
+		text("EMPTY", x + w / 2, y + h / 2);
+	}
+	pop();
 }
 
 function drawCareerMenu() {
@@ -584,6 +676,40 @@ function mouseClicked() {
 				let index = leaderboardStatsList.indexOf(leaderboardStat);
 				leaderboardStat = leaderboardStatsList[(index + 1) % leaderboardStatsList.length];
 				loadLeaderboardData();
+			}
+		}
+
+		if (selectedMenu === "loadout") {
+			let startX = 120,
+				startY = 200;
+			let cardW = 260,
+				cardH = 180,
+				gap = 40;
+
+			for (let i = 0; i < allLoadoutItems.length; i++) {
+				let row = Math.floor(i / 2);
+				let col = i % 2;
+
+				let x = startX + col * (cardW + gap);
+				let y = startY + row * (cardH + gap);
+
+				if (collidePointRect(mouseX, mouseY, x, y, cardW, cardH)) {
+					loadoutSelection[selectedLoadoutIndex] = allLoadoutItems[i];
+					return;
+				}
+			}
+
+			let baseX = width - 500;
+			let baseY = 250;
+
+			for (let i = 0; i < 3; i++) {
+				let x = baseX;
+				let y = baseY + i * 200;
+
+				if (collidePointRect(mouseX, mouseY, x, y, 400, 150)) {
+					selectedLoadoutIndex = i;
+					return;
+				}
 			}
 		}
 	}

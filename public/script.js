@@ -119,6 +119,13 @@ socket.on("game_start", (data) => {
 	playerScore = 0;
 	opponentScore = 0;
 	gameround = 0;
+
+	player.inventory = [
+		loadoutSelection[0]?.ref ?? weapons.assaultRifle,
+		loadoutSelection[1]?.ref ?? weapons.pistol,
+		loadoutSelection[2]?.ref ?? grenadeItems.handGrenade,
+	];
+
 	for (let i = 0; i < 3; i++) {
 		player.inventory[i].ammo = player.inventory[i].magazineSize;
 	}
