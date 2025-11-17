@@ -471,10 +471,10 @@ function drawCareerMenu() {
 	fill("#ffffff");
 	textSize(40);
 	let KDratio;
-	if (v2 === 0) {
-		KDratio = v1;
+	if (deaths === 0) {
+		KDratio = kills;
 	} else {
-		KDratio = (v1 / v2).toFixed(2);
+		KDratio = (kills / deaths).toFixed(2);
 	}
 	text(KDratio, 0, 120);
 
@@ -511,10 +511,10 @@ function drawCareerMenu() {
 	fill("#ffffff");
 	textSize(40);
 	let WLratio;
-	if (v2 === 0) {
-		WLratio = v1;
+	if (losses === 0) {
+		WLratio = wins;
 	} else {
-		WLratio = (v1 / v2).toFixed(2);
+		WLratio = (wins / losses).toFixed(2);
 	}
 	text(WLratio, 0, 120);
 
