@@ -234,6 +234,9 @@ function draw() {
 		if (selectedMenu == "career") {
 			drawCareerMenu();
 		}
+		if (selectedMenu == "loadout") {
+			drawLoadoutMenu();
+		}
 		drawMenuTabs();
 	}
 
