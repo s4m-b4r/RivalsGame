@@ -556,7 +556,7 @@ function drawCareerMenu() {
 	fill("#f6cd26");
 	textFont("IMPACT");
 	textSize(70);
-	text("K/D RATIO", -220, -265);
+	text("K/D RATIO", -220, -280);
 
 	let radius = 200;
 	let start = -HALF_PI;
@@ -574,7 +574,7 @@ function drawCareerMenu() {
 	text(`${kills} KILLS`, -220, 255);
 
 	fill("#ff0000");
-	text(`${deaths} DEATHS`, -220, 320);
+	text(`${deaths} DEATHS`, -220, 305);
 
 	fill("#ffffff");
 	textSize(60);
@@ -602,7 +602,7 @@ function drawCareerMenu() {
 	fill("#f6cd26");
 	textFont("IMPACT");
 	textSize(70);
-	text("W/L RATIO", -220, -265);
+	text("W/L RATIO", -220, -280);
 
 	fill("#00ff00AA");
 	arc(0, -30, radius * 2, radius * 2, start, start + WLangle1);
@@ -617,7 +617,7 @@ function drawCareerMenu() {
 	text(`${wins} WINS`, -220, 255);
 
 	fill("#ff0000");
-	text(`${losses} LOSSES`, -220, 320);
+	text(`${losses} LOSSES`, -220, 305);
 
 	fill("#ffffff");
 	textSize(60);
