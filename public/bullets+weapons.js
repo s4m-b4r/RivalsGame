@@ -497,7 +497,7 @@ function buildLoadoutItemPool() {
 			name: grenadeItems[key].name ?? key,
 			ref: grenadeItems[key],
 			type: "grenade",
-			image: grenadeItems[key].image,
+			asset: grenadeItems[key].asset,
 		});
 	}
 }

@@ -465,11 +465,11 @@ function drawLoadoutCard(i, item, x, y, w, h) {
 	fill(hovered ? "#303030" : "#202020");
 	rect(x, y, w, h, 15);
 
-	if (item.image) {
+	if (item.asset) {
 		imageMode(CENTER);
-		image(item.image, x + w / 2, y + h / 2 - 10, 80, 80);
+		image(item.asset, x + w / 2, y + h / 2 - 10, 80, 80);
 	}
-
+	noStroke();
 	fill("#f6cd26");
 	textSize(28);
 	textAlign(CENTER, CENTER);
@@ -504,6 +504,7 @@ function drawLoadoutSlot(i, x, y, w, h) {
 	fill(hovered ? "#303030" : "#202020");
 	rect(x, y, w, h, 15);
 
+	noStroke();
 	fill("#f6cd26");
 	textSize(30);
 	textAlign(CENTER, CENTER);
@@ -511,9 +512,9 @@ function drawLoadoutSlot(i, x, y, w, h) {
 	let item = loadoutSelection[i];
 
 	if (item) {
-		if (item.image) {
+		if (item.asset) {
 			imageMode(CENTER);
-			image(item.image, x + 70, y + h / 2, 80, 80);
+			image(item.asset, x + 70, y + h / 2, 80, 80);
 		}
 		text(item.name.toUpperCase(), x + w / 2 + 30, y + h / 2);
 	} else {
