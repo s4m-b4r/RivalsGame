@@ -469,15 +469,15 @@ function drawCareerMenu() {
 
 	noStroke();
 
-	textSize(18);
+	textSize(40);
 	fill("#00ff00");
 	text(`${kills} KILLS`, -240, 255);
 
 	fill("#ff0000");
-	text(`${deaths} DEATHS`, -240, 280);
+	text(`${deaths} DEATHS`, -240, 325);
 
 	fill("#ffffff");
-	textSize(40);
+	textSize(60);
 	let KDratio;
 	if (deaths === 0) {
 		KDratio = kills;
@@ -485,7 +485,7 @@ function drawCareerMenu() {
 		KDratio = (kills / deaths).toFixed(2);
 	}
 	textAlign(CENTER, CENTER);
-	text(KDratio, 0, 0);
+	text(KDratio, 0, -25);
 	pop();
 
 	//////////////////////
@@ -513,12 +513,12 @@ function drawCareerMenu() {
 
 	noStroke();
 
-	textSize(18);
+	textSize(40);
 	fill("#00ff00");
 	text(`${wins} WINS`, -240, 255);
 
 	fill("#ff0000");
-	text(`${losses} LOSSES`, -240, 280);
+	text(`${losses} LOSSES`, -240, 325);
 
 	fill("#ffffff");
 	textSize(60);
