@@ -218,6 +218,7 @@ function drawSettingsMenu() {
 	}
 }
 function drawTextsettings() {
+	push();
 	for (let i = 0; i < keybindLabels.length; i++) {
 		x = keyStartX;
 		y = keyStartY + i * keySpacing;
@@ -244,6 +245,7 @@ function drawTextsettings() {
 	text("Crosshair Colour", 150, 520);
 	text("Opponent Colour", 350, 520);
 	text("Player Colour", 150, 650);
+	pop();
 }
 
 const keybindLabels = [
@@ -428,13 +430,14 @@ let selectedLoadoutIndex = 0;
 function drawLoadoutMenu() {
 	push();
 	background("#202020");
-	pop();
 
 	drawLoadoutItemsGrid();
 	drawLoadoutSlots();
+	pop();
 }
 
 function drawLoadoutItemsGrid() {
+	push();
 	let startX = 120;
 	let startY = 200;
 	let cardW = 260;
@@ -450,12 +453,13 @@ function drawLoadoutItemsGrid() {
 
 		drawLoadoutCard(i, allLoadoutItems[i], itemx, itemy, cardW, cardH);
 	}
+	pop();
 }
 
 function drawLoadoutCard(i, item, x, y, w, h) {
+	push();
 	let hovered = collidePointRect(mouseX, mouseY, x, y, w, h);
 
-	push();
 	stroke("#f6cd26");
 	strokeWeight(hovered ? 6 : 3);
 	fill(hovered ? "#303030" : "#202020");
@@ -475,6 +479,7 @@ function drawLoadoutCard(i, item, x, y, w, h) {
 }
 
 function drawLoadoutSlots() {
+	push();
 	let baseX = width - 500;
 	let baseY = 250;
 
@@ -489,13 +494,15 @@ function drawLoadoutSlots() {
 
 		drawLoadoutSlot(i, x, y, 400, 150);
 	}
+
+	pop();
 }
 
 function drawLoadoutSlot(i, x, y, w, h) {
+	push();
 	let hovered = collidePointRect(mouseX, mouseY, x, y, w, h);
 	let selected = selectedLoadoutIndex === i;
 
-	push();
 	stroke(selected ? "#f6cd26" : "#ffffff44");
 	strokeWeight(selected ? 6 : 3);
 	fill(hovered ? "#303030" : "#202020");
@@ -521,6 +528,7 @@ function drawLoadoutSlot(i, x, y, w, h) {
 }
 
 function drawCareerMenu() {
+	push();
 	background("#202020");
 
 	let kills = player.kills;
@@ -536,7 +544,6 @@ function drawCareerMenu() {
 	let KDangle1 = (kills / KDtotal) * TWO_PI;
 	let KDangle2 = (deaths / KDtotal) * TWO_PI;
 
-	push();
 	translate(width / 2 - 350, 600);
 
 	stroke("#f6cd26");
@@ -579,7 +586,6 @@ function drawCareerMenu() {
 	}
 	textAlign(CENTER, CENTER);
 	text(KDratio, 0, -25);
-	pop();
 
 	//////////////////////
 
