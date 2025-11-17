@@ -222,6 +222,9 @@ function draw() {
 		if (selectedMenu == "leaderboard") {
 			drawLeaderboardMenu();
 		}
+		if (selectedMenu == "career") {
+			drawCareerMenu();
+		}
 		drawMenuTabs();
 	}
 

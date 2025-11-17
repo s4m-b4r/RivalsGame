@@ -427,8 +427,80 @@ function drawLoadoutMenu() {
 	//
 }
 
-function drawStatisticsMenu() {
-	//
+function drawCareerMenu() {
+	background("#202020");
+
+	push();
+	textAlign(CENTER, CENTER);
+	textFont("IMPACT");
+	fill("#f6cd26");
+	textSize(50);
+	text("CAREER STATISTICS", width / 2, 120);
+	pop();
+
+	let kills = player.kills;
+	let deaths = player.deaths;
+	let wins = player.wins;
+	let losses = player.losses;
+
+	drawPieStat(width / 2 - 350, 350, "K/D RATIO", kills, deaths, "#00ff00AA", "#ff0000AA");
+
+	drawPieStat(width / 2 + 350, 350, "W/L RATIO", wins, losses, "#00ff00AA", "#ff0000AA");
+}
+
+function drawPieStat(cx, cy, label, v1, v2, color1, color2) {
+	let total = v1 + v2;
+	let angle1 = (v1 / total) * TWO_PI;
+	let angle2 = (v2 / total) * TWO_PI;
+
+	push();
+	translate(cx, cy);
+
+	// Box outline
+	stroke("#f6cd26");
+	strokeWeight(3);
+	fill("#ffffff08");
+	rectMode(CENTER);
+	rect(0, 0, 300, 400, 15);
+
+	// Title
+	noStroke();
+	fill("#f6cd26");
+	textFont("IMPACT");
+	textSize(32);
+	text(label, 0, -180);
+
+	// Pie chart
+	let radius = 100;
+	let start = -HALF_PI;
+
+	fill(color1);
+	arc(0, -30, radius * 2, radius * 2, start, start + angle1);
+
+	fill(color2);
+	arc(0, -30, radius * 2, radius * 2, start + angle1, start + angle1 + angle2);
+
+	// Divider line
+	stroke("#ffffff");
+	strokeWeight(2);
+	line(0, -30, radius * cos(start + angle1), -30 + radius * sin(start + angle1));
+
+	// Ratio text
+	noStroke();
+	fill("#ffffff");
+	textSize(40);
+	let ratio = v2 === 0 ? v1 : (v1 / v2).toFixed(2);
+	text(ratio, 0, 120);
+
+	// Labels
+	textSize(18);
+	fill("#00ff00");
+	text(`${v1} positive`, 0, 155);
+
+	fill("#ff0000");
+	text(`${v2} negative`, 0, 180);
+
+	pop();
 }
 
 function mouseClicked() {
@@ -458,14 +530,14 @@ function mouseClicked() {
 			clearUI();
 		}
 
-		//LeaderBoard Menu
+		//career Menu
 		if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) {
 			selectedMenu = "career";
 			slidersInitialized = false;
 			clearUI();
 		}
 
-		//career menu
+		//leaderboard menu
 		if (collidePointRect(mouseX, mouseY, 1187, 41, 300, 75)) {
 			selectedMenu = "leaderboard";
 			slidersInitialized = false;
@@ -797,6 +869,23 @@ async function handleLogin() {
 			settings = Object.assign(new Settings(), settingsData.settings);
 			keybind = Object.assign(new Keybinds(), settingsData.keybinds);
 		}
+
+		// Load career stats
+		const careerRes = await fetch("/career", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ username: usernameInput }),
+		});
+
+		const careerData = await careerRes.json();
+
+		player.kills = careerData.kills;
+		player.deaths = careerData.deaths;
+		player.roundsWon = careerData.rounds_won;
+		player.matchesWon = careerData.matches_won;
+		player.matchesLost = careerData.matches_lost;
+		player.kd = careerData.kd;
+		player.wl = careerData.wl;
 
 		message = "Welcome, " + usernameInput + "!";
 	}
