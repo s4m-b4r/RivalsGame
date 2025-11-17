@@ -474,7 +474,7 @@ function drawCareerMenu() {
 	text(`${kills} KILLS`, -220, 255);
 
 	fill("#ff0000");
-	text(`${deaths} DEATHS`, -220, 325);
+	text(`${deaths} DEATHS`, -220, 320);
 
 	fill("#ffffff");
 	textSize(60);
@@ -518,7 +518,7 @@ function drawCareerMenu() {
 	text(`${wins} WINS`, -220, 255);
 
 	fill("#ff0000");
-	text(`${losses} LOSSES`, -220, 325);
+	text(`${losses} LOSSES`, -220, 320);
 
 	fill("#ffffff");
 	textSize(60);
