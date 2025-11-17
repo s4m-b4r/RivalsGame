@@ -438,12 +438,12 @@ function drawCareerMenu() {
 	drawPieStat(width / 2 + 350, 350, "W/L RATIO", wins, losses, "#00ff00AA", "#ff0000AA");
 
 	let WLtotal = wins + losses;
-	let WLangle1 = (wins / total) * TWO_PI;
-	let WLangle2 = (losses / total) * TWO_PI;
+	let WLangle1 = (wins / WLtotal) * TWO_PI;
+	let WLangle2 = (losses / WLtotal) * TWO_PI;
 
 	let KDtotal = kills + deaths;
-	let KDangle1 = (kills / total) * TWO_PI;
-	let KDangle2 = (deaths / total) * TWO_PI;
+	let KDangle1 = (kills / KDtotal) * TWO_PI;
+	let KDangle2 = (deaths / KDtotal) * TWO_PI;
 
 	push();
 	translate(width * 2 - 350, 500);
