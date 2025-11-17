@@ -13,7 +13,9 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
+			this.recoilDist / 100
+		);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -472,4 +474,30 @@ class OpponentGrenade {
 function loadGrenades() {
 	let handGrenade = new GrenadeItem("Hand Grenade", handGrenadeImage, handGrenadeExplosionImage, 1, 70, 3000, 5);
 	return { handGrenade };
+}
+
+let allLoadoutItems = [];
+
+function buildLoadoutItemPool() {
+	allLoadoutItems = [];
+
+	// Add all weapons (guns)
+	for (let key in weapons) {
+		allLoadoutItems.push({
+			name: weapons[key].name ?? key,
+			ref: weapons[key], // direct reference to real weapon object
+			type: "weapon",
+			image: weapons[key].image, // your loadWeapons already includes image refs
+		});
+	}
+
+	// Add all grenades
+	for (let key in grenadeItems) {
+		allLoadoutItems.push({
+			name: grenadeItems[key].name ?? key,
+			ref: grenadeItems[key],
+			type: "grenade",
+			image: grenadeItems[key].image,
+		});
+	}
 }

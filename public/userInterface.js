@@ -417,7 +417,7 @@ function drawLeaderboardMenu() {
 
 		fill("#ffffff");
 		text(i + 1, width / 2 - 300, y);
-		text(row.username, width / 2, y);
+		text(row.username.slice(0, 25), width / 2, y);
 		text(row[leaderboardStat], width / 2 + 300, y);
 	}
 	pop();
