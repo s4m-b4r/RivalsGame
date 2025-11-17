@@ -455,7 +455,7 @@ function drawCareerMenu() {
 	noStroke();
 	fill("#f6cd26");
 	textFont("IMPACT");
-	textSize(32);
+	textSize(50);
 	text("K/D RATIO", -240, -265);
 
 	let radius = 200;
@@ -495,7 +495,7 @@ function drawCareerMenu() {
 	strokeWeight(3);
 	fill("#ffffff08");
 	rectMode(CENTER);
-	rect(0, 0, 500, 600, 15);
+	rect(0, 0, 500, 700, 15);
 
 	noStroke();
 	fill("#f6cd26");
