@@ -468,6 +468,14 @@ function drawCareerMenu() {
 	arc(0, -30, radius * 2, radius * 2, start + KDangle1, start + KDangle1 + KDangle2);
 
 	noStroke();
+
+	textSize(18);
+	fill("#00ff00");
+	text(`${kills} KILLS`, -240, 255);
+
+	fill("#ff0000");
+	text(`${deaths} DEATHS`, -240, 280);
+
 	fill("#ffffff");
 	textSize(40);
 	let KDratio;
@@ -476,14 +484,8 @@ function drawCareerMenu() {
 	} else {
 		KDratio = (kills / deaths).toFixed(2);
 	}
-	text(KDratio, -240, 220);
-
-	textSize(18);
-	fill("#00ff00");
-	text(`${kills} KILLS`, -240, 255);
-
-	fill("#ff0000");
-	text(`${deaths} DEATHS`, -240, 280);
+	textAlign(CENTER, CENTER);
+	text(KDratio, 0, 0);
 	pop();
 
 	//////////////////////
@@ -510,15 +512,6 @@ function drawCareerMenu() {
 	arc(0, -30, radius * 2, radius * 2, start + WLangle1, start + WLangle1 + WLangle2);
 
 	noStroke();
-	fill("#ffffff");
-	textSize(40);
-	let WLratio;
-	if (losses === 0) {
-		WLratio = wins;
-	} else {
-		WLratio = (wins / losses).toFixed(2);
-	}
-	text(WLratio, -240, 220);
 
 	textSize(18);
 	fill("#00ff00");
@@ -527,6 +520,16 @@ function drawCareerMenu() {
 	fill("#ff0000");
 	text(`${losses} LOSSES`, -240, 280);
 
+	fill("#ffffff");
+	textSize(40);
+	let WLratio;
+	if (losses === 0) {
+		WLratio = wins;
+	} else {
+		WLratio = (wins / losses).toFixed(2);
+	}
+	textAlign(CENTER, CENTER);
+	text(WLratio, 0, 0);
 	pop();
 }
 
