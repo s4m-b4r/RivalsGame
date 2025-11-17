@@ -427,12 +427,7 @@ let selectedLoadoutIndex = 0;
 
 function drawLoadoutMenu() {
 	push();
-	background("#1a1a1a");
-	textFont("IMPACT");
-	fill("#f6cd26");
-	textSize(60);
-	textAlign(LEFT, TOP);
-	text("SELECT YOUR LOADOUT", 120, 80);
+	background("#202020");
 	pop();
 
 	drawLoadoutItemsGrid();
