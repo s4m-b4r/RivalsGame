@@ -467,7 +467,7 @@ function drawCareerMenu() {
 	arc(0, -30, radius * 2, radius * 2, start, start + KDangle1);
 
 	fill("#ff0000AA");
-	arc(0, -30, radius * 2, radius * 2, start + angle1, start + KDangle1 + KDangle2);
+	arc(0, -30, radius * 2, radius * 2, start + KDangle1, start + KDangle1 + KDangle2);
 
 	noStroke();
 	fill("#ffffff");
@@ -507,7 +507,7 @@ function drawCareerMenu() {
 	arc(0, -30, radius * 2, radius * 2, start, start + WLangle1);
 
 	fill("#ff0000AA");
-	arc(0, -30, radius * 2, radius * 2, start + angle1, start + WLangle1 + WLangle2);
+	arc(0, -30, radius * 2, radius * 2, start + WLangle1, start + WLangle1 + WLangle2);
 
 	noStroke();
 	fill("#ffffff");
@@ -520,68 +520,12 @@ function drawCareerMenu() {
 	}
 	text(WLratio, 0, 120);
 
-	// Labels
 	textSize(18);
 	fill("#00ff00");
 	text(`${wins} WINS`, 0, 155);
 
 	fill("#ff0000");
 	text(`${losses} LOSSES`, 0, 180);
-
-	pop();
-}
-
-function drawPieStat(cx, cy, label, v1, v2, color1, color2) {
-	let total = v1 + v2;
-	let angle1 = (v1 / total) * TWO_PI;
-	let angle2 = (v2 / total) * TWO_PI;
-
-	push();
-	translate(cx, cy);
-
-	// Box outline
-	stroke("#f6cd26");
-	strokeWeight(3);
-	fill("#ffffff08");
-	rectMode(CENTER);
-	rect(0, 0, 300, 400, 15);
-
-	// Title
-	noStroke();
-	fill("#f6cd26");
-	textFont("IMPACT");
-	textSize(32);
-	text(label, 0, -180);
-
-	// Pie chart
-	let radius = 100;
-	let start = -HALF_PI;
-
-	fill(color1);
-	arc(0, -30, radius * 2, radius * 2, start, start + angle1);
-
-	fill(color2);
-	arc(0, -30, radius * 2, radius * 2, start + angle1, start + angle1 + angle2);
-
-	// Divider line
-	stroke("#ffffff");
-	strokeWeight(2);
-	line(0, -30, radius * cos(start + angle1), -30 + radius * sin(start + angle1));
-
-	// Ratio text
-	noStroke();
-	fill("#ffffff");
-	textSize(40);
-	let ratio = v2 === 0 ? v1 : (v1 / v2).toFixed(2);
-	text(ratio, 0, 120);
-
-	// Labels
-	textSize(18);
-	fill("#00ff00");
-	text(`${v1} positive`, 0, 155);
-
-	fill("#ff0000");
-	text(`${v2} negative`, 0, 180);
 
 	pop();
 }
