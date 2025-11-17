@@ -444,13 +444,13 @@ function drawCareerMenu() {
 	let KDangle2 = (deaths / KDtotal) * TWO_PI;
 
 	push();
-	translate(width / 2 - 350, 500);
+	translate(width / 2 - 350, 600);
 
 	stroke("#f6cd26");
 	strokeWeight(3);
 	fill("#ffffff08");
 	rectMode(CENTER);
-	rect(0, 0, 500, 600, 15);
+	rect(0, 0, 500, 700, 15);
 
 	noStroke();
 	fill("#f6cd26");
