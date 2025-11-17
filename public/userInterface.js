@@ -444,7 +444,7 @@ function drawCareerMenu() {
 	let KDangle2 = (deaths / KDtotal) * TWO_PI;
 
 	push();
-	translate(width * 2 - 350, 500);
+	translate(width / 2 - 350, 500);
 
 	stroke("#f6cd26");
 	strokeWeight(3);
@@ -487,7 +487,7 @@ function drawCareerMenu() {
 	pop();
 
 	push();
-	translate(width * 2 + 350, 500);
+	translate(width / 2 + 350, 500);
 
 	stroke("#f6cd26");
 	strokeWeight(3);
