@@ -528,8 +528,6 @@ function drawLoadoutSlot(i, x, y, w, h) {
 }
 
 function drawCareerMenu() {
-	push();
-	textAlign(CENTER, CENTER);
 	background("#202020");
 
 	let kills = player.kills;
@@ -544,7 +542,8 @@ function drawCareerMenu() {
 	let KDtotal = kills + deaths;
 	let KDangle1 = (kills / KDtotal) * TWO_PI;
 	let KDangle2 = (deaths / KDtotal) * TWO_PI;
-
+	push();
+	textAlign(CENTER, CENTER);
 	translate(width / 2 - 350, 600);
 
 	stroke("#f6cd26");
@@ -587,9 +586,10 @@ function drawCareerMenu() {
 	}
 	textAlign(CENTER, CENTER);
 	text(KDratio, 0, -25);
-
+	pop();
 	//////////////////////
-
+	push();
+	textAlign(CENTER, CENTER);
 	translate(width / 2 + 350, 600);
 
 	stroke("#f6cd26");
