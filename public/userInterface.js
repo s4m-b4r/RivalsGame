@@ -435,8 +435,6 @@ function drawCareerMenu() {
 	let wins = player.matchesWon;
 	let losses = player.matchesLost;
 
-	drawPieStat(width / 2 + 350, 350, "W/L RATIO", wins, losses, "#00ff00AA", "#ff0000AA");
-
 	let WLtotal = wins + losses;
 	let WLangle1 = (wins / WLtotal) * TWO_PI;
 	let WLangle2 = (losses / WLtotal) * TWO_PI;
