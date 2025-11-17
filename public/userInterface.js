@@ -372,6 +372,7 @@ async function savePlayerSettingsUI() {
 
 	console.log("Settings saved!");
 }
+
 function drawLeaderboardMenu() {
 	background("#202020");
 
@@ -391,7 +392,6 @@ function drawLeaderboardMenu() {
 	text("RANK BY: " + statDisplayName(leaderboardStat), width / 2 - 150 + 300 / 2, 200 + 70 / 2);
 	pop();
 
-	// Table headings
 	push();
 	textAlign(CENTER, CENTER);
 	textFont("IMPACT");
@@ -402,7 +402,6 @@ function drawLeaderboardMenu() {
 	text(statDisplayName(leaderboardStat).toUpperCase(), width / 2 + 300, 300);
 	pop();
 
-	// Rows
 	push();
 	textFont("IMPACT");
 	textSize(32);
@@ -427,12 +426,14 @@ let loadoutSelection = [null, null, null];
 let selectedLoadoutIndex = 0;
 
 function drawLoadoutMenu() {
+	push();
 	background("#1a1a1a");
 	textFont("IMPACT");
 	fill("#f6cd26");
 	textSize(60);
 	textAlign(LEFT, TOP);
 	text("SELECT YOUR LOADOUT", 120, 80);
+	pop();
 
 	drawLoadoutItemsGrid();
 	drawLoadoutSlots();
@@ -449,10 +450,10 @@ function drawLoadoutItemsGrid() {
 		let row = Math.floor(i / 2);
 		let col = i % 2;
 
-		let x = startX + col * (cardW + gap);
-		let y = startY + row * (cardH + gap);
+		let itemx = startX + col * (cardW + gap);
+		let itemy = startY + row * (cardH + gap);
 
-		drawLoadoutCard(i, allLoadoutItems[i], x, y, cardW, cardH);
+		drawLoadoutCard(i, allLoadoutItems[i], itemx, itemy, cardW, cardH);
 	}
 }
 
@@ -467,8 +468,9 @@ function drawLoadoutCard(i, item, x, y, w, h) {
 
 	if (item.asset) {
 		imageMode(CENTER);
-		image(item.asset, x + w / 2, y + h / 2 - 10, 80, 80);
+		image(item.asset, x + w / 2, y + h / 2 - 10, item.asset.width * 4, item.asset.height * 4);
 	}
+
 	noStroke();
 	fill("#f6cd26");
 	textSize(28);
@@ -514,7 +516,7 @@ function drawLoadoutSlot(i, x, y, w, h) {
 	if (item) {
 		if (item.asset) {
 			imageMode(CENTER);
-			image(item.asset, x + 70, y + h / 2, 80, 80);
+			image(item.asset, x + 70, y + h / 2, item.asset.width * 4, item.asset.height * 4);
 		}
 		text(item.name.toUpperCase(), x + w / 2 + 30, y + h / 2);
 	} else {
