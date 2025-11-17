@@ -450,13 +450,13 @@ function drawCareerMenu() {
 	strokeWeight(3);
 	fill("#ffffff08");
 	rectMode(CENTER);
-	rect(0, 0, 300, 400, 15);
+	rect(0, 0, 500, 600, 15);
 
 	noStroke();
 	fill("#f6cd26");
 	textFont("IMPACT");
 	textSize(32);
-	text("K/D RATIO", 0, -180);
+	text("K/D RATIO", -240, -100);
 
 	let radius = 200;
 	let start = -HALF_PI;
@@ -476,15 +476,17 @@ function drawCareerMenu() {
 	} else {
 		KDratio = (kills / deaths).toFixed(2);
 	}
-	text(KDratio, 0, 120);
+	text(KDratio, -240, 220);
 
 	textSize(18);
 	fill("#00ff00");
-	text(`${kills} KILLS`, 0, 155);
+	text(`${kills} KILLS`, -240, 255);
 
 	fill("#ff0000");
-	text(`${deaths} DEATHS`, 0, 180);
+	text(`${deaths} DEATHS`, -240, 280);
 	pop();
+
+	//////////////////////
 
 	push();
 	translate(width / 2 + 350, 500);
@@ -493,13 +495,13 @@ function drawCareerMenu() {
 	strokeWeight(3);
 	fill("#ffffff08");
 	rectMode(CENTER);
-	rect(0, 0, 300, 400, 15);
+	rect(0, 0, 500, 600, 15);
 
 	noStroke();
 	fill("#f6cd26");
 	textFont("IMPACT");
 	textSize(32);
-	text("W/L RATIO", 0, -180);
+	text("W/L RATIO", -240, -100);
 
 	fill("#00ff00AA");
 	arc(0, -30, radius * 2, radius * 2, start, start + WLangle1);
@@ -516,14 +518,14 @@ function drawCareerMenu() {
 	} else {
 		WLratio = (wins / losses).toFixed(2);
 	}
-	text(WLratio, 0, 120);
+	text(WLratio, -240, 220);
 
 	textSize(18);
 	fill("#00ff00");
-	text(`${wins} WINS`, 0, 155);
+	text(`${wins} WINS`, -240, 255);
 
 	fill("#ff0000");
-	text(`${losses} LOSSES`, 0, 180);
+	text(`${losses} LOSSES`, -240, 280);
 
 	pop();
 }
