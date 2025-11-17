@@ -430,22 +430,105 @@ function drawLoadoutMenu() {
 function drawCareerMenu() {
 	background("#202020");
 
-	push();
-	textAlign(CENTER, CENTER);
-	textFont("IMPACT");
-	fill("#f6cd26");
-	textSize(50);
-	text("CAREER STATISTICS", width / 2, 120);
-	pop();
-
 	let kills = player.kills;
 	let deaths = player.deaths;
-	let wins = player.wins;
-	let losses = player.losses;
-
-	drawPieStat(width / 2 - 350, 350, "K/D RATIO", kills, deaths, "#00ff00AA", "#ff0000AA");
+	let wins = player.matchesWon;
+	let losses = player.matchesLost;
 
 	drawPieStat(width / 2 + 350, 350, "W/L RATIO", wins, losses, "#00ff00AA", "#ff0000AA");
+
+	let WLtotal = wins + losses;
+	let WLangle1 = (wins / total) * TWO_PI;
+	let WLangle2 = (losses / total) * TWO_PI;
+
+	let KDtotal = kills + deaths;
+	let KDangle1 = (kills / total) * TWO_PI;
+	let KDangle2 = (deaths / total) * TWO_PI;
+
+	push();
+	translate(width * 2 - 350, 500);
+
+	stroke("#f6cd26");
+	strokeWeight(3);
+	fill("#ffffff08");
+	rectMode(CENTER);
+	rect(0, 0, 300, 400, 15);
+
+	noStroke();
+	fill("#f6cd26");
+	textFont("IMPACT");
+	textSize(32);
+	text("K/D RATIO", 0, -180);
+
+	let radius = 200;
+	let start = -HALF_PI;
+
+	fill("#00ff00AA");
+	arc(0, -30, radius * 2, radius * 2, start, start + KDangle1);
+
+	fill("#ff0000AA");
+	arc(0, -30, radius * 2, radius * 2, start + angle1, start + KDangle1 + KDangle2);
+
+	noStroke();
+	fill("#ffffff");
+	textSize(40);
+	let KDratio;
+	if (v2 === 0) {
+		KDratio = v1;
+	} else {
+		KDratio = (v1 / v2).toFixed(2);
+	}
+	text(KDratio, 0, 120);
+
+	textSize(18);
+	fill("#00ff00");
+	text(`${kills} KILLS`, 0, 155);
+
+	fill("#ff0000");
+	text(`${deaths} DEATHS`, 0, 180);
+	pop();
+
+	push();
+	translate(width * 2 + 350, 500);
+
+	stroke("#f6cd26");
+	strokeWeight(3);
+	fill("#ffffff08");
+	rectMode(CENTER);
+	rect(0, 0, 300, 400, 15);
+
+	noStroke();
+	fill("#f6cd26");
+	textFont("IMPACT");
+	textSize(32);
+	text("W/L RATIO", 0, -180);
+
+	fill("#00ff00AA");
+	arc(0, -30, radius * 2, radius * 2, start, start + WLangle1);
+
+	fill("#ff0000AA");
+	arc(0, -30, radius * 2, radius * 2, start + angle1, start + WLangle1 + WLangle2);
+
+	noStroke();
+	fill("#ffffff");
+	textSize(40);
+	let WLratio;
+	if (v2 === 0) {
+		WLratio = v1;
+	} else {
+		WLratio = (v1 / v2).toFixed(2);
+	}
+	text(WLratio, 0, 120);
+
+	// Labels
+	textSize(18);
+	fill("#00ff00");
+	text(`${wins} WINS`, 0, 155);
+
+	fill("#ff0000");
+	text(`${losses} LOSSES`, 0, 180);
+
+	pop();
 }
 
 function drawPieStat(cx, cy, label, v1, v2, color1, color2) {
@@ -884,8 +967,6 @@ async function handleLogin() {
 		player.roundsWon = careerData.rounds_won;
 		player.matchesWon = careerData.matches_won;
 		player.matchesLost = careerData.matches_lost;
-		player.kd = careerData.kd;
-		player.wl = careerData.wl;
 
 		message = "Welcome, " + usernameInput + "!";
 	}
