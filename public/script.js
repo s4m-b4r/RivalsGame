@@ -195,7 +195,6 @@ function setup() {
 
 	player.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
 	opponent.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
-	menuMusic.setVolume(0.5 * settings.musicLevel * settings.masterLevel);
 }
 
 //fix
