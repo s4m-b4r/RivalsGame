@@ -539,6 +539,9 @@ function createOpponentInventory(opponentLoadout) {
 			case 5:
 				opponent.inventory[i] = grenadeItems.handGrenade;
 				break;
+			default:
+				opponent.inventory[i] = weapons.assaultRifle;
+				break;
 		}
 	}
 }
