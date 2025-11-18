@@ -139,7 +139,7 @@ class Weapon {
 			//for shotgun
 			let baseAngle = atan2(mouseY - player.y, mouseX - player.x);
 
-			let spread = 0.25;
+			let spread = 0.1;
 			let half = (this.bulletCount - 1) / 2;
 
 			for (let i = 0; i < this.bulletCount; i++) {
