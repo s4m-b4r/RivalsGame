@@ -1041,7 +1041,8 @@ async function handleLogin() {
 		player.matchesWon = careerData.matches_won;
 		player.matchesLost = careerData.matches_lost;
 
-		message = "Welcome, " + usernameInput + "!";
+		menuMusic.setVolume(0.5 * settings.musicLevel * settings.masterLevel);
+		menuMusic.loop();
 	}
 }
 
