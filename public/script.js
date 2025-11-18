@@ -152,6 +152,7 @@ function preload() {
 	tileset = loadImage("assets/environment/tileset.png");
 	//sounds//
 	clickSound = loadSound("assets/Sounds/Click_stereo.ogg.mp3");
+	menuMusic = loadSound("assets/Sounds/Apparel Shop Pokemon Sun _ Moon.mp3");
 	//weapon sounds//
 	rifleShot = loadSound("assets/Sounds/762x54r Single Isolated MP3.mp3");
 	rifleReload = loadSound("assets/Sounds/ak-47-reload-sound-effect.wav");
@@ -194,6 +195,8 @@ function setup() {
 
 	player.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
 	opponent.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
+	menuMusic.setVolume(0.5 * settings.musicLevel * settings.masterLevel);
+	menuMusic.loop();
 }
 
 //fix
