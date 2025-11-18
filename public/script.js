@@ -1,3 +1,5 @@
+//railway redeploy please
+
 socket.on("player_move", (data) => {
 	console.log("Opponent moved:", data);
 	opponent.x = data.x;
