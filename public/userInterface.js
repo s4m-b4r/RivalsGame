@@ -480,17 +480,10 @@ function drawLoadoutCard(i, item, x, y, w, h) {
 
 function drawLoadoutSlots() {
 	push();
-	let baseX = width - 500;
-	let baseY = 250;
-
-	textSize(45);
-	fill("#f6cd26");
-	textAlign(CENTER, TOP);
-	text("YOUR LOADOUT", baseX + 200, 150);
 
 	for (let i = 0; i < 3; i++) {
-		let x = baseX;
-		let y = baseY + i * 200;
+		let x = width - 500;
+		let y = 250 + i * 200;
 
 		drawLoadoutSlot(i, x, y, 500, 150);
 	}
@@ -506,7 +499,7 @@ function drawLoadoutSlot(i, x, y, w, h) {
 	stroke(selected ? "#f6cd26" : "#ffffff44");
 	strokeWeight(selected ? 6 : 3);
 	fill(hovered ? "#303030" : "#202020");
-	rect(x, y, w, h, 15);
+	rect(x - 30, y, w, h, 15);
 
 	noStroke();
 	fill("#f6cd26");
