@@ -147,8 +147,8 @@ class Weapon {
 				let startX = player.x + cos(angle) * this.muzzleOffset;
 				let startY = player.y + sin(angle) * this.muzzleOffset;
 
-				// let targetX = startX + cos(angle) * 1000;
-				// let targetY = startY + sin(angle) * 1000;
+				let targetX = startX + cos(angle) * 1000;
+				let targetY = startY + sin(angle) * 1000;
 
 				let bullet = new Bullet(startX, startY, targetX, targetY, this);
 				bullets.push(bullet);
