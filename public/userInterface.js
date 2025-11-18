@@ -739,7 +739,7 @@ let countdownArray = ["3", "2", "1", "GO!", " "];
 roundStartTime = 0;
 let lastSecondPlayed = -1;
 function drawCountdown() {
-	if (Date.now() < roundStartTime + 5000) {
+	if (Date.now() < roundStartTime + 4000) {
 		push();
 		stroke(0);
 		fill("#00000050");
