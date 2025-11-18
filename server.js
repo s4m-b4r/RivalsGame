@@ -193,7 +193,7 @@ io.on("connection", (socket) => {
 		socket.username = data.username;
 		console.log(`User ${data.username} registered on socket ${socket.id}`);
 	});
-	socket.on("join_queue", () => {
+	socket.on("join_queue", (data) => {
 		console.log("Join queue:", socket.id);
 		if (waitingPlayer) {
 			if (waitingPlayer.id != socket.id) {
@@ -213,6 +213,7 @@ io.on("connection", (socket) => {
 					opStartPos: player2Pos,
 					arena: matchArena,
 					roundEndTime: roundEndTime,
+					loadout: data.loadout,
 				});
 
 				io.to(socket.id).emit("game_start", {
@@ -224,6 +225,7 @@ io.on("connection", (socket) => {
 					opStartPos: player1Pos,
 					arena: matchArena,
 					roundEndTime: roundEndTime,
+					loadout: waitingPlayerLoadout,
 				});
 
 				games.push({
@@ -241,6 +243,7 @@ io.on("connection", (socket) => {
 			}
 		} else {
 			waitingPlayer = socket;
+			waitingPlayerLoadout = data.loadout;
 		}
 	});
 

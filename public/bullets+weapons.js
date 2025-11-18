@@ -97,7 +97,7 @@ function bulletDraw() {
 }
 
 class Weapon {
-	constructor(name, asset, bulletAsset, damage, recoil, magazineSize, speed, cooldown, bulletCount, type) {
+	constructor(name, asset, bulletAsset, damage, recoil, magazineSize, speed, cooldown, bulletCount, type, refNum) {
 		this.name = name;
 		this.asset = asset;
 		this.bulletAsset = bulletAsset;
@@ -114,6 +114,7 @@ class Weapon {
 		this.bulletCount = bulletCount;
 		this.lastShotTime = 0;
 		this.type = type;
+		this.refNum = refNum; // for loadout purposes
 
 		this.remainingAmmo = 10000; // Total ammo available
 		this.reloadTime = 2000; //time in milliseconds to reload
@@ -205,11 +206,11 @@ class Weapon {
 }
 
 function loadWeapons() {
-	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, rifleAmmoImage, 10, 3, 30, 10, 75, 1, 1);
-	let shotgun = new Weapon("Shotgun", shotgunImage, shotgunAmmoImage, 15, 0, 2, 7, 1000, 7, 2);
-	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, rifleAmmoImage, 90, 0, 3, 15, 2000, 1, 1);
-	let smg = new Weapon("SMG", smgImage, smgAmmoImage, 5, 15, 60, 15, 50, 1, 3);
-	let pistol = new Weapon("Pistol", pistolImage, smgAmmoImage, 15, 3, 12, 10, 125, 1, 3);
+	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, rifleAmmoImage, 10, 3, 30, 10, 75, 1, 1, 0);
+	let shotgun = new Weapon("Shotgun", shotgunImage, shotgunAmmoImage, 15, 0, 2, 7, 1000, 7, 2, 1);
+	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, rifleAmmoImage, 90, 0, 3, 15, 2000, 1, 1, 2);
+	let smg = new Weapon("SMG", smgImage, smgAmmoImage, 5, 15, 60, 15, 50, 1, 3, 3);
+	let pistol = new Weapon("Pistol", pistolImage, smgAmmoImage, 15, 3, 12, 10, 125, 1, 3, 4);
 
 	return { assaultRifle, shotgun, sniperRifle, smg, pistol };
 }
@@ -286,6 +287,7 @@ class GrenadeItem {
 		this.speed = 6;
 		this.visible = true;
 		this.cooldown = 4000;
+		this.refNum = 5;
 	}
 	shoot() {
 		let now = Date.now();
@@ -513,5 +515,30 @@ function buildLoadoutItemPool() {
 			type: "grenade",
 			asset: grenadeItems[key].asset,
 		});
+	}
+}
+
+function createOpponentInventory(opponentLoadout) {
+	for (let i = 0; i < 3; i++) {
+		switch (opponentLoadout[i]) {
+			case 0:
+				opponent.inventory[i] = weapons.assaultRifle;
+				break;
+			case 1:
+				opponent.inventory[i] = weapons.shotgun;
+				break;
+			case 2:
+				opponent.inventory[i] = weapons.sniperRifle;
+				break;
+			case 3:
+				opponent.inventory[i] = weapons.smg;
+				break;
+			case 4:
+				opponent.inventory[i] = weapons.pistol;
+				break;
+			case 5:
+				opponent.inventory[i] = grenadeItems.handGrenade;
+				break;
+		}
 	}
 }

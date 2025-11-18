@@ -631,7 +631,7 @@ function mouseClicked() {
 		if (selectedMenu === "match") {
 			if (collidePointRect(mouseX, mouseY, width - 450, height - 250, 400, 200)) {
 				if (!queueing) {
-					socket.emit("join_queue");
+					socket.emit("join_queue", { loadout: [loadoutSelection[0].ref.refNum, loadoutSelection[1].ref.refNum, loadoutSelection[2].ref.refNum] });
 					queueing = true;
 				} else {
 					socket.emit("leave_queue");
