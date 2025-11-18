@@ -46,7 +46,7 @@ socket.on("new_round", (data) => {
 	player.y = data.startPos.y;
 	opponent.x = data.opStartPos.x;
 	opponent.y = data.opStartPos.y;
-	roundStartTime = data.roundStartTime;
+	roundStartTime = roundEndTime - 150000;
 	roundEndTime = data.roundEndTime;
 	inMatch = true;
 	roundStart = false;
@@ -99,7 +99,7 @@ socket.on("game_start", (data) => {
 	opponent.y = data.opStartPos.y;
 	arena = arenas[data.arena];
 	roundEndTime = data.roundEndTime;
-	roundStartTime = data.roundStartTime;
+	roundStartTime = roundEndTime - 150000;
 	arenaAssetsLoad();
 	player.id = data.playerId;
 	opponent.id = data.opponentId;

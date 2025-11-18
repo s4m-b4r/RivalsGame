@@ -204,7 +204,6 @@ io.on("connection", (socket) => {
 				const player1Pos = { x: 1600, y: 475 };
 				matchArena = Math.floor(Math.random() * 4); // 0 to 4
 				roundEndTime = Date.now() + 154000;
-				roundStartTime = Date.now();
 				io.to(waitingPlayer.id).emit("game_start", {
 					room,
 					playerId: waitingPlayer.id,
@@ -214,7 +213,6 @@ io.on("connection", (socket) => {
 					opStartPos: player2Pos,
 					arena: matchArena,
 					roundEndTime: roundEndTime,
-					roundStartTime: roundStartTime,
 				});
 
 				io.to(socket.id).emit("game_start", {
@@ -226,7 +224,6 @@ io.on("connection", (socket) => {
 					opStartPos: player1Pos,
 					arena: matchArena,
 					roundEndTime: roundEndTime,
-					roundStartTime: roundStartTime,
 				});
 
 				games.push({
@@ -305,7 +302,6 @@ io.on("connection", (socket) => {
 
 			const newArena = Math.floor(Math.random() * 4); // 0 to 4
 			const roundEndTime = Date.now() + 154000;
-			const roundStartTime = Date.now();
 
 			if (game.round % 2 == 1) {
 				player1Pos = { x: 150, y: 475 };
@@ -321,7 +317,6 @@ io.on("connection", (socket) => {
 				startPos: player1Pos,
 				opStartPos: player2Pos,
 				roundEndTime: roundEndTime,
-				roundStartTime: roundStartTime,
 			});
 
 			io.to(game.players.p2).emit("new_round", {
@@ -329,8 +324,7 @@ io.on("connection", (socket) => {
 				a: newArena,
 				startPos: player2Pos,
 				opStartPos: player1Pos,
-				roundEndTime,
-				roundStartTime,
+				roundEndTime: roundEndTime,
 			});
 
 			console.log(`Game ${game.gameID} - Round ${game.round} started`);
