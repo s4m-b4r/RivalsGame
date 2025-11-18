@@ -131,18 +131,17 @@ class Weapon {
 			let startX = player.x + cos(angle) * this.muzzleOffset;
 			let startY = player.y + sin(angle) * this.muzzleOffset;
 
-			let aimDir = createVector(mouseX - player.x, mouseY - player.y);
+			let targetX = startX + cos(angle) * 2000;
+			let targetY = startY + sin(angle) * 2000;
 
-			let bullet = new Bullet(startX, startY, mouseX, mouseY, this);
+			let bullet = new Bullet(startX, startY, targetX, targetY, this);
 			bullets.push(bullet);
 		} else {
 			//for shotgun
 			let baseAngle = atan2(mouseY - player.y, mouseX - player.x);
 
-			let half = (this.bulletCount - 1) / 2;
-
 			for (let i = 0; i < this.bulletCount; i++) {
-				let offset = map(i, 0, this.bulletCount - 1);
+				let offset = map(i, 0, this.bulletCount - 1, -spread, spread);
 				let angle = baseAngle + offset;
 
 				let startX = player.x + cos(angle) * this.muzzleOffset;
