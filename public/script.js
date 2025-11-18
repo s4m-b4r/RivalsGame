@@ -109,6 +109,7 @@ socket.on("game_start", (data) => {
 
 	opponent.health = 100;
 	opponent.alive = true;
+	opponentLoadout = data.loadout;
 
 	createOpponentInventory(data.opponentLoadout);
 
