@@ -492,7 +492,7 @@ function drawLoadoutSlots() {
 		let x = baseX;
 		let y = baseY + i * 200;
 
-		drawLoadoutSlot(i, x, y, 400, 150);
+		drawLoadoutSlot(i, x, y, 500, 150);
 	}
 
 	pop();
@@ -520,7 +520,7 @@ function drawLoadoutSlot(i, x, y, w, h) {
 			imageMode(CENTER);
 			image(item.asset, x + 70, y + h / 2, item.asset.width * 4, item.asset.height * 4);
 		}
-		text(item.name.toUpperCase(), x + w / 2 + 30, y + h / 2);
+		text(item.name.toUpperCase(), x + w / 2 + 20, y + h / 2);
 	} else {
 		text("EMPTY", x + w / 2, y + h / 2);
 	}
