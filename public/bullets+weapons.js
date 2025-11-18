@@ -16,6 +16,7 @@ class Bullet {
 		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
 			this.recoilDist / 100
 		);
+		console.log(this.recoilAdd, this.recoilscale);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -131,6 +132,7 @@ class Weapon {
 			let startY = player.y + sin(angle) * this.muzzleOffset;
 
 			let aimDir = createVector(mouseX - player.x, mouseY - player.y);
+
 			let bullet = new Bullet(startX, startY, mouseX, mouseY, this);
 			bullets.push(bullet);
 		} else {
