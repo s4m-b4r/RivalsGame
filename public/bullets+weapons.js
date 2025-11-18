@@ -141,7 +141,7 @@ class Weapon {
 			let baseAngle = atan2(mouseY - player.y, mouseX - player.x);
 
 			for (let i = 0; i < this.bulletCount; i++) {
-				let offset = map(i, 0, this.bulletCount - 1, -spread, spread);
+				let offset = map(i, 0, this.bulletCount - 1);
 				let angle = baseAngle + offset;
 
 				let startX = player.x + cos(angle) * this.muzzleOffset;
