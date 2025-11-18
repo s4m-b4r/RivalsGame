@@ -371,6 +371,7 @@ async function savePlayerSettingsUI() {
 			settings: settings,
 		}),
 	});
+	menuMusic.setVolume(0.5 * settings.musicLevel * settings.masterLevel);
 
 	console.log("Settings saved!");
 }
