@@ -277,6 +277,7 @@ function drawOpponent() {
 			); // Draw the gun at player's position
 			pop();
 		}
+
 		push();
 		textAlign(CENTER, CENTER);
 		textSize(15);

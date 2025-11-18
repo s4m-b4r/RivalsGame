@@ -134,11 +134,29 @@ class Weapon {
 			let bullet = new Bullet(startX, startY, mouseX, mouseY, this);
 			bullets.push(bullet);
 		} else {
+			// Shotgun: shoot multiple pellets in a spread
+			let baseAngle = atan2(mouseY - player.y, mouseX - player.x);
+
+			// How wide the spread is (in radians)
+			let spread = 0.25; // about 14 degrees total
+			let half = (this.bulletCount - 1) / 2;
+
 			for (let i = 0; i < this.bulletCount; i++) {
-				////////////////////////// fix for shotgun here
+				// Spread angle offset
+				let offset = map(i, 0, this.bulletCount - 1, -spread, spread);
+				let angle = baseAngle + offset;
+
+				// Starting at muzzle position
+				let startX = player.x + cos(angle) * this.muzzleOffset;
+				let startY = player.y + sin(angle) * this.muzzleOffset;
+
+				let targetX = startX + cos(angle) * 1000;
+				let targetY = startY + sin(angle) * 1000;
+
+				let bullet = new Bullet(startX, startY, targetX, targetY, this);
+				bullets.push(bullet);
 			}
 		}
-
 		this.lastShotTime = now;
 		this.ammo--;
 
