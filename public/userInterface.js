@@ -631,8 +631,12 @@ function mouseClicked() {
 		if (selectedMenu === "match") {
 			if (collidePointRect(mouseX, mouseY, width - 450, height - 250, 400, 200)) {
 				if (!queueing) {
-					socket.emit("join_queue", { loadout: [loadoutSelection[0].ref.refNum, loadoutSelection[1].ref.refNum, loadoutSelection[2].ref.refNum] });
-					queueing = true;
+					if (loadoutSelection[0] && loadoutSelection[1] && loadoutSelection[2]) {
+						socket.emit("join_queue", { loadout: [loadoutSelection[0].ref.refNum, loadoutSelection[1].ref.refNum, loadoutSelection[2].ref.refNum] });
+						queueing = true;
+					} else {
+						alert("Please select 3 loadout items before joining the queue.");
+					}
 				} else {
 					socket.emit("leave_queue");
 					queueing = false;
