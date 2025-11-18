@@ -139,11 +139,10 @@ class Weapon {
 			//for shotgun
 			let baseAngle = atan2(mouseY - player.y, mouseX - player.x);
 
-			let spread = 0.1;
 			let half = (this.bulletCount - 1) / 2;
 
 			for (let i = 0; i < this.bulletCount; i++) {
-				let offset = map(i, 0, this.bulletCount - 1, -spread, spread);
+				let offset = map(i, 0, this.bulletCount - 1);
 				let angle = baseAngle + offset;
 
 				let startX = player.x + cos(angle) * this.muzzleOffset;
