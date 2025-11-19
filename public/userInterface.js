@@ -482,10 +482,10 @@ function drawLoadoutSlots() {
 	push();
 
 	for (let i = 0; i < 3; i++) {
-		let x = width - 500;
+		let x = width - 700;
 		let y = 250 + i * 200;
 
-		drawLoadoutSlot(i, x, y, 400, 150);
+		drawLoadoutSlot(i, x, y, 500, 150);
 	}
 
 	pop();
