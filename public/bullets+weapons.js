@@ -354,7 +354,13 @@ class Grenade {
 	draw() {
 		let now = Date.now();
 		if (this.detonated) {
-			if (this.startTime + (this.frameCount * 50 + 50) > Date.now()) {
+			push();
+			translate(this.location.x, this.location.y);
+			noSmooth();
+			image(this.explosionAsset, 0, 0, 200, 200, this.frameCount * 355, 0, 355, 355);
+			pop();
+
+			if (Date.now() - this.detonatedTime > this.frameCount * 50) {
 				this.frameCount++;
 			}
 		} else {
@@ -445,10 +451,10 @@ class OpponentGrenade {
 			push();
 			translate(this.location.x, this.location.y);
 			noSmooth();
-			image(this.explosionAsset, 0, 0, 200, 200, this.frameCount * 64, 0, 355, 355);
+			image(this.explosionAsset, 0, 0, 200, 200, this.frameCount * 355, 0, 355, 355);
 			pop();
 
-			if (this.startTime + (this.frameCount * 50 + 50) > Date.now()) {
+			if (Date.now() - this.detonatedTime > this.frameCount * 50) {
 				this.frameCount++;
 			}
 		} else {
@@ -467,6 +473,7 @@ class OpponentGrenade {
 			if (Date.now() > this.detonationTime) {
 				this.detonated = true;
 				this.detonatedTime = Date.now();
+
 				return;
 			}
 
