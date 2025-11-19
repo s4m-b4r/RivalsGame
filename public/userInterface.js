@@ -493,7 +493,7 @@ function drawLoadoutSlots() {
 
 function drawLoadoutSlot(i, x, y, w, h) {
 	push();
-	let hovered = collidePointRect(mouseX, mouseY, x, y, w, h);
+	let hovered = collidePointRect(mouseX, mouseY, x - 30, y, w, h);
 	let selected = selectedLoadoutIndex === i;
 
 	stroke(selected ? "#f6cd26" : "#ffffff44");
