@@ -426,6 +426,10 @@ function drawLeaderboardMenu() {
 }
 
 let loadoutSelection = [null, null, null];
+loadoutSelection[0] = allLoadoutItems[0];
+loadoutSelection[1] = allLoadoutItems[3];
+loadoutSelection[1] = allLoadoutItems[5];
+
 let selectedLoadoutIndex = 0;
 
 function drawLoadoutMenu() {
