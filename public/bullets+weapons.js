@@ -379,6 +379,12 @@ class Grenade {
 			if (Date.now() > this.detonationTime) {
 				this.detonated = true;
 				this.detonatedTime = Date.now();
+				if (collideCircleCircle(this.location.x, this.location.y, 300, opponent.x, opponent.y, opponent.radius)) {
+					opponent.health -= this.grenade.damage;
+					socket.emit("damage_dealt", { room: roomID, d: this.grenade.damage });
+					hitSound.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
+					hitSound.play();
+				}
 				return;
 			}
 
@@ -475,6 +481,12 @@ class OpponentGrenade {
 			if (Date.now() > this.detonationTime) {
 				this.detonated = true;
 				this.detonatedTime = Date.now();
+				if (collideCircleCircle(this.location.x, this.location.y, 300, opponent.x, opponent.y, opponent.radius)) {
+					opponent.health -= 70;
+					socket.emit("damage_dealt", { room: roomID, d: this.grenade.damage });
+					hitSound.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
+					hitSound.play();
+				}
 
 				return;
 			}
