@@ -357,7 +357,7 @@ class Grenade {
 			push();
 			translate(this.location.x, this.location.y);
 			noSmooth();
-			image(this.explosionAsset, 0, 0, 200, 200, this.frameCount * 355, 0, 355, 355);
+			image(this.grenade.explosionAsset, 0, 0, 200, 200, this.frameCount * 355, 0, 355, 355);
 			pop();
 
 			if (Date.now() - this.detonatedTime > this.frameCount * 50) {
