@@ -340,6 +340,7 @@ class Grenade {
 
 		this.frameCount = 0; // for explosion
 		this.detonatedTime = 0;
+		this.lifetime = 53;
 
 		socket.emit("grenade_thrown", { room: roomID, l: this.location, v: this.velocity, t: this.grenade.type, dt: this.detonationTime });
 	}
@@ -413,6 +414,8 @@ class OpponentGrenade {
 		this.frameCount = 0;
 		this.startTime = 0;
 		this.spin = 0;
+		this.lifetime = 53;
+		this.fullyDetonated = false;
 
 		switch (type) {
 			case 1:
@@ -439,6 +442,12 @@ class OpponentGrenade {
 	draw() {
 		let now = Date.now();
 		if (this.detonated) {
+			push();
+			translate(this.location.x, this.location.y);
+			noSmooth();
+			image(this.explosionAsset, 0, 0, 200, 200, this.frameCount * 64, 0, 355, 355);
+			pop();
+
 			if (this.startTime + (this.frameCount * 50 + 50) > Date.now()) {
 				this.frameCount++;
 			}
@@ -485,6 +494,8 @@ class OpponentGrenade {
 					}
 				}
 			}
+		} else if (this.frameCount > this.lifetime) {
+			this.fullyDetonated = true;
 		}
 	}
 }
