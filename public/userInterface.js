@@ -703,14 +703,11 @@ function mouseClicked() {
 				}
 			}
 
-			let baseX = width - 500;
-			let baseY = 250;
-
 			for (let i = 0; i < 3; i++) {
-				let x = baseX;
-				let y = baseY + i * 200;
+				let x = width - 700;
+				let y = 235 + i * 200;
 
-				if (collidePointRect(mouseX, mouseY, x, y, 400, 150)) {
+				if (collidePointRect(mouseX, mouseY, x, y, 500, 150)) {
 					selectedLoadoutIndex = i;
 					return;
 				}
