@@ -12,9 +12,6 @@ class Keybinds {
 		this.slot2 = slot2;
 		this.slot3 = slot3;
 	}
-	changeKeybind(keycode) {
-		//change the keybind to the new keycode
-	}
 }
 
 let keybind = new Keybinds(87, 83, 68, 65, 32, 16, 82, 27, 49, 50, 51);

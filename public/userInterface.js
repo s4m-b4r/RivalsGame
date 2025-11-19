@@ -462,9 +462,8 @@ function drawLoadoutCard(i, item, x, y, w, h) {
 	let hovered = collidePointRect(mouseX, mouseY, x, y, w, h);
 
 	stroke("#f6cd26");
-	strokeWeight(hovered ? 6 : 3);
 	fill(hovered ? "#303030" : "#202020");
-	rect(x, y, w, h, 15);
+	rect(x, y, w, h);
 
 	if (item.asset) {
 		imageMode(CENTER);
@@ -500,7 +499,7 @@ function drawLoadoutSlot(i, x, y, w, h) {
 	stroke(selected ? "#f6cd26" : "#ffffff44");
 	strokeWeight(selected ? 6 : 3);
 	fill(hovered ? "#303030" : "#202020");
-	rect(x - 30, y, w, h, 15);
+	rect(x - 30, y, w, h);
 
 	noStroke();
 	fill("#f6cd26");
@@ -538,7 +537,7 @@ function drawCareerMenu() {
 	let KDangle2 = (deaths / KDtotal) * TWO_PI;
 	push();
 	textAlign(LEFT, CENTER);
-	translate(width / 2 - 350, 600);
+	translate(width / 2 - 350, 500);
 
 	stroke("#f6cd26");
 	strokeWeight(3);
@@ -584,7 +583,7 @@ function drawCareerMenu() {
 	//////////////////////
 	push();
 	textAlign(LEFT, CENTER);
-	translate(width / 2 + 350, 600);
+	translate(width / 2 + 350, 500);
 
 	stroke("#f6cd26");
 	strokeWeight(3);
