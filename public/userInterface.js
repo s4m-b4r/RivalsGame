@@ -485,7 +485,7 @@ function drawLoadoutSlots() {
 		let x = width - 500;
 		let y = 250 + i * 200;
 
-		drawLoadoutSlot(i, x, y, 450, 150);
+		drawLoadoutSlot(i, x, y, 400, 150);
 	}
 
 	pop();
