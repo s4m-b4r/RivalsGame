@@ -340,7 +340,7 @@ class Grenade {
 
 		this.frameCount = 0; // for explosion
 		this.detonatedTime = 0;
-		this.lifetime = 53;
+		this.lifetime = 30;
 
 		socket.emit("grenade_thrown", { room: roomID, l: this.location, v: this.velocity, t: this.grenade.type, dt: this.detonationTime });
 	}
@@ -406,6 +406,8 @@ class Grenade {
 					}
 				}
 			}
+		} else if (this.frameCount > this.lifetime) {
+			this.fullyDetonated = true;
 		}
 	}
 }
@@ -420,7 +422,7 @@ class OpponentGrenade {
 		this.frameCount = 0;
 		this.startTime = 0;
 		this.spin = 0;
-		this.lifetime = 53;
+		this.lifetime = 30;
 		this.fullyDetonated = false;
 
 		switch (type) {
