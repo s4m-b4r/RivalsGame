@@ -481,7 +481,7 @@ class OpponentGrenade {
 				this.detonatedTime = Date.now();
 				if (collideCircleCircle(this.location.x, this.location.y, 150, opponent.x, opponent.y, opponent.radius)) {
 					opponent.health -= 70;
-					socket.emit("damage_dealt", { room: roomID, d: this.grenade.damage });
+					socket.emit("damage_dealt", { room: roomID, d: 70 });
 					hitSound.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
 					hitSound.play();
 				}
