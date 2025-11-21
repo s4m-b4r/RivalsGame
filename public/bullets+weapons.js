@@ -13,9 +13,7 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
-			this.recoilDist / 100
-		);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
 		console.log(this.recoilAdd, this.recoilscale);
 
 		this.radius = 10; // Bullet size
@@ -286,7 +284,7 @@ class GrenadeItem {
 		this.magazineSize = count;
 		this.speed = 6;
 		this.visible = true;
-		this.cooldown = 4000;
+		this.cooldown = 10;
 		this.refNum = 5;
 	}
 	shoot() {
@@ -481,7 +479,7 @@ class OpponentGrenade {
 			if (Date.now() > this.detonationTime) {
 				this.detonated = true;
 				this.detonatedTime = Date.now();
-				if (collideCircleCircle(this.location.x, this.location.y, 300, opponent.x, opponent.y, opponent.radius)) {
+				if (collideCircleCircle(this.location.x, this.location.y, 150, opponent.x, opponent.y, opponent.radius)) {
 					opponent.health -= 70;
 					socket.emit("damage_dealt", { room: roomID, d: this.grenade.damage });
 					hitSound.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
@@ -522,7 +520,7 @@ class OpponentGrenade {
 }
 
 function loadGrenades() {
-	let handGrenade = new GrenadeItem("Hand Grenade", handGrenadeImage, handGrenadeExplosionImage, 1, 70, 3000, 5);
+	let handGrenade = new GrenadeItem("Hand Grenade", handGrenadeImage, handGrenadeExplosionImage, 1, 70, 3000, 1000);
 	return { handGrenade };
 }
 
