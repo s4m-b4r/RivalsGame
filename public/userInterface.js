@@ -337,6 +337,7 @@ function createKeybindInput(label, x, y, key) {
 		function captureKey(e) {
 			e.preventDefault();
 			keybind[key] = e.keyCode;
+			console.log(e.keyCode);
 			input.value(keyCodeToName(e.keyCode));
 			window.removeEventListener("keydown", captureKey);
 		}
