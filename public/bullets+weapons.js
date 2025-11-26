@@ -122,26 +122,10 @@ class Weapon {
 
 	shoot() {
 		let now = Date.now();
-		if (now - this.lastShotTime < this.cooldown) return; // cooldown check
-		if (this.ammo <= 0 || this.isReloading) return; // no ammo check
-		if (this.bulletCount < 2) {
-			let angle = atan2(mouseY - player.y, mouseX - player.x);
-
-			let startX = player.x + cos(angle) * this.muzzleOffset;
-			let startY = player.y + sin(angle) * this.muzzleOffset;
-
-			let targetX = startX + cos(angle) * 2000;
-			let targetY = startY + sin(angle) * 2000;
-
-			let bullet = new Bullet(startX, startY, targetX, targetY, this);
-			bullets.push(bullet);
-		} else {
-			//for shotgun
-			let baseAngle = atan2(mouseY - player.y, mouseX - player.x);
-
-			for (let i = 0; i < this.bulletCount; i++) {
-				let t = i / (this.bulletCount - 1) - 0.5;
-				let angle = baseAngle + t * 0.25; //0.25 = spread
+		if (!(now - this.lastShotTime < this.cooldown || this.ammo <= 0 || this.isReloading)) {
+			if (this.bulletCount < 2) {
+				// cooldown check
+				let angle = atan2(mouseY - player.y, mouseX - player.x);
 
 				let startX = player.x + cos(angle) * this.muzzleOffset;
 				let startY = player.y + sin(angle) * this.muzzleOffset;
@@ -151,13 +135,30 @@ class Weapon {
 
 				let bullet = new Bullet(startX, startY, targetX, targetY, this);
 				bullets.push(bullet);
-			}
-		}
-		this.lastShotTime = now;
-		this.ammo--;
+			} else {
+				//for shotgun
+				let baseAngle = atan2(mouseY - player.y, mouseX - player.x);
 
-		rifleShot.setVolume(settings.sfxLevel * settings.masterLevel);
-		rifleShot.play();
+				for (let i = 0; i < this.bulletCount; i++) {
+					let t = i / (this.bulletCount - 1) - 0.5;
+					let angle = baseAngle + t * 0.25; //0.25 = spread
+
+					let startX = player.x + cos(angle) * this.muzzleOffset;
+					let startY = player.y + sin(angle) * this.muzzleOffset;
+
+					let targetX = startX + cos(angle) * 2000;
+					let targetY = startY + sin(angle) * 2000;
+
+					let bullet = new Bullet(startX, startY, targetX, targetY, this);
+					bullets.push(bullet);
+				}
+			}
+			this.lastShotTime = now;
+			this.ammo--;
+
+			rifleShot.setVolume(settings.sfxLevel * settings.masterLevel);
+			rifleShot.play();
+		}
 	}
 
 	reload() {
