@@ -203,11 +203,11 @@ class Weapon {
 }
 
 function loadWeapons() {
-	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, rifleAmmoImage, 10, 3, 30, 10, 75, 1, 1, 0, 2000);
-	let shotgun = new Weapon("Shotgun", shotgunImage, shotgunAmmoImage, 15, 0, 2, 7, 1000, 7, 2, 1, 2500);
-	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, rifleAmmoImage, 90, 0, 3, 15, 2000, 1, 1, 2, 3000);
+	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, rifleAmmoImage, 10, 3, 30, 15, 75, 1, 1, 0, 2000);
+	let shotgun = new Weapon("Shotgun", shotgunImage, shotgunAmmoImage, 15, 0, 2, 15, 1000, 7, 2, 1, 2500);
+	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, rifleAmmoImage, 90, 0, 3, 20, 2000, 1, 1, 2, 3000);
 	let smg = new Weapon("SMG", smgImage, smgAmmoImage, 5, 15, 60, 15, 50, 1, 3, 3, 1000);
-	let pistol = new Weapon("Pistol", pistolImage, smgAmmoImage, 15, 3, 12, 10, 125, 1, 3, 4, 500);
+	let pistol = new Weapon("Pistol", pistolImage, smgAmmoImage, 15, 3, 12, 15, 125, 1, 3, 4, 500);
 
 	return { assaultRifle, shotgun, sniperRifle, smg, pistol };
 }
