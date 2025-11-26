@@ -426,10 +426,10 @@ function drawLeaderboardMenu() {
 	pop();
 }
 
-let loadoutSelection = [null, null, null];
-loadoutSelection[0] = allLoadoutItems[0];
+let loadoutSelection = [allLoadoutItems[0], allLoadoutItems[3], allLoadoutItems[5]];
+letloadoutSelection[0] = allLoadoutItems[0];
 loadoutSelection[1] = allLoadoutItems[3];
-loadoutSelection[1] = allLoadoutItems[5];
+loadoutSelection[2] = allLoadoutItems[5];
 
 let selectedLoadoutIndex = 0;
 

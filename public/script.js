@@ -191,7 +191,9 @@ function setup() {
 
 	weapons = loadWeapons();
 	grenadeItems = loadGrenades();
+
 	buildLoadoutItemPool();
+	loadoutSelection[(allLoadoutItems[0], allLoadoutItems[3], allLoadoutItems[5])];
 
 	player.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
 	opponent.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
