@@ -14,7 +14,6 @@ class Bullet {
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
 		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
-		console.log(this.recoilAdd, this.recoilscale);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -95,7 +94,7 @@ function bulletDraw() {
 }
 
 class Weapon {
-	constructor(name, asset, bulletAsset, damage, recoil, magazineSize, speed, cooldown, bulletCount, type, refNum) {
+	constructor(name, asset, bulletAsset, damage, recoil, magazineSize, speed, cooldown, bulletCount, type, refNum, reloadTime) {
 		this.name = name;
 		this.asset = asset;
 		this.bulletAsset = bulletAsset;
@@ -115,7 +114,7 @@ class Weapon {
 		this.refNum = refNum; // for loadout purposes
 
 		this.remainingAmmo = 10000; // Total ammo available
-		this.reloadTime = 2000; //time in milliseconds to reload
+		this.reloadTime = reloadTime; //time in milliseconds to reload
 		this.isReloading = false;
 		this.muzzleOffset = 60; // distance from player center to weapon muzzle
 	}
@@ -204,11 +203,11 @@ class Weapon {
 }
 
 function loadWeapons() {
-	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, rifleAmmoImage, 10, 3, 30, 10, 75, 1, 1, 0);
-	let shotgun = new Weapon("Shotgun", shotgunImage, shotgunAmmoImage, 15, 0, 2, 7, 1000, 7, 2, 1);
-	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, rifleAmmoImage, 90, 0, 3, 15, 2000, 1, 1, 2);
-	let smg = new Weapon("SMG", smgImage, smgAmmoImage, 5, 15, 60, 15, 50, 1, 3, 3);
-	let pistol = new Weapon("Pistol", pistolImage, smgAmmoImage, 15, 3, 12, 10, 125, 1, 3, 4);
+	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, rifleAmmoImage, 10, 3, 30, 10, 75, 1, 1, 0, 2000);
+	let shotgun = new Weapon("Shotgun", shotgunImage, shotgunAmmoImage, 15, 0, 2, 7, 1000, 7, 2, 1, 2500);
+	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, rifleAmmoImage, 90, 0, 3, 15, 2000, 1, 1, 2, 3000);
+	let smg = new Weapon("SMG", smgImage, smgAmmoImage, 5, 15, 60, 15, 50, 1, 3, 3, 1000);
+	let pistol = new Weapon("Pistol", pistolImage, smgAmmoImage, 15, 3, 12, 10, 125, 1, 3, 4, 500);
 
 	return { assaultRifle, shotgun, sniperRifle, smg, pistol };
 }
