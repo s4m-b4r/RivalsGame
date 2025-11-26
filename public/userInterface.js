@@ -387,13 +387,13 @@ function drawLeaderboardMenu() {
 	stroke("#f6cd26");
 	strokeWeight(3);
 	fill(leaderboardButtonHovered ? "#303030" : "#202020");
-	rect(width / 2 - 150, 200, 300, 70, 10);
+	rect(width / 2 - 200, 200, 400, 70, 10);
 	fill("#f6cd26");
 	textAlign(CENTER, CENTER);
 	textSize(32);
 	textFont("IMPACT");
 	strokeWeight(0);
-	text("RANK BY: " + statDisplayName(leaderboardStat), width / 2 - 150 + 300 / 2, 200 + 70 / 2);
+	text("ORDER BY: " + statDisplayName(leaderboardStat), width / 2 - 150 + 300 / 2, 200 + 70 / 2);
 	pop();
 
 	push();
