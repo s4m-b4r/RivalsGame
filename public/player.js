@@ -234,12 +234,21 @@ function drawPlayer() {
 		}
 
 		if (keyIsDown(keybind.slot1)) {
+			if (selectedHotbarSlot != 0) {
+				socket.emit("swap_item", { room: roomID, s: 0 });
+			}
 			selectedHotbarSlot = 0;
 		}
 		if (keyIsDown(keybind.slot2)) {
+			if (selectedHotbarSlot != 1) {
+				socket.emit("swap_item", { room: roomID, s: 1 });
+			}
 			selectedHotbarSlot = 1;
 		}
 		if (keyIsDown(keybind.slot3)) {
+			if (selectedHotbarSlot != 2) {
+				socket.emit("swap_item", { room: roomID, s: 2 });
+			}
 			selectedHotbarSlot = 2;
 		}
 	}
@@ -268,13 +277,7 @@ function drawOpponent() {
 				scale(1, -1);
 			}
 
-			image(
-				opponent.inventory[opponentSelectedSlot].asset,
-				0,
-				5,
-				opponent.inventory[opponentSelectedSlot].asset.width * 2,
-				opponent.inventory[opponentSelectedSlot].asset.height * 2
-			); // Draw the gun at player's position
+			image(opponent.inventory[opponentSelectedSlot].asset, 0, 5, opponent.inventory[opponentSelectedSlot].asset.width * 2, opponent.inventory[opponentSelectedSlot].asset.height * 2); // Draw the gun at player's position
 			pop();
 		}
 
