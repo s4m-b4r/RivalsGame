@@ -195,7 +195,7 @@ function setup() {
 	buildLoadoutItemPool();
 
 	loadoutSelection[0] = allLoadoutItems[0];
-	loadoutSelection[1] = allLoadoutItems[3];
+	loadoutSelection[1] = allLoadoutItems[1];
 	loadoutSelection[2] = allLoadoutItems[5];
 
 	player.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
