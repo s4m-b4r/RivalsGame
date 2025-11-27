@@ -892,6 +892,8 @@ function drawWinMatch() {
 		roundStart = false;
 		countdown = false;
 		document.body.classList.toggle("hide-mouse", false);
+		menuMusic.setVolume(0.5 * settings.musicLevel * settings.masterLevel);
+		menuMusic.loop();
 	}
 }
 

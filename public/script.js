@@ -130,6 +130,7 @@ socket.on("game_start", (data) => {
 		player.inventory[i].ammo = player.inventory[i].magazineSize;
 	}
 	player.stamina = 300;
+	menuMusic.stop();
 });
 
 function preload() {
