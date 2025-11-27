@@ -60,7 +60,8 @@ function drawPlayerUI() {
 			text(player.inventory[selectedHotbarSlot].ammo, mouseX + 25, mouseY);
 			pop();
 			if (player.inventory[selectedHotbarSlot].isReloading) {
-				let reloadArcPercent = Date.now() / (player.inventory[selectedHotbarSlot].reloadStartTime + player.inventory[selectedHotbarSlot].reloadTime);
+				let reloadArcPercent = (Date.now() - player.inventory[selectedHotbarSlot].reloadStartTime) / player.inventory[selectedHotbarSlot].reloadTime;
+				console.log(reloadArcPercent);
 				push();
 				noFill();
 				stroke(settings.cColor);
