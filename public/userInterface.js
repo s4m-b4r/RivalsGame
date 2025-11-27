@@ -219,7 +219,7 @@ let slidersInitialized = false;
 let uiElements = [];
 
 function drawSettingsMenu() {
-	pauseMenuSettings ? background("#202020") : background("#20202050");
+	pauseMenuSettings ? background("#20202050") : background("#202020");
 	noSmooth();
 	drawTextsettings();
 
@@ -236,6 +236,7 @@ function drawSettingsMenu() {
 		strokeWeight(3);
 		rect(41, 41, 300, 75);
 		noStroke();
+		fill("#f6cd26");
 		textAlign(CENTER, CENTER);
 		textFont("IMPACT");
 		textSize(50);
