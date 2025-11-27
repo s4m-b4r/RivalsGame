@@ -64,8 +64,8 @@ function drawPlayerUI() {
 				console.log(reloadArcPercent);
 				push();
 				noFill();
-				stroke(settings.cColor);
-				strokeWeight(5);
+				stroke(settings.cColor, 70);
+				strokeWeight(3);
 				arc(mouseX, mouseY, 50, 50, 0, reloadArcPercent * 2 * PI);
 				pop();
 			}
