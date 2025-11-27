@@ -225,7 +225,9 @@ function draw() {
 			drawMatchScoreTime();
 		}
 		if (pauseMenu) drawPauseUI();
-		if (pauseMenuSettings) drawSettingsMenu();
+		if (pauseMenuSettings) {
+			drawSettingsMenu();
+		}
 	}
 
 	if (createArenaMode) {

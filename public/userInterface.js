@@ -753,6 +753,7 @@ function mouseClicked() {
 			pauseMenuSettings = true;
 			console.log("settings pressed");
 			document.body.classList.toggle("hide-mouse", false);
+			return;
 		}
 		//forfeit
 		if (collidePointRect(mouseX, mouseY, 750, 550, 250, 100)) {
@@ -762,7 +763,7 @@ function mouseClicked() {
 		}
 	}
 	if (inMatch && pauseMenuSettings) {
-		if (!collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) {
+		if (collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) {
 			pauseMenuSettings = false;
 			pauseMenu = true;
 		}
