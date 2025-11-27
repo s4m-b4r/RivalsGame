@@ -1,17 +1,17 @@
 socket.on("player_move", (data) => {
-	console.log("Opponent moved:", data);
+	// console.log("Opponent moved:", data);
 	opponent.x = data.x;
 	opponent.y = data.y;
 });
 
 socket.on("mouse_moved", (data) => {
-	console.log("mouse_moved", data);
+	// console.log("mouse_moved", data);
 	opponent.mouseX = data.mX;
 	opponent.mouseY = data.mY;
 });
 
 socket.on("bullet_shot", (data) => {
-	console.log("bullet_shot", data);
+	// console.log("bullet_shot", data);
 	let bullet = new OpponentBullet(data.l, data.v, data.t);
 	bullets.push(bullet);
 	rifleShot.setVolume(settings.sfxLevel * settings.masterLevel);
