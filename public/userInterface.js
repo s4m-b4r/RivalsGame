@@ -751,6 +751,7 @@ function mouseClicked() {
 		if (collidePointRect(mouseX, mouseY, 750, 425, 250, 100)) {
 			pauseMenu = false;
 			pauseMenuSettings = true;
+			console.log("settings pressed");
 			document.body.classList.toggle("hide-mouse", false);
 		}
 		//forfeit
