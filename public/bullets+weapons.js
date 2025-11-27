@@ -281,7 +281,7 @@ class GrenadeItem {
 		this.lastThrownTime = 0;
 		this.ammo = count;
 		this.magazineSize = count;
-		this.speed = 10;
+		this.speed = 7;
 		this.visible = true;
 		this.cooldown = 4000;
 		this.refNum = 5;
