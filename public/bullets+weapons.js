@@ -381,6 +381,10 @@ class Grenade {
 					socket.emit("damage_dealt", { room: roomID, d: this.grenade.damage });
 					hitSound.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
 					hitSound.play();
+					if (opponent.health <= 0 && player.alive) {
+						socket.emit("player_killed_opponent", { room: roomID });
+						opponent.alive = false;
+					}
 				}
 				return;
 			}
@@ -483,6 +487,10 @@ class OpponentGrenade {
 					socket.emit("damage_dealt", { room: roomID, d: 70 });
 					hitSound.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
 					hitSound.play();
+					if (opponent.health <= 0 && player.alive) {
+						socket.emit("player_killed_opponent", { room: roomID });
+						opponent.alive = false;
+					}
 				}
 
 				return;
