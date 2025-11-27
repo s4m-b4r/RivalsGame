@@ -219,7 +219,7 @@ let slidersInitialized = false;
 let uiElements = [];
 
 function drawSettingsMenu() {
-	background("#202020");
+	pauseMenuSettings ? background("#202020") : background("#20202050");
 	noSmooth();
 	drawTextsettings();
 
