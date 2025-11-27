@@ -116,11 +116,16 @@ app.post("/load_settings", async (req, res) => {
 
 app.get("/leaderboard", async (req, res) => {
 	try {
+		const allowed = ["matches_won", "kills", "rounds_won"];
+		let sort = req.query.sort;
+
+		if (!allowed.includes(sort)) sort = "matches_won";
+
 		const result = await pool.query(`
             SELECT u.username, s.kills, s.deaths, s.rounds_won, s.matches_won, s.matches_lost
             FROM player_stats s
             JOIN users u ON u.id = s.user_id
-            ORDER BY s.matches_won DESC, s.kills DESC
+            ORDER BY s.${sort} DESC
             LIMIT 10
         `);
 

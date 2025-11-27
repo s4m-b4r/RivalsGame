@@ -1067,7 +1067,7 @@ let leaderboardStatsList = ["matches_won", "kills", "rounds_won"];
 let leaderboardButtonHovered = false;
 
 async function loadLeaderboardData() {
-	const res = await fetch("/leaderboard");
+	const res = await fetch(`/leaderboard?sort=${leaderboardStat}`);
 	const data = await res.json();
 	leaderboardData = data;
 }
