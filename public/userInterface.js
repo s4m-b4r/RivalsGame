@@ -227,6 +227,7 @@ function drawSettingsMenu() {
 		createSettingsUI();
 		slidersInitialized = true;
 	}
+
 	if (pauseMenuSettings) {
 		push();
 		let settingsHovered = collidePointRect(mouseX, mouseY, 41, 41, 300, 75);
@@ -771,6 +772,7 @@ function mouseClicked() {
 			pauseMenuSettings = false;
 			pauseMenu = true;
 			clearUI();
+			slidersInitialized = false;
 		}
 	}
 }
@@ -1001,7 +1003,7 @@ function keyPressed() {
 	}
 	if (inMatch) {
 		if (keyCode == keybind.pause) {
-			if (!pauseMenu) {
+			if (!pauseMenu && !pauseMenuSettings) {
 				pauseMenu = true;
 				document.body.classList.toggle("hide-mouse", false);
 			} else {
