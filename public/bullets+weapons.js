@@ -281,7 +281,7 @@ class GrenadeItem {
 		this.lastThrownTime = 0;
 		this.ammo = count;
 		this.magazineSize = count;
-		this.speed = 6;
+		this.speed = 10;
 		this.visible = true;
 		this.cooldown = 4000;
 		this.refNum = 5;
@@ -527,7 +527,7 @@ class OpponentGrenade {
 }
 
 function loadGrenades() {
-	let handGrenade = new GrenadeItem("Hand Grenade", handGrenadeImage, handGrenadeExplosionImage, 1, 70, 3000, 5);
+	let handGrenade = new GrenadeItem("Hand Grenade", handGrenadeImage, handGrenadeExplosionImage, 1, 70, 2500, 5);
 	return { handGrenade };
 }
 
