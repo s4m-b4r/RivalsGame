@@ -59,6 +59,15 @@ function drawPlayerUI() {
 			textAlign(CENTER, CENTER);
 			text(player.inventory[selectedHotbarSlot].ammo, mouseX + 25, mouseY);
 			pop();
+			if (player.inventory[selectedHotbarSlot].isReloading) {
+				let reloadArcPercent = Date.now() / (player.inventory[selectedHotbarSlot].reloadStartTime + player.inventory[selectedHotbarSlot].reloadTime);
+				push();
+				noFill();
+				stroke(settings.cColor);
+				strokeWeight(5);
+				arc(mouseX, mouseY, 50, 50, 0, reloadArcPercent * 2 * PI);
+				pop();
+			}
 		}
 		//health + stamina bar
 		push();
