@@ -231,13 +231,16 @@ function drawSettingsMenu() {
 		push();
 		let settingsHovered = collidePointRect(mouseX, mouseY, 41, 41, 300, 75);
 		fill(settingsHovered ? "#303030" : "#202020");
+
+		stroke("#f6cd26");
+		strokeWeight(3);
+		rect(41, 41, 300, 75);
+		noStroke();
 		textAlign(CENTER, CENTER);
 		textFont("IMPACT");
 		textSize(50);
 		text("BACK", 191, 78);
-		stroke("#f6cd26");
-		strokeWeight(3);
-		rect(41, 41, 300, 75);
+
 		pop();
 	}
 }
@@ -766,6 +769,7 @@ function mouseClicked() {
 		if (collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) {
 			pauseMenuSettings = false;
 			pauseMenu = true;
+			clearUI();
 		}
 	}
 }
