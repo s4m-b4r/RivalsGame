@@ -691,7 +691,7 @@ function mouseClicked() {
 				// cycle to the next stat
 				let index = leaderboardStatsList.indexOf(leaderboardStat);
 				leaderboardStat = leaderboardStatsList[(index + 1) % leaderboardStatsList.length];
-				loadLeaderboardData();
+				await loadLeaderboardData();
 			}
 		}
 
