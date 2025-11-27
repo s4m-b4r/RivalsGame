@@ -124,7 +124,11 @@ socket.on("game_start", (data) => {
 	opponentScore = 0;
 	gameround = 0;
 
-	player.inventory = [loadoutSelection[0]?.ref ?? weapons.assaultRifle, loadoutSelection[1]?.ref ?? weapons.pistol, loadoutSelection[2]?.ref ?? grenadeItems.handGrenade];
+	player.inventory = [
+		loadoutSelection[0]?.ref ?? weapons.assaultRifle,
+		loadoutSelection[1]?.ref ?? weapons.pistol,
+		loadoutSelection[2]?.ref ?? grenadeItems.handGrenade,
+	];
 
 	for (let i = 0; i < 3; i++) {
 		player.inventory[i].ammo = player.inventory[i].magazineSize;
@@ -221,6 +225,7 @@ function draw() {
 			drawMatchScoreTime();
 		}
 		if (pauseMenu) drawPauseUI();
+		if (pauseMenuSettings) drawSettingsMenu();
 	}
 
 	if (createArenaMode) {

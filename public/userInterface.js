@@ -1,6 +1,7 @@
 selectedHotbarSlot = 0;
 
 pauseMenu = false;
+pauseMenuSettings = false;
 function drawPauseUI() {
 	push();
 	fill("#20202050");
@@ -225,6 +226,19 @@ function drawSettingsMenu() {
 	if (!slidersInitialized) {
 		createSettingsUI();
 		slidersInitialized = true;
+	}
+	if (pauseMenuSettings) {
+		push();
+		let settingsHovered = collidePointRect(mouseX, mouseY, 41, 41, 300, 75);
+		fill(settingsHovered ? "#303030" : "#202020");
+		textAlign(CENTER, CENTER);
+		textFont("IMPACT");
+		textSize(50);
+		text("BACK", 191, 78);
+		stroke("#f6cd26");
+		strokeWeight(3);
+		rect(41, 41, 300, 75);
+		pop();
 	}
 }
 function drawTextsettings() {
@@ -736,6 +750,7 @@ function mouseClicked() {
 		//settings
 		if (collidePointRect(mouseX, mouseY, 750, 425, 250, 100)) {
 			pauseMenu = false;
+			pauseMenuSettings = true;
 			document.body.classList.toggle("hide-mouse", false);
 		}
 		//forfeit
@@ -743,6 +758,12 @@ function mouseClicked() {
 			socket.emit("forfeit_round", { room: roomID });
 			pauseMenu = false;
 			document.body.classList.toggle("hide-mouse", false);
+		}
+	}
+	if (inMatch && pauseMenuSettings) {
+		if (!collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) {
+			pauseMenuSettings = false;
+			pauseMenu = true;
 		}
 	}
 }
