@@ -768,6 +768,7 @@ function mouseClicked() {
 			inMatch = false;
 			selectedMenu = "match";
 			roundStart = false;
+			queueing = false;
 
 			menuMusic.setVolume(0.5 * settings.musicLevel * settings.masterLevel);
 			menuMusic.loop();
