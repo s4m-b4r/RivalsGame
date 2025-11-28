@@ -80,15 +80,17 @@ socket.on("round_end", (data) => {
 });
 
 socket.on("match_over", (data) => {
-	if (data.winner == player.id) {
-		matchWinner = "player";
-	} else {
-		matchWinner = "opponent";
+	if (inMatch) {
+		if (data.winner == player.id) {
+			matchWinner = "player";
+		} else {
+			matchWinner = "opponent";
+		}
+		drawWinner = false;
+		drawMatchWinner = true;
+		matchWinScreenTime = Date.now();
+		queueing = false;
 	}
-	drawWinner = false;
-	drawMatchWinner = true;
-	matchWinScreenTime = Date.now();
-	queueing = false;
 });
 
 socket.on("game_start", (data) => {
@@ -124,11 +126,7 @@ socket.on("game_start", (data) => {
 	opponentScore = 0;
 	gameround = 0;
 
-	player.inventory = [
-		loadoutSelection[0]?.ref ?? weapons.assaultRifle,
-		loadoutSelection[1]?.ref ?? weapons.pistol,
-		loadoutSelection[2]?.ref ?? grenadeItems.handGrenade,
-	];
+	player.inventory = [loadoutSelection[0]?.ref ?? weapons.assaultRifle, loadoutSelection[1]?.ref ?? weapons.pistol, loadoutSelection[2]?.ref ?? grenadeItems.handGrenade];
 
 	for (let i = 0; i < 3; i++) {
 		player.inventory[i].ammo = player.inventory[i].magazineSize;
