@@ -255,7 +255,9 @@ io.on("connection", (socket) => {
 	socket.on("player_killed_opponent", (data) => {
 		const game = games.find((g) => g.gameID === data.room);
 		if (!game || !game.inProgress) return;
+
 		if (game.roundWinner) return;
+
 		const { p1, p2 } = game.players;
 		const killer = socket.id;
 		const victim = killer === p1 ? p2 : p1;
