@@ -764,6 +764,13 @@ function mouseClicked() {
 		if (collidePointRect(mouseX, mouseY, 750, 550, 250, 100)) {
 			socket.emit("forfeit_round", { room: roomID });
 			pauseMenu = false;
+
+			inMatch = false;
+			selectedMenu = "match";
+			roundStart = false;
+
+			menuMusic.setVolume(0.5 * settings.musicLevel * settings.masterLevel);
+			menuMusic.loop();
 			document.body.classList.toggle("hide-mouse", false);
 		}
 	}

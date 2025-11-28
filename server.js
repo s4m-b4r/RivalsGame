@@ -397,6 +397,29 @@ io.on("connection", (socket) => {
 		}, 5000);
 	});
 
+	socket.on("forfeit_round", (data) => {
+		const game = games.find((g) => g.gameID === data.room);
+		if (!game || !game.inProgress) return;
+
+		const { p1, p2 } = game.players;
+		const loser = socket.id;
+		const winner = loser === p1 ? p2 : p1;
+
+		const loserName = socket.username;
+		const winnerName = io.sockets.sockets.get(victim)?.username;
+
+		const p1Socket = io.sockets.sockets.get(p1);
+		const p2Socket = io.sockets.sockets.get(p2);
+
+		updateStats(loserName, "matches_lost", 1);
+		updateStats(winnerName, "matches_won", 1);
+		updateStats(winnerName, "rounds_won", 1);
+
+		io.to(data.room).emit("match_over", { winner: winner, scores: game.scores });
+		games.splice(games.indexOf(game), 1);
+		return;
+	});
+
 	socket.on("leave_queue", () => {
 		console.log("Leave queue:", socket.id);
 		if (waitingPlayer) {
