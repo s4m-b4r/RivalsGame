@@ -256,13 +256,12 @@ io.on("connection", (socket) => {
 		const game = games.find((g) => g.gameID === data.room);
 		if (!game || !game.inProgress) return;
 
+		// Prevent double reporting
 		if (game.roundWinner) return;
 
 		const { p1, p2 } = game.players;
 		const killer = socket.id;
 		const victim = killer === p1 ? p2 : p1;
-
-		// Prevent double reporting
 
 		const killerName = socket.username;
 		const victimName = io.sockets.sockets.get(victim)?.username;
