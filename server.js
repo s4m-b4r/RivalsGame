@@ -406,7 +406,7 @@ io.on("connection", (socket) => {
 		const winner = loser === p1 ? p2 : p1;
 
 		const loserName = socket.username;
-		const winnerName = io.sockets.sockets.get(victim)?.username;
+		const winnerName = io.sockets.sockets.get(winner)?.username;
 
 		const p1Socket = io.sockets.sockets.get(p1);
 		const p2Socket = io.sockets.sockets.get(p2);
