@@ -811,6 +811,7 @@ function drawCountdown() {
 		text(countdownArray[i], 1750 / 2, 950 / 2);
 		pop();
 	} else {
+		console.log("end countdown");
 		lastSecondPlayed = -1;
 		roundStart = true;
 		countdown = false;
