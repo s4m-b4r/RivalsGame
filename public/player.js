@@ -120,6 +120,17 @@ class Player {
 							if (collideRectCircle(i * 50, j * 50, 50, 50, this.x, this.nY, this.radius)) {
 								this.canMoveYroll = false;
 							}
+							if (collideRectCircle(i * 50, j * 50, 50, 50, this.nX, this.nY, this.radius)) {
+								if (!this.canMoveXroll && !this.canMoveYroll) {
+									//fill
+								} else if (this.canMoveXroll) {
+									this.canMoveYroll = false;
+									this.canMoveXroll = true;
+								} else if (this.canMoveYroll) {
+									this.canMoveXroll = false;
+									this.canMoveYroll = true;
+								}
+							}
 						}
 					}
 				}
