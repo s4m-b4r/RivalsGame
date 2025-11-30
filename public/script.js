@@ -47,7 +47,8 @@ socket.on("new_round", (data) => {
 	opponent.x = data.opStartPos.x;
 	opponent.y = data.opStartPos.y;
 	roundEndTime = data.roundEndTime;
-	roundStartTime = roundEndTime - 154000;
+	roundStartTime = data.roundStartTime;
+	console.log(roundStartTime, roundEndTime, roundStartTime - Date.now(), Date.now());
 	inMatch = true;
 	roundStart = false;
 	countdown = true;

@@ -852,7 +852,7 @@ function drawMatchScoreTime() {
 	fill("#ff0000");
 	text(opponentScore, 975, 25);
 
-	if (remainingRoundTime === 0) {
+	if (remainingRoundTime <= 0) {
 		drawWinner = true;
 		if (!emittedRoundEnd) {
 			emittedRoundEnd = true;
@@ -905,7 +905,7 @@ function drawWinRound() {
 matchWinner = "";
 matchWinScreenTime = 0;
 function drawWinMatch() {
-	if ((matchWinner = "player")) {
+	if (matchWinner == "player") {
 		push();
 		textAlign(CENTER, CENTER);
 		textFont("IMPACT");

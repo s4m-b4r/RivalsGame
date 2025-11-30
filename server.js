@@ -220,7 +220,7 @@ io.on("connection", (socket) => {
 					opStartPos: player2Pos,
 					arena: matchArena,
 					roundEndTime: roundEndTime,
-					roundStartTime: Date.now(),
+					roundStartTime: roundStartTime,
 					loadout: data.loadout,
 				});
 
@@ -233,7 +233,7 @@ io.on("connection", (socket) => {
 					opStartPos: player1Pos,
 					arena: matchArena,
 					roundEndTime: roundEndTime,
-					roundStartTime: Date.now(),
+					roundStartTime: roundStartTime,
 					loadout: waitingPlayerLoadout,
 				});
 
