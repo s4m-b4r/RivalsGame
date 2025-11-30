@@ -123,14 +123,14 @@ class Player {
 						}
 					}
 				}
-
-				if (this.canMoveXroll) {
-					this.x = this.nX;
+				if (this.canMoveXroll || this.canMoveYroll) {
+					if (this.canMoveXroll) {
+						this.x = this.nX;
+					}
+					if (this.canMoveYroll) {
+						this.y = this.nY;
+					}
 				}
-				if (this.canMoveYroll) {
-					this.y = this.nY;
-				}
-
 				if (!this.canMoveXroll && !this.canMoveYroll) {
 					this.isRolling = false;
 				}
