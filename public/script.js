@@ -102,7 +102,7 @@ socket.on("game_start", (data) => {
 	arena = arenas[data.arena];
 	roundEndTime = data.roundEndTime;
 	roundStartTime = data.roundStartTime;
-	console.log(roundStartTime, roundEndTime, roundStartTime - Date.now());
+	console.log(roundStartTime, roundEndTime, roundStartTime - Date.now(), Date.now());
 	arenaAssetsLoad();
 	player.id = data.playerId;
 	opponent.id = data.opponentId;
