@@ -245,9 +245,9 @@ io.on("connection", (socket) => {
 					winner: null,
 				});
 
+				console.log("Game Started:", room, "Arena:", matchArena, "StartTime:", Date.now(), "players:", socket.id, waitingPlayer.id);
 				waitingPlayer = null;
 				gameIdCounter++;
-				console.log("Game Started:", room, "Arena:", matchArena, "StartTime:", Date.now(), "players:", socket.id, waitingPlayer.id);
 			}
 		} else {
 			waitingPlayer = socket;
