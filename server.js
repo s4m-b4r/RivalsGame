@@ -209,6 +209,7 @@ io.on("connection", (socket) => {
 				const player1Pos = { x: 1600, y: 475 };
 				matchArena = Math.floor(Math.random() * 4); // 0 to 4
 				roundEndTime = Date.now() + 154000;
+				roundStartTime = Date.now();
 
 				io.to(waitingPlayer.id).emit("game_start", {
 					room,
