@@ -47,7 +47,7 @@ socket.on("new_round", (data) => {
 	opponent.x = data.opStartPos.x;
 	opponent.y = data.opStartPos.y;
 	roundEndTime = data.roundEndTime;
-	roundStartTime = roundEndTime - 153000;
+	roundStartTime = roundEndTime - 154000;
 	inMatch = true;
 	roundStart = false;
 	countdown = true;
@@ -101,7 +101,7 @@ socket.on("game_start", (data) => {
 	opponent.y = data.opStartPos.y;
 	arena = arenas[data.arena];
 	roundEndTime = data.roundEndTime;
-	roundStartTime = roundEndTime - 153000;
+	roundStartTime = data.roundStartTime;
 	arenaAssetsLoad();
 	player.id = data.playerId;
 	opponent.id = data.opponentId;
@@ -126,7 +126,11 @@ socket.on("game_start", (data) => {
 	opponentScore = 0;
 	gameround = 0;
 
-	player.inventory = [loadoutSelection[0]?.ref ?? weapons.assaultRifle, loadoutSelection[1]?.ref ?? weapons.pistol, loadoutSelection[2]?.ref ?? grenadeItems.handGrenade];
+	player.inventory = [
+		loadoutSelection[0]?.ref ?? weapons.assaultRifle,
+		loadoutSelection[1]?.ref ?? weapons.pistol,
+		loadoutSelection[2]?.ref ?? grenadeItems.handGrenade,
+	];
 
 	for (let i = 0; i < 3; i++) {
 		player.inventory[i].ammo = player.inventory[i].magazineSize;
