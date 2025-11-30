@@ -103,44 +103,41 @@ class Player {
 
 			if (elapsed < this.rollDuration) {
 				let t = elapsed / this.rollDuration;
-				this.speed = Math.sin(Math.PI * t) * (this.rollDistance / 30); //smooths out the start and end of the roll
+				this.speed = Math.sin(Math.PI * t) * (this.rollDistance / 30);
 
-				this.nX = this.x + this.rollDirection.x * this.speed * 6; //fixes the speed
+				this.nX = this.x + this.rollDirection.x * this.speed * 6;
 				this.nY = this.y + this.rollDirection.y * this.speed * 6;
 
 				this.canMoveXroll = true;
 				this.canMoveYroll = true;
 
-				//checking for collisions while rolling
 				for (let i = 0; i < 35; i++) {
 					for (let j = 0; j < 19; j++) {
 						if (arena[j][i] === 1) {
 							if (collideRectCircle(i * 50, j * 50, 50, 50, this.nX, this.y, this.radius)) {
 								this.canMoveXroll = false;
-								console.log("collisionX");
 							}
-
 							if (collideRectCircle(i * 50, j * 50, 50, 50, this.x, this.nY, this.radius)) {
 								this.canMoveYroll = false;
-								console.log("collisionY");
 							}
 						}
 					}
 				}
 
 				if (this.canMoveXroll) {
-					this.x = this.nX; //only move if no collision
+					this.x = this.nX;
 				}
 				if (this.canMoveYroll) {
-					this.y = this.nY; //only move if no collision
+					this.y = this.nY;
 				}
-				if (!this.canMoveX && !this.canMoveY) {
+
+				if (!this.canMoveXroll && !this.canMoveYroll) {
 					this.isRolling = false;
 				}
 
 				socket.emit("player_move", { room: roomID, x: this.x, y: this.y });
 			} else {
-				this.isRolling = false; // end roll
+				this.isRolling = false;
 			}
 		}
 	}
@@ -277,7 +274,13 @@ function drawOpponent() {
 				scale(1, -1);
 			}
 
-			image(opponent.inventory[opponentSelectedSlot].asset, 0, 5, opponent.inventory[opponentSelectedSlot].asset.width * 2, opponent.inventory[opponentSelectedSlot].asset.height * 2); // Draw the gun at player's position
+			image(
+				opponent.inventory[opponentSelectedSlot].asset,
+				0,
+				5,
+				opponent.inventory[opponentSelectedSlot].asset.width * 2,
+				opponent.inventory[opponentSelectedSlot].asset.height * 2
+			); // Draw the gun at player's position
 			pop();
 		}
 
