@@ -142,6 +142,13 @@ socket.on("game_start", (data) => {
 	}
 	player.stamina = 300;
 	menuMusic.stop();
+
+	for (let i = bullets.length - 1; i >= 0; i--) {
+		bullets.splice(i, 1);
+	}
+	for (let i = grenades.length - 1; i >= 0; i--) {
+		grenades.splice(i, 1);
+	}
 });
 
 function preload() {
