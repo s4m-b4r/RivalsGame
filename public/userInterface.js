@@ -715,11 +715,11 @@ function mouseClicked() {
 		}
 
 		if (selectedMenu === "loadout") {
-			let startX = 120,
-				startY = 200;
-			let cardW = 260,
-				cardH = 180,
-				gap = 40;
+			let startX = 120;
+			let startY = 200;
+			let cardW = 260;
+			let cardH = 180;
+			let gap = 40;
 
 			for (let i = 0; i < allLoadoutItems.length; i++) {
 				let row = Math.floor(i / 2);
@@ -729,7 +729,20 @@ function mouseClicked() {
 				let y = startY + row * (cardH + gap);
 
 				if (collidePointRect(mouseX, mouseY, x, y, cardW, cardH)) {
-					loadoutSelection[selectedLoadoutIndex] = allLoadoutItems[i];
+					// Check if this item is already equipped in another slot
+					let alreadyEquipped = false;
+					for (let slot = 0; slot < 3; slot++) {
+						if (slot !== selectedLoadoutIndex && loadoutSelection[slot] === allLoadoutItems[i]) {
+							alreadyEquipped = true;
+							break;
+						}
+					}
+
+					if (!alreadyEquipped) {
+						loadoutSelection[selectedLoadoutIndex] = allLoadoutItems[i];
+					} else {
+						alert("This item is already equipped in another slot.");
+					}
 					return;
 				}
 			}
