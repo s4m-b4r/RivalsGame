@@ -361,6 +361,9 @@ class Grenade {
 		this.detonatedTime = 0;
 		this.lifetime = 30;
 
+		grenadeHissing.setVolume(settings.sfxLevel * settings.masterLevel);
+		grenadeHissing.play();
+
 		socket.emit("grenade_thrown", { room: roomID, l: this.location, v: this.velocity, t: this.grenade.type, dt: this.detonationTime });
 	}
 
@@ -437,6 +440,8 @@ class Grenade {
 			}
 		} else if (this.frameCount > this.lifetime) {
 			this.fullyDetonated = true;
+			grenadeExplosion.setVolume(settings.sfxLevel * settings.masterLevel);
+			grenadeExplosion.play();
 		}
 	}
 }
