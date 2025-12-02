@@ -459,6 +459,9 @@ class OpponentGrenade {
 		this.lifetime = 30;
 		this.fullyDetonated = false;
 
+		grenadeHissing.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
+		grenadeHissing.play();
+
 		switch (type) {
 			case 1:
 				this.asset = handGrenadeImage;
@@ -548,6 +551,8 @@ class OpponentGrenade {
 			}
 		} else if (this.frameCount > this.lifetime) {
 			this.fullyDetonated = true;
+			grenadeExplosion.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
+			grenadeExplosion.play();
 		}
 	}
 }
