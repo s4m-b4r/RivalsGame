@@ -386,6 +386,14 @@ function keyCodeToName(code) {
 			return "Esc";
 		case 9:
 			return "Tab";
+		case 39:
+			return "Right Arrow";
+		case 37:
+			return "Left Arrow";
+		case 38:
+			return "Up Arrow";
+		case 40:
+			return "Down Arrow";
 		default:
 			return String.fromCharCode(code);
 	}
