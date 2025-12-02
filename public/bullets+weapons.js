@@ -401,6 +401,8 @@ class Grenade {
 			if (Date.now() > this.detonationTime) {
 				this.detonated = true;
 				this.detonatedTime = Date.now();
+				grenadeExplosion.setVolume(settings.sfxLevel * settings.masterLevel);
+				grenadeExplosion.play();
 				if (collideCircleCircle(this.location.x, this.location.y, 300, opponent.x, opponent.y, opponent.radius)) {
 					opponent.health -= this.grenade.damage;
 					socket.emit("damage_dealt", { room: roomID, d: this.grenade.damage });
@@ -440,8 +442,6 @@ class Grenade {
 			}
 		} else if (this.frameCount > this.lifetime) {
 			this.fullyDetonated = true;
-			grenadeExplosion.setVolume(settings.sfxLevel * settings.masterLevel);
-			grenadeExplosion.play();
 		}
 	}
 }
@@ -511,6 +511,8 @@ class OpponentGrenade {
 		if (!this.detonated) {
 			if (Date.now() > this.detonationTime) {
 				this.detonated = true;
+				grenadeExplosion.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
+				grenadeExplosion.play();
 				this.detonatedTime = Date.now();
 				if (collideCircleCircle(this.location.x, this.location.y, 150, opponent.x, opponent.y, opponent.radius)) {
 					opponent.health -= 70;
@@ -551,8 +553,6 @@ class OpponentGrenade {
 			}
 		} else if (this.frameCount > this.lifetime) {
 			this.fullyDetonated = true;
-			grenadeExplosion.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
-			grenadeExplosion.play();
 		}
 	}
 }
