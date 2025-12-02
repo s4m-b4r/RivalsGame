@@ -195,12 +195,12 @@ function preload() {
 
 	smgShot = loadSound("assets/Sounds/smg-shot.wav"); //yes
 	smgReload = loadSound("assets/Sounds/smg-reload.mp3"); //yes
-	smgShot.playMode("restart");
+	// smgShot.playMode("restart");
 	smgReload.playMode("restart");
 
 	pistolShot = loadSound("assets/Sounds/smg-shot.wav"); //yes
 	pistolReload = loadSound("assets/Sounds/smg-reload.mp3"); //yes
-	pistolShot.playMode("restart");
+	// pistolShot.playMode("restart");
 	pistolReload.playMode("restart");
 
 	hitSound = loadSound("assets/Sounds/hitmarker.mp3");
