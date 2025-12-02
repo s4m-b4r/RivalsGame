@@ -176,23 +176,35 @@ function preload() {
 	//sounds//
 	clickSound = loadSound("assets/Sounds/Click_stereo.ogg.mp3"); // yes
 	menuMusic = loadSound("assets/Sounds/Apparel Shop Pokemon Sun _ Moon.mp3"); // yes
+
 	//weapon sounds//
 	rifleShot = loadSound("assets/Sounds/762x54r Single Isolated MP3.mp3"); // yes
 	rifleReload = loadSound("assets/Sounds/ak-47-reload-sound-effect.wav"); // yes
+	rifleShot.playMode("restart");
+	rifleReload.playMode("restart");
 
 	sniperShot = loadSound("assets/Sounds/sniper-shot.mp3"); // yes
 	sniperReload = loadSound("assets/Sounds/sniper-reload.wav"); // yes
+	sniperShot.playMode("restart");
+	sniperReload.playMode("restart");
 
 	shotgunShot = loadSound("assets/Sounds/shotgun-shot.mp3"); // yes
 	shotgunReload = loadSound("assets/Sounds/shotgun-reload.mp3"); // yes
+	shotgunShot.playMode("restart");
+	shotgunReload.playMode("restart");
 
 	smgShot = loadSound("assets/Sounds/smg-shot.wav"); //yes
 	smgReload = loadSound("assets/Sounds/smg-reload.mp3"); //yes
+	smgShot.playMode("restart");
+	smgReload.playMode("restart");
 
 	pistolShot = loadSound("assets/Sounds/smg-shot.wav"); //yes
 	pistolReload = loadSound("assets/Sounds/smg-reload.mp3"); //yes
+	pistolShot.playMode("restart");
+	pistolReload.playMode("restart");
 
 	hitSound = loadSound("assets/Sounds/hitmarker.mp3");
+	hitSound.playMode("restart");
 
 	// grenades //
 	handGrenadeImage = loadImage("assets/Grenades/handGrenade.png");
