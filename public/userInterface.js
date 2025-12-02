@@ -777,7 +777,7 @@ function mouseClicked() {
 		if (collidePointRect(mouseX, mouseY, 750, 550, 250, 100)) {
 			socket.emit("forfeit_round", { room: roomID });
 			pauseMenu = false;
-
+			drawWinner = false;
 			inMatch = false;
 			selectedMenu = "match";
 			roundStart = false;
@@ -866,7 +866,7 @@ function drawMatchScoreTime() {
 	text(opponentScore, 975, 25);
 
 	if (remainingRoundTime <= 0) {
-		drawWinner = true;
+		// drawWinner = true;
 		if (!emittedRoundEnd) {
 			emittedRoundEnd = true;
 			if (player.health > opponent.health) {
