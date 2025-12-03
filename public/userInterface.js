@@ -1093,7 +1093,7 @@ async function handleSignup() {
 	const res = await fetch("/signup", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({ username: usernameInputBox.value(), password: passwordInput.value() }),
+		body: JSON.stringify({ username: usernameInputBox.value(), password: passwordInputBox.value() }),
 	});
 	const data = await res.json();
 	message = data.message || data.error || "";
