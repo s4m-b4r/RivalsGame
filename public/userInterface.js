@@ -975,7 +975,7 @@ function drawSignInUpScreen() {
 		usernameInputBox.style("font-family", "IMPACT");
 		usernameInputBox.style("font-size", "22px");
 
-		passwordInputBox = createInput();
+		passwordInputBox = createInput("", "password");
 		passwordInputBox.position(width - 400, 370);
 		passwordInputBox.size(300, 40);
 		passwordInputBox.style("text-align", "left");
