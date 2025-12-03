@@ -1097,7 +1097,9 @@ async function handleSignup() {
 	});
 	const data = await res.json();
 	message = data.message || data.error || "";
-	if (data.success) showingSignup = false;
+	if (data.success) {
+		showingSignup = false;
+	}
 }
 
 async function handleLogin() {
@@ -1112,7 +1114,8 @@ async function handleLogin() {
 		loggedIn = true;
 		player.name = usernameInput;
 		socket.emit("register_username", { username: usernameInput });
-
+		usernameInputBox.hide();
+		passwordInputBox.hide();
 		// Load settings
 		const settingsRes = await fetch("/load_settings", {
 			method: "POST",
