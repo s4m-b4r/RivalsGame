@@ -963,8 +963,30 @@ let showingSignup = false;
 let usernameInput = "";
 let passwordInput = "";
 let message = "";
+let loginInitiated = false;
 
 function drawSignInUpScreen() {
+	if (!loginInitiated) {
+		usernameInputBox = createInput();
+		usernameInputBox.position(width - 400, 270);
+		usernameInputBox.size(300, 40);
+		usernameInputBox.style("text-align", "center");
+		usernameInputBox.style("background-color", "#202020");
+		usernameInputBox.style("border", "3px solid #f6cd26");
+		usernameInputBox.style("color", "#fff");
+		usernameInputBox.style("font-family", "IMPACT");
+		usernameInputBox.style("font-size", "22px");
+
+		passwordInputBox = createInput();
+		passwordInputBox.position(width - 400, 370);
+		passwordInputBox.size(300, 40);
+		passwordInputBox.style("text-align", "center");
+		passwordInputBox.style("background-color", "#202020");
+		passwordInputBox.style("border", "3px solid #f6cd26");
+		passwordInputBox.style("color", "#fff");
+		passwordInputBox.style("font-family", "IMPACT");
+		passwordInputBox.style("font-size", "22px");
+	}
 	push();
 	background("#202020");
 	imageMode(CORNER);
