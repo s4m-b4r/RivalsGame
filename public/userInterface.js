@@ -986,6 +986,7 @@ function drawSignInUpScreen() {
 		passwordInputBox.style("color", "#fff");
 		passwordInputBox.style("font-family", "IMPACT");
 		passwordInputBox.style("font-size", "22px");
+		loginInitiated = true;
 	}
 	push();
 	background("#202020");
