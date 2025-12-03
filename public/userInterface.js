@@ -1009,20 +1009,20 @@ function drawSignInUpScreen() {
 	text("Password:", width - 400, 350);
 
 	noFill();
-	stroke("#f6cd26");
-	if (focusedInput === "username") strokeWeight(3);
-	else strokeWeight(1);
-	rect(width - 400, 270, 300, 40);
-	if (focusedInput === "password") strokeWeight(3);
-	else strokeWeight(1);
-	rect(width - 400, 370, 300, 40);
-	strokeWeight(0);
-	textSize(20);
-	stroke("#ffffff");
-	fill("#ffffff");
-	text(usernameInput, width - 390, 290);
-	text(passwordInput.replace(/./g, "*"), width - 390, 390);
-	strokeWeight(1);
+	// stroke("#f6cd26");
+	// if (focusedInput === "username") strokeWeight(3);
+	// else strokeWeight(1);
+	// rect(width - 400, 270, 300, 40);
+	// if (focusedInput === "password") strokeWeight(3);
+	// else strokeWeight(1);
+	// rect(width - 400, 370, 300, 40);
+	// strokeWeight(0);
+	// textSize(20);
+	// stroke("#ffffff");
+	// fill("#ffffff");
+	// text(usernameInput, width - 390, 290);
+	// text(passwordInput.replace(/./g, "*"), width - 390, 390);
+	// strokeWeight(1);
 	rectMode(CENTER);
 	stroke("#f6cd26");
 	fill("#202020");
@@ -1046,15 +1046,15 @@ function drawSignInUpScreen() {
 }
 
 function keyPressed() {
-	if (!loggedIn) {
-		if (keyCode === BACKSPACE) {
-			if (focusedInput === "username") usernameInput = usernameInput.slice(0, -1);
-			if (focusedInput === "password") passwordInput = passwordInput.slice(0, -1);
-		} else if (key.length === 1 && key !== " ") {
-			if (focusedInput === "username") usernameInput += key;
-			if (focusedInput === "password") passwordInput += key;
-		}
-	}
+	// if (!loggedIn) {
+	// 	if (keyCode === BACKSPACE) {
+	// 		if (focusedInput === "username") usernameInput = usernameInput.slice(0, -1);
+	// 		if (focusedInput === "password") passwordInput = passwordInput.slice(0, -1);
+	// 	} else if (key.length === 1 && key !== " ") {
+	// 		if (focusedInput === "username") usernameInput += key;
+	// 		if (focusedInput === "password") passwordInput += key;
+	// 	}
+	// }
 	if (inMatch) {
 		if (keyCode == keybind.pause) {
 			if (!pauseMenu && !pauseMenuSettings) {
@@ -1072,12 +1072,12 @@ let focusedInput = "username";
 
 function mousePressed() {
 	if (!loggedIn) {
-		// username box
-		if (collidePointRect(mouseX, mouseY, width - 400, 270, 300, 40)) focusedInput = "username";
-		// password box
-		else if (collidePointRect(mouseX, mouseY, width - 400, 370, 300, 40)) focusedInput = "password";
+		// // username box
+		// if (collidePointRect(mouseX, mouseY, width - 400, 270, 300, 40)) focusedInput = "username";
+		// // password box
+		// else if (collidePointRect(mouseX, mouseY, width - 400, 370, 300, 40)) focusedInput = "password";
 		// login/signup button
-		else if (collidePointRect(mouseX, mouseY, width - 350, 450, 200, 60)) {
+		if (collidePointRect(mouseX, mouseY, width - 350, 450, 200, 60)) {
 			if (showingSignup) handleSignup();
 			else handleLogin();
 		}
@@ -1093,7 +1093,7 @@ async function handleSignup() {
 	const res = await fetch("/signup", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({ username: usernameInput, password: passwordInput }),
+		body: JSON.stringify({ username: usernameInputBox.value(), password: passwordInput.value() }),
 	});
 	const data = await res.json();
 	message = data.message || data.error || "";
