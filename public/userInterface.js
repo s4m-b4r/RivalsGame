@@ -960,8 +960,6 @@ function drawWinMatch() {
 
 let loggedIn = false;
 let showingSignup = false;
-let usernameInput = "";
-let passwordInput = "";
 let message = "";
 let loginInitiated = false;
 
