@@ -1112,15 +1112,15 @@ async function handleLogin() {
 	message = data.message || data.error || "";
 	if (data.success) {
 		loggedIn = true;
-		player.name = usernameInput;
-		socket.emit("register_username", { username: usernameInput });
+		player.name = usernameInputBox.value();
+		socket.emit("register_username", { username: player.name });
 		usernameInputBox.hide();
 		passwordInputBox.hide();
 		// Load settings
 		const settingsRes = await fetch("/load_settings", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ username: usernameInput }),
+			body: JSON.stringify({ username: player.name }),
 		});
 		const settingsData = await settingsRes.json();
 		if (settingsData.settings) {
@@ -1132,7 +1132,7 @@ async function handleLogin() {
 		const careerRes = await fetch("/career", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ username: usernameInput }),
+			body: JSON.stringify({ username: player.name }),
 		});
 
 		const careerData = await careerRes.json();
