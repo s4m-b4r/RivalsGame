@@ -141,7 +141,7 @@ class Weapon {
 
 				for (let i = 0; i < this.bulletCount; i++) {
 					let t = i / (this.bulletCount - 1) - 0.5;
-					let angle = baseAngle + t * 0.25; //0.25 = spread
+					let angle = baseAngle + t * 0.2467; //0.25 = spread
 
 					let startX = player.x + cos(angle) * this.muzzleOffset;
 					let startY = player.y + sin(angle) * this.muzzleOffset;
