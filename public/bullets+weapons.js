@@ -13,9 +13,7 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
-			this.recoilDist / 100
-		);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -96,23 +94,7 @@ function bulletDraw() {
 }
 
 class Weapon {
-	constructor(
-		name,
-		asset,
-		bulletAsset,
-		damage,
-		recoil,
-		magazineSize,
-		speed,
-		cooldown,
-		bulletCount,
-		type,
-		refNum,
-		reloadTime,
-		muzzleOffset,
-		shotSound,
-		reloadSound
-	) {
+	constructor(name, asset, bulletAsset, damage, recoil, magazineSize, speed, cooldown, bulletCount, type, refNum, reloadTime, muzzleOffset, shotSound, reloadSound) {
 		this.name = name;
 		this.asset = asset;
 		this.bulletAsset = bulletAsset;
@@ -225,7 +207,7 @@ function loadWeapons() {
 	let assaultRifle = new Weapon("Assault Rifle", assaultRifleImage, rifleAmmoImage, 10, 3, 30, 15, 75, 1, 1, 0, 2000, 60, rifleShot, rifleReload);
 	let shotgun = new Weapon("Shotgun", shotgunImage, shotgunAmmoImage, 15, 0, 2, 15, 1000, 7, 2, 1, 2500, 50, shotgunShot, shotgunReload);
 	let sniperRifle = new Weapon("Sniper Rifle", sniperRifleImage, rifleAmmoImage, 90, 0, 3, 20, 2000, 1, 1, 2, 3000, 70, sniperShot, sniperReload);
-	let smg = new Weapon("SMG", smgImage, smgAmmoImage, 5, 15, 60, 15, 50, 1, 3, 3, 1000, 50, smgShot, smgReload);
+	let smg = new Weapon("SMG", smgImage, smgAmmoImage, 5, 12, 60, 15, 50, 1, 3, 3, 1000, 50, smgShot, smgReload);
 	let pistol = new Weapon("Pistol", pistolImage, smgAmmoImage, 15, 3, 12, 15, 125, 1, 3, 4, 500, 40, pistolShot, pistolReload);
 
 	return { assaultRifle, shotgun, sniperRifle, smg, pistol };
