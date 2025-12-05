@@ -866,11 +866,11 @@ function drawMatchScoreTime() {
 	textAlign(CENTER, CENTER);
 	textFont("IMPACT");
 	textSize(25);
-	fill("#0000ff");
-
+	fill(settings.pColor);
+	// text(player.name)
 	text(playerScore, 775, 25);
 
-	fill("#ff0000");
+	fill(settings.oColor);
 	text(opponentScore, 975, 25);
 
 	if (remainingRoundTime <= 0) {
