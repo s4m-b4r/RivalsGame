@@ -465,6 +465,28 @@ io.on("connection", (socket) => {
 			if (socket.id == waitingPlayer.id) {
 				waitingPlayer = null;
 			}
+
+			const game = games.find((g) => (g.players.p1 === socket.id || g.players.p2 === socket.id) && g.inProgress);
+
+			if (game) {
+				const { p1, p2 } = game.players;
+				const disconnectedPlayer = socket.id;
+				const winner = disconnectedPlayer === p1 ? p2 : p1;
+
+				const winnerSocket = io.sockets.sockets.get(winner);
+
+				if (winnerSocket) {
+					updateStats(winnerSocket.username, "matches_won", 1);
+					updateStats(socket.username, "matches_lost", 1);
+
+					io.to(winner).emit("match_over", {
+						winner: winner,
+						scores: game.scores,
+					});
+				}
+
+				games.splice(games.indexOf(game), 1);
+			}
 		}
 	});
 });
