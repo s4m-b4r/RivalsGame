@@ -672,12 +672,16 @@ function mouseClicked() {
 					if (loadoutSelection[0] && loadoutSelection[1] && loadoutSelection[2]) {
 						socket.emit("join_queue", { loadout: [loadoutSelection[0].ref.refNum, loadoutSelection[1].ref.refNum, loadoutSelection[2].ref.refNum] });
 						queueing = true;
+						clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+						clickSound.play();
 					} else {
 						alert("Please select 3 loadout items before joining the queue.");
 					}
 				} else {
 					socket.emit("leave_queue");
 					queueing = false;
+					clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+					clickSound.play();
 				}
 			}
 		}
@@ -686,6 +690,8 @@ function mouseClicked() {
 			selectedMenu = "match";
 			slidersInitialized = false;
 			clearUI();
+			clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+			clickSound.play();
 		}
 
 		//loadout menu
@@ -693,6 +699,8 @@ function mouseClicked() {
 			selectedMenu = "loadout";
 			slidersInitialized = false;
 			clearUI();
+			clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+			clickSound.play();
 		}
 
 		//career Menu
@@ -700,6 +708,8 @@ function mouseClicked() {
 			selectedMenu = "career";
 			slidersInitialized = false;
 			clearUI();
+			clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+			clickSound.play();
 		}
 
 		//leaderboard menu
@@ -708,10 +718,16 @@ function mouseClicked() {
 			slidersInitialized = false;
 			clearUI();
 			loadLeaderboardData();
+			clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+			clickSound.play();
 		}
 
 		//settings menu
-		if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) selectedMenu = "settings";
+		if (collidePointRect(mouseX, mouseY, 1569, 41, 300, 75)) {
+			selectedMenu = "settings";
+			clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+			clickSound.play();
+		}
 
 		if (selectedMenu === "leaderboard") {
 			if (collidePointRect(mouseX, mouseY, width / 2 - 150, 200, 300, 70)) {
@@ -719,6 +735,8 @@ function mouseClicked() {
 				let index = leaderboardStatsList.indexOf(leaderboardStat);
 				leaderboardStat = leaderboardStatsList[(index + 1) % leaderboardStatsList.length];
 				loadLeaderboardData();
+				clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+				clickSound.play();
 			}
 		}
 
@@ -728,6 +746,8 @@ function mouseClicked() {
 			let cardW = 260;
 			let cardH = 180;
 			let gap = 40;
+			clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+			clickSound.play();
 
 			for (let i = 0; i < allLoadoutItems.length; i++) {
 				let row = Math.floor(i / 2);
@@ -772,6 +792,8 @@ function mouseClicked() {
 		if (collidePointRect(mouseX, mouseY, 750, 300, 250, 100)) {
 			pauseMenu = false;
 			document.body.classList.toggle("hide-mouse", true);
+			clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+			clickSound.play();
 		}
 		//settings
 		if (collidePointRect(mouseX, mouseY, 750, 425, 250, 100)) {
@@ -779,6 +801,8 @@ function mouseClicked() {
 			pauseMenuSettings = true;
 			console.log("settings pressed");
 			document.body.classList.toggle("hide-mouse", false);
+			clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+			clickSound.play();
 			return;
 		}
 		//forfeit
@@ -794,6 +818,8 @@ function mouseClicked() {
 			menuMusic.setVolume(0.5 * settings.musicLevel * settings.masterLevel);
 			menuMusic.loop();
 			document.body.classList.toggle("hide-mouse", false);
+			clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+			clickSound.play();
 		}
 	}
 	if (inMatch && pauseMenuSettings) {
@@ -802,6 +828,8 @@ function mouseClicked() {
 			pauseMenu = true;
 			clearUI();
 			slidersInitialized = false;
+			clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
+			clickSound.play();
 		}
 	}
 }
