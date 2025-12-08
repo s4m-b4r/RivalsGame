@@ -925,7 +925,7 @@ function drawWinRound() {
 		fill(settings.pColor);
 		strokeWeight(0);
 		textSize(100);
-		text(`${player.name.toUpperCase().splice(0, 20)} WON THE ROUND!`, 1750 / 2, 950 / 2, 1000, 500);
+		text(`${player.name.toUpperCase().slice(0, 20)} WON THE ROUND!`, 1750 / 2, 950 / 2, 1000, 500);
 		pop();
 	} else if (roundWinner == "opponent") {
 		push();
@@ -935,7 +935,7 @@ function drawWinRound() {
 		fill(settings.oColor);
 		strokeWeight(0);
 		textSize(100);
-		text(`${opponent.name.toUpperCase().splice(0, 20)} WON THE ROUND!`, 1750 / 2, 950 / 2, 1000, 500);
+		text(`${opponent.name.toUpperCase().slice(0, 20)} WON THE ROUND!`, 1750 / 2, 950 / 2, 1000, 500);
 		pop();
 	} else if (roundWinner == "draw") {
 		push();
@@ -962,7 +962,7 @@ function drawWinMatch() {
 		fill(settings.pColor);
 		strokeWeight(0);
 		textSize(100);
-		text(`${player.name.toUpperCase().splice(0, 20)} WON THE MATCH!`, 1750 / 2, 950 / 2, 1000, 500);
+		text(`${player.name.toUpperCase().slice(0, 20)} WON THE MATCH!`, 1750 / 2, 950 / 2, 1000, 500);
 		pop();
 	} else {
 		push();
@@ -972,7 +972,7 @@ function drawWinMatch() {
 		fill(settings.oColor);
 		strokeWeight(0);
 		textSize(100);
-		text(`${opponent.name.toUpperCase().splice(0, 20)} WON THE MATCH!`, 1750 / 2, 950 / 2, 1000, 500);
+		text(`${opponent.name.toUpperCase().slice(0, 20)} WON THE MATCH!`, 1750 / 2, 950 / 2, 1000, 500);
 		pop();
 	}
 	if (Date.now() > matchWinScreenTime + 5000) {
