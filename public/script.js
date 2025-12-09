@@ -26,8 +26,8 @@ socket.on("swap_item", (data) => {
 socket.on("damage_dealt", (data) => {
 	console.log("damage_dealt", data);
 	player.health -= data.d;
-	screenShake = 2;
-	damageFlash = 120;
+	screenShake = 1;
+	damageFlash = 100;
 	if (player.health <= 0) {
 		player.alive = false;
 		player.health = 0;
