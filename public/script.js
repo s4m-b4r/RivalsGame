@@ -27,7 +27,7 @@ socket.on("damage_dealt", (data) => {
 	console.log("damage_dealt", data);
 	player.health -= data.d;
 	screenShake = 2;
-	damageFlash = 70;
+	damageFlash = 120;
 	if (player.health <= 0) {
 		player.alive = false;
 		player.health = 0;
