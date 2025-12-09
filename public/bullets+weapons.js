@@ -13,7 +13,9 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
+			this.recoilDist / 100
+		);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -94,7 +96,23 @@ function bulletDraw() {
 }
 
 class Weapon {
-	constructor(name, asset, bulletAsset, damage, recoil, magazineSize, speed, cooldown, bulletCount, type, refNum, reloadTime, muzzleOffset, shotSound, reloadSound) {
+	constructor(
+		name,
+		asset,
+		bulletAsset,
+		damage,
+		recoil,
+		magazineSize,
+		speed,
+		cooldown,
+		bulletCount,
+		type,
+		refNum,
+		reloadTime,
+		muzzleOffset,
+		shotSound,
+		reloadSound
+	) {
 		this.name = name;
 		this.asset = asset;
 		this.bulletAsset = bulletAsset;
@@ -383,6 +401,7 @@ class Grenade {
 			if (Date.now() > this.detonationTime) {
 				this.detonated = true;
 				this.detonatedTime = Date.now();
+				screenShake = 20;
 				grenadeExplosion.setVolume(settings.sfxLevel * settings.masterLevel);
 				grenadeExplosion.play();
 				if (collideCircleCircle(this.location.x, this.location.y, 300, opponent.x, opponent.y, opponent.radius)) {
@@ -495,6 +514,7 @@ class OpponentGrenade {
 				this.detonated = true;
 				grenadeExplosion.setVolume(0.8 * settings.sfxLevel * settings.masterLevel);
 				grenadeExplosion.play();
+				screenShake = 20;
 				this.detonatedTime = Date.now();
 				if (collideCircleCircle(this.location.x, this.location.y, 150, opponent.x, opponent.y, opponent.radius)) {
 					opponent.health -= 70;

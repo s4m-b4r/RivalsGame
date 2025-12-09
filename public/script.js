@@ -26,6 +26,8 @@ socket.on("swap_item", (data) => {
 socket.on("damage_dealt", (data) => {
 	console.log("damage_dealt", data);
 	player.health -= data.d;
+	screenShake = 2;
+	damageFlash = 70;
 	if (player.health <= 0) {
 		player.alive = false;
 		player.health = 0;
@@ -253,11 +255,42 @@ function setup() {
 	opponent.inventory = [weapons.assaultRifle, weapons.pistol, grenadeItems.handGrenade];
 }
 
+let screenShake = 0;
+let screenShakeDecay = 0.9;
+let damageFlash = 0;
+let damageFlashDecay = 0.92;
+
+function applyScreenShake() {
+	if (screenShake > 0) {
+		let shakeX = random(-screenShake, screenShake);
+		let shakeY = random(-screenShake, screenShake);
+		translate(shakeX, shakeY);
+		screenShake *= screenShakeDecay;
+		if (screenShake < 0.1) screenShake = 0;
+	}
+}
+
+function drawDamageFlash() {
+	if (damageFlash > 0) {
+		push();
+		fill(255, 0, 0, damageFlash); // Red with alpha based on damageFlash
+		noStroke();
+		rect(0, 0, width, height);
+		pop();
+		damageFlash *= damageFlashDecay;
+		if (damageFlash < 1) damageFlash = 0;
+	}
+}
+
 //fix
 function draw() {
 	frameRate(60);
 	time = Date.now(); // gets the current time (used for calldowns)
 	background(0);
+
+	push();
+	applyScreenShake();
+
 	if (inMatch) {
 		drawArena(); // Draw the arena
 		bulletDraw(); // Draw bullets
@@ -275,6 +308,9 @@ function draw() {
 			drawSettingsMenu();
 		}
 	}
+	pop();
+
+	drawDamageFlash();
 
 	if (createArenaMode) {
 		createArena(); // used for making new arenas
