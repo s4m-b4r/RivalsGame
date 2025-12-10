@@ -274,6 +274,8 @@ function drawTextsettings() {
 	text("Crosshair Colour", 150, 520);
 	text("Opponent Colour", 350, 520);
 	text("Player Colour", 150, 650);
+	textSize(20);
+	text("You can also use the scroll wheel for swapping weapons. LEFT CLICK is used for shooting weapons.", width - 350, 210, 300, 1000);
 	pop();
 }
 
