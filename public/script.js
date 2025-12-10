@@ -26,8 +26,8 @@ socket.on("swap_item", (data) => {
 socket.on("damage_dealt", (data) => {
 	console.log("damage_dealt", data);
 	player.health -= data.d;
-	screenShake = 1;
-	damageFlash = 100;
+	screenShake = (data.d / 50) * 1;
+	damageFlash = (data.d / 100) * 200;
 	if (player.health <= 0) {
 		player.alive = false;
 		player.health = 0;
@@ -137,11 +137,7 @@ socket.on("game_start", (data) => {
 	opponentScore = 0;
 	gameround = 0;
 
-	player.inventory = [
-		loadoutSelection[0]?.ref ?? weapons.assaultRifle,
-		loadoutSelection[1]?.ref ?? weapons.pistol,
-		loadoutSelection[2]?.ref ?? grenadeItems.handGrenade,
-	];
+	player.inventory = [loadoutSelection[0]?.ref ?? weapons.assaultRifle, loadoutSelection[1]?.ref ?? weapons.pistol, loadoutSelection[2]?.ref ?? grenadeItems.handGrenade];
 
 	for (let i = 0; i < 3; i++) {
 		player.inventory[i].ammo = player.inventory[i].magazineSize;
@@ -273,7 +269,7 @@ function applyScreenShake() {
 function drawDamageFlash() {
 	if (damageFlash > 0) {
 		push();
-		fill(255, 0, 0, damageFlash); // Red with alpha based on damageFlash
+		fill(255, 20, 20, damageFlash);
 		noStroke();
 		rect(0, 0, width, height);
 		pop();
