@@ -36,7 +36,7 @@ socket.on("damage_dealt", (data) => {
 
 socket.on("grenade_thrown", (data) => {
 	console.log("grenade_thrown", data);
-	let grenade = new OpponentGrenade(data.l, data.v, data.t, data.dt);
+	let grenade = new OpponentGrenade(data.l, data.v, data.t, Date.now() + 2500);
 	grenades.push(grenade);
 });
 
@@ -48,8 +48,8 @@ socket.on("new_round", (data) => {
 	player.y = data.startPos.y;
 	opponent.x = data.opStartPos.x;
 	opponent.y = data.opStartPos.y;
-	roundEndTime = data.roundEndTime;
-	roundStartTime = data.roundStartTime;
+	roundEndTime = Date.now() + 154000;
+	roundStartTime = Date.now();
 	console.log(roundStartTime, roundEndTime, roundStartTime - Date.now(), Date.now());
 	inMatch = true;
 	roundStart = false;
@@ -111,7 +111,7 @@ socket.on("game_start", (data) => {
 	opponent.y = data.opStartPos.y;
 	arena = arenas[data.arena];
 	roundEndTime = data.roundEndTime;
-	roundStartTime = data.roundStartTime;
+	roundStartTime = Date.now();
 	console.log(roundStartTime, roundEndTime, roundStartTime - Date.now(), Date.now());
 	arenaAssetsLoad();
 	player.id = data.playerId;
@@ -137,7 +137,11 @@ socket.on("game_start", (data) => {
 	opponentScore = 0;
 	gameround = 0;
 
-	player.inventory = [loadoutSelection[0]?.ref ?? weapons.assaultRifle, loadoutSelection[1]?.ref ?? weapons.pistol, loadoutSelection[2]?.ref ?? grenadeItems.handGrenade];
+	player.inventory = [
+		loadoutSelection[0]?.ref ?? weapons.assaultRifle,
+		loadoutSelection[1]?.ref ?? weapons.pistol,
+		loadoutSelection[2]?.ref ?? grenadeItems.handGrenade,
+	];
 
 	for (let i = 0; i < 3; i++) {
 		player.inventory[i].ammo = player.inventory[i].magazineSize;
