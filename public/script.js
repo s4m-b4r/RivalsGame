@@ -48,8 +48,8 @@ socket.on("new_round", (data) => {
 	player.y = data.startPos.y;
 	opponent.x = data.opStartPos.x;
 	opponent.y = data.opStartPos.y;
-	roundEndTime = Date.now() + 154000;
-	roundStartTime = Date.now();
+	roundEndTime = Date.now() + 155000;
+	roundStartTime = Date.now() + 1000;
 	console.log(roundStartTime, roundEndTime, roundStartTime - Date.now(), Date.now());
 	inMatch = true;
 	roundStart = false;
@@ -110,8 +110,8 @@ socket.on("game_start", (data) => {
 	opponent.x = data.opStartPos.x;
 	opponent.y = data.opStartPos.y;
 	arena = arenas[data.arena];
-	roundEndTime = data.roundEndTime;
-	roundStartTime = Date.now();
+	roundEndTime = Date.now() + 155000;
+	roundStartTime = Date.now() + 1000;
 	console.log(roundStartTime, roundEndTime, roundStartTime - Date.now(), Date.now());
 	arenaAssetsLoad();
 	player.id = data.playerId;
