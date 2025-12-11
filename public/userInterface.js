@@ -708,6 +708,7 @@ function mouseClicked() {
 
 		//career Menu
 		if (collidePointRect(mouseX, mouseY, 805, 41, 300, 75)) {
+			loadCarreerData();
 			selectedMenu = "career";
 			slidersInitialized = false;
 			clearUI();
@@ -1181,6 +1182,22 @@ let leaderboardData = [];
 let leaderboardStat = "matches_won";
 let leaderboardStatsList = ["matches_won", "kills", "rounds_won"];
 let leaderboardButtonHovered = false;
+
+async function loadCarreerData() {
+	const careerRes = await fetch("/career", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ username: player.name }),
+	});
+
+	const careerData = await careerRes.json();
+
+	player.kills = careerData.kills;
+	player.deaths = careerData.deaths;
+	player.roundsWon = careerData.rounds_won;
+	player.matchesWon = careerData.matches_won;
+	player.matchesLost = careerData.matches_lost;
+}
 
 async function loadLeaderboardData() {
 	const res = await fetch(`/leaderboard?sort=${leaderboardStat}`);
