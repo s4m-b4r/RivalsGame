@@ -246,6 +246,7 @@ function drawSettingsMenu() {
 		pop();
 	}
 }
+
 function drawTextsettings() {
 	push();
 	for (let i = 0; i < keybindLabels.length; i++) {
@@ -1039,6 +1040,8 @@ function drawSignInUpScreen() {
 	text("Password:", width - 400, 350);
 
 	noFill();
+	// old code did not use textboxes
+
 	// stroke("#f6cd26");
 	// if (focusedInput === "username") strokeWeight(3);
 	// else strokeWeight(1);
@@ -1053,6 +1056,8 @@ function drawSignInUpScreen() {
 	// text(usernameInput, width - 390, 290);
 	// text(passwordInput.replace(/./g, "*"), width - 390, 390);
 	// strokeWeight(1);
+
+	//new code uses p5 inputs text boxes.
 	rectMode(CENTER);
 	stroke("#f6cd26");
 	fill("#202020");
@@ -1076,6 +1081,8 @@ function drawSignInUpScreen() {
 }
 
 function keyPressed() {
+	//old login code before text boxes
+
 	// if (!loggedIn) {
 	// 	if (keyCode === BACKSPACE) {
 	// 		if (focusedInput === "username") usernameInput = usernameInput.slice(0, -1);
@@ -1085,6 +1092,7 @@ function keyPressed() {
 	// 		if (focusedInput === "password") passwordInput += key;
 	// 	}
 	// }
+
 	if (inMatch) {
 		if (keyCode == keybind.pause) {
 			if (!pauseMenu && !pauseMenuSettings) {
