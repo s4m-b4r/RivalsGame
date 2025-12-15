@@ -294,6 +294,7 @@ const keybindLabels = [
 	["Slot 2", "slot2"],
 	["Slot 3", "slot3"],
 ];
+
 // Keybind inputs
 let keyStartX = 800;
 let keyStartY = 220;
@@ -337,6 +338,8 @@ function createVolumeSlider(label, x, y, settingKey) {
 	slider.position(x, y);
 	slider.style("width", "400px");
 	slider.style("height", "30px");
+	slider.style("background", "#404040");
+	slider.style("accent-color", "#f6cd26");
 	slider.input(() => (settings[settingKey] = slider.value()));
 	uiElements.push(slider);
 }
@@ -415,7 +418,7 @@ async function savePlayerSettingsUI() {
 	});
 	menuMusic.setVolume(0.5 * settings.musicLevel * settings.masterLevel);
 
-	console.log("Settings saved!");
+	console.log("settings saved");
 }
 
 function drawLeaderboardMenu() {
