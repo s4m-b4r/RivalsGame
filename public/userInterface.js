@@ -315,17 +315,31 @@ function createSettingsUI() {
 		createKeybindInput(label, keyStartX, keyStartY + i * keySpacing, key);
 	});
 
-	let saveBtn = createButton("SAVE SETTINGS");
-	saveBtn.position(width - 450, height - 120);
-	saveBtn.size(400, 80);
-	saveBtn.style("font-family", "IMPACT");
-	saveBtn.style("font-size", "28px");
-	saveBtn.style("background-color", "#f6cd26");
-	saveBtn.style("border", "none");
-	saveBtn.style("color", "#202020");
-	saveBtn.style("border-radius", "10px");
-	saveBtn.mousePressed(savePlayerSettingsUI);
-	uiElements.push(saveBtn);
+	//save button
+	push();
+	saveButtonHoverd = collidePointRect(mouseX, mouseY, width - 450, height - 120, 400, 80);
+	fill(saveButtonHoverd ? "#303030" : "#202020");
+	strokeWeight(5);
+	stroke("#f6cd26");
+	rect(width - 450, height - 120, 400, 80, 5);
+	nostroke();
+	textSize(28);
+	textFont("IMPACT");
+	textAlign(CENTER, CENTER);
+	text("SAVE SETTINGS");
+	pop();
+
+	// let saveBtn = createButton("SAVE SETTINGS");
+	// saveBtn.position(width - 450, height - 120);
+	// saveBtn.size(400, 80);
+	// saveBtn.style("font-family", "IMPACT");
+	// saveBtn.style("font-size", "28px");
+	// saveBtn.style("background-color", "#f6cd26");
+	// saveBtn.style("border", "none");
+	// saveBtn.style("color", "#202020");
+	// saveBtn.style("border-radius", "10px");
+	// saveBtn.mousePressed(savePlayerSettingsUI);
+	// uiElements.push(saveBtn);
 }
 
 function clearUI() {
