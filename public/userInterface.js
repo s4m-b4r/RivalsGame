@@ -279,6 +279,20 @@ function drawTextsettings() {
 	textSize(20);
 	text("You can also use the scroll wheel for swapping weapons. LEFT CLICK is used for shooting weapons.", 350, 210, 300, 1000);
 	pop();
+
+	//save button
+	push();
+	saveButtonHoverd = collidePointRect(mouseX, mouseY, width - 450, height - 120, 400, 80);
+	fill(saveButtonHoverd ? "#303030" : "#202020");
+	strokeWeight(5);
+	stroke("#f6cd26");
+	rect(width - 450, height - 120, 400, 80, 5);
+	noStroke();
+	textSize(28);
+	textFont("IMPACT");
+	textAlign(CENTER, CENTER);
+	text("SAVE SETTINGS", width - 250, height - 120);
+	pop();
 }
 
 const keybindLabels = [
@@ -315,20 +329,6 @@ function createSettingsUI() {
 		createKeybindInput(label, keyStartX, keyStartY + i * keySpacing, key);
 	});
 
-	//save button
-	push();
-	saveButtonHoverd = collidePointRect(mouseX, mouseY, width - 450, height - 120, 400, 80);
-	fill(saveButtonHoverd ? "#303030" : "#202020");
-	strokeWeight(5);
-	stroke("#f6cd26");
-	rect(width - 450, height - 120, 400, 80, 5);
-	noStroke();
-	textSize(28);
-	textFont("IMPACT");
-	textAlign(CENTER, CENTER);
-	text("SAVE SETTINGS", width - 250, height - 120);
-	pop();
-
 	// let saveBtn = createButton("SAVE SETTINGS");
 	// saveBtn.position(width - 450, height - 120);
 	// saveBtn.size(400, 80);
@@ -347,6 +347,7 @@ function clearUI() {
 	uiElements = [];
 }
 
+// creates and styles the volume sliders
 function createVolumeSlider(label, x, y, settingKey) {
 	let slider = createSlider(0, 1, settings[settingKey], 0.01);
 	slider.position(x, y);
@@ -358,6 +359,7 @@ function createVolumeSlider(label, x, y, settingKey) {
 	uiElements.push(slider);
 }
 
+// creates and styles the volume sliders
 function createColorPickerUI(label, x, y, settingKey) {
 	let picker = createColorPicker(settings[settingKey]);
 	picker.position(x, y);
@@ -369,6 +371,7 @@ function createColorPickerUI(label, x, y, settingKey) {
 	else colorPickerOpponent = picker;
 }
 
+//creates and styles the keybind inputs
 function createKeybindInput(label, x, y, key) {
 	let input = createInput(keyCodeToName(keybind[key]));
 	input.position(x + 250, y - 15);
@@ -382,6 +385,7 @@ function createKeybindInput(label, x, y, key) {
 	input.style("border-radius", "6px");
 	input.elt.readOnly = true;
 
+	// if the user clicks on the keybinds a key is checked for and updates the UI.
 	input.mousePressed(() => {
 		input.value("Press key...");
 		function captureKey(e) {
