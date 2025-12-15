@@ -289,7 +289,7 @@ function drawTextsettings() {
 	rect(width - 450, height - 120, 400, 80, 5);
 	noStroke();
 	fill("#f6cd26");
-	textSize(28);
+	textSize(34);
 	textFont("IMPACT");
 	textAlign(CENTER, CENTER);
 	text("SAVE SETTINGS", width - 250, height - 60);
