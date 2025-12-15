@@ -326,7 +326,7 @@ function createSettingsUI() {
 	textSize(28);
 	textFont("IMPACT");
 	textAlign(CENTER, CENTER);
-	text("SAVE SETTINGS");
+	text("SAVE SETTINGS", width - 250, height - 120);
 	pop();
 
 	// let saveBtn = createButton("SAVE SETTINGS");
