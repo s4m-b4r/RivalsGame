@@ -322,7 +322,7 @@ function createSettingsUI() {
 	strokeWeight(5);
 	stroke("#f6cd26");
 	rect(width - 450, height - 120, 400, 80, 5);
-	nostroke();
+	noStroke();
 	textSize(28);
 	textFont("IMPACT");
 	textAlign(CENTER, CENTER);
@@ -759,6 +759,11 @@ function mouseClicked() {
 				loadLeaderboardData();
 				clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
 				clickSound.play();
+			}
+		}
+		if (selectedMenu === "settings") {
+			if (collidePointRect(mouseX, mouseY, width - 450, height - 120, 400, 80)) {
+				savePlayerSettingsUI();
 			}
 		}
 
