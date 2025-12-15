@@ -100,6 +100,7 @@ socket.on("match_over", (data) => {
 		drawMatchWinner = true;
 		matchWinScreenTime = Date.now();
 		queueing = false;
+		clearUI();
 	}
 });
 
