@@ -292,7 +292,7 @@ function drawTextsettings() {
 	textSize(34);
 	textFont("IMPACT");
 	textAlign(CENTER, CENTER);
-	text("SAVE SETTINGS", width - 250, height - 60);
+	text("SAVE SETTINGS", width - 250, height - 80);
 	pop();
 }
 
