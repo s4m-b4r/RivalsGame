@@ -60,6 +60,7 @@ function drawPlayerUI() {
 			textAlign(CENTER, CENTER);
 			text(player.inventory[selectedHotbarSlot].ammo, mouseX + 25, mouseY);
 			pop();
+			//reloading status circle
 			if (player.inventory[selectedHotbarSlot].isReloading) {
 				let reloadArcPercent = (Date.now() - player.inventory[selectedHotbarSlot].reloadStartTime) / player.inventory[selectedHotbarSlot].reloadTime;
 				console.log(reloadArcPercent);
@@ -133,7 +134,7 @@ function drawPlayerUI() {
 let queueing = false;
 
 let selectedMenu = "match";
-
+//menu tabs at top of screen
 function drawMenuTabs() {
 	push();
 	stroke("#f6cd26");
@@ -182,7 +183,7 @@ function drawMenuTabs() {
 	text("SETTINGS", 1719, 78);
 	pop();
 }
-
+//main queuing menu with logo on background
 function drawMainMenu() {
 	push();
 	background("#202020");
@@ -217,12 +218,12 @@ function drawMainMenu() {
 let colorPickerCrosshair, colorPickerOpponent;
 let slidersInitialized = false;
 let uiElements = [];
-
+//settings menu
 function drawSettingsMenu() {
 	pauseMenuSettings ? background("#20202050") : background("#202020");
 	noSmooth();
 	drawTextsettings();
-
+	//creates the elements if not already made
 	if (!slidersInitialized) {
 		createSettingsUI();
 		slidersInitialized = true;
@@ -246,7 +247,7 @@ function drawSettingsMenu() {
 		pop();
 	}
 }
-
+//constantly drawn as p5 text
 function drawTextsettings() {
 	push();
 	for (let i = 0; i < keybindLabels.length; i++) {
@@ -296,6 +297,7 @@ function drawTextsettings() {
 	pop();
 }
 
+//lables and coresponding variable name in settings class
 const keybindLabels = [
 	["Move Up", "up"],
 	["Move Down", "down"],
@@ -679,11 +681,13 @@ function drawCareerMenu() {
 }
 
 function mouseClicked() {
+	//logic for the queue button
 	if (loggedIn && !inMatch) {
 		if (selectedMenu === "match") {
 			if (collidePointRect(mouseX, mouseY, width - 450, height - 250, 400, 200)) {
 				if (!queueing) {
 					if (loadoutSelection[0] && loadoutSelection[1] && loadoutSelection[2]) {
+						//check full loadout
 						socket.emit("join_queue", { loadout: [loadoutSelection[0].ref.refNum, loadoutSelection[1].ref.refNum, loadoutSelection[2].ref.refNum] });
 						queueing = true;
 						clickSound.setVolume(settings.masterLevel * settings.sfxLevel);
@@ -699,6 +703,8 @@ function mouseClicked() {
 				}
 			}
 		}
+
+		//the following select the menus on the main menu
 		//Match Menu
 		if (collidePointRect(mouseX, mouseY, 41, 41, 300, 75)) {
 			selectedMenu = "match";
@@ -760,6 +766,7 @@ function mouseClicked() {
 			}
 		}
 
+		//loadout menu selecting the weapons
 		if (selectedMenu === "loadout") {
 			let startX = 120;
 			let startY = 200;
@@ -777,7 +784,7 @@ function mouseClicked() {
 				let y = startY + row * (cardH + gap);
 
 				if (collidePointRect(mouseX, mouseY, x, y, cardW, cardH)) {
-					// Check if this item is already equipped in another slot
+					// check if this item is already equipped in another slot
 					let alreadyEquipped = false;
 					for (let slot = 0; slot < 3; slot++) {
 						if (slot !== selectedLoadoutIndex && loadoutSelection[slot] === allLoadoutItems[i]) {
@@ -853,12 +860,13 @@ function mouseClicked() {
 		}
 	}
 }
-
+//countdown at the start of rounds
 let countdownArray = ["3", "2", "1", "GO!", " "];
 roundStartTime = 0;
 let lastSecondPlayed = -1;
 function drawCountdown() {
 	console.log("countdown");
+	// calculate the time
 	if (Date.now() < roundStartTime + 4000) {
 		push();
 		stroke(0);
@@ -870,7 +878,7 @@ function drawCountdown() {
 			clickSound.play();
 			lastSecondPlayed = i;
 		}
-
+		//display the text
 		textAlign(CENTER, CENTER);
 		textFont("IMPACT");
 		textSize(100);
@@ -890,11 +898,12 @@ function drawCountdown() {
 emittedRoundEnd = false;
 roundStartTime = 0;
 roundEndTime = 0;
+//time and score at top of screen
 function drawMatchScoreTime() {
 	let remainingRoundTime = roundEndTime - Date.now();
 
 	if (remainingRoundTime < 0) remainingRoundTime = 0;
-
+	// calculate time
 	let roundMinutes = floor(remainingRoundTime / 60000);
 	let roundSeconds = floor((remainingRoundTime % 60000) / 1000);
 	let roundTimeStr = nf(roundMinutes, 2) + ":" + nf(roundSeconds, 2);
@@ -936,6 +945,7 @@ function drawMatchScoreTime() {
 }
 
 roundWinner = "";
+//draws the round winner from the server.
 function drawWinRound() {
 	if (roundWinner == "player") {
 		push();
@@ -973,6 +983,7 @@ function drawWinRound() {
 
 matchWinner = "";
 matchWinScreenTime = 0;
+//draws the match winner from the server.
 function drawWinMatch() {
 	if (matchWinner == "player") {
 		push();
@@ -995,6 +1006,7 @@ function drawWinMatch() {
 		text(`${opponent.name.toUpperCase().slice(0, 20)} WON THE MATCH!`, 1750 / 2 - 500, 950 / 2 - 250, 1000, 500);
 		pop();
 	}
+	//returns player to main menu
 	if (Date.now() > matchWinScreenTime + 5000) {
 		drawMatchWinner = false;
 		inMatch = false;
@@ -1013,6 +1025,7 @@ let loginInitiated = false;
 
 function drawSignInUpScreen() {
 	if (!loginInitiated) {
+		// html textbox input elements
 		usernameInputBox = createInput();
 		usernameInputBox.position(width - 400, 270);
 		usernameInputBox.size(300, 40);
@@ -1034,6 +1047,7 @@ function drawSignInUpScreen() {
 		passwordInputBox.style("font-size", "22px");
 		loginInitiated = true;
 	}
+
 	push();
 	background("#202020");
 	imageMode(CORNER);
@@ -1108,6 +1122,7 @@ function keyPressed() {
 	// 	}
 	// }
 
+	//hides mouse when in match and unhides when opening pause menu
 	if (inMatch) {
 		if (keyCode == keybind.pause) {
 			if (!pauseMenu && !pauseMenuSettings) {
@@ -1144,6 +1159,7 @@ function mousePressed() {
 
 async function handleSignup() {
 	const res = await fetch("/signup", {
+		//sends signup info to the server which the database handles
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({ username: usernameInputBox.value(), password: passwordInputBox.value() }),
@@ -1161,9 +1177,11 @@ async function handleLogin() {
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({ username: usernameInputBox.value(), password: passwordInputBox.value() }),
 	});
+	//sets all required variables gotten from the database
 	const data = await res.json();
 	message = data.message || data.error || "";
 	if (data.success) {
+		// closes the login menu on successful login
 		loggedIn = true;
 		player.name = usernameInputBox.value();
 		socket.emit("register_username", { username: player.name });
@@ -1205,7 +1223,7 @@ let leaderboardData = [];
 let leaderboardStat = "matches_won";
 let leaderboardStatsList = ["matches_won", "kills", "rounds_won"];
 let leaderboardButtonHovered = false;
-
+// gets information for career menu
 async function loadCarreerData() {
 	const careerRes = await fetch("/career", {
 		method: "POST",
@@ -1221,7 +1239,7 @@ async function loadCarreerData() {
 	player.matchesWon = careerData.matches_won;
 	player.matchesLost = careerData.matches_lost;
 }
-
+// gets information for the leaderboard menu.
 async function loadLeaderboardData() {
 	const res = await fetch(`/leaderboard?sort=${leaderboardStat}`);
 	const data = await res.json();
