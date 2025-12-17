@@ -13,9 +13,7 @@ class Bullet {
 		this.type = weapon.type;
 		// recoil calculation
 		this.recoilDist = this.mouseVec.dist(this.location);
-		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(
-			this.recoilDist / 100
-		);
+		this.recoilAdd = createVector(random(-this.recoilScale, this.recoilScale), random(-this.recoilScale, this.recoilScale)).mult(this.recoilDist / 100);
 
 		this.radius = 10; // Bullet size
 		this.speed = weapon.speed; // Bullet speed
@@ -96,23 +94,7 @@ function bulletDraw() {
 }
 
 class Weapon {
-	constructor(
-		name,
-		asset,
-		bulletAsset,
-		damage,
-		recoil,
-		magazineSize,
-		speed,
-		cooldown,
-		bulletCount,
-		type,
-		refNum,
-		reloadTime,
-		muzzleOffset,
-		shotSound,
-		reloadSound
-	) {
+	constructor(name, asset, bulletAsset, damage, recoil, magazineSize, speed, cooldown, bulletCount, type, refNum, reloadTime, muzzleOffset, shotSound, reloadSound) {
 		this.name = name;
 		this.asset = asset;
 		this.bulletAsset = bulletAsset;
@@ -341,6 +323,7 @@ class GrenadeItem {
 			image(this.asset, 0, 0, this.asset.width * 2, this.asset.height * 2);
 			pop();
 		}
+		if (this.ammo > 0) this.visible = true;
 	}
 }
 
