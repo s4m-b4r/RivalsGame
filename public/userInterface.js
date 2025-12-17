@@ -327,7 +327,7 @@ function createSettingsUI() {
 	createColorPickerUI("Crosshair Colour", 150, 540, "cColor");
 	createColorPickerUI("Opponent Colour", 350, 540, "oColor");
 	createColorPickerUI("Player Colour", 150, 670, "pColor");
-
+	//for each keybind create the button for keybind
 	keybindLabels.forEach(([label, key], i) => {
 		createKeybindInput(label, keyStartX, keyStartY + i * keySpacing, key);
 	});
@@ -391,7 +391,7 @@ function createKeybindInput(label, x, y, key) {
 
 	uiElements.push(input);
 }
-
+//fixes keycode showing incorrect key for certain keys
 function keyCodeToName(code) {
 	switch (code) {
 		case 32:
@@ -415,6 +415,7 @@ function keyCodeToName(code) {
 	}
 }
 
+//saves the settings to the database
 async function savePlayerSettingsUI() {
 	await fetch("/save_settings", {
 		method: "POST",
@@ -430,11 +431,12 @@ async function savePlayerSettingsUI() {
 	console.log("settings saved");
 }
 
+// draws the leaderoard
 function drawLeaderboardMenu() {
 	background("#202020");
 
 	leaderboardButtonHovered = collidePointRect(mouseX, mouseY, width / 2 - 150, 200, 300, 70);
-
+	//swap stat button
 	push();
 	rectMode(CORNER);
 	stroke("#f6cd26");
@@ -448,7 +450,7 @@ function drawLeaderboardMenu() {
 	strokeWeight(0);
 	text("ORDER BY: " + statDisplayName(leaderboardStat), width / 2 - 150 + 300 / 2, 200 + 70 / 2);
 	pop();
-
+	//top table tags
 	push();
 	textAlign(CENTER, CENTER);
 	textFont("IMPACT");
@@ -463,7 +465,7 @@ function drawLeaderboardMenu() {
 	textFont("IMPACT");
 	textSize(32);
 	textAlign(CENTER, CENTER);
-
+	//draws the leaderboard table with stats
 	for (let i = 0; i < leaderboardData.length && i < 10; i++) {
 		let y = 360 + i * 60;
 		let row = leaderboardData[i];
