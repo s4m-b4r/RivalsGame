@@ -1,9 +1,11 @@
+//loads from .env file
 require("dotenv").config();
 const { Pool } = require("pg");
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
 
+// configure postgresql
 const pool = new Pool({
 	connectionString: process.env.DATABASE_URL,
 	ssl: {
@@ -11,19 +13,23 @@ const pool = new Pool({
 	},
 });
 
+//test database connection
 pool
 	.connect()
 	.then(() => console.log("Connected to the database"))
 	.catch((err) => console.error("Database connection error:", err));
 
+//initialize express and socket.io
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+//game variables
 let waitingPlayer = null;
 let gameIdCounter = 1;
 const games = [];
 
+//serve static files
 app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
@@ -36,16 +42,20 @@ app.use(express.json());
 app.post("/signup", async (req, res) => {
 	const { username, password } = req.body;
 
+	//checks that the request has a username and password
 	if (!username || !password) return res.status(400).json({ error: "Username and password required" });
 
+	//checks password length
 	if (password.length < 12) return res.status(400).json({ error: "Password must be at least 12 characters long" });
 
+	//checks if username already exists
 	try {
 		const result = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
 		if (result.rows.length > 0) {
 			return res.status(400).json({ error: "Username already exists" });
 		}
 
+		//inserts new user into database
 		await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [username, password]);
 		res.json({ success: true, message: "Account created successfully!" });
 	} catch (err) {
@@ -58,12 +68,15 @@ app.post("/signup", async (req, res) => {
 app.post("/login", async (req, res) => {
 	const { username, password } = req.body;
 
+	//checks that the request has a username and password
 	if (!username || !password) return res.status(400).json({ error: "Username and password required" });
 
 	try {
+		//fetches user from database
 		const result = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
 		if (result.rows.length === 0) return res.status(400).json({ error: "Invalid username" });
 
+		//checks password
 		const user = result.rows[0];
 		if (user.password !== password) return res.status(400).json({ error: "Invalid password" });
 
@@ -79,14 +92,17 @@ app.post("/save_settings", async (req, res) => {
 	const { username, keybinds, settings } = req.body;
 
 	try {
+		//get user id
 		const userResult = await pool.query("SELECT id FROM users WHERE username = $1", [username]);
 		if (userResult.rows.length === 0) return res.status(400).json({ error: "User not found" });
 		const userId = userResult.rows[0].id;
 
 		const existing = await pool.query("SELECT * FROM player_settings WHERE user_id = $1", [userId]);
 		if (existing.rows.length > 0) {
+			//update existing settings
 			await pool.query("UPDATE player_settings SET keybinds = $1, settings = $2 WHERE user_id = $3", [keybinds, settings, userId]);
 		} else {
+			//insert new settings
 			await pool.query("INSERT INTO player_settings (user_id, keybinds, settings) VALUES ($1, $2, $3)", [userId, keybinds, settings]);
 		}
 
@@ -102,10 +118,12 @@ app.post("/load_settings", async (req, res) => {
 	const { username } = req.body;
 
 	try {
+		// get user id
 		const userResult = await pool.query("SELECT id FROM users WHERE username = $1", [username]);
 		if (userResult.rows.length === 0) return res.status(400).json({ error: "User not found" });
 		const userId = userResult.rows[0].id;
 
+		//get settings
 		const settingsResult = await pool.query("SELECT keybinds, settings FROM player_settings WHERE user_id = $1", [userId]);
 		if (settingsResult.rows.length === 0) return res.json({ keybinds: null, settings: null });
 
@@ -119,11 +137,14 @@ app.post("/load_settings", async (req, res) => {
 //load top ten players for leaderboard menu
 app.get("/leaderboard", async (req, res) => {
 	try {
+		//allowed sorting fields
 		const allowed = ["matches_won", "kills", "rounds_won"];
 		let sort = req.query.sort;
 
+		//default sorting
 		if (!allowed.includes(sort)) sort = "matches_won";
 
+		//query top ten players
 		const result = await pool.query(`
             SELECT u.username, s.kills, s.deaths, s.rounds_won, s.matches_won, s.matches_lost
             FROM player_stats s
@@ -144,11 +165,14 @@ app.post("/career", async (req, res) => {
 	const { username } = req.body;
 
 	try {
+		//user id from username
 		const user = await pool.query("SELECT id FROM users WHERE username = $1", [username]);
 		if (user.rows.length === 0) return res.status(400).json({ error: "User not found" });
 
+		//get player stats
 		const stats = await pool.query("SELECT * FROM player_stats WHERE user_id = $1", [user.rows[0].id]);
 
+		//if no stats, return zeros
 		if (stats.rows.length === 0)
 			return res.json({
 				kills: 0,
@@ -160,6 +184,7 @@ app.post("/career", async (req, res) => {
 				wl: 0,
 			});
 
+		//calculate kd and wl ratios
 		const s = stats.rows[0];
 		const kd = s.deaths === 0 ? s.kills : (s.kills / s.deaths).toFixed(2);
 		const wl = s.matches_lost === 0 ? s.matches_won : (s.matches_won / s.matches_lost).toFixed(2);
@@ -175,13 +200,16 @@ app.post("/career", async (req, res) => {
 	}
 });
 
+//update player stats in database
 async function updateStats(username, field, amount = 1) {
 	try {
+		//get user id
 		const user = await pool.query("SELECT id FROM users WHERE username = $1", [username]);
 		if (user.rows.length === 0) return;
 
 		const userId = user.rows[0].id;
 
+		//update or insert stats
 		await pool.query(
 			`INSERT INTO player_stats (user_id, ${field})
              VALUES ($1, $2)
