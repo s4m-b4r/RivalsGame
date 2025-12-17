@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 
-// Signup route
+// signup route
 app.post("/signup", async (req, res) => {
 	const { username, password } = req.body;
 
@@ -54,7 +54,7 @@ app.post("/signup", async (req, res) => {
 	}
 });
 
-// Login route
+// login route
 app.post("/login", async (req, res) => {
 	const { username, password } = req.body;
 
@@ -74,6 +74,7 @@ app.post("/login", async (req, res) => {
 	}
 });
 
+//saves the players settings to the databse
 app.post("/save_settings", async (req, res) => {
 	const { username, keybinds, settings } = req.body;
 
@@ -96,6 +97,7 @@ app.post("/save_settings", async (req, res) => {
 	}
 });
 
+//loads players settings from the database when they log in
 app.post("/load_settings", async (req, res) => {
 	const { username } = req.body;
 
@@ -114,6 +116,7 @@ app.post("/load_settings", async (req, res) => {
 	}
 });
 
+//load top ten players for leaderboard menu
 app.get("/leaderboard", async (req, res) => {
 	try {
 		const allowed = ["matches_won", "kills", "rounds_won"];
@@ -136,6 +139,7 @@ app.get("/leaderboard", async (req, res) => {
 	}
 });
 
+//for career screen
 app.post("/career", async (req, res) => {
 	const { username } = req.body;
 
@@ -201,16 +205,24 @@ io.on("connection", (socket) => {
 	socket.on("join_queue", (data) => {
 		console.log("Join queue:", socket.id);
 		if (waitingPlayer) {
+			//start game if player already in queue
 			if (waitingPlayer.id != socket.id) {
+				//create a room code and join players to room
 				const room = "game-" + gameIdCounter;
 				socket.join(room);
 				waitingPlayer.join(room);
+
+				//player positions
 				const player2Pos = { x: 150, y: 475 };
 				const player1Pos = { x: 1600, y: 475 };
+				//map
 				matchArena = Math.floor(Math.random() * 4); // 0 to 4
+
+				//timings
 				roundEndTime = Date.now() + 154000;
 				roundStartTime = Date.now();
 
+				//emit information to clients
 				io.to(waitingPlayer.id).emit("game_start", {
 					room,
 					playerId: waitingPlayer.id,
@@ -237,6 +249,7 @@ io.on("connection", (socket) => {
 					loadout: waitingPlayerLoadout,
 				});
 
+				//add the match and stats to an array
 				games.push({
 					gameID: room,
 					players: { p1: socket.id, p2: waitingPlayer.id },
@@ -247,32 +260,38 @@ io.on("connection", (socket) => {
 				});
 
 				console.log("Game Started:", room, "Arena:", matchArena, "StartTime:", Date.now(), "players:", socket.id, waitingPlayer.id);
+				//remove player from queue
 				waitingPlayer = null;
 				gameIdCounter++;
 			}
 		} else {
+			//adds player to queue
 			waitingPlayer = socket;
 			waitingPlayerLoadout = data.loadout;
 		}
 	});
 
+	//check kill logic
 	socket.on("player_killed_opponent", (data) => {
+		//find game
 		const game = games.find((g) => g.gameID === data.room);
 		if (!game || !game.inProgress) return;
 
-		// Prevent double reporting
+		// prevent double reporting
 		if (game.roundWinner) return;
 
 		const { p1, p2 } = game.players;
 		const killer = socket.id;
 		const victim = killer === p1 ? p2 : p1;
 
+		//decalare varuiabels
 		const killerName = socket.username;
 		const victimName = io.sockets.sockets.get(victim)?.username;
 
 		const p1Socket = io.sockets.sockets.get(p1);
 		const p2Socket = io.sockets.sockets.get(p2);
 
+		//update database stats
 		updateStats(killerName, "kills", 1);
 		updateStats(victimName, "deaths", 1);
 
@@ -294,12 +313,14 @@ io.on("connection", (socket) => {
 			round: game.round,
 		});
 
+		//check if match has ended (score of 3)
 		if (game.scores.p1 >= 3 || game.scores.p2 >= 3) {
 			const matchWinner = game.scores.p1 > game.scores.p2 ? p1 : p2;
 			io.to(data.room).emit("match_over", { winner: matchWinner, scores: game.scores });
 			const winnerSocket = io.sockets.sockets.get(matchWinner);
 			const loserSocket = matchWinner === p1 ? io.sockets.sockets.get(p2) : io.sockets.sockets.get(p1);
 
+			//update stats
 			if (winnerSocket) updateStats(winnerSocket.username, "matches_won", 1);
 			if (loserSocket) updateStats(loserSocket.username, "matches_lost", 1);
 			games.splice(games.indexOf(game), 1);
@@ -308,6 +329,7 @@ io.on("connection", (socket) => {
 
 		// Start next round after a short delay
 		setTimeout(() => {
+			//reset variables
 			game.round++;
 			game.inProgress = true;
 			game.roundWinner = null;
@@ -315,6 +337,7 @@ io.on("connection", (socket) => {
 			const newArena = Math.floor(Math.random() * 4); // 0 to 4
 			const roundEndTime = Date.now() + 154000;
 
+			//swaps player positions
 			if (game.round % 2 == 1) {
 				player1Pos = { x: 150, y: 475 };
 				player2Pos = { x: 1600, y: 475 };
@@ -323,6 +346,7 @@ io.on("connection", (socket) => {
 				player1Pos = { x: 1600, y: 475 };
 			}
 
+			//send data to clients
 			io.to(game.players.p1).emit("new_round", {
 				round: game.round,
 				a: newArena,
@@ -345,6 +369,7 @@ io.on("connection", (socket) => {
 		}, 5000);
 	});
 
+	//new round (draw)
 	socket.on("new_round_equal_health", (data) => {
 		const game = games.find((g) => g.gameID === data.room);
 		if (!game || !game.inProgress) return;
@@ -356,6 +381,7 @@ io.on("connection", (socket) => {
 			round: game.round,
 		});
 
+		//check if game has ended because score has reached 3
 		if (game.scores.p1 >= 3 || game.scores.p2 >= 3) {
 			const matchWinner = game.scores.p1 > game.scores.p2 ? p1 : p2;
 			io.to(data.room).emit("match_over", { winner: matchWinner, scores: game.scores });
@@ -373,6 +399,7 @@ io.on("connection", (socket) => {
 			const roundEndTime = Date.now() + 154000;
 			const roundStartTime = Date.now();
 
+			//swap player starting positions
 			if (game.round % 2 == 1) {
 				player1Pos = { x: 150, y: 475 };
 				player2Pos = { x: 1600, y: 475 };
@@ -381,6 +408,7 @@ io.on("connection", (socket) => {
 				player1Pos = { x: 1600, y: 475 };
 			}
 
+			//send data to clients
 			io.to(game.players.p1).emit("new_round", {
 				round: game.round,
 				a: newArena,
@@ -400,10 +428,12 @@ io.on("connection", (socket) => {
 			});
 
 			console.log(`Game ${game.gameID} - Round ${game.round} started`);
-		}, 5000);
+		}, 5000); //timeout time
 	});
 
+	//player forfeits the rounds
 	socket.on("forfeit_round", (data) => {
+		//find game in array
 		const game = games.find((g) => g.gameID === data.room);
 		if (!game || !game.inProgress) return;
 
@@ -417,15 +447,18 @@ io.on("connection", (socket) => {
 		const p1Socket = io.sockets.sockets.get(p1);
 		const p2Socket = io.sockets.sockets.get(p2);
 
+		//update database stats
 		updateStats(loserName, "matches_lost", 1);
 		updateStats(winnerName, "matches_won", 1);
 		updateStats(winnerName, "rounds_won", 1);
 
+		//send to the opponent that they have won
 		io.to(data.room).emit("match_over", { winner: winner, scores: game.scores });
 		games.splice(games.indexOf(game), 1);
 		return;
 	});
 
+	//removes player from queue
 	socket.on("leave_queue", () => {
 		console.log("Leave queue:", socket.id);
 		if (waitingPlayer) {
@@ -435,6 +468,7 @@ io.on("connection", (socket) => {
 		}
 	});
 
+	//relay information to the other player in that room
 	socket.on("player_move", (data) => {
 		socket.to(data.room).emit("player_move", data);
 	});
@@ -459,13 +493,16 @@ io.on("connection", (socket) => {
 		socket.to(data.room).emit("damage_dealt", data);
 	});
 
+	//when a player disconnects (closes the tab)
 	socket.on("disconnect", () => {
 		console.log("A user disconnected:", socket.id);
+		//remove from queue
 		if (waitingPlayer) {
 			if (socket.id == waitingPlayer.id) {
 				waitingPlayer = null;
 			}
 		}
+		// check if they are in a game and remove them if they are.
 		const game = games.find((g) => (g.players.p1 === socket.id || g.players.p2 === socket.id) && g.inProgress);
 
 		if (game) {
@@ -490,5 +527,6 @@ io.on("connection", (socket) => {
 	});
 });
 
+//port server listens for
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
