@@ -118,6 +118,7 @@ function drawPlayerUI() {
 				image(player.inventory[i].asset, 0, 0, player.inventory[i].asset.width * 1.5, player.inventory[i].asset.height * 1.5);
 				pop();
 			}
+			//hotbar ammo count
 			push();
 			stroke("#ffffff90");
 			textSize(15);
@@ -469,14 +470,14 @@ function drawLeaderboardMenu() {
 	for (let i = 0; i < leaderboardData.length && i < 10; i++) {
 		let y = 360 + i * 60;
 		let row = leaderboardData[i];
-
+		//draws the rows for the stats
 		fill(i % 2 === 0 ? "#ffffff15" : "#ffffff05");
 		rect(width / 2 - 500, y - 25, 1000, 50);
 
 		fill("#ffffff");
-		text(i + 1, width / 2 - 300, y);
-		text(row.username.slice(0, 25), width / 2, y);
-		text(row[leaderboardStat], width / 2 + 300, y);
+		text(i + 1, width / 2 - 300, y); //rank number
+		text(row.username.slice(0, 25), width / 2, y); //player name
+		text(row[leaderboardStat], width / 2 + 300, y); //stat number
 	}
 	pop();
 }
@@ -495,6 +496,7 @@ function drawLoadoutMenu() {
 }
 
 function drawLoadoutItemsGrid() {
+	// creates the weapons and grenades to choose from
 	push();
 	let startX = 120;
 	let startY = 200;
@@ -524,18 +526,19 @@ function drawLoadoutCard(i, item, x, y, w, h) {
 
 	if (item.asset) {
 		imageMode(CENTER);
-		image(item.asset, x + w / 2, y + h / 2 - 10, item.asset.width * 4, item.asset.height * 4);
+		image(item.asset, x + w / 2, y + h / 2 - 10, item.asset.width * 4, item.asset.height * 4); //weapon image
 	}
 
 	noStroke();
 	fill("#f6cd26");
 	textSize(28);
 	textAlign(CENTER, CENTER);
-	text(item.name.toUpperCase(), x + w / 2, y + h - 30);
+	text(item.name.toUpperCase(), x + w / 2, y + h - 30); //weapon name
 	pop();
 }
 
 function drawLoadoutSlots() {
+	//draws the players selected loadout
 	push();
 
 	for (let i = 0; i < 3; i++) {
@@ -549,6 +552,7 @@ function drawLoadoutSlots() {
 }
 
 function drawLoadoutSlot(i, x, y, w, h) {
+	//players selected weapon
 	push();
 	let hovered = collidePointRect(mouseX, mouseY, x - 30, y, w, h);
 	let selected = selectedLoadoutIndex === i;
@@ -572,7 +576,7 @@ function drawLoadoutSlot(i, x, y, w, h) {
 		}
 		text(item.name.toUpperCase(), x + w / 2 + 20, y + h / 2);
 	} else {
-		text("EMPTY", x + w / 2, y + h / 2);
+		text("EMPTY", x + w / 2, y + h / 2); //incase the player doesnt have something selected
 	}
 	pop();
 }
@@ -592,6 +596,7 @@ function drawCareerMenu() {
 	let KDtotal = kills + deaths;
 	let KDangle1 = (kills / KDtotal) * TWO_PI;
 	let KDangle2 = (deaths / KDtotal) * TWO_PI;
+	//draw the KD stat.
 	push();
 	textAlign(LEFT, CENTER);
 	translate(width / 2 - 350, 500);
@@ -610,7 +615,7 @@ function drawCareerMenu() {
 
 	let radius = 200;
 	let start = -HALF_PI;
-
+	//pie chart
 	fill("#00ff00AA");
 	arc(0, -30, radius * 2, radius * 2, start, start + KDangle1);
 
@@ -618,7 +623,7 @@ function drawCareerMenu() {
 	arc(0, -30, radius * 2, radius * 2, start + KDangle1, start + KDangle1 + KDangle2);
 
 	noStroke();
-
+	// stat numbers
 	textSize(40);
 	fill("#00ff00");
 	text(`${kills} KILLS`, -220, 255);
@@ -638,6 +643,7 @@ function drawCareerMenu() {
 	text(KDratio, 0, -25);
 	pop();
 	//////////////////////
+	//draw the WL stat
 	push();
 	textAlign(LEFT, CENTER);
 	translate(width / 2 + 350, 500);
@@ -653,7 +659,7 @@ function drawCareerMenu() {
 	textFont("IMPACT");
 	textSize(70);
 	text("W/L RATIO", -220, -280);
-
+	//pie chart
 	fill("#00ff00AA");
 	arc(0, -30, radius * 2, radius * 2, start, start + WLangle1);
 
@@ -661,7 +667,7 @@ function drawCareerMenu() {
 	arc(0, -30, radius * 2, radius * 2, start + WLangle1, start + WLangle1 + WLangle2);
 
 	noStroke();
-
+	//stat numbers
 	textSize(40);
 	fill("#00ff00");
 	text(`${wins} WINS`, -220, 255);
@@ -836,6 +842,7 @@ function mouseClicked() {
 		}
 		//forfeit
 		if (collidePointRect(mouseX, mouseY, 750, 550, 250, 100)) {
+			//returns the player to the main menu and tells the server that a forfiet has occured.
 			socket.emit("forfeit_round", { room: roomID });
 			pauseMenu = false;
 			drawWinner = false;
