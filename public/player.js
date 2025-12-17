@@ -30,6 +30,7 @@ class Player {
 		this.mouseY = 450;
 	}
 
+	//swap item
 	swapHotBarItem(scroll) {
 		if (scroll > 0) {
 			selectedHotbarSlot++;
@@ -42,9 +43,11 @@ class Player {
 				selectedHotbarSlot = 2;
 			}
 		}
+		//for opponent to see item
 		socket.emit("swap_item", { room: roomID, s: selectedHotbarSlot });
 	}
 
+	//shoot selected weapon
 	shoot(mouseX, mouseY) {
 		if (this.inventory[selectedHotbarSlot]) {
 			this.inventory[selectedHotbarSlot].shoot();
@@ -76,13 +79,14 @@ class Player {
 		if (this.canMoveY) {
 			this.y += dy;
 		}
-
+		//send to server
 		socket.emit("player_move", { room: roomID, x: this.x, y: this.y });
 	}
 
+	//initialises the roll
 	startRoll(directionX, directionY) {
-		let now = Date.now();
-
+		let now = Date.now(); //start time
+		//check for current roll and stamina
 		if (!this.isRolling && now > this.startRollTime + this.rollCooldown && this.stamina >= 50) {
 			this.isRolling = true;
 			this.startRollTime = now;
@@ -93,24 +97,25 @@ class Player {
 
 			this.canMoveXroll = true;
 			this.canMoveYroll = true;
-			this.stamina -= 50;
+			this.stamina -= 50; //deplete stamina
 		}
 	}
 
+	//moves the player
 	updateRoll() {
 		if (this.isRolling) {
 			let elapsed = Date.now() - this.startRollTime;
 
 			if (elapsed < this.rollDuration) {
 				let t = elapsed / this.rollDuration;
-				this.speed = Math.sin(Math.PI * t) * (this.rollDistance / 30);
+				this.speed = Math.sin(Math.PI * t) * (this.rollDistance / 30); //curve for smoothing roll
 
-				this.nX = this.x + this.rollDirection.x * this.speed * 6;
+				this.nX = this.x + this.rollDirection.x * this.speed * 6; //new positions
 				this.nY = this.y + this.rollDirection.y * this.speed * 6;
 
 				this.canMoveXroll = true;
 				this.canMoveYroll = true;
-
+				// check collisions
 				for (let i = 0; i < 35; i++) {
 					for (let j = 0; j < 19; j++) {
 						if (arena[j][i] === 1) {
@@ -121,6 +126,7 @@ class Player {
 								this.canMoveYroll = false;
 							}
 							if (collideRectCircle(i * 50, j * 50, 50, 50, this.nX, this.nY, this.radius)) {
+								/////fix for getting stuck in corners
 								if (!this.canMoveXroll && !this.canMoveYroll) {
 									//fill
 								} else if (this.canMoveXroll) {
@@ -130,6 +136,7 @@ class Player {
 									this.canMoveXroll = false;
 									this.canMoveYroll = true;
 								}
+								/////////////////////////////////////
 							}
 						}
 					}
@@ -143,9 +150,10 @@ class Player {
 				}
 
 				if (!this.canMoveXroll && !this.canMoveYroll) {
+					//ends roll if player cant move any more
 					this.isRolling = false;
 				}
-
+				//sends movement to opponent
 				socket.emit("player_move", { room: roomID, x: this.x, y: this.y });
 			} else {
 				this.isRolling = false;
@@ -153,11 +161,12 @@ class Player {
 		}
 	}
 }
-
+//placeholder positions
 let player = new Player("P1", 200, 450);
 
 let opponent = new Player("P2", 1000, 450);
 
+//draws player and handles movement
 function drawPlayer() {
 	if (player.alive) {
 		moveX = 0;
@@ -186,11 +195,11 @@ function drawPlayer() {
 					moveX *= Math.SQRT1_2;
 					moveY *= Math.SQRT1_2;
 				}
-
+				//check for sprinting
 				if (keyIsDown(keybind.sprint) && (moveX !== 0 || moveY !== 0) && player.stamina > 0 && !player.staminaCooldown) {
 					moveX *= 1.75; //sprint
 					moveY *= 1.75;
-					player.stamina -= 1;
+					player.stamina -= 1; //decrease stamina
 					sprinting = true;
 
 					if (player.stamina < 0) {
@@ -198,6 +207,7 @@ function drawPlayer() {
 					}
 				}
 
+				//regenerate stamina
 				if (!sprinting) {
 					if (player.stamina <= 300) {
 						player.stamina += 0.5;
@@ -215,6 +225,7 @@ function drawPlayer() {
 					player.move(moveX, moveY);
 				}
 
+				//check for roll keybind
 				if (keyIsDown(keybind.roll) && (moveX !== 0 || moveY !== 0)) {
 					player.startRoll(moveX, moveY);
 				}
@@ -233,14 +244,16 @@ function drawPlayer() {
 		textSize(15);
 		fill(settings.pColor);
 		strokeWeight(0);
-		text(player.name.slice(0, 20), player.x, player.y + 35);
+		text(player.name.slice(0, 20), player.x, player.y + 35); //draw player name underneath
 		pop();
 
+		//draws the players weapon/item and checks for reloading
 		if (player.inventory[selectedHotbarSlot]) {
 			player.inventory[selectedHotbarSlot].draw(player);
 			player.inventory[selectedHotbarSlot].reload();
 		}
 
+		//check for swapping item/weapon
 		if (keyIsDown(keybind.slot1)) {
 			if (selectedHotbarSlot != 0) {
 				socket.emit("swap_item", { room: roomID, s: 0 });
@@ -263,15 +276,17 @@ function drawPlayer() {
 }
 
 opponentSelectedSlot = 0;
-
+//draws the opponent and their weapon/item
 function drawOpponent() {
 	if (opponent.alive) {
 		push();
 		fill(settings.oColor);
 		strokeWeight(2);
 		stroke(0);
-		ellipse(opponent.x, opponent.y, 50);
+		ellipse(opponent.x, opponent.y, 50); //draw opponent
 		pop();
+
+		//draws opponents weapon/item
 		if (opponent.inventory[opponentSelectedSlot]) {
 			let angle = atan2(opponent.mouseY - opponent.y, opponent.mouseX - opponent.x);
 			gunX = opponent.x + cos(angle) * 35;
@@ -285,16 +300,11 @@ function drawOpponent() {
 				scale(1, -1);
 			}
 
-			image(
-				opponent.inventory[opponentSelectedSlot].asset,
-				0,
-				5,
-				opponent.inventory[opponentSelectedSlot].asset.width * 2,
-				opponent.inventory[opponentSelectedSlot].asset.height * 2
-			); // Draw the gun at player's position
+			image(opponent.inventory[opponentSelectedSlot].asset, 0, 5, opponent.inventory[opponentSelectedSlot].asset.width * 2, opponent.inventory[opponentSelectedSlot].asset.height * 2); // Draw the gun at player's position
 			pop();
 		}
 
+		//opponent name
 		push();
 		textAlign(CENTER, CENTER);
 		textSize(15);

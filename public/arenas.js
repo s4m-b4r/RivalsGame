@@ -9,6 +9,7 @@ function drawArena() {
 	}
 }
 
+//function used for creating arenas
 function createArena() {
 	let boardX = floor(mouseX / 50);
 	let boardY = floor(mouseY / 50);
@@ -59,6 +60,7 @@ function arenaAssetsLoad() {
 				else if (!up && down && left && right) arenaTiles[i][j] = { x: 0, y: 5 };
 				else if (up && down && left && right) arenaTiles[i][j] = { x: 0, y: 1 };
 			} else {
+				// wall tiles
 				if (!up && !down && !left && !right) arenaTiles[i][j] = { x: 3, y: 1 };
 				else if (!up && down && !left && !right) arenaTiles[i][j] = { x: 2, y: 5 };
 				else if (up && !down && !left && !right) arenaTiles[i][j] = { x: 1, y: 5 };

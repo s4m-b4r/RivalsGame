@@ -1,3 +1,4 @@
+//variables
 selectedHotbarSlot = 0;
 
 pauseMenu = false;
